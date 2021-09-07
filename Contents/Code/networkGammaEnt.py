@@ -15,6 +15,16 @@ def search(results, lang, siteNum, searchData):
     network_sep_dvd_prev = ''
     network_sep_dvd = '/1/dvd'
 
+    # try:
+    #     splited = searchTitle.split(' ')
+    #     if unicode(splited[0], 'UTF-8').isdigit():
+    #         sceneID = splited[0]
+    #         searchTitle = searchTitle.replace(sceneID, '', 1).strip()
+    #     if sceneID > 100:
+    #         encodedTitle = sceneID
+    # except:
+    #     sceneID = ''
+
     if siteNum == 278 or (siteNum >= 285 and siteNum <= 287) or siteNum == 843:
         network = 'XEmpire'
         network_sep_scene_prev = 'scene/'
@@ -315,15 +325,15 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     # Title DVD
     try:
         dvdTitle = detailsPageElements.xpath('//a[contains(@class, "dvdLink")][1]/@title')[0].strip()
-        metadata.collections.add(dvdTitle.replace('#0', '').replace('#', ''))
+        # metadata.collections.add(dvdTitle.replace('#0', '').replace('#', ''))
     except:
         try:
             dvdTitleScript = detailsPageElements.xpath('//script[contains(text(), "dvdName")]')[0].text_content()
             alpha = dvdTitleScript.find('"dvdName"') + 11
             omega = dvdTitleScript.find('"', alpha)
             dvdTitle = dvdTitleScript[alpha:omega]
-            if dvdTitle:
-                metadata.collections.add(dvdTitle.replace('#0', '').replace('#', ''))
+            # if dvdTitle:
+                # metadata.collections.add(dvdTitle.replace('#0', '').replace('#', ''))
         except:
             try:
                 dvdTitle = detailsPageElements.xpath('//h1[@class="sceneTitle"]')[0].text_content().strip()
@@ -331,7 +341,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
                 dvdTitle = dvdTitle.replace('BONUS', '')
                 dvdTitle = dvdTitle.replace('BTS-', '').replace('BTS - ', '')
                 dvdTitle = dvdTitle.replace('BTS', '')
-                metadata.collections.add(dvdTitle.replace('#0', '').replace('#', ''))
+                # metadata.collections.add(dvdTitle.replace('#0', '').replace('#', ''))
             except:
                 dvdTitle = 'This is some damn nonsense that should never match the scene title'
 

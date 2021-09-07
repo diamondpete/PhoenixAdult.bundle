@@ -12,7 +12,7 @@ def search(results, lang, siteNum, searchData):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + sceneID)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="video-details"]'):
-        titleNoFormatting = searchResult.xpath('//h2[@class="h2 m-0"]')[0].text_content()
+        titleNoFormatting = PAutils.parseTitle(searchResult.xpath('//h2[@class="h2 m-0"]')[0].text_content(), siteNum)
         curID = searchData.title.lower().replace(' ', '-')
         subSite = searchResult.xpath('//a[@class="username "]')[0].text_content().strip()
         releaseDate = searchData.dateFormat() if searchData.date else ''
@@ -35,7 +35,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h2[@class="h2 m-0"]')[0].text_content().strip()
+    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h2[@class="h2 m-0"]')[0].text_content().strip(), siteNum)
 
     # Summary
     try:

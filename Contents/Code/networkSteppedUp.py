@@ -3,14 +3,21 @@ import PAutils
 
 
 def search(results, lang, siteNum, searchData):
+    cookies = {}
+    token = ''
+    if PAsearchSites.getSearchSiteName(siteNum) == 'Nympho':
+        splited = searchData.title.split(' ')
+        token = splited[0]
+        searchData.title = searchData.title.replace(token, '', 1).strip()
+        cookies = {'SPSI': token.lower()}
+
     searchData.encoded = searchData.title.replace(' ', '-').replace('--', '-').replace('\'', '').lower()
     if '/' not in searchData.encoded and re.match(r'\d+.*', searchData.encoded):
         searchData.encoded = searchData.encoded.replace('-', '/', 1)
 
     sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded
-    req = PAutils.HTTPRequest(sceneURL)
+    req = PAutils.HTTPRequest(sceneURL, cookies=cookies)
     detailsPageElements = HTML.ElementFromString(req.text)
-
     curID = PAutils.Encode(sceneURL)
     titleNoFormatting = detailsPageElements.xpath('//h1[@class="title"] | //h2[@class="title"]')[0].text_content().strip()
 
@@ -26,7 +33,7 @@ def search(results, lang, siteNum, searchData):
     else:
         score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-    results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+    results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, releaseDate, token), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
 
@@ -37,7 +44,13 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     if not sceneURL.startswith('http'):
         sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
     sceneDate = metadata_id[2]
-    req = PAutils.HTTPRequest(sceneURL)
+    cookies = {}
+
+    if PAsearchSites.getSearchSiteName(siteNum) == 'Nympho':
+        token = metadata_id[3]
+        cookies = {'SPSI': token.lower()}
+    
+    req = PAutils.HTTPRequest(sceneURL, cookies=cookies)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
@@ -81,21 +94,34 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
         actorName = actorLink.text_content().strip()
 
         actorPageURL = actorLink.get('href')
-        req = PAutils.HTTPRequest(actorPageURL)
+        req = PAutils.HTTPRequest(actorPageURL, cookies=cookies)
         actorPage = HTML.ElementFromString(req.text)
-        actorPhotoURL = actorPage.xpath('//div[contains(@class, "model")]//img/@src')[0]
+
+        if tagline == 'Nympho':
+            actorPhotoURL = actorPage.xpath('//div[@id="ny-contents-container"]//img/@src')[0]
+        else:
+            actorPhotoURL = actorPage.xpath('//div[contains(@class,"model")]/img/@src')[0]
 
         movieActors.addActor(actorName, actorPhotoURL)
     movieActors.addActor('Mike Adriano', 'https://imgs1cdn.adultempire.com/actors/470003.jpg')
 
     # Posters
     art = []
-    xpaths = [
-        '//div[@id="trailer-player"]/@data-screencap',
-        '//video[contains(@id, "ypp-player")]/@poster',
-        '//a[@href="%s"]//img/@src' % sceneURL,
-        '//div[@class="view-thumbs"]//img/@src',
-    ]
+    if tagline == 'Nympho':
+        xpaths = [
+            '//div[@id="trailer-player"]/@data-screencap',
+            '//video[@id="ypp-player"]/@poster',
+            '//a[@href="%s"]//img/@src' % sceneURL,
+        ]
+    else:
+        xpaths = [
+            '//div[@id="trailer-player"]/@data-screencap',
+            '//video[contains(@id, "ypp-player")]/@poster',
+            '//a[@href="%s"]//img/@src' % sceneURL,
+            '//div[@class="view-thumbs"]//img/@src',
+        ]
+
+
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
             art.append(poster)

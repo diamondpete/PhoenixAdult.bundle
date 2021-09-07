@@ -118,16 +118,16 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata.summary = detailsPageElements['description'].replace('</br>', '\n').replace('<br>', '\n')
 
     # Studio
-    metadata.studio = detailsPageElements['network_name']
+    metadata.studio = PAutils.studio(detailsPageElements['network_name'], siteNum)
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    for collectionName in ['studio_name', 'serie_name']:
+    for collectionName in ['studio_name']: #, 'serie_name']:
         if collectionName in detailsPageElements:
-            metadata.collections.add(detailsPageElements[collectionName])
-    if (':' in detailsPageElements['title'] or '#' in detailsPageElements['title']) and len(scenesPagesElements) > 1:
-        if 'movie_title' in detailsPageElements:
-            metadata.collections.add(detailsPageElements['movie_title'])
+            metadata.collections.add(detailsPageElements[collectionName].replace("Devils Film", "Devil's Film"))
+    # if (':' in detailsPageElements['title'] or '#' in detailsPageElements['title']) and len(scenesPagesElements) > 1:
+    #     if 'movie_title' in detailsPageElements:
+    #         metadata.collections.add(detailsPageElements['movie_title'])
 
     # Release Date
     date_object = parse(sceneDate)

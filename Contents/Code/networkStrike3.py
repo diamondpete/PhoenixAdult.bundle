@@ -65,7 +65,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
         director.name = video['directors'][0]['name']
 
     # Studio
-    metadata.studio = PAsearchSites.getSearchSiteName(siteNum).title()
+    metadata.studio = PAutils.studio(PAsearchSites.getSearchSiteName(siteNum).title(), siteNum)
 
     # Tagline and Collection(s)
     metadata.collections.clear()

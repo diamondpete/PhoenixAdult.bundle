@@ -94,10 +94,10 @@ def search(results, lang, siteNum, searchData):
                 else:
                     results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s %s' % (titleNoFormatting, displayDate), score=score, lang=lang))
 
-    googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum)
-    for movieURL in googleResults:
-        if ('/movies/' in movieURL and '.html' not in movieURL and movieURL not in searchResults and movieURL not in siteResults):
-            searchResults.append(movieURL)
+    # googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum)
+    # for movieURL in googleResults:
+    #     if ('/movies/' in movieURL and '.html' not in movieURL and movieURL not in searchResults and movieURL not in siteResults):
+    #         searchResults.append(movieURL)
 
     for movieURL in searchResults:
         req = PAutils.HTTPRequest(movieURL)
@@ -105,13 +105,13 @@ def search(results, lang, siteNum, searchData):
         urlID = re.sub(r'.*/', '', movieURL)
 
         try:
-            siteName = detailsPageElements.xpath('//i[contains(., "Network")]//preceding-sibling::a[1]')[0].text_content().strip()
+            siteName = PAutils.studio(detailsPageElements.xpath('//i[contains(., "Network")]//preceding-sibling::a[1]')[0].text_content().strip(), siteNum)
         except:
             try:
-                siteName = detailsPageElements.xpath('//i[contains(., "Studio")]//preceding-sibling::a[1]')[0].text_content().strip()
+                siteName = PAutils.studio(detailsPageElements.xpath('//i[contains(., "Studio")]//preceding-sibling::a[1]')[0].text_content().strip(), siteNum)
             except:
                 try:
-                    siteName = detailsPageElements.xpath('//i[contains(., "Site")]//preceding-sibling::a[1]')[0].text_content().strip()
+                    siteName = PAutils.studio(detailsPageElements.xpath('//i[contains(., "Site")]//preceding-sibling::a[1]')[0].text_content().strip(), siteNum)
                 except:
                     siteName = ''
 
@@ -200,24 +200,25 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
 
     # Studio
     try:
-        studio = detailsPageElements.xpath('//i[contains(., "Network")]//preceding-sibling::a[1]')[0].text_content().strip()
+        studio = PAutils.studio(detailsPageElements.xpath('//i[contains(., "Network")]//preceding-sibling::a[1]')[0].text_content().strip(), siteNum)
     except:
         try:
-            studio = detailsPageElements.xpath('//i[contains(., "Studio")]//preceding-sibling::a[1]')[0].text_content().strip()
+            studio = PAutils.studio(detailsPageElements.xpath('//i[contains(., "Studio")]//preceding-sibling::a[1]')[0].text_content().strip(), siteNum)
         except:
             try:
-                studio = detailsPageElements.xpath('//i[contains(., "Site")]//preceding-sibling::a[1]')[0].text_content().strip()
+                studio = PAutils.studio(detailsPageElements.xpath('//i[contains(., "Site")]//preceding-sibling::a[1]')[0].text_content().strip(), siteNum)
             except:
                 studio = ''
 
     if studio:
-        metadata.studio = studio
+        metadata.studio = PAutils.studio(studio, siteNum)
 
     # Tagline and Collection(s)
     metadata.collections.clear()
     metadata.collections.add(metadata.studio)
     try:
         tagline = detailsPageElements.xpath('//p[contains(., "Serie")]//a[@title]')[0].text_content().strip()
+        metadata.tagline = tagline
         metadata.collections.add(tagline)
     except:
         pass

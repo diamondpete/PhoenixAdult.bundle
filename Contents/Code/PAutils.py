@@ -302,16 +302,21 @@ def parseTitle(s, siteNum):
         final.append(parseWord(word, siteNum))
 
     output = ' '.join(final)
+
+    # Remove single period at end of title
     output = re.sub(r'\b(?:\.)$', '', output)
+    # Add space after a punctuation if missing
     output = re.sub(r'(!|:|\?|\.|,)(?=\w)', lambda m: m.group(0) + ' ', output)
+    # Remove space between word and punctuation
     output = re.sub(r'\s+(?=[.,!\":])', '', output)
+    # Override lowercase if word follows a punctuation
     output = re.sub(r'(?<=!|:|\?|\.|-)(\s)(\S)', lambda m: m.group(1) + m.group(2).upper(), output)
 
     return output
 
 
 def parseWord(word, siteNum):
-    lower_exceptions = ['a', 'v', 'y', 'an', 'of', 'the', 'and', 'for', 'to', 'onto', 'but', 'or', 'nor', 'at', 'with', 'vs', 'in', 'on']
+    lower_exceptions = ['a', 'v', 'y', 'an', 'of', 'the', 'and', 'for', 'to', 'onto', 'but', 'or', 'nor', 'at', 'with', 'vs', 'in']
     upper_exceptions = ['bbc', 'xxx', 'bbw', 'bf', 'bff', 'bts', 'pov', 'dp', 'gf', 'bj', 'wtf', 'cfnm', 'bwc', 'fm', 'tv', 'ai', 'hd', 'milf']
     letter_exceptions = ['A', 'V', 'Y']
     sitename = PAsearchSites.getSearchSiteName(siteNum).replace(' ', '')
@@ -371,6 +376,23 @@ def parseWord(word, siteNum):
     word = manualWordFix(word)
 
     return word
+
+
+def studio(name, siteNum):
+    studios = (
+        'Mile High Media', 'Evil Angel', 'Blacked RAW', 'Reality Kings', '40 Inch Plus', 'HD Love',
+        'CFNM Secret', 'Pure 18', 'RK Prime', 'Lets Try Anal', 'Public Pickups', 'ArchAngel', 'BangBros',
+        'BellaPass', 'Pornstars Like It Big', 'Look At Her Now'
+    )
+
+    if name == '':
+        return ''
+
+    for studio in studios:
+        if name.lower().replace(' ', '').replace('\'', '') in studio.lower().replace(' ', ''):
+            return studio
+
+    return parseTitle(name, siteNum)
 
 
 def manualWordFix(word):

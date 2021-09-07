@@ -48,26 +48,26 @@ def search(results, lang, siteNum, searchData):
         if req:
             searchResults = req.json()['result']
             for searchResult in searchResults:
-                titleNoFormatting = searchResult['title']
+                titleNoFormatting = PAutils.parseTitle(searchResult['title'], siteNum)
                 releaseDate = parse(searchResult['dateReleased']).strftime('%Y-%m-%d')
                 curID = searchResult['id']
-                siteName = searchResult['brand'].title()
+
+                siteName = PAutils.studio(searchResult['brand'].title(), siteNum)
                 subSite = ''
                 if 'collections' in searchResult and searchResult['collections']:
                     subSite = searchResult['collections'][0]['name']
                 siteDisplay = '%s/%s' % (siteName, subSite) if subSite else siteName
 
-                score = 100
-                if sceneID:
-                    score = score - Util.LevenshteinDistance(sceneID, curID)
+                if sceneID == curID:
+                    score = 100
+                elif searchData.date:
+                    score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
                 else:
-                    if searchData.date:
-                        score = score - 2 * Util.LevenshteinDistance(searchData.date, releaseDate)
-                    score = score - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                    score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
                 if sceneType == 'trailer':
                     titleNoFormatting = '[%s] %s' % (sceneType.capitalize(), titleNoFormatting)
-                    score = score - 10
+                    score = score - 30
 
                 if subSite and PAsearchSites.getSearchSiteName(siteNum).replace(' ', '').lower() != subSite.replace(' ', '').lower():
                     score = score - 10
@@ -91,7 +91,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     detailsPageElements = req.json()['result'][0]
 
     # Title
-    metadata.title = detailsPageElements['title']
+    metadata.title = PAutils.parseTitle(detailsPageElements['title'], siteNum)
 
     # Summary
     description = None
@@ -105,15 +105,22 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
         metadata.summary = description
 
     # Studio
-    metadata.studio = detailsPageElements['brand'].title()
+    metadata.studio = PAutils.studio(detailsPageElements['brand'].title(), siteNum)
 
     # Tagline and Collection(s)
     metadata.collections.clear()
+    tagline = PAsearchSites.getSearchSiteName(siteNum).strip()
+    if tagline == metadata.studio:
+        tagline = detailsPageElements['collections'][0]['name']
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
+
     seriesNames = []
 
-    if 'collections' in detailsPageElements and detailsPageElements['collections']:
-        for collection in detailsPageElements['collections']:
-            seriesNames.append(collection['name'])
+    # if 'collections' in detailsPageElements and detailsPageElements['collections']:
+    #     for collection in detailsPageElements['collections']:
+    #         seriesNames.append(collection['name'])
+
     if 'parent' in detailsPageElements:
         if 'title' in detailsPageElements['parent']:
             seriesNames.append(detailsPageElements['parent']['title'])
@@ -125,11 +132,12 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
             isInCollection = True
             break
 
-    if not isInCollection:
-        seriesNames.insert(0, PAsearchSites.getSearchSiteName(siteNum))
+    # if not isInCollection:
+    #     seriesNames.insert(0, PAsearchSites.getSearchSiteName(siteNum))
 
-    for seriesName in seriesNames:
-        metadata.collections.add(seriesName)
+
+    # for seriesName in seriesNames:
+    #     metadata.collections.add(seriesName)
 
     # Release Date
     date_object = parse(detailsPageElements['dateReleased'])
