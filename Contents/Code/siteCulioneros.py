@@ -46,7 +46,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
 
     # Summary
     try:
-        metadata.summary = detailsPageElements.xpath('//meta[@http-equiv="description"]/@content')[0]
+        metadata.summary = detailsPageElements.xpath('//meta[@http-equiv="description"]/@content')[0].replace('\n', ' ')
     except:
         pass
 
