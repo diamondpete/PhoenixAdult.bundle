@@ -176,6 +176,8 @@ import siteBoundHoneys
 import siteLustomic
 import siteStraponCum
 import siteHotwifeXXX
+import siteXSinsVR
+import sitePOVR
 
 searchSites = {
     0: ('Blacked RAW', 'https://www.blackedraw.com', '/api'),
@@ -652,7 +654,7 @@ searchSites = {
     471: ('18VR', 'https://www.18vr.com', '/vrpornvideos/search/'),
     472: ('KinkVR', 'http://www.kinkvr.com', '/bdsm-vr-videos/search/'),
     473: ('VRCosplayX', 'https://www.vrcosplayx.com', '/cosplaypornvideos/search/'),
-    474: ('VRBangers', 'https://www.vrbangers.com', '/?post_type=video&s='),
+    474: ('VRBangers', 'https://www.vrbangers.com', '/api/content/v1/search/'),
     475: ('SexBabesVR', 'https://www.sexbabesvr.com', '/virtualreality/scene/id/'),
     476: ('WankzVR', 'https://www.wankzvr.com', '/search?q='),
     477: ('MilfVR', 'https://www.milfvr.com', '/search?q='),
@@ -747,7 +749,7 @@ searchSites = {
     566: ('Black Valley Girls', 'https://www.blackvalleygirls.com', '/movies'),
     567: ('Sis Loves Me', 'https://www.sislovesme.com', '/movies'),
     568: ('Manyvids', 'https://www.manyvids.com', '/video/'),
-    569: ('SinsVR', 'https://www.xsinsvr.com', '/video/'),
+    569: ('SinsVR', 'https://www.xsinsvr.com', '/search/'),
     570: ('StasyQ VR', 'https://www.stasyqvr.com', '/virtualreality/scene/id/'),
     571: ('First Class POV', 'https://www.spizoo.com', '/search.php?query='),
     572: ('Intimate Lesbians', 'https://www.spizoo.com', '/search.php?query='),
@@ -1080,7 +1082,7 @@ searchSites = {
     899: ('Sex Like Real', 'https://www.sexlikereal.com', '/scenes/'),
     900: ('Doe Girls', 'https://doegirls.com', '/search.en.html?q='),
     901: ('Xillimite', 'https://www.xillimite.com', '/en/search?type=4&keyword='),
-    902: ('VRP Films', 'https://vrpfilms.com', '/vrp-movies?s='),
+    902: ('VRPFilms', 'https://vrpfilms.com', '/m/'),
     903: ('VR Latina', 'https://vrlatina.com', '/video/'),
     904: ('VRConk', 'https://www.vrconk.com', '/virtualreality/scene/id/'),
     905: ('RealJamVR', 'https://realjamvr.com', '/virtualreality/scene/id/'),
@@ -1537,6 +1539,7 @@ searchSites = {
     1356: ('FreeuseMILF', 'http://freeusemilf.com', '/movies'),
     1357: ('Slayed', 'https://www.slayed.com', '/api'),
     1358: ('White Teens Black Cocks', 'https://teencoreclub.com', '/video/'),
+    1359: ('POVR', 'https://povr.com', '/search?q=')
 }
 
 abbreviations = (
@@ -2083,7 +2086,7 @@ def getProviderFromSiteNum(siteNum):
 
         # SinsVR
         elif siteNum == 569:
-            provider = networkHighTechVR
+            provider = siteXSinsVR
 
         # StasyQ VR
         elif siteNum == 570:
@@ -2831,5 +2834,9 @@ def getProviderFromSiteNum(siteNum):
         # Slayed
         elif siteNum == 1357:
             provider = networkStrike3
+
+        # POVR
+        elif siteNum == 1359:
+            provider = sitePOVR
 
     return provider
