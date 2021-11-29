@@ -317,7 +317,7 @@ def parseTitle(s, siteNum):
 
 def parseWord(word, siteNum):
     lower_exceptions = ['a', 'v', 'y', 'an', 'of', 'the', 'and', 'for', 'to', 'onto', 'but', 'or', 'nor', 'at', 'with', 'vs', 'in']
-    upper_exceptions = ['bbc', 'xxx', 'bbw', 'bf', 'bff', 'bts', 'pov', 'dp', 'gf', 'bj', 'wtf', 'cfnm', 'bwc', 'fm', 'tv', 'ai', 'hd', 'milf']
+    upper_exceptions = ['bbc', 'xxx', 'bbw', 'bf', 'bff', 'bts', 'pov', 'dp', 'gf', 'bj', 'wtf', 'cfnm', 'bwc', 'fm', 'tv', 'ai', 'hd', 'milf', 'gilf', 'dilf', 'dtf']
     letter_exceptions = ['A', 'V', 'Y']
     sitename = PAsearchSites.getSearchSiteName(siteNum).replace(' ', '')
 
