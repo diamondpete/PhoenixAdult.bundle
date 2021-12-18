@@ -178,6 +178,7 @@ import siteStraponCum
 import siteHotwifeXXX
 import siteXSinsVR
 import sitePOVR
+import siteSwallowBay
 
 searchSites = {
     0: ('Blacked RAW', 'https://www.blackedraw.com', '/api'),
@@ -875,7 +876,7 @@ searchSites = {
     692: ('Butt Plays', 'http://www.21sextury.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
     693: ('Dorcel Vision', 'https://www.dorcelvision.com', '/en/search?type=4&keyword='),
     694: ('Feminized', 'http://feminized.com', '/tour/search.php?st=advanced&qany='),
-    695: ('XConfessions', 'https://xconfessions.com', '/api/search'),
+    695: ('XConfessions', 'https://api.xconfessions.com', '/api/search'),
     696: ('Czech Amateurs', 'https://czechamateurs.com', '/tour/search/?q='),
     697: ('Czech Bangbus', 'https://czechbangbus.com', '/tour/search/?q='),
     698: ('Czech Bitch', 'https://czechbitch.com', '/tour/search/?q='),
@@ -1541,6 +1542,10 @@ searchSites = {
     1358: ('White Teens Black Cocks', 'https://teencoreclub.com', '/video/'),
     1359: ('POVR', 'https://povr.com', '/search?q='),
     1360: ('Bratty MILF', 'https://brattymilf.com', '/video/gallery/'),
+    1361: ('Swallow Bay', 'https://swallowbay.com', '/video/'),
+    1362: ('SisSwap', 'https://www.sisswap.com', '/movies'),
+    1363: ('IMadePorn', 'https://www.teamskeet.com', '/movies'),
+    1364: ('Facials4K', 'https://www.facials4k.com', '/video/'),
 }
 
 abbreviations = (
@@ -1970,7 +1975,7 @@ def getProviderFromSiteNum(siteNum):
             provider = networkPornFidelity
 
         # TeamSkeet
-        elif (187 <= siteNum <= 215) or (566 <= siteNum <= 567) or siteNum == 626 or siteNum == 686 or siteNum == 748 or siteNum == 807 or (845 <= siteNum <= 851) or siteNum == 875 or (997 <= siteNum <= 1011) or (1249 <= siteNum <= 1251) or (1354 <= siteNum <= 1356):
+        elif (187 <= siteNum <= 215) or (566 <= siteNum <= 567) or siteNum == 626 or siteNum == 686 or siteNum == 748 or siteNum == 807 or (845 <= siteNum <= 851) or siteNum == 875 or (997 <= siteNum <= 1011) or (1249 <= siteNum <= 1251) or (1354 <= siteNum <= 1356) or (1362 <= siteNum <= 1363):
             provider = networkTeamSkeet
 
         # Porndoe Premium
@@ -2022,7 +2027,7 @@ def getProviderFromSiteNum(siteNum):
             provider = sitePrivate
 
         # PornPros Network
-        elif (306 <= siteNum <= 327) or (479 <= siteNum <= 489) or siteNum == 624 or siteNum == 769 or siteNum == 844 or siteNum == 890 or siteNum == 1263:
+        elif (306 <= siteNum <= 327) or (479 <= siteNum <= 489) or siteNum == 624 or siteNum == 769 or siteNum == 844 or siteNum == 890 or siteNum == 1263 or siteNum == 1364:
             provider = networkPornPros
 
         # DigitalPlayground
@@ -2839,5 +2844,9 @@ def getProviderFromSiteNum(siteNum):
         # POVR
         elif siteNum == 1359:
             provider = sitePOVR
+
+        # Swallow Bay
+        elif siteNum == 1361:
+            provider = siteSwallowBay
 
     return provider
