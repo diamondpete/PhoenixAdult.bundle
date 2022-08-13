@@ -71,7 +71,7 @@ def getSearchSettings(mediaTitle):
         Log('^^^^^^^ siteNum: %d' % siteNum)
         Log('^^^^^^^ Shortening Title')
 
-        title = mediaTitle.lower()
+        title = mediaTitle.lower().replace('\'', '')
         site = getSearchSiteName(siteNum).lower()
 
         # \u0410-\u042F == А-Я, \u0430-\u044F == а-я
@@ -131,11 +131,10 @@ def posterAlreadyExists(posterUrl, metadata):
         if url.lower() == posterUrl.lower():
             Log('Found %s in posters collection' % posterUrl)
             return True
-        else:
-            pass
 
     for url in metadata.art.keys():
         if url.lower() == posterUrl.lower():
+            Log('Found %s in art collection' % posterUrl)
             return True
 
     return False

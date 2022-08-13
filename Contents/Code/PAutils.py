@@ -225,7 +225,7 @@ def getFromGoogleSearch(searchText, site='', **kwargs):
     Log('Using Google Search "%s"' % searchTerm)
 
     try:
-        googleResults = list(googlesearch.search(searchTerm, stop=stop, lang=lang, user_agent=getUserAgent()))
+        googleResults = list(googlesearch.search(searchTerm, stop=stop, lang=lang, user_agent=getUserAgent(true)))
     except:
         Log('Google Search Error')
         pass
@@ -289,85 +289,56 @@ def parseTitle(s, siteNum):
     s = s.replace('_', ' ')
     word_list = re.split(' ', s)
 
-    firstword = parseWord(word_list[0], siteNum)
-    if len(firstword) > 1:
-        firstword = manualWordFix(firstword)
-        firstword = firstword[0].capitalize() + firstword[1:]
+    firstWord = parseWord(word_list[0], siteNum)
+    if len(firstWord) > 1:
+        firstWord = firstWord[0].capitalize() + firstWord[1:]
     else:
-        firstword = firstword.capitalize()
+        firstWord = firstWord.capitalize()
 
-    final = [firstword]
+    final = [firstWord]
 
     for word in word_list[1:]:
         final.append(parseWord(word, siteNum))
 
     output = ' '.join(final)
 
-    # Remove single period at end of title
-    output = re.sub(r'\b(?:\.)$', '', output)
     # Add space after a punctuation if missing
-    output = re.sub(r'(!|:|\?|\.|,)(?=\w)', lambda m: m.group(0) + ' ', output)
+    output = re.sub(r'(?=[\!|\:|\?|\.|\,]\b)\S(?!(co\b|net\b|com\b|org\b|porn\b))', lambda m: m.group(0) + ' ', output, flags=re.IGNORECASE)
+    # Remove single period at end of title
+    output = re.sub(r'(?<=[^\.].)(?<=\w)(?:\.)$', '', output)
     # Remove space between word and punctuation
-    output = re.sub(r'\s+(?=[.,!\":])', '', output)
+    output = re.sub(r'\s+(?=[.,!:])', '', output)
     # Override lowercase if word follows a punctuation
     output = re.sub(r'(?<=!|:|\?|\.|-)(\s)(\S)', lambda m: m.group(1) + m.group(2).upper(), output)
+    # Override lowercase if word follows a parenthesis
+    output = re.sub(r'(?<=\()(\w)(\W)', lambda m: m.group(1).upper() + m.group(2), output)
+    # Override lowercase if last word
+    output = re.sub(r'\S+$', lambda m: m.group(0)[0].capitalize() + m.group(0)[1:], output)
 
     return output
 
 
 def parseWord(word, siteNum):
-    lower_exceptions = ['a', 'v', 'y', 'an', 'of', 'the', 'and', 'for', 'to', 'onto', 'but', 'or', 'nor', 'at', 'with', 'vs', 'in']
-    upper_exceptions = ['bbc', 'xxx', 'bbw', 'bf', 'bff', 'bts', 'pov', 'dp', 'gf', 'bj', 'wtf', 'cfnm', 'bwc', 'fm', 'tv', 'ai', 'hd', 'milf', 'gilf', 'dilf', 'dtf']
-    letter_exceptions = ['A', 'V', 'Y']
+    lower_exceptions = ['a', 'v', 'y', 'n', 'an', 'of', 'the', 'and', 'for', 'to', 'onto', 'but', 'or', 'nor', 'at', 'with', 'vs', 'com', 'co', 'org']
+    upper_exceptions = ['bbc', 'xxx', 'bbw', 'bf', 'bff', 'bts', 'pov', 'dp', 'gf', 'bj', 'wtf', 'cfnm', 'bwc', 'fm', 'tv', 'ai', 'hd', 'milf', 'gilf', 'dilf', 'dtf', 'zz', 'xxxl']
+    symbolsClean = ['-', '/', '.', '+', '\'']
+    symbolsEsc = ['-', '/', r'\.', r'\+', '\'']
     sitename = PAsearchSites.getSearchSiteName(siteNum).replace(' ', '')
 
     pattern = re.compile(r'\W')
     cleanWord = re.sub(pattern, '', word)
+    cleanSiteName = re.sub(pattern, '', sitename)
 
-    if '-' in word and '--' not in word:
-        word_list = re.split('-', word)
-
-        firstword = parseWord(word_list[0], siteNum)
-        if len(firstword) > 1:
-            firstword = firstword[0].capitalize() + firstword[1:]
-        else:
-            firstword = firstword.capitalize()
-        nhword = firstword + '-'
-
-        for hword in word_list[1:]:
-            if len(hword) > 1:
-                nhword += parseWord(hword, siteNum)
-            else:
-                nhword += hword.upper()
-
-            if hword != word_list[-1]:
-                nhword += '-'
-        word = nhword
-    elif '\'' in word:
-        word_list = re.split('\'', word)
-
-        firstword = parseWord(word_list[0], siteNum)
-        if len(firstword) > 1:
-            firstword = firstword[0].capitalize() + firstword[1:]
-        else:
-            firstword = firstword.upper()
-        nhword = firstword + '\''
-
-        for hword in word_list[1:]:
-            if len(re.sub(pattern, '', hword)) > 2:
-                nhword += parseWord(hword, siteNum)
-            else:
-                nhword += hword
-
-            if hword != word_list[-1]:
-                nhword += '\''
-        word = nhword
+    if cleanSiteName.lower() == cleanWord.lower():
+        word = sitename
+    elif any(symbol in word for symbol in symbolsClean):
+        for idx, symbol in enumerate(symbolsClean, 0):
+            if symbol in word:
+                word = parseTitleSymbol(word, siteNum, symbolsEsc[idx])
     elif cleanWord.lower() in upper_exceptions:
         word = word.upper()
-    elif cleanWord.isupper() and cleanWord not in letter_exceptions:
+    elif cleanWord.isupper() and cleanWord.lower() not in lower_exceptions:
         word = word.upper()
-    elif sitename.lower() == word.lower():
-        word = sitename
     elif not (cleanWord.islower() or cleanWord.isupper() or cleanWord.lower() in lower_exceptions):
         pass
     else:
@@ -378,11 +349,51 @@ def parseWord(word, siteNum):
     return word
 
 
+def any(s):
+    for v in s:
+        if v:
+            return True
+    return False
+
+
+def parseTitleSymbol(word, siteNum, symbol):
+    symbol_exceptions = ['vs', 'v', 'n']
+    pattern = re.compile(r'\W')
+    word_list = re.split(symbol, word)
+    symbols = ['-', '/', r'\.', r'\+']
+
+    firstWord = parseWord(word_list[0], siteNum)
+    if firstWord.lower() in symbol_exceptions and symbol == '\.':
+        firstWord = firstWord.lower()
+    elif re.search(r'^\W', firstWord):
+        firstWord = firstWord[0:2].upper() + firstWord[2:]
+    elif len(firstWord) > 1:
+        firstWord = firstWord[0].capitalize() + firstWord[1:]
+    else:
+        firstWord = firstWord.upper()
+    nhword = firstWord + symbol.replace('\\', '')
+
+    for idx, hword in enumerate(word_list[1:], 1):
+        if symbol in symbols:
+            if len(hword) > 1:
+                nhword += parseWord(hword, siteNum)
+            else:
+                nhword += hword.capitalize()
+        elif len(re.sub(pattern, '', hword)) > 2:
+            nhword += parseWord(hword, siteNum)
+        else:
+            nhword += hword
+
+        if idx != len(word_list) - 1:
+            nhword += symbol.replace('\\', '')
+    return nhword
+
+
 def studio(name, siteNum):
     studios = (
         'Mile High Media', 'Evil Angel', 'Blacked RAW', 'Reality Kings', '40 Inch Plus', 'HD Love',
         'CFNM Secret', 'Pure 18', 'RK Prime', 'Lets Try Anal', 'Public Pickups', 'ArchAngel', 'BangBros',
-        'BellaPass', 'Pornstars Like It Big', 'Look At Her Now'
+        'BellaPass', 'Pornstars Like It Big', 'Look At Her Now', 'Digital Playground'
     )
 
     if name == '':
@@ -396,12 +407,12 @@ def studio(name, siteNum):
 
 
 def manualWordFix(word):
-    exceptions = ['im', 'theyll', 'cant', 'ive', 'shes', 'theyre', 'tshirt', 'dont', 'wasnt', 'youre', 'ill', 'whats', 'didnt', 'isnt', 'senor', 'senorita', 'thats', 'gstring', 'milfs', 'oreilly']
-    corrections = ['I\'m', 'They\'ll', 'Can\'t', 'I\'ve', 'She\'s', 'They\'re', 'T-Shirt', 'Don\'t', 'Wasn\'t', 'You\'re', 'I\'ll', 'What\'s', 'Didn\'t', 'Isn\'t', 'Señor', 'Señorita', 'That\'s', 'G-String', 'MILFs', 'O\'Reilly']
+    exceptions = ['im', 'theyll', 'cant', 'ive', 'shes', 'theyre', 'tshirt', 'dont', 'wasnt', 'youre', 'ill', 'whats', 'didnt', 'isnt', 'senor', 'senorita', 'thats', 'gstring', 'milfs', 'oreilly', 'vs', 'bangbros']
+    corrections = ['I\'m', 'They\'ll', 'Can\'t', 'I\'ve', 'She\'s', 'They\'re', 'T-Shirt', 'Don\'t', 'Wasn\'t', 'You\'re', 'I\'ll', 'What\'s', 'Didn\'t', 'Isn\'t', 'Señor', 'Señorita', 'That\'s', 'G-String', 'MILFs', 'O\'Reilly', 'vs.', 'BangBros']
 
     if word.lower() in exceptions:
         for correction in corrections:
-            if word.lower() == correction.lower().replace('\'', '').replace('-', '').replace('ñ', 'n'):
+            if word.lower() == re.sub(r'\W', '', correction.replace('ñ', 'n')).lower():
                 return correction
 
     return word

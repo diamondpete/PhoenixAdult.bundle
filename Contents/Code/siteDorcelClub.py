@@ -37,7 +37,7 @@ def search(results, lang, siteNum, searchData):
     return results
 
 
-def update(metadata, lang, siteNum, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
@@ -113,11 +113,15 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
         pass
 
     # Poster
-    art = []
-
     xpaths = [
         '//div[contains(@class, "photos")]//source/@data-srcset'
     ]
+
+    if 'porn-movie' in sceneURL:
+        cover = '//div[@class="header"]//source[contains(@data-srcset, "1536")]/@data-srcset'
+        img = detailsPageElements.xpath(cover)[0].split(',')[-1].replace('2x', '').strip()
+
+        art.append(img)
 
     for xpath in xpaths:
         for img in detailsPageElements.xpath(xpath):

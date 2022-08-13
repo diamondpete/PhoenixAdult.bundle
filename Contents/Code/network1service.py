@@ -1,5 +1,6 @@
 import PAsearchSites
 import PAutils
+import siteData18Scenes
 
 
 def get_Token(siteNum):
@@ -27,57 +28,59 @@ def get_Token(siteNum):
 
 
 def search(results, lang, siteNum, searchData):
-    token = get_Token(siteNum)
-    headers = {
-        'Instance': token,
-    }
-
     sceneID = None
     parts = searchData.title.split()
     if unicode(parts[0], 'UTF-8').isdigit():
         sceneID = parts[0]
         searchData.title = searchData.title.replace(sceneID, '', 1).strip()
 
-    for sceneType in ['scene', 'movie', 'serie', 'trailer']:
-        if sceneID and not searchData.title:
-            url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&id=%s' % (sceneType, sceneID)
-        else:
-            url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&search=%s' % (sceneType, searchData.encoded)
+    if Prefs['data18_override']:
+        return siteData18Scenes.search(results, lang, siteNum, searchData)
+    else:
+        token = get_Token(siteNum)
+        headers = {
+            'Instance': token,
+        }
 
-        req = PAutils.HTTPRequest(url, headers=headers)
-        if req:
-            searchResults = req.json()['result']
-            for searchResult in searchResults:
-                titleNoFormatting = PAutils.parseTitle(searchResult['title'], siteNum)
-                releaseDate = parse(searchResult['dateReleased']).strftime('%Y-%m-%d')
-                curID = searchResult['id']
+        for sceneType in ['scene', 'movie', 'serie', 'trailer']:
+            if sceneID and not searchData.title:
+                url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&id=%s' % (sceneType, sceneID)
+            else:
+                url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&search=%s' % (sceneType, searchData.encoded)
 
-                siteName = PAutils.studio(searchResult['brand'].title(), siteNum)
-                subSite = ''
-                if 'collections' in searchResult and searchResult['collections']:
-                    subSite = searchResult['collections'][0]['name']
-                siteDisplay = '%s/%s' % (siteName, subSite) if subSite else siteName
+            req = PAutils.HTTPRequest(url, headers=headers)
+            if req:
+                searchResults = req.json()['result']
+                for searchResult in searchResults:
+                    titleNoFormatting = PAutils.parseTitle(searchResult['title'], siteNum)
+                    releaseDate = parse(searchResult['dateReleased']).strftime('%Y-%m-%d')
+                    curID = searchResult['id']
 
-                if sceneID == curID:
-                    score = 100
-                elif searchData.date:
-                    score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
-                else:
-                    score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                    siteName = PAutils.studio(searchResult['brand'].title(), siteNum)
+                    subSite = ''
+                    if 'collections' in searchResult and searchResult['collections']:
+                        subSite = searchResult['collections'][0]['name']
+                    siteDisplay = '%s/%s' % (siteName, subSite) if subSite else siteName
 
-                if sceneType == 'trailer':
-                    titleNoFormatting = '[%s] %s' % (sceneType.capitalize(), titleNoFormatting)
-                    score = score - 30
+                    if sceneID and int(sceneID) == curID:
+                        score = 100
+                    elif searchData.date:
+                        score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                    else:
+                        score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-                if subSite and PAsearchSites.getSearchSiteName(siteNum).replace(' ', '').lower() != subSite.replace(' ', '').lower():
-                    score = score - 10
+                    if sceneType == 'trailer':
+                        titleNoFormatting = '[%s] %s' % (sceneType.capitalize(), titleNoFormatting)
+                        score = score - 30
 
-                results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, sceneType), name='%s [%s] %s' % (titleNoFormatting, siteDisplay, releaseDate), score=score, lang=lang))
+                    if subSite and PAsearchSites.getSearchSiteName(siteNum).replace(' ', '').lower() != subSite.replace(' ', '').lower():
+                        score = score - 10
 
-    return results
+                    results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, sceneType), name='%s [%s] %s' % (titleNoFormatting, siteDisplay, releaseDate), score=score, lang=lang))
 
+        return results
 
-def update(metadata, lang, siteNum, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata_id = str(metadata.id).split('|')
     sceneID = metadata_id[0]
     sceneType = metadata_id[2]
@@ -117,9 +120,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
 
     seriesNames = []
 
-    # if 'collections' in detailsPageElements and detailsPageElements['collections']:
-    #     for collection in detailsPageElements['collections']:
-    #         seriesNames.append(collection['name'])
+    if 'collections' in detailsPageElements and detailsPageElements['collections']:
+        for collection in detailsPageElements['collections']:
+            seriesNames.append(collection['name'])
 
     if 'parent' in detailsPageElements:
         if 'title' in detailsPageElements['parent']:
@@ -132,12 +135,12 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
             isInCollection = True
             break
 
-    # if not isInCollection:
-    #     seriesNames.insert(0, PAsearchSites.getSearchSiteName(siteNum))
+    if not isInCollection:
+        seriesNames.insert(0, PAsearchSites.getSearchSiteName(siteNum))
 
-
-    # for seriesName in seriesNames:
-    #     metadata.collections.add(seriesName)
+    for seriesName in seriesNames:
+        if not seriesName == metadata.studio:
+            metadata.collections.add(seriesName)
 
     # Release Date
     date_object = parse(detailsPageElements['dateReleased'])
@@ -169,7 +172,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
-    art = []
     for imageType in ['poster', 'cover']:
         if imageType in detailsPageElements['images']:
             for image in detailsPageElements['images'][imageType]:

@@ -29,7 +29,7 @@ def search(results, lang, siteNum, searchData):
     return results
 
 
-def update(metadata, lang, siteNum, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
@@ -97,7 +97,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
             movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
-    art = []
     try:
         bigScript = detailsPageElements.xpath('//script[contains(text(), "df_movie")]')[0].text_content()
         alpha = bigScript.find('useimage = "') + 12
@@ -183,9 +182,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
-        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
-            # Download image file for analysis
-            try:
+        try:
+            if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
+                # Download image file for analysis
                 image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
@@ -197,7 +196,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
                 if width > 100 and width > height:
                     # Item is an art item
                     metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
-            except:
-                pass
+        except:
+            pass
 
     return metadata

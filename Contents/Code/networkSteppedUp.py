@@ -38,7 +38,7 @@ def search(results, lang, siteNum, searchData):
     return results
 
 
-def update(metadata, lang, siteNum, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
@@ -49,7 +49,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     if PAsearchSites.getSearchSiteName(siteNum) == 'Nympho':
         token = metadata_id[3]
         cookies = {'SPSI': token.lower()}
-    
+
     req = PAutils.HTTPRequest(sceneURL, cookies=cookies)
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -92,9 +92,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     actors = detailsPageElements.xpath('(//h4[@class="models"])[1]//a')
     for actorLink in actors:
         actorName = actorLink.text_content().strip()
-
         actorPageURL = actorLink.get('href')
-        req = PAutils.HTTPRequest(actorPageURL, cookies=cookies)
+        if not actorPageURL.startswith('http'):
+            actorPageURL = PAsearchSites.getSearchBaseURL(siteNum) + actorPageURL
+
+        req = PAutils.HTTPRequest(actorPageURL)
         actorPage = HTML.ElementFromString(req.text)
 
         if tagline == 'Nympho':

@@ -14,6 +14,7 @@ from cStringIO import StringIO
 from datetime import datetime
 from dateutil.parser import parse
 from PIL import Image
+from slugify import slugify
 from traceback import format_exc
 import PAactors
 import PAgenres
@@ -48,12 +49,19 @@ def ValidatePrefs():
 
 class PhoenixAdultAgent(Agent.Movies):
     name = 'PhoenixAdult'
-    languages = [Locale.Language.English, Locale.Language.German, Locale.Language.French, Locale.Language.Spanish, Locale.Language.Italian, Locale.Language.Dutch]
+    languages = [Locale.Language.NoLanguage, Locale.Language.English, Locale.Language.German, Locale.Language.French, Locale.Language.Spanish, Locale.Language.Italian, Locale.Language.Dutch]
     accepts_from = ['com.plexapp.agents.localmedia', 'com.plexapp.agents.lambda']
-    contributes_to = ['com.plexapp.agents.stashplexagent', 'com.plexapp.agents.themoviedb', 'com.plexapp.agents.imdb']
+    contributes_to = ['com.plexapp.agents.none', 'com.plexapp.agents.stashplexagent', 'com.plexapp.agents.themoviedb', 'com.plexapp.agents.imdb']
     primary_provider = True
 
-    def search(self, results, media, lang):
+    def search(self, results, media, lang, manual):
+        if not manual and Prefs['manual_override']:
+            Log('Skipping Search for Manual Override')
+            return
+
+        if not media.name and media.primary_metadata.title:
+            media.name = media.primary_metadata.title
+
         title = PAutils.getSearchTitleStrip(media.name)
         title = PAutils.getCleanSearchTitle(title)
 
@@ -119,6 +127,7 @@ class PhoenixAdultAgent(Agent.Movies):
     def update(self, metadata, media, lang):
         movieGenres = PAgenres.PhoenixGenres()
         movieActors = PAactors.PhoenixActors()
+        valid_images = list()
 
         HTTP.ClearCache()
         metadata.genres.clear()
@@ -134,7 +143,7 @@ class PhoenixAdultAgent(Agent.Movies):
         if provider is not None:
             providerName = getattr(provider, '__name__')
             Log('Provider: %s' % providerName)
-            provider.update(metadata, lang, siteNum, movieGenres, movieActors)
+            provider.update(metadata, lang, siteNum, movieGenres, movieActors, valid_images)
 
         # Cleanup Genres and Add
         Log('Genres')
@@ -156,3 +165,8 @@ class PhoenixAdultAgent(Agent.Movies):
                 'series': ', '.join(set([collection.encode('ascii', 'ignore') for collection in metadata.collections if collection not in metadata.studio])),
             }
             metadata.title = Prefs['custom_title'].format(**data)
+
+        if Prefs['validate_image_keys']:
+            Log('Removing Old Images')
+            metadata.posters.validate_keys(valid_images)
+            metadata.art.validate_keys(valid_images)
