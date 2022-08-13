@@ -9,10 +9,10 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
 
 # All Supported Networks and Sites
 
-+ #### 5Kporn | ✅
-  - 5Kporn
-  - 5Kteens
 + #### 18OnlyGirls | ✅
++ #### 18 Network | ✓ - **Title or Actor Name**
+  - Fit18
+  - Thicc18
 + #### 21Naturals | ✅
   - 21Naturals
   - 21FootArt
@@ -32,6 +32,9 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Gapeland
   - LezCuties
   - PixandVideo
++ #### 5Kporn | ✅
+  - 5Kporn
+  - 5Kteens
 + #### Abby Winters | ✅
   - Behind the Scenes
   - Best Of
@@ -133,6 +136,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Mia Khalifa
   - XXXPawn
 + #### Bang! | ✓ - **Title only**
++ #### Bang! Movies | ✓ - **Title only**
 + #### BBC Paradise | ✅
 + #### BellaPass | ✓ - **Title only**
   - AleahJasmine
@@ -288,6 +292,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Empire
   - Scenes
   - Movies
+  - Movie Scene
 + #### DDFNetwork | ✅
   - Cherry Jul
   - DDF Babes
@@ -321,6 +326,11 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - SlaveMouth
 + #### Desperate Amateurs | ✅
 + #### DickDrainers | ✅
++ #### DirtyFlix | ✅ - **Title Only**
+  - Make Him Cuckold
+  - She Is Nerdy
+  - Trick Your GF
+  - Tricky Agent
 + #### Dirty Hard Drive Network | ✅
   - Bang My Hand
   - Dirty Sluts and Studs
@@ -450,9 +460,11 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
 + #### FuelVirtual Network | ✅
   - FuckedHard18
   - MassageGirls18
-+ #### Full Porn Network | ✓ - **Date Add**
+  - NewGirlPOV
++ #### Full Porn Network | ✓ - **Model Name (will fetch a list of scenes for google-matched model names)**
   - Analized
   - Bad Daddy POV
+  - Bad Mommy POV
   - DTF Sluts
   - James Deen
   - Only Prince
@@ -477,11 +489,13 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
 + #### Gloryhole Secrets | ✓ - **Title only** (Title includes actress first name)
 + #### Grooby Network | ✅
   - Black TGirls
+  - Bob's TGirls
   - Brazilian Transsexuals
   - Femout.xxx
   - Grooby Girls
   - TGirl Japan
   - TGirl Japan Hardcore
+  - TGirls.porn
   - TGirls.xxx
 + #### Hegre | ✓ - **Title only**
 + #### HentaiPros | ✅
@@ -492,6 +506,21 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
 + #### Holly Randall | ✓
 + #### HotwifeXXX | ✅
 + #### HuCows | ✅
++ #### Huge Media | Site Based
+  - Black4k ✅
+  - Daddy4k ✅
+  - Debt4k ❌ - **SceneID**
+  - Fist4k ❌ - **SceneID**
+  - Hunt4k ✅
+  - Loan4k ✅
+  - Mature4k ❌ - **SceneID**
+  - Old4k ✅
+  - Rim4k ❌ - **SceneID**
+  - Shame4k ❌ - **SceneID**
+  - Sis.Porn ❌ - **SceneID**
+  - Shame4k ❌ - **SceneID**
+  - Stuck4k ❌ - **SceneID**
+  - Tutor4k ❌ - **SceneID**
 + #### Hustler | ✓ - **Date Add**
 + #### I Kiss Girls | ✅
 + #### Interracial Pass | ✅
@@ -508,6 +537,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
 + #### Jacquie Et Michel TV | ✅
 + #### JAV (via R18 - Censored JAV Only) | ✅ - **SceneID (in form of JAVID)**
 + #### JavBus (via JavBus - Censored & Uncensored JAV) | ✅ - **SceneID (in form of JAVID)**
++ #### JavLibrary (via JavLibrary - Censored JAV Only) | ✅ - **SceneID (in form of JAVID)**
 + #### JAY's POV | ✅
 + #### Joymii | ✓
 + #### JulesJordan Network | ✅  **Movies Not Supported**
@@ -518,6 +548,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - SpermSwallowers
   - TheAssFactory
 + #### Kelly Madison | ✅
++ #### Killergram | ❌ - **SceneID**
 + #### Kink Network | ✅
   - 30MinutesofTorment
   - BoundGangBangs
@@ -561,12 +592,12 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - WaterBondage
   - WhippedAss
   - WiredPussy
-+ #### Kinky Spa | ✓  
++ #### Kinky Spa | ✓
 + #### Karups | ✅ - **Actor only**
   - Karups Hometown Amateurs
   - Karups Older Women
   - Karups Private Collection
-+ #### LegalPorno | ✓ - **Title only**
++ #### AnalVids | ✅
 + #### Little Caprice | ✅
 + #### Look At Her Now | ✅
 + #### Love Her Feet | ✅
@@ -656,24 +687,44 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Milfty
   - Mom Drips
   - Mom Swap
+  - MomShoot
   - Mylf
+  - Mylf Classics
+  - Mylf Labs
   - Mylf Of The Month
+  - Mylf X Bang
+  - Mylf X BJ Raw
   - Mylf X CamSoda
+  - Mylf X Chad Alva
+  - Mylf X Dee Siren
+  - Mylf X Elegant Raw
+  - Mylf X EvilAngel
   - Mylf X Fucking Awesome
-  - Mylf X James Deen
-  - Mylf X Mindi Mink
-  - Mylf X Owen Gray
-  - Mylf X SpankMonster
   - Mylf x Hussie Pass
+  - Mylf X Karups Older Women
+  - Mylf X James Deen
   - Mylf x Joybear
   - Mylf x Lady Fyre
+  - Mylf X Mandy Flores
+  - Mylf X Marie McCray
+  - Mylf X MariskaX
+  - Mylf X Mindi Mink
+  - Mylf X Miss Lexa
+  - Mylf X Owen Gray
+  - Mylf X Paytons Place
+  - Mylf X Purgatory X
+  - Mylf X SinfulXXX
+  - Mylf X SpankMonster
+  - Mylf X Steve Holmes
   - Mylf x Teamskeet
+  - Mylf X ToughLoveX
   - MylfBlows
   - MylfBoss
   - MylfDom
   - Mylfed
   - Mylfselects
   - Mylfwood
+  - New Mylfs
   - StayHomeMilf
 + #### MyDirtyHobby | ✅
 + #### My Pervy Family | ✅
@@ -737,6 +788,8 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Watch Your Mom
   - Watch Your Wife
   - Wives on Vacation
++ #### NVG Network | ❌ - **SceneID Only, Date Add, Actor Add (Name1 AND Name2)**
+  - Net Video Girls
 + #### NewSensations | ✅ - **Date Add**
 + #### NewSensations Other Sites | ✅
   - Fresh Out of High School
@@ -747,10 +800,12 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
 + #### Nubiles Porn Network | ❌ - **SceneID**
   - Bad Teens Punished
   - Bountyhunter Porn
+  - Cum Swapping Sis
   - Daddy's Lil Angel
   - Detention Girls
   - Driver XXX
   - Moms Teach Sex  
+  - Moms Family Secrets  
   - My Family Pies
   - Nubiles Casting
   - Nubiles ET
@@ -761,8 +816,10 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Princess Cum
   - Step Siblings Caught
   - Teacher Fucks Teens
+  - Younger Mommy
 + #### Other Nubiles Sites | ❌ - **SceneID**
   - Anilos
+  - Bratty MILF
   - Bratty Sis
   - Deep Lush
   - Hot Crazy Mess
@@ -925,6 +982,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - FantasyHD
   - Holed
   - Lubed
+  - Mom4k
   - MyVeryFirstTime
   - NannySpy
   - Passion-HD
@@ -1052,9 +1110,11 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - FirstClassPOV
   - IntimateLesbians
   - JessicaJaymesXXX
+  - MrLuckyPOV
   - PornGoesPro
   - PornstarTease
   - RawAttack
+  - RealSensual
   - TheStripperExperience
 + #### Step Secrets | ✅ - **Date Add**
 + #### Straplezz | ❌ - **Direct URL**
@@ -1063,6 +1123,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Blacked
   - BlackedRaw
   - Deeper
+  - Slayed
   - Tushy
   - TushyRaw
   - Vixen
@@ -1085,8 +1146,10 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Freeuse Fantasy
   - Gingerpatch
   - Her Freshman Year
+  - Hijab Hookup
   - I Made Porn
   - Innocent High
+  - Kissing Sis
   - Little Asians
   - Lust HD
   - My Babysitters Club
@@ -1094,6 +1157,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Oye Loca
   - PervDoctor
   - PervMom
+  - PervTherapy
   - POV Life
   - Rub A Teen
   - Self Desire
@@ -1103,23 +1167,50 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Sis Loves Me
   - Sis Swap
   - Solo Interviews
+  - StayHomePOV
   - StepSiblings
   - Team Skeet Extras
+  - TeamSkeet AllStars
+  - TeamSkeet Classics
+  - TeamSkeet Labs
+  - TeamSkeet Selects
+  - TeamSkeet X Avery Black
+  - TeamSkeet X Bang
   - TeamSkeet X BAEB
   - TeamSkeet X Banana Fever
+  - TeamSkeet X BJ Raw
+  - TeamSkeet X Bratty Foot Girls
+  - TeamSkeet X BritStudioXXX
   - TeamSkeet X CamSoda
   - TeamSkeet X Club Sweethearts
+  - TeamSkeet X Cum Kitchen
+  - TeamSkeet X DocTayTay
+  - TeamSkeet X Erotique TV Live
   - TeamSkeet X Eva Elfie
+  - TeamSkeet X EvilAngel
   - TeamSkeet X Flora Rodgers
   - TeamSkeet X Fucking Awesome
+  - TeamSkeet X GrandDadz
+  - TeamSkeet X Herb Collins
+  - TeamSkeet X Impure Desire
   - TeamSkeet X James Deen
+  - TeamSkeet X JAV Hub
   - TeamSkeet X Joy Bear
   - TeamSkeet X Layna Landry
   - TeamSkeet X LunaXJames
+  - TeamSkeet X Luxury Girl
   - TeamSkeet X Mickey Mod
   - TeamSkeet X OG
+  - TeamSkeet X OZ Fellatio Queens
+  - TeamSkeet X POV Perv
+  - TeamSkeet X POVGod
+  - TeamSkeet X PurgatoryX
   - TeamSkeet X Reislin
+  - TeamSkeet X Riley Cyriis
+  - TeamSkeet X Screampies
   - TeamSkeet X SpankMonster
+  - TeamSkeet X ToughLoveX
+  - TeamSkeet X YoungBusty
   - Teen Curves
   - Teen JOI
   - Teen Pies
@@ -1131,6 +1222,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - The Real Workout
   - Thickumz
   - This Girl Sucks
+  - Tiny Sis
   - Titty Attack
 + #### TeenCoreClub Network | ❌ - **Scene ID**
   - Anal Checkups
@@ -1198,6 +1290,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Teen Sex Movs
   - Teen Stars Only
   - Teens 3 Some
+  - TMWPOV
   - TmwVRnet
   - Tricky Masseur
   - WOW Orgasms
@@ -1217,19 +1310,19 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Scoreland2
   - XL Girls
 + #### Thick Cash Network | ✅ - **Actor only, Date Add**
- - Ebony Tugs
- - Family Lust
- - Over 40 Handjobs
- - Teen Tugs
+  - Ebony Tugs
+  - Family Lust
+  - Over 40 Handjobs
+  - Teen Tugs
 + #### Tonights Girlfriend | ✓ - **Actor only**
 + #### Top Web Models | ✅
- - 2 Girls 1 Camera
- - Big Gulp Girls
- - Cougar Season
- - Deepthroat Sirens
- - Facials Forever
- - Pounded Petite
- - She's Brand New
+  - 2 Girls 1 Camera
+  - Big Gulp Girls
+  - Cougar Season
+  - Deepthroat Sirens
+  - Facials Forever
+  - Pounded Petite
+  - She's Brand New
 + #### ToughLoveX | ✅ - **Actor only, Date Add**
 + #### TransAngels | ✅
 + #### True Amateurs | ✅
@@ -1245,6 +1338,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Wank It Now
 + #### Ultrafilms | ✓
 + #### VIPissy | ✓
++ #### VirtualPorn | ✅
 + #### VirtualRealPorn | ❌ - **Direct URL**
 + #### VirtualTaboo | ✓ - **Title only**
 + #### Vivid Network | ✅ - **Title only for DVDs**

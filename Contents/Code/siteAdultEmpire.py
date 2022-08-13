@@ -273,6 +273,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
         metadata.tagline = tagline
         metadata.collections.add(tagline)
+        metadata.collections.add(studio)
     except:
         if splitScene:
             metadata.collections.add(PAutils.parseTitle(detailsPageElements.xpath('//h1/text()')[0], siteNum).strip())
