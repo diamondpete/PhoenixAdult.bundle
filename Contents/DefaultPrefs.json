@@ -24,6 +24,12 @@
         "default": "false"
     },
     {
+        "id": "data18_override",
+        "label": "Use Data18",
+        "type": "bool",
+        "default": "false"
+    },
+    {
         "id": "metadataapi_enable",
         "label": "Enable using MetadataAPI for unsuccessful search",
         "type": "bool",
