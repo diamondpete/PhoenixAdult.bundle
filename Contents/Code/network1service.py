@@ -69,12 +69,12 @@ def search(results, lang, siteNum, searchData):
                     else:
                         score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
+                        if subSite and PAsearchSites.getSearchSiteName(siteNum).replace(' ', '').lower() != subSite.replace(' ', '').lower():
+                            score = score - 10
+
                     if sceneType == 'trailer':
                         titleNoFormatting = '[%s] %s' % (sceneType.capitalize(), titleNoFormatting)
                         score = score - 30
-
-                    if subSite and PAsearchSites.getSearchSiteName(siteNum).replace(' ', '').lower() != subSite.replace(' ', '').lower():
-                        score = score - 10
 
                     results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, sceneType), name='%s [%s] %s' % (titleNoFormatting, siteDisplay, releaseDate), score=score, lang=lang))
 
@@ -113,8 +113,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     # Tagline and Collection(s)
     metadata.collections.clear()
     tagline = PAsearchSites.getSearchSiteName(siteNum).strip()
-    if tagline == metadata.studio:
-        tagline = detailsPageElements['collections'][0]['name']
+    try:
+        if tagline == metadata.studio:
+            tagline = detailsPageElements['collections'][0]['name']
+    except:
+        pass
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
