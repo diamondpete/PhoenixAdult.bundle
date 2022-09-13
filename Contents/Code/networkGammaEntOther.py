@@ -70,7 +70,7 @@ def search(results, lang, siteNum, searchData):
                 releaseDate = parse(searchResult[date])
                 curID = searchResult['movie_id']
 
-            titleNoFormatting = searchResult['title']
+            titleNoFormatting = PAutils.parseTitle(searchResult['title'], siteNum)
             releaseDate = releaseDate.strftime('%Y-%m-%d')
 
             if sceneID:
@@ -107,10 +107,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     if sceneType == 'scenes' and len(scenesPagesElements) > 1:
         for idx, scene in scenesPagesElements:
             if scene['clip_id'] == sceneID:
-                title = '%s, Scene %d' % (detailsPageElements['title'], idx)
+                title = '%s, Scene %d' % (PAutils.parseTitle(detailsPageElements['title'], siteNum), idx)
                 break
     if not title:
-        title = detailsPageElements['title']
+        title = PAutils.parseTitle(detailsPageElements['title'], siteNum)
 
     metadata.title = title
 
@@ -124,7 +124,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.collections.clear()
     for collectionName in ['studio_name']: #, 'serie_name']:
         if collectionName in detailsPageElements:
-            metadata.collections.add(detailsPageElements[collectionName].replace("Devils Film", "Devil's Film"))
+            metadata.collections.add(PAutils.parseTitle(detailsPageElements[collectionName].replace("Devils Film", "Devil's Film"), siteNum))
     # if (':' in detailsPageElements['title'] or '#' in detailsPageElements['title']) and len(scenesPagesElements) > 1:
     #     if 'movie_title' in detailsPageElements:
     #         metadata.collections.add(detailsPageElements['movie_title'])
