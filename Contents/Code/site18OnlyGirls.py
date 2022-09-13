@@ -6,6 +6,9 @@ import PAutils
 def search(results, lang, siteNum, searchData):
     searchResults = []
 
+    searchData.encoded = searchData.title.replace(' ', '-').replace('.', '').lower()
+    searchResults.append('%s/%s' % (PAsearchSites.getSearchBaseURL(siteNum), searchData.encoded))
+
     googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum)
     for sceneURL in googleResults:
         if ('/search/' not in sceneURL and '/page/' not in sceneURL and '/tag/' not in sceneURL and sceneURL not in searchResults):
@@ -15,11 +18,11 @@ def search(results, lang, siteNum, searchData):
         req = PAutils.HTTPRequest(sceneURL)
         if req.ok:
             detailsPageElements = HTML.ElementFromString(req.text)
-            if detailsPageElements.xpath('//meta[@property="og:type"]/@content')[0].strip() == 'video':
-                titleNoFormatting = detailsPageElements.xpath('//meta[@property="og:title"]/@content')[0].strip()
+            if detailsPageElements.xpath('//meta[@name="description"]/@content[contains(., "movie")]')[0]:
+                titleNoFormatting = detailsPageElements.xpath('//meta[@itemprop="name"]/@content')[0].strip()
                 curID = PAutils.Encode(sceneURL)
 
-                date = detailsPageElements.xpath('//div[@class="post_date"]')[0].text_content().strip()
+                date = detailsPageElements.xpath('//meta[@itemprop="uploadDate"]/@content')[0].split('T')[0].strip()
                 if date:
                     releaseDate = parse(date).strftime('%Y-%m-%d')
                 else:
@@ -52,7 +55,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         photosetPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//meta[@property="og:title"]/@content')[0].strip()
+    metadata.title = detailsPageElements.xpath('//meta[@itemprop="name"]/@content')[0].strip()
 
     # Summary
     if photosetPageElements:
@@ -77,14 +80,14 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Genres
     movieGenres.clearGenres()
-    for genreLink in detailsPageElements.xpath('//div[@itemprop="keywords"]//a'):
+    for genreLink in detailsPageElements.xpath('//div[@class="tags-list"]//a'):
         genreName = genreLink.text_content().replace('Movies', '').strip()
 
         movieGenres.addGenre(genreName)
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[@itemprop="actor"]//a')
+    actors = detailsPageElements.xpath('//div[@id="video-actors"]/a')
 
     if actors:
         if len(actors) == 3:

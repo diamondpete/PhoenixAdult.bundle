@@ -5371,6 +5371,9 @@ ActorsReplaceStudios = {
     53: {  # FakeHub
         'Sharon Saint': ['Steffany'],
     },
+    54: {  # 18OnlyGirls
+        'Carrie Beasley': ['Ella'],
+    },
 }
 
 ActorsStudioIndexes = {
@@ -5428,4 +5431,5 @@ ActorsStudioIndexes = {
     51: ['Teen Core Club'],
     52: ['Abby Winters'],
     53: ['FakeHub'],
+    54: ['18OnlyGirls'],
 }
