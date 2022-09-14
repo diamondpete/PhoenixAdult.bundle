@@ -3,14 +3,6 @@ import PAutils
 
 
 def search(results, lang, siteNum, searchData):
-    cookies = {}
-    token = ''
-    if PAsearchSites.getSearchSiteName(siteNum) == 'Nympho':
-        splited = searchData.title.split(' ')
-        token = splited[0]
-        searchData.title = searchData.title.replace(token, '', 1).strip()
-        cookies = {'SPSI': token.lower()}
-
     searchData.encoded = searchData.title.replace(' ', '-').replace('--', '-').replace('\'', '').lower()
     if '/' not in searchData.encoded and re.match(r'\d+.*', searchData.encoded):
         searchData.encoded = searchData.encoded.replace('-', '/', 1)
