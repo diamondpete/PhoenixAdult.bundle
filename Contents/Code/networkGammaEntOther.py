@@ -122,9 +122,15 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    for collectionName in ['studio_name']: #, 'serie_name']:
-        if collectionName in detailsPageElements:
-            metadata.collections.add(PAutils.parseTitle(detailsPageElements[collectionName].replace("Devils Film", "Devil's Film"), siteNum))
+    if 'serie_name' in detailsPageElements:
+        metadata.collections.add(PAutils.parseTitle(detailsPageElements['serie_name'].replace("Devils Film", "Devil's Film"), siteNum))
+        metadata.tagline = PAutils.parseTitle(detailsPageElements['serie_name'].replace("Devils Film", "Devil's Film"), siteNum)
+    elif 'studio_name' in detailsPageElements:
+        metadata.collections.add(PAutils.parseTitle(detailsPageElements['studio_name'].replace("Devils Film", "Devil's Film"), siteNum))
+
+    # for collectionName in ['studio_name', 'serie_name']:
+    #     if collectionName in detailsPageElements:
+    #         metadata.collections.add(PAutils.parseTitle(detailsPageElements[collectionName].replace("Devils Film", "Devil's Film"), siteNum))
     # if (':' in detailsPageElements['title'] or '#' in detailsPageElements['title']) and len(scenesPagesElements) > 1:
     #     if 'movie_title' in detailsPageElements:
     #         metadata.collections.add(detailsPageElements['movie_title'])
