@@ -45,7 +45,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.collections.add(PAsearchSites.getSearchSiteName(siteNum))
 
     # Studio
-    metadata.studio = 'AdultEmpireCash'
+    metadata.studio = 'Adult Empire Cash'
 
     # Summary
     summary = detailsPageElements.xpath('//div[@class="synopsis"]/p/text()')
