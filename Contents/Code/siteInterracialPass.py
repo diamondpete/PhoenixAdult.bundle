@@ -3,6 +3,22 @@ import PAutils
 
 
 def search(results, lang, siteNum, searchData):
+    directURL = '%s/t1/trailers/%s.html' % (PAsearchSites.getSearchBaseURL(siteNum), searchData.title.replace(' ', '-'))
+    req = PAutils.HTTPRequest(directURL)
+    detailsPageElements = HTML.ElementFromString(req.text)
+    if req.ok:
+        titleNoFormatting = detailsPageElements.xpath('//*[@class="video-player"]//h2[@class="section-title"]')[0].text_content().strip()
+        curID = PAutils.Encode(directURL)
+        date = detailsPageElements.xpath('//div[@class="update-info-row"]')[0].text_content().replace('Released:', '', 1).strip()
+        releaseDate = parse(date).strftime('%Y-%m-%d')
+
+        if searchData.date:
+            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
+        else:
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.title.replace(' ', '+'))
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[contains(@class, "item-video")]'):
