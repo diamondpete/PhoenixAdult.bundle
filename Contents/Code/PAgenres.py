@@ -14,10 +14,7 @@ class PhoenixGenres:
     def clearGenres(self):
         self.genresTable = []
 
-    def processGenres(self, metadata):
-        metadata_id = str(metadata.id).split('|')
-        siteNum = int(metadata_id[1])
-
+    def processGenres(self, metadata, siteNum):
         for genreLink in self.genresTable:
             skip = False
             genreName = genreLink.replace('"', '').strip()
