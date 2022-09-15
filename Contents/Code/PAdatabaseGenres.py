@@ -49,7 +49,7 @@ GenresReplace = {
     'Cum Shot': ['cumshot'],
     'Cum Swallowing': ['cum swallow', 'cum swallowers', 'swallow cum', 'swallowing cum'],
     'Cum Swap': ['cum swapping', 'cumswap'],
-    'Curly hair': ['curly'],
+    'Curly Hair': ['curly'],
     'Curvy': ['curvy woman', 'thick', 'voluptuous'],
     'Deep Throat': ['deepthroat', 'deepthroating'],
     'Dildo': ['dildo play'],

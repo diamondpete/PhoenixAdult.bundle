@@ -147,7 +147,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # Cleanup Genres and Add
         Log('Genres')
-        movieGenres.processGenres(metadata)
+        movieGenres.processGenres(metadata, siteNum)
         metadata.genres = sorted(metadata.genres)
 
         # Cleanup Actors and Add
