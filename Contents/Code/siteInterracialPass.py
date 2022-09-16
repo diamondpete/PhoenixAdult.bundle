@@ -48,6 +48,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     # Title
     if siteNum == 977:
         title = detailsPageElements.xpath('//*[@class="video-player"]//h3[@class="section-title"]')[0].text_content().strip()
+    elif siteNum == 1564:
+        title = detailsPageElements.xpath('//*[@class="video-player"]//h1[@class="section-title"]')[0].text_content().strip()
     else:
         title = detailsPageElements.xpath('//*[@class="video-player"]//h2[@class="section-title"]')[0].text_content().strip()
     metadata.title = PAutils.parseTitle(title, siteNum)
@@ -57,7 +59,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Studio
     metadata.studio = PAsearchSites.getSearchSiteName(siteNum)
-    if 976 <= siteNum <= 978:
+    if (976 <= siteNum <= 978) or siteNum == 1564:
         metadata.studio = 'ExploitedX'
 
     # Tagline and Collection(s)
@@ -88,7 +90,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         if not actorPhotoURL.startswith('http'):
             actorPhotoURL = PAsearchSites.getSearchBaseURL(siteNum) + actorPhotoURL
 
-        movieActors.addActor(actorName, actorPhotoURL)
+        if siteNum == 977 and actorName == 'Twins':
+            movieActors.addActor('Joey White', actorPhotoURL)
+            movieActors.addActor('Sami White', actorPhotoURL)
+        else:
+            movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
     xpaths = [

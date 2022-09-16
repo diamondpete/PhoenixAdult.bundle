@@ -196,6 +196,11 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - See Him Fuck
 + #### Black PayBack | ✓
 + #### Black Valley Girls | ❌ - **SceneID**
++ #### Blurred Media | ✅
+  - Bi Guys Fuck
+  - Gay Hoopla
+  - Hot Guys Fuck
+  - Sugar Daddy Porn
 + #### Blowpass | ✅
   - 1000 Facials
   - ImmoralLive
@@ -416,6 +421,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Backroom Casting Couch
   - BBC Surprise
   - Exploited College Girls
+  - Hot Milfs Fuck
 + #### FakeHub | ✅
   - Fake Agent
   - Fake Agent UK
@@ -489,6 +495,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Analized
   - Bad Daddy POV
   - Bad Mommy POV
+  - Daughter JOI
   - DTF Sluts
   - James Deen
   - Only Prince
@@ -539,6 +546,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
 + #### Hustler | ✓ - **Date Add**
 + #### I Kiss Girls | ✅
 + #### Interracial Pass | ✅
++ #### HushPass | ✅
 + #### Intersec Network | ✅ - **Actor only**
   - Hardtied
   - Infernal Restraints
@@ -817,8 +825,8 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Daddy's Lil Angel
   - Detention Girls
   - Driver XXX
-  - Moms Teach Sex  
-  - Moms Family Secrets  
+  - Moms Teach Sex
+  - Moms Family Secrets
   - My Family Pies
   - Nubiles Casting
   - Nubiles ET
