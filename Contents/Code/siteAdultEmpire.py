@@ -57,12 +57,12 @@ def search(results, lang, siteNum, searchData):
                 curID = PAutils.Encode(movieURL)
                 siteResults.append(movieURL)
 
-                if re.search(r'(,\sthe)(?=:|\s\())', titleNoFormatting):
-                    titleNoFormatting = re.sub(r'(,\sthe)(?=:|\s\()', '', titleNoFormatting)
+                if re.search(r'(,\sthe)(?=:|\s\()', titleNoFormatting, re.IGNORECASE):
+                    titleNoFormatting = re.sub(r'(,\sthe)(?=:|\s\()', '', titleNoFormatting, flags=re.IGNORECASE)
                     titleNoFormatting = 'The ' + titleNoFormatting
 
-                if re.search(r'(,\sthe)$', titleNoFormatting):
-                    titleNoFormatting = re.sub(r'(,\sthe)$', '', titleNoFormatting)
+                if re.search(r'(,\sthe)$', titleNoFormatting, re.IGNORECASE):
+                    titleNoFormatting = re.sub(r'(,\sthe)$', '', titleNoFormatting, flags=re.IGNORECASE)
                     titleNoFormatting = 'The ' + titleNoFormatting
 
                 releaseDate, displayDate = getReleaseDateAndDisplayDate('', searchData)
@@ -230,12 +230,12 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     if splitScene:
         metadata.title = '%s [Scene %d]' % (metadata.title, sceneNum)
 
-    if re.search(r'(,\sthe)(?=:|\s\()', metadata.title):
-        metadata.title = re.sub(r'(,\sthe)(?=:|\s\()', '', metadata.title)
+    if re.search(r'(,\sthe)(?=:|\s\()', metadata.title, re.IGNORECASE):
+        metadata.title = re.sub(r'(,\sthe)(?=:|\s\()', '', metadata.title, flags=re.IGNORECASE)
         metadata.title = 'The ' + metadata.title
 
-    if re.search(r'(,\sthe)$', metadata.title):
-        metadata.title = re.sub(r'(,\sthe)$', '', metadata.title)
+    if re.search(r'(,\sthe)$', metadata.title, re.IGNORECASE):
+        metadata.title = re.sub(r'(,\sthe)$', '', metadata.title, flags=re.IGNORECASE)
         metadata.title = 'The ' + metadata.title
 
     # Summary
