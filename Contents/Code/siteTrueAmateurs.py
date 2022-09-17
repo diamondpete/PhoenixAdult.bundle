@@ -17,7 +17,7 @@ def search(results, lang, siteNum, searchData):
         curID = PAutils.Encode(url)
 
         if sceneTitle:
-            score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
         else:
             score = 90
 

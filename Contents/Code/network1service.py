@@ -56,7 +56,7 @@ def search(results, lang, siteNum, searchData):
                     releaseDate = parse(searchResult['dateReleased']).strftime('%Y-%m-%d')
                     curID = searchResult['id']
 
-                    siteName = PAutils.studio(searchResult['brand'].title(), siteNum)
+                    siteName = PAutils.studio(PAutils.parseTitle(searchResult['brand'], siteNum), siteNum)
                     subSite = ''
                     if 'collections' in searchResult and searchResult['collections']:
                         subSite = searchResult['collections'][0]['name']
@@ -108,7 +108,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.summary = description
 
     # Studio
-    metadata.studio = PAutils.studio(detailsPageElements['brand'].title(), siteNum)
+    metadata.studio = PAutils.studio(PAutils.parseTitle(detailsPageElements['brand'], siteNum), siteNum)
 
     # Tagline and Collection(s)
     metadata.collections.clear()

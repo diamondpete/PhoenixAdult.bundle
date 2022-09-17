@@ -31,7 +31,7 @@ def search(results, lang, siteNum, searchData):
         curID = PAutils.Encode(searchResult.xpath('./h2/a/@href')[0])
         date = searchResult.xpath('./p/span[1]/text()')[0].strip()
         releaseDate = parse(date).strftime('%b %d, %Y')
-        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+        score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id='%s|%d|%d' % (curID, siteNum, 0), name='%s [FamilyTherapy] %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 
     if len(searchResults) == 0:
@@ -44,7 +44,7 @@ def search(results, lang, siteNum, searchData):
         matches = siteClips4Sale.search(FakeResults(), lang, 760, searchData)
         for match in matches.list:
             match.name = clean(match.name)
-            match.score = 100 - Util.LevenshteinDistance(title.lower(), re.search(r'.*(?=\[)', match.name.lower()).group().strip())
+            match.score = 80 - Util.LevenshteinDistance(title.lower(), re.search(r'.*(?=\[)', match.name.lower()).group().strip())
             match.id = ('|').join([match.id.split('|')[0], str(siteNum), str(1)])
             results.Append(match)
 

@@ -24,9 +24,9 @@ def search(results, lang, siteNum, searchData):
             subSite = 'KarupsPC'
 
         if searchData.date:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(titleNoFormatting.lower(), searchData.title.lower())
+            score = 80 - Util.LevenshteinDistance(titleNoFormatting.lower(), searchData.title.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, subSite, releaseDate), score=score, lang=lang))
 

@@ -18,7 +18,7 @@ def search(results, lang, siteNum, searchData):
             pass
         releaseDate = parse(date).strftime('%Y-%m-%d') if date else ''
 
-        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+        score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, titleNoFormatting, releaseDate), name='%s %s [%s]' % (titleNoFormatting, releaseDate, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     return results

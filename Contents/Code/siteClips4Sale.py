@@ -45,7 +45,7 @@ def search(results, lang, siteNum, searchData):
         titleNoFormatting = getCleanTitle(searchResult.xpath('.//h3')[0].text_content())
         subSite = searchResult.xpath('//title')[0].text_content().strip()
 
-        score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
+        score = 80 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [Clips4Sale/%s]' % (titleNoFormatting, subSite), score=score, lang=lang))
 

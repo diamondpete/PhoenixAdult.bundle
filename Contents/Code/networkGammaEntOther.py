@@ -74,11 +74,11 @@ def search(results, lang, siteNum, searchData):
             releaseDate = releaseDate.strftime('%Y-%m-%d')
 
             if sceneID:
-                score = 100 - Util.LevenshteinDistance(sceneID, curID)
+                score = 80 - Util.LevenshteinDistance(sceneID, curID)
             elif searchData.date:
-                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%d|%d|%s|%s' % (curID, siteNum, sceneType, releaseDate), name='[%s] %s %s' % (sceneType.capitalize(), titleNoFormatting, releaseDate), score=score, lang=lang))
 

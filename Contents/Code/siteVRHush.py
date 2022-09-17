@@ -12,7 +12,7 @@ def search(results, lang, siteNum, searchData):
     releaseDate = parse(detailsPageElements.xpath('//div[contains(@class, "latest-scene-meta")]//div[contains(@class, "text-left")]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
     if searchData.date:
-        score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+        score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
     else:
         score = 95
 

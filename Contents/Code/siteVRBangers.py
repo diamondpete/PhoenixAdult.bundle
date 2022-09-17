@@ -10,7 +10,7 @@ def search(results, lang, siteNum, searchData):
         title = searchResult['title']
         curID = PAutils.Encode(searchResult['slug'])
 
-        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), title.lower())
+        score = 80 - Util.LevenshteinDistance(searchData.title.lower(), title.lower())
 
         if len(title) > 29:
             title = title[:32] + '...'

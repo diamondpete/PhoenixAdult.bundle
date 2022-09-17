@@ -46,7 +46,7 @@ def search(results, lang, siteNum, searchData):
 
         compareSearch = ' - '.join(compareSearchStrings)
         compareResult = ' - '.join(compareResultStrings)
-        score = 100 - Util.LevenshteinDistance(compareSearch, compareResult)
+        score = 80 - Util.LevenshteinDistance(compareSearch, compareResult)
 
         results.Append(MetadataSearchResult(id='%s|%d|%s|%s|%s|%s|%s' % (curID, siteNum, titleNoFormattingID, descriptionID, releaseDate, actor, posterID), name='%s [ATKGirlfriends]' % titleNoFormatting, score=score, lang=lang))
 

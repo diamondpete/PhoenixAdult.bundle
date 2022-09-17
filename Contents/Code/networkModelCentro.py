@@ -50,9 +50,9 @@ def search(results, lang, siteNum, searchData):
             if sceneID == curID:
                 score = 100
             elif searchData.date:
-                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%d|%d|%s|%s' % (curID, siteNum, titleID, artobj), name='%s %s [%s]' % (titleNoFormatting, releaseDate, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 

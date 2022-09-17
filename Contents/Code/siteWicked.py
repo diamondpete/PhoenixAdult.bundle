@@ -16,9 +16,9 @@ def search(results, lang, siteNum, searchData):
             releaseDate = parse(searchResult.xpath('.//p[@class="sceneDate"]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
             if searchData.date:
-                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [Wicked/Scene] %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 
@@ -27,9 +27,9 @@ def search(results, lang, siteNum, searchData):
         releaseDate = parse(searchResults.xpath('//li[@class="updatedOn"]')[0].text_content().replace('Updated', '').strip()).strftime('%Y-%m-%d')
 
         if searchData.date:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), dvdTitle.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), dvdTitle.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [Wicked/Full Movie] %s' % (dvdTitle, releaseDate), score=score, lang=lang))
 
@@ -41,9 +41,9 @@ def search(results, lang, siteNum, searchData):
         releaseDate = parse(searchResults.xpath('//li[@class="updatedDate"]')[0].text_content().replace('Updated', '').replace('|', '').strip()).strftime('%Y-%m-%d')
 
         if searchData.date:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [Wicked/Scene] %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 

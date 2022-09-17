@@ -10,7 +10,7 @@ def search(results, lang, siteNum, searchData):
         curID = PAutils.Encode(searchResult.xpath('./p/a/@href')[0])
         img = PAutils.Encode(searchResult.xpath('.//img[@class="video_placeholder"]/@src')[0])
 
-        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+        score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, img), name='%s [Meana Wolf]' % titleNoFormatting, score=score, lang=lang))
 

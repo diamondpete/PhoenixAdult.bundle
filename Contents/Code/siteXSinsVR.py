@@ -15,7 +15,7 @@ def search(results, lang, siteNum, searchData):
             sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
         curID = PAutils.Encode(sceneURL)
         releaseDate = ''
-        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+        score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
         actorsList = []
         for actor in searchResult.xpath('.//div/div[@class="tn-video-models"]/a'):
             Log('actor.href: ' + actor.text_content().strip())

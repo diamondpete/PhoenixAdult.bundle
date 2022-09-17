@@ -14,9 +14,9 @@ def search(results, lang, siteNum, searchData):
             curID = PAutils.Encode(searchResult.xpath('.//a[1]/@href')[0])
 
             if searchData.date:
-                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             if len(titleNoFormatting) > 29:
                 titleNoFormatting = titleNoFormatting[:32] + '...'
@@ -31,9 +31,9 @@ def search(results, lang, siteNum, searchData):
             curID = PAutils.Encode(searchResult.xpath('./a[2]/@href')[0])
 
             if searchData.date:
-                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             if len(titleNoFormatting) > 29:
                 titleNoFormatting = titleNoFormatting[:32] + '...'

@@ -23,7 +23,7 @@ def search(results, lang, siteNum, searchData):
         titleNoFormatting = searchResult.xpath('//h3[@class="post-title text"]/a')[0].text_content().strip()
         JAVID = searchResult.xpath('//td[contains(text(), "ID:")]/following-sibling::td')[0].text_content().strip()
         curID = PAutils.Encode(searchResult.xpath('//meta[@property="og:url"]/@content')[0].strip())
-        score = 100 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
+        score = 80 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (JAVID, titleNoFormatting), score=score, lang=lang))
 
@@ -47,7 +47,7 @@ def search(results, lang, siteNum, searchData):
                     titleNoFormatting = searchResult.xpath('//h3[@class="post-title text"]/a')[0].text_content().strip()
                     JAVID = searchResult.xpath('//td[contains(text(), "ID:")]/following-sibling::td')[0].text_content().strip()
                     curID = PAutils.Encode(searchResult.xpath('//meta[@property="og:url"]/@content')[0].strip().replace('//www', 'https://www'))
-                    score = 100 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
+                    score = 80 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
 
                     results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (JAVID, titleNoFormatting),score=score, lang=lang))
                 except:

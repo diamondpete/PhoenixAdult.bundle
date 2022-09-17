@@ -13,7 +13,7 @@ def search(results, lang, siteNum, searchData):
         else:
             titleNoFormatting = searchResult.xpath('.//a[@class="grid-item-title"]')[0].text_content()
             curID = PAutils.Encode(searchResult.xpath('.//a[@class="grid-item-title"]/@href')[0])
-        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+        score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         displayTitle = titleNoFormatting
         if siteNum != 815 or siteNum != 1337:

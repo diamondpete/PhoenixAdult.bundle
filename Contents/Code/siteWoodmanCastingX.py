@@ -26,7 +26,7 @@ def search(results, lang, siteNum, searchData):
             titleNoFormatting = searchResult.xpath('./img/@alt')[0]
             curID = PAutils.Encode(sceneURL)
 
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 

@@ -30,7 +30,7 @@ def search(results, lang, siteNum, searchData):
             url = searchResults.xpath('//a[contains(@class, "__pagination_button--more")]/@href')[0]
             curID = PAutils.Encode(url)
 
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
             return results
@@ -41,7 +41,7 @@ def search(results, lang, siteNum, searchData):
             url = searchResult.xpath('./a/@href')[0]
             curID = PAutils.Encode(url)
 
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 

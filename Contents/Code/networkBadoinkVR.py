@@ -34,9 +34,9 @@ def search(results, lang, siteNum, searchData):
                 releaseDate = parse(date[0]).strftime('%Y-%m-%d')
             girlName = searchResult.xpath('.//a[@class="video-card-link"]')[0].text_content()
             if searchData.date and releaseDate:
-                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s in %s %s' % (PAsearchSites.getSearchSiteName(siteNum), girlName, titleNoFormatting, releaseDate), score=score, lang=lang))
 
     return results

@@ -55,7 +55,7 @@ def search(results, lang, siteNum, searchData):
             if sceneDateString == searchData.date:
                 results.Append(MetadataSearchResult(id='%s|%d|%s' % (modelString, siteNum, sceneString), name='%s, %s [Watch4Beauty]' % (sceneName, sceneDateString), score=100, lang=lang))
         elif searchData.title:
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), sceneName.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), sceneName.lower())
             results.Append(MetadataSearchResult(id='%s|%d|%s' % (modelString, siteNum, sceneString), name='%s, %s [Watch4Beauty]' % (sceneName, sceneDateString), score=score, lang=lang))
 
     return results

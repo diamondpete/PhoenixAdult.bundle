@@ -33,9 +33,9 @@ def search(results, lang, siteNum, searchData):
             subSite = detailsPageElements.xpath('//script[@type="text/javascript"][contains(., "siteName")]')[0].text_content().split('siteName = \'')[-1].split('\'')[0].strip()
 
             if searchData.date:
-                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, displayDate), name='%s [BangBros/%s] %s' % (titleNoFormatting, subSite, displayDate), score=score, lang=lang))
         except:

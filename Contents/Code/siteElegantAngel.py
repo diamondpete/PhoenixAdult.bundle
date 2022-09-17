@@ -9,7 +9,7 @@ def search(results, lang, siteNum, searchData):
         titleNoFormatting = searchResult.xpath('.//span[@class="overlay-inner"]')[0].text_content().strip()
         curID = PAutils.Encode(searchResult.xpath('.//a[@class="boxcover"]/@href')[0])
 
-        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+        score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [Elegant Angel]' % titleNoFormatting, score=score, lang=lang))
 

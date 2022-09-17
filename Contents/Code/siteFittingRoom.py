@@ -17,7 +17,7 @@ def search(results, lang, siteNum, searchData):
     releaseDate = searchData.dateFormat() if searchData.date else ''
 
     if sceneTitle:
-        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+        score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
     else:
         score = 90
 

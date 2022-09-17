@@ -25,11 +25,11 @@ def search(results, lang, siteNum, searchData):
             actorList.append(actorName)
         actorsPrint = ', '.join(actorList)
         if sceneID:
-            score = 100 - Util.LevenshteinDistance(sceneID, curSceneID)
+            score = 80 - Util.LevenshteinDistance(sceneID, curSceneID)
         elif searchData.date:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s in %s [%s] %s' % (actorsPrint, titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 

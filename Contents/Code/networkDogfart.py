@@ -18,7 +18,7 @@ def search(results, lang, siteNum, searchData):
         subSite = fullSubSite.split('.com')[0]
 
         if subSite == PAsearchSites.getSearchSiteName(siteNum):
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
         else:
             score = 60 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 

@@ -21,7 +21,7 @@ def search(results, lang, siteNum, searchData):
             curID = PAutils.Encode(sceneURL)
             releaseDate = parse(searchData.date) if searchData.date else ''
 
-            score = 100 - Util.LevenshteinDistance(searchData.title, titleNoFormatting)
+            score = 80 - Util.LevenshteinDistance(searchData.title, titleNoFormatting)
 
             results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [Girls Rimming]' % titleNoFormatting, score=score, lang=lang))
 

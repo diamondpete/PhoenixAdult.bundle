@@ -28,7 +28,7 @@ def search(results, lang, siteNum, searchData):
                 sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + 'show_video.php?galid=' + sceneID
             curID = PAutils.Encode(sceneURL)
 
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (PAsearchSites.getSearchSiteName(siteNum), titleNoFormatting), score=score, lang=lang))
 

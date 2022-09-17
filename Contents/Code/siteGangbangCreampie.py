@@ -11,9 +11,9 @@ def search(results, lang, siteNum, searchData):
         releaseDate = parse(searchResult.xpath('.//div[@class="details"]/p/strong')[0].text_content().strip()).strftime('%Y-%m-%d')
 
         if searchData.date:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [Gangbang Creampie] %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 

@@ -10,7 +10,7 @@ def search(results, lang, siteNum, searchData):
         curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
         releaseDate = searchData.dateFormat() if searchData.date else ''
 
-        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+        score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name=titleNoFormatting, score=score, lang=lang))
 

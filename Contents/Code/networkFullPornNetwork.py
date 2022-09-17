@@ -28,7 +28,7 @@ def search(results, lang, siteNum, searchData):
             poster = PAutils.Encode(sceneResult.xpath('.//a[@class="updateimg"]//img/@src0_3x')[0])
             releaseDate = sceneResult.xpath('.//div[contains(@class, "video-data")]/span[2]')[0].text_content()
 
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, releaseDate, poster), name='%s [FPN/%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
