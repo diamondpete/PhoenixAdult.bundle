@@ -18,17 +18,17 @@ def search(results, lang, siteNum, searchData):
     for searchResult in searchResults:
         searchResult = searchResult['_source']
         titleNoFormatting = PAutils.parseTitle(searchResult['name'], siteNum)
-        studioScene = searchResult['studio']['name'].title()
-        seriesScene = searchResult['series']['name']
+        studioScene = PAutils.parseTitle(searchResult['studio']['name'], siteNum)
+        seriesScene = PAutils.parseTitle(searchResult['series']['name'], siteNum)
         curID = searchResult['identifier']
         releaseDate = parse(searchResult['releaseDate']).strftime('%Y-%m-%d')
 
         if searchData.date:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (seriesScene.title() if seriesScene else studioScene, titleNoFormatting), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (seriesScene if seriesScene else studioScene, titleNoFormatting), score=score, lang=lang))
 
     return results
 
@@ -46,13 +46,16 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.summary = detailsPageElements['description']
 
     # Studio
-    metadata.studio = detailsPageElements['studio']['name'].title()
+    metadata.studio = re.sub(r'bang(?=(\s|$))(?!\!)', 'Bang!', PAutils.parseTitle(detailsPageElements['studio']['name'], siteNum), flags=re.IGNORECASE)
 
     # Tagline and Collection(s)
-    metadata.collections.add(metadata.studio)
-    seriesScene = detailsPageElements['series']['name']
-    if seriesScene:
-        metadata.collections.add(seriesScene.title())
+    metadata.collections.clear()
+    tagline = re.sub(r'bang(?=(\s|$))(?!\!)', 'Bang!', PAutils.parseTitle(detailsPageElements['series']['name'], siteNum), flags=re.IGNORECASE)
+    if tagline:
+        metadata.tagline = tagline
+        metadata.collections.add(tagline)
+    else:
+        metadata.collections.add(metadata.studio)
 
     # Release Date
     date = detailsPageElements['releaseDate']
