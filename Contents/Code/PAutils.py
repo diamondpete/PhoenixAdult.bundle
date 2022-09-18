@@ -361,10 +361,11 @@ def parseTitleSymbol(word, siteNum, symbol):
     pattern = re.compile(r'\W')
     word_list = re.split(symbol, word)
     symbols = ['-', '/', r'\.', r'\+']
+    clean_word = re.sub(pattern, '', word)
 
     firstWord = parseWord(word_list[0], siteNum)
-    if firstWord.lower() in symbol_exceptions and symbol == '\.':
-        firstWord = firstWord.lower()
+    if clean_word.lower() in symbol_exceptions and symbol == '\.':
+        firstWord = clean_word.lower()
     elif re.search(r'^\W', firstWord):
         firstWord = firstWord[0:2].upper() + firstWord[2:]
     elif len(firstWord) > 1:
