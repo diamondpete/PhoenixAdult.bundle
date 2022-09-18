@@ -242,30 +242,16 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Actors
     movieActors.clearActors()
-    # runOnce = 0
-    actors = detailsPageElements.xpath('//h3[contains(., "Cast")]//following::div//a[contains(@href, "/name/")]/img')
-    for actorLink in actors:
-        actorName = actorLink.xpath('./@alt')[0].strip()
+    actors = detailsPageElements.xpath('//h3[contains(., "Cast")]//following::div[./p[contains(., "No Profile")]]//span[@class]/text()')
+    actorsLinks = detailsPageElements.xpath('//h3[contains(., "Cast")]//following::div//a[contains(@href, "/name/")]/img')
+    for actorLink in actorsLinks:
+        actors.append(actorLink.xpath('./@alt')[0].strip())
+
+    for actor in actors:
+        actorName = actor
         actorPhotoURL = ''
 
-        actorPhotoNode = actorLink.xpath('./@data-src')
-
-        if 'nopic' in actorPhotoURL:
-            actorPhotoURL = ''
-
-        if actorPhotoNode:
-            actorPhotoURL = actorPhotoNode[0].strip()
-
-        # if ' in ' in title and runOnce == 0:
-        #     if actorName.lower() in title.lower():
-        #             sceneActor = title.split(' in ', 1)[0].strip()
-        #             sceneTitle = title.split(' in ', 1)[1].strip()
-        #             title = '%s - %s' % (sceneTitle, sceneActor)
-        #             metadata.title = PAutils.parseTitle(title, siteNum)
-        #             runOnce = 1
-
-        if actorName:
-            movieActors.addActor(actorName, actorPhotoURL)
+        movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
     xpaths = [
