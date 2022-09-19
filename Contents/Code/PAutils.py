@@ -301,26 +301,14 @@ def parseTitle(s, siteNum):
         final.append(parseWord(word, siteNum))
 
     output = ' '.join(final)
-
-    # Add space after a punctuation if missing
-    output = re.sub(r'(?=[\!|\:|\?|\.|\,]\b)\S(?!(co\b|net\b|com\b|org\b|porn\b))', lambda m: m.group(0) + ' ', output, flags=re.IGNORECASE)
-    # Remove single period at end of title
-    output = re.sub(r'(?<=[^\.].)(?<=\w)(?:\.)$', '', output)
-    # Remove space between word and punctuation
-    output = re.sub(r'\s+(?=[.,!:])', '', output)
-    # Override lowercase if word follows a punctuation
-    output = re.sub(r'(?<=!|:|\?|\.|-)(\s)(\S)', lambda m: m.group(1) + m.group(2).upper(), output)
-    # Override lowercase if word follows a parenthesis
-    output = re.sub(r'(?<=\()(\w)', lambda m: m.group(0).upper() + m.group(1)[1:], output)
-    # Override lowercase if last word
-    output = re.sub(r'\S+$', lambda m: m.group(0)[0].capitalize() + m.group(0)[1:], output)
+    output = titlePostProcess(output)
 
     return output
 
 
 def parseWord(word, siteNum):
     lower_exceptions = ['a', 'v', 'y', 'n', 'an', 'of', 'the', 'and', 'for', 'to', 'onto', 'but', 'or', 'nor', 'at', 'with', 'vs', 'com', 'co', 'org']
-    upper_exceptions = ['bbc', 'xxx', 'bbw', 'bf', 'bff', 'bts', 'pov', 'dp', 'gf', 'bj', 'wtf', 'cfnm', 'bwc', 'fm', 'tv', 'ai', 'hd', 'milf', 'gilf', 'dilf', 'dtf', 'zz', 'xxxl']
+    upper_exceptions = ['bbc', 'xxx', 'bbw', 'bf', 'bff', 'bts', 'pov', 'dp', 'gf', 'bj', 'wtf', 'cfnm', 'bwc', 'fm', 'tv', 'ai', 'hd', 'milf', 'gilf', 'dilf', 'dtf', 'zz', 'xxxl', 'usa', 'nsa']
     symbolsClean = ['-', '/', '.', '+', '\'']
     symbolsEsc = ['-', '/', r'\.', r'\+', '\'']
     sitename = PAsearchSites.getSearchSiteName(siteNum).replace(' ', '')
@@ -390,6 +378,25 @@ def parseTitleSymbol(word, siteNum, symbol):
     return nhword
 
 
+def titlePostProcess(output):
+    # Add space after a punctuation if missing
+    output = re.sub(r'(?=[\!|\:|\?|\.|\,]\b)\S(?!(co\b|net\b|com\b|org\b|porn\b))', lambda m: m.group(0) + ' ', output, flags=re.IGNORECASE)
+    # Remove single period at end of title
+    output = re.sub(r'(?<=[^\.].)(?<=\w)(?:\.)$', '', output)
+    # Remove space between word and punctuation
+    output = re.sub(r'\s+(?=[.,!:])', '', output)
+    # Override lowercase if last word
+    output = re.sub(r'T\sShirt', 'T-Shirt', output)
+    # Override lowercase if word follows a punctuation
+    output = re.sub(r'(?<=!|:|\?|\.|-)(\s)(\S)', lambda m: m.group(1) + m.group(2).upper(), output)
+    # Override lowercase if word follows a parenthesis
+    output = re.sub(r'(?<=\()(\w)', lambda m: m.group(0).upper() + m.group(1)[1:], output)
+    # Override lowercase if last word
+    output = re.sub(r'\S+$', lambda m: m.group(0)[0].capitalize() + m.group(0)[1:], output)
+
+    return output
+
+
 def studio(name, siteNum):
     studios = (
         'Mile High Media', 'Evil Angel', 'Blacked RAW', 'Reality Kings', '40 Inch Plus', 'HD Love',
@@ -408,8 +415,8 @@ def studio(name, siteNum):
 
 
 def manualWordFix(word):
-    exceptions = ['im', 'theyll', 'cant', 'ive', 'shes', 'theyre', 'tshirt', 'dont', 'wasnt', 'youre', 'ill', 'whats', 'didnt', 'isnt', 'senor', 'senorita', 'thats', 'gstring', 'milfs', 'oreilly', 'vs', 'bangbros']
-    corrections = ['I\'m', 'They\'ll', 'Can\'t', 'I\'ve', 'She\'s', 'They\'re', 'T-Shirt', 'Don\'t', 'Wasn\'t', 'You\'re', 'I\'ll', 'What\'s', 'Didn\'t', 'Isn\'t', 'Señor', 'Señorita', 'That\'s', 'G-String', 'MILFs', 'O\'Reilly', 'vs.', 'BangBros']
+    exceptions = ['im', 'theyll', 'cant', 'ive', 'shes', 'theyre', 'tshirt', 'dont', 'wasnt', 'youre', 'ill', 'whats', 'didnt', 'isnt', 'senor', 'senorita', 'thats', 'gstring', 'milfs', 'oreilly', 'vs', 'bangbros', 'bday']
+    corrections = ['I\'m', 'They\'ll', 'Can\'t', 'I\'ve', 'She\'s', 'They\'re', 'T-Shirt', 'Don\'t', 'Wasn\'t', 'You\'re', 'I\'ll', 'What\'s', 'Didn\'t', 'Isn\'t', 'Señor', 'Señorita', 'That\'s', 'G-String', 'MILFs', 'O\'Reilly', 'vs.', 'BangBros', 'B-Day']
 
     if word.lower() in exceptions:
         for correction in corrections:
