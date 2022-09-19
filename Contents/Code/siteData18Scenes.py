@@ -22,7 +22,7 @@ def search(results, lang, siteNum, searchData):
             sceneURL = '%s/scenes/%s' % (PAsearchSites.getSearchBaseURL(siteNum), sceneID)
             searchResults.append(sceneURL)
 
-    searchData.encoded = searchData.encoded.replace('\'', '').replace(',', '').replace('& ', '')
+    searchData.encoded = searchData.title.replace('\'', '').replace(',', '').replace('& ', '')
     searchURL = '%s%s&key2=%s&next=1&page=0' % (PAsearchSites.getSearchSearchURL(siteNum), searchData.encoded, searchData.encoded)
     req = PAutils.HTTPRequest(searchURL, headers={'Referer': 'https://www.data18.com'})
     searchPageElements = HTML.ElementFromString(req.text)
@@ -244,6 +244,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//h3[contains(., "Cast")]//following::div[./p[contains(., "No Profile")]]//span[@class]/text()')
     actors.extend(detailsPageElements.xpath('//h3[contains(., "Cast")]//following::div//a[contains(@href, "/name/")]/img/@alt'))
+    actors.extend(detailsPageElements.xpath('//h3[contains(., "Cast")]//following::p[contains(., "No profile")]/b/text()'))
     for actor in actors:
         actorName = actor
         actorPhotoURL = ''
