@@ -308,9 +308,9 @@ def parseTitle(s, siteNum):
 
 def parseWord(word, siteNum):
     lower_exceptions = ['a', 'v', 'y', 'n', 'an', 'of', 'the', 'and', 'for', 'to', 'onto', 'but', 'or', 'nor', 'at', 'with', 'vs', 'com', 'co', 'org']
-    upper_exceptions = ['bbc', 'xxx', 'bbw', 'bf', 'bff', 'bts', 'pov', 'dp', 'gf', 'bj', 'wtf', 'cfnm', 'bwc', 'fm', 'tv', 'ai', 'hd', 'milf', 'gilf', 'dilf', 'dtf', 'zz', 'xxxl', 'usa', 'nsa']
+    upper_exceptions = ['bbc', 'xxx', 'bbw', 'bf', 'bff', 'bts', 'pov', 'dp', 'gf', 'bj', 'wtf', 'cfnm', 'bwc', 'fm', 'tv', 'ai', 'hd', 'milf', 'gilf', 'dilf', 'dtf', 'zz', 'xxxl', 'usa', 'nsa', 'hr']
     symbolsClean = ['-', '/', '.', '+', '\'']
-    symbolsEsc = ['-', '/', r'\.', r'\+', '\'']
+    symbolsEsc = ['-', '/', r'\.', r'\+', r'\'']
     sitename = PAsearchSites.getSearchSiteName(siteNum).replace(' ', '')
 
     pattern = re.compile(r'\W')
@@ -346,6 +346,7 @@ def any(s):
 
 def parseTitleSymbol(word, siteNum, symbol):
     symbol_exceptions = ['vs', 'v', 'n']
+    contraction_exceptions = ['re', 't', 's', 'd', 'll', 've', 'm']
     pattern = re.compile(r'\W')
     word_list = re.split(symbol, word)
     symbols = ['-', '/', r'\.', r'\+']
@@ -368,10 +369,10 @@ def parseTitleSymbol(word, siteNum, symbol):
                 nhword += parseWord(hword, siteNum)
             else:
                 nhword += hword.capitalize()
-        elif len(re.sub(pattern, '', hword)) > 2:
-            nhword += parseWord(hword, siteNum)
+        elif hword.lower() in contraction_exceptions:
+            nhword += hword.lower()
         else:
-            nhword += hword
+            nhword += parseWord(hword, siteNum)
 
         if idx != len(word_list) - 1:
             nhword += symbol.replace('\\', '')
@@ -390,7 +391,7 @@ def titlePostProcess(output):
     # Override lowercase if word follows a punctuation
     output = re.sub(r'(?<=!|:|\?|\.|-)(\s)(\S)', lambda m: m.group(1) + m.group(2).upper(), output)
     # Override lowercase if word follows a parenthesis
-    output = re.sub(r'(?<=\()(\w)', lambda m: m.group(0).upper() + m.group(1)[1:], output)
+    output = re.sub(r'(?<=[\(|\&])(\w)', lambda m: m.group(0).upper() + m.group(1)[1:], output)
     # Override lowercase if last word
     output = re.sub(r'\S+$', lambda m: m.group(0)[0].capitalize() + m.group(0)[1:], output)
 
