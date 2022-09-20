@@ -301,7 +301,7 @@ def parseTitle(s, siteNum):
         final.append(parseWord(word, siteNum))
 
     output = ' '.join(final)
-    output = titlePostProcess(output)
+    output = parseTitlePost(output)
 
     return output
 
@@ -379,7 +379,7 @@ def parseTitleSymbol(word, siteNum, symbol):
     return nhword
 
 
-def titlePostProcess(output):
+def parseTitlePost(output):
     # Add space after a punctuation if missing
     output = re.sub(r'(?=[\!|\:|\?|\.|\,]\b)\S(?!(co\b|net\b|com\b|org\b|porn\b))', lambda m: m.group(0) + ' ', output, flags=re.IGNORECASE)
     # Remove single period at end of title
