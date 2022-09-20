@@ -30,8 +30,8 @@ def search(results, lang, siteNum, searchData):
     searchPages = re.search(r'(?<=pages:\s).*(?=])', req.text)
     if searchPages:
         numSearchPages = int(searchPages.group(0))
-        if numSearchPages > 10:
-            numSearchPages = 10
+        if numSearchPages > 50:
+            numSearchPages = 50
     else:
         numSearchPages = 1
 
@@ -244,9 +244,12 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//h3[contains(., "Cast")]//following::div[./p[contains(., "No Profile")]]//span[@class]/text()')
     actors.extend(detailsPageElements.xpath('//h3[contains(., "Cast")]//following::div//a[contains(@href, "/name/")]/img/@alt'))
-    actors.extend(detailsPageElements.xpath('//h3[contains(., "Cast")]//following::p[contains(., "No profile")]/b/text()'))
+    try:
+        actors.extend(detailsPageElements.xpath('//h3[contains(., "Cast")]//following::p[contains(., "No profile")]/b/text()')[0].split(','))
+    except:
+        pass
     for actor in actors:
-        actorName = actor
+        actorName = actor.strip()
         actorPhotoURL = ''
 
         movieActors.addActor(actorName, actorPhotoURL)
