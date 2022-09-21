@@ -22,7 +22,7 @@ def search(results, lang, siteNum, searchData):
             sceneURL = '%s/scenes/%s' % (PAsearchSites.getSearchBaseURL(siteNum), sceneID)
             searchResults.append(sceneURL)
 
-    searchData.encoded = re.sub(r'\W', '', searchData.title)
+    searchData.encoded = re.sub(r'[^\w|^\s]', '', searchData.title)
     searchURL = '%s%s&key2=%s&next=1&page=0' % (PAsearchSites.getSearchSearchURL(siteNum), searchData.encoded, searchData.encoded)
     req = PAutils.HTTPRequest(searchURL, headers={'Referer': 'https://www.data18.com'})
     searchPageElements = HTML.ElementFromString(req.text)
