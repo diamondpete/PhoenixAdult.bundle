@@ -123,27 +123,27 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     seriesNames = []
 
-    if 'collections' in detailsPageElements and detailsPageElements['collections']:
-        for collection in detailsPageElements['collections']:
-            seriesNames.append(collection['name'])
+    # if 'collections' in detailsPageElements and detailsPageElements['collections']:
+    #     for collection in detailsPageElements['collections']:
+    #         seriesNames.append(collection['name'])
 
-    if 'parent' in detailsPageElements:
-        if 'title' in detailsPageElements['parent']:
-            seriesNames.append(detailsPageElements['parent']['title'])
+    # if 'parent' in detailsPageElements:
+    #     if 'title' in detailsPageElements['parent']:
+    #         seriesNames.append(detailsPageElements['parent']['title'])
 
-    isInCollection = False
-    siteName = PAsearchSites.getSearchSiteName(siteNum).lower().replace(' ', '').replace('\'', '')
-    for seriesName in seriesNames:
-        if seriesName.lower().replace(' ', '').replace('\'', '') == siteName:
-            isInCollection = True
-            break
+    # isInCollection = False
+    # siteName = PAsearchSites.getSearchSiteName(siteNum).lower().replace(' ', '').replace('\'', '')
+    # for seriesName in seriesNames:
+    #     if seriesName.lower().replace(' ', '').replace('\'', '') == siteName:
+    #         isInCollection = True
+    #         break
 
-    if not isInCollection:
-        seriesNames.insert(0, PAsearchSites.getSearchSiteName(siteNum))
+    # if not isInCollection:
+    #     seriesNames.insert(0, PAsearchSites.getSearchSiteName(siteNum))
 
-    for seriesName in seriesNames:
-        if not seriesName == metadata.studio:
-            metadata.collections.add(seriesName)
+    # for seriesName in seriesNames:
+    #     if not seriesName == metadata.studio:
+    #         metadata.collections.add(seriesName)
 
     # Release Date
     date_object = parse(detailsPageElements['dateReleased'])
