@@ -87,7 +87,7 @@ ActorsReplace = {
     'Jenny Fer': ['Jenny Ferri'],
     'Jessi Gold': ['Jaggie Gold', 'Jassie Gold'],
     'Jessica Foxx': ['Jessica Blue', 'Jessica Cute'],
-    'Jmac': ['J Mac', 'JMac'],
+    'J-Mac': ['J Mac', 'JMac'],
     'Jojo Kiss': ['Jo Jo Kiss'],
     'Jordi El Nino Polla': ['Jordi Enp'],
     'Josephine Jackson': ['Josephina Jackson'],
