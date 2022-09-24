@@ -121,7 +121,7 @@ def search(results, lang, siteNum, searchData):
         curID = PAutils.Encode(sceneURL)
 
         try:
-            date = detailsPageElements.xpath('//@datetime')[0].strip()
+            date = detailsPageElements.xpath('//span[contains(., "Release date")]//following-sibling::a/b')[0].text_content().strip()
         except:
             date = ''
 
