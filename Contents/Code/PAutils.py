@@ -287,6 +287,7 @@ def parseTitle(s, siteNum):
     s = re.sub(r'w\/(?!\s)', 'w/ ', s, flags=re.IGNORECASE)
     s = re.sub(r'\,(?!\s)', ', ', s)
     s = s.replace('_', ' ')
+    s = preParseTitle(s)
     word_list = re.split(' ', s)
 
     firstWord = parseWord(word_list[0], siteNum)
@@ -301,7 +302,7 @@ def parseTitle(s, siteNum):
         final.append(parseWord(word, siteNum))
 
     output = ' '.join(final)
-    output = parseTitlePost(output)
+    output = postParseTitle(output)
 
     return output
 
@@ -382,27 +383,29 @@ def parseTitleSymbol(word, siteNum, symbol):
     return nhword
 
 
-def parseTitlePost(output):
+def postParseTitle(output):
     # Add space after a punctuation if missing
     output = re.sub(r'(?=[\!|\:|\?|\.|\,]\b)\S(?!(co\b|net\b|com\b|org\b|porn\b))', lambda m: m.group(0) + ' ', output, flags=re.IGNORECASE)
-
     # Remove single period at end of title
     output = re.sub(r'(?<=[^\.].)(?<=\w)(?:\.)$', '', output)
-
     # Remove space between word and punctuation
     output = re.sub(r'\s+(?=[.,!:])', '', output)
-
-    # Override lowercase if last word
-    output = re.sub(r'T\sShirt', 'T-Shirt', output)
-
     # Override lowercase if word follows a punctuation
     output = re.sub(r'(?<=!|:|\?|\.|-)(\s)(\S)', lambda m: m.group(1) + m.group(2).upper(), output)
-
     # Override lowercase if word follows a parenthesis
     output = re.sub(r'(?<=[\(|\&])(\w)', lambda m: m.group(0).upper() + m.group(1)[1:], output)
-
     # Override lowercase if last word
     output = re.sub(r'\S+$', lambda m: m.group(0)[0].capitalize() + m.group(0)[1:], output)
+
+    return output
+
+
+def preParseTitle(input):
+    exceptions_pattern = [r't\sshirt', r'j\smac|jmac']
+    corrections = ['tshirt', 'J-Mac']
+
+    for idx, pattern in enumerate(exceptions_pattern, 0):
+        output = re.sub(pattern, corrections[idx], input, flags=re.IGNORECASE)
 
     return output
 
@@ -425,8 +428,15 @@ def studio(name, siteNum):
 
 
 def manualWordFix(word):
-    exceptions = ['im', 'theyll', 'cant', 'ive', 'shes', 'theyre', 'tshirt', 'dont', 'wasnt', 'youre', 'ill', 'whats', 'didnt', 'isnt', 'senor', 'senorita', 'thats', 'gstring', 'milfs', 'oreilly', 'vs', 'bangbros', 'bday', 'dms']
-    corrections = ['I\'m', 'They\'ll', 'Can\'t', 'I\'ve', 'She\'s', 'They\'re', 'T-Shirt', 'Don\'t', 'Wasn\'t', 'You\'re', 'I\'ll', 'What\'s', 'Didn\'t', 'Isn\'t', 'Señor', 'Señorita', 'That\'s', 'G-String', 'MILFs', 'O\'Reilly', 'vs.', 'BangBros', 'B-Day', 'DMs']
+    exceptions = (
+        'im', 'theyll', 'cant', 'ive', 'shes', 'theyre', 'tshirt', 'dont', 'wasnt', 'youre', 'ill', 'whats', 'didnt',
+        'isnt', 'senor', 'senorita', 'thats', 'gstring', 'milfs', 'oreilly', 'vs', 'bangbros', 'bday', 'dms',
+    )
+    corrections = (
+        'I\'m', 'They\'ll', 'Can\'t', 'I\'ve', 'She\'s', 'They\'re', 'T-Shirt', 'Don\'t', 'Wasn\'t', 'You\'re',
+        'I\'ll', 'What\'s', 'Didn\'t', 'Isn\'t', 'Señor', 'Señorita', 'That\'s', 'G-String', 'MILFs', 'O\'Reilly',
+        'vs.', 'BangBros', 'B-Day', 'DMs'
+    )
     pattern = re.compile(r'\W')
     cleanWord = re.sub(pattern, '', word)
 
