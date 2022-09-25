@@ -312,7 +312,7 @@ def parseWord(word, siteNum):
     upper_exceptions = (
         'bbc', 'xxx', 'bbw', 'bf', 'bff', 'bts', 'pov', 'dp', 'gf', 'bj', 'wtf', 'cfnm', 'bwc', 'fm', 'tv', 'ai',
         'hd', 'milf', 'gilf', 'dilf', 'dtf', 'zz', 'xxxl', 'usa', 'nsa', 'hr', 'ii', 'iii', 'iv', 'bbq', 'avn', 'xtc', 'atv',
-        'joi',
+        'joi', 'rpg',
     )
     symbolsClean = ['-', '/', '.', '+', '\'']
     symbolsEsc = ['-', '/', r'\.', r'\+', r'\'']
@@ -431,12 +431,12 @@ def studio(name, siteNum):
 def manualWordFix(word):
     exceptions = (
         'im', 'theyll', 'cant', 'ive', 'shes', 'theyre', 'tshirt', 'dont', 'wasnt', 'youre', 'ill', 'whats', 'didnt',
-        'isnt', 'senor', 'senorita', 'thats', 'gstring', 'milfs', 'oreilly', 'vs', 'bangbros', 'bday', 'dms',
+        'isnt', 'senor', 'senorita', 'thats', 'gstring', 'milfs', 'oreilly', 'vs', 'bangbros', 'bday', 'dms', 'bffs'
     )
     corrections = (
         'I\'m', 'They\'ll', 'Can\'t', 'I\'ve', 'She\'s', 'They\'re', 'T-Shirt', 'Don\'t', 'Wasn\'t', 'You\'re',
         'I\'ll', 'What\'s', 'Didn\'t', 'Isn\'t', 'Señor', 'Señorita', 'That\'s', 'G-String', 'MILFs', 'O\'Reilly',
-        'vs.', 'BangBros', 'B-Day', 'DMs'
+        'vs.', 'BangBros', 'B-Day', 'DMs', 'BFFs'
     )
     pattern = re.compile(r'\W')
     cleanWord = re.sub(pattern, '', word)

@@ -1001,7 +1001,7 @@ searchSites = {
     812: ('JAV', 'https://www.r18.com', '/common/search/searchword='),
     813: ('Bang', 'https://www.bang.com', 'https://617fb597b659459bafe6472470d9073a.us-east-1.aws.found.io/videos/video/_search'),
     814: ('Vivid', 'https://www.vivid.com', '/'),
-    815: ('JAYs POV', 'https://jayspov.net', '/MemberSceneSearch?q='),
+    815: ('Jays POV', 'https://jayspov.net', '/MemberSceneSearch?q='),
     816: ('Errotica Archives', 'https://www.errotica-archives.com', '/api'),
     817: ('ALS Scan', 'https://www.alsscan.com', '/api'),
     818: ('Rylsky Art', 'https://www.rylskyart.com', '/api'),
