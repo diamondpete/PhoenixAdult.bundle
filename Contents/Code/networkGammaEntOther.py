@@ -9,11 +9,14 @@ def getAPIKey(siteNum):
     token = None
     if token_key and token_key in Dict:
         data = Dict[token_key]
-        data = base64.b64decode(data).decode('UTF-8')
-        if 'validUntil=' in data:
-            timestamp = int(data.split('validUntil=')[1].split('&')[0])
-            if timestamp > time.time():
-                token = Dict[token_key]
+        try:
+            data = base64.b64decode(data).decode('UTF-8')
+            if 'validUntil=' in data:
+                timestamp = int(data.split('validUntil=')[1].split('&')[0])
+                if timestamp > time.time():
+                    token = Dict[token_key]
+        except:
+            pass
 
     if not token:
         req = PAutils.HTTPRequest(url)
