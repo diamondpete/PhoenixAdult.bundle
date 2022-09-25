@@ -6,7 +6,7 @@ def search(results, lang, siteNum, searchData):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="updateItem"] | //div[@class="photo-thumb video-thumb"]'):
-        titleNoFormatting = searchResult.xpath('.//h4//a | .//p[@class="thumb-title"]')[0].text_content().strip()
+        titleNoFormatting = PAutils.parseTitle(searchResult.xpath('.//h4//a | .//p[@class="thumb-title"]')[0].text_content().strip(), siteNum)
         curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
 
         try:
@@ -45,7 +45,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//span[@class="update_title"] | //p[@class="raiting-section__title"]')[0].text_content().strip()
+    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//span[@class="update_title"] | //p[@class="raiting-section__title"]')[0].text_content().strip(), siteNum)
 
     # Summary
     try:
