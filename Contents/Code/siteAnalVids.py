@@ -3,11 +3,11 @@ import PAutils
 
 
 def search(results, lang, siteNum, searchData):
-    sceneID = None
+    sourceID = None
     parts = searchData.title.split()
     if unicode(parts[0], 'UTF-8').isdigit():
-        sceneID = parts[0]
-        searchData.title = searchData.title.replace(sceneID, '', 1).strip()
+        sourceID = parts[0]
+        searchData.title = searchData.title.replace(sourceID, '', 1).strip()
 
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.title)
     searchResults = req.json()
@@ -15,13 +15,21 @@ def search(results, lang, siteNum, searchData):
     for searchResult in searchResults['terms']:
         if searchResult['type'] == 'scene':
             titleNoFormatting = PAutils.parseTitle(searchResult['name'], siteNum)
+            match = re.search(r'\w+\d$', titleNoFormatting)
+            if match:
+                sceneID = match.group(0)
+                titleNoFormatting = re.sub(r'\w+\d$', '', titleNoFormatting).strip()
+                titleNoFormatting = '[%s] %s' % (sceneID, titleNoFormatting)
+
 
             sceneURL = searchResult['url']
             curID = PAutils.Encode(sceneURL)
 
             releaseDate = searchData.dateFormat() if searchData.date else ''
 
-            if sceneID and int(sceneID) == searchResult['source_id']:
+            if sceneID and sceneID.lower() == searchData.title.lower():
+                score = 100
+            elif sourceID and int(sourceID) == searchResult['source_id']:
                 score = 100
             elif searchData.date:
                 score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
