@@ -2,7 +2,7 @@ import PAsearchSites
 import PAutils
 
 
-def getDataFromAPI(url, req_type, query, siteNum):
+def getDataFromAPI(url, req_type, query):
     headers = {
         'Authorization': 'Basic YmFuZy1yZWFkOktqVDN0RzJacmQ1TFNRazI=',
         'Content-Type': 'application/json'
@@ -14,7 +14,7 @@ def getDataFromAPI(url, req_type, query, siteNum):
 
 
 def search(results, lang, siteNum, searchData):
-    searchResults = getDataFromAPI(PAsearchSites.getSearchSearchURL(siteNum), 'name', searchData.title, siteNum)['hits']['hits']
+    searchResults = getDataFromAPI(PAsearchSites.getSearchSearchURL(siteNum), 'name', searchData.title)['hits']['hits']
     for searchResult in searchResults:
         searchResult = searchResult['_source']
         titleNoFormatting = PAutils.parseTitle(searchResult['name'], siteNum)
@@ -37,7 +37,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata_id = str(metadata.id).split('|')
     sceneID = metadata_id[0]
 
-    detailsPageElements = getDataFromAPI(PAsearchSites.getSearchSearchURL(siteNum), 'identifier', sceneID, siteNum)['hits']['hits'][0]['_source']
+    detailsPageElements = getDataFromAPI(PAsearchSites.getSearchSearchURL(siteNum), 'identifier', sceneID)['hits']['hits'][0]['_source']
 
     # Title
     metadata.title = PAutils.parseTitle(detailsPageElements['name'], siteNum)
@@ -111,7 +111,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
-                if width > 1:
+                if height > width:
                     # Item is a poster
                     metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
                 if width > 100 and width > height:
