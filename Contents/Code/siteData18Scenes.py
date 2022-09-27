@@ -205,8 +205,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         try:
             tagline = detailsPageElements.xpath('//p[contains(., "Site:")]//following-sibling::a[@class="bold"]')[0].text_content().strip()
         except:
-            tagline = detailsPageElements.xpath('//p[contains(., "Movie:")]/a')[0].text_content()
-            metadata.collections.add(metadata.studio)
+            try:
+                tagline = detailsPageElements.xpath('//b[contains(., "Studio")]//following-sibling::b')[0].text_content().strip()
+            except:
+                tagline = detailsPageElements.xpath('//p[contains(., "Movie:")]/a')[0].text_content()
+                metadata.collections.add(metadata.studio)
 
         if len(metadata_id) > 3:
             Log('Using original series information')
