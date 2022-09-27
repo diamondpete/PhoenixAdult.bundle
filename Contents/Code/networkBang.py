@@ -69,6 +69,21 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         actorName = actorLink['name']
         actorPhotoURL = 'https://i.bang.com/pornstars/%d.jpg' % actorLink['id']
 
+        if actorName:
+            movieActors.addActor(actorName, actorPhotoURL)
+
+    # Manually Add Actors
+    actors = []
+    for key, value in actorsDB.items():
+        if key == sceneID:
+            movieActors.clearActors()
+            actors = value
+            break
+
+    for actorLink in actors:
+        actorName = actorLink[0]
+        actorPhotoURL = 'https://i.bang.com/pornstars/%d.jpg' % int(actorLink[1])
+
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Genres
@@ -106,3 +121,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                 pass
 
     return metadata
+
+
+actorsDB= {
+    '173946': [('La Sirena 69', '38477')],
+}

@@ -178,10 +178,7 @@ genresDB = {
 }
 
 actorsDB = {
-    'Poke Her In The Front': [
-        'Sara Luvv',
-        'Dillion Harper',
-    ],
+    'Poke Her In The Front': ['Sara Luvv', 'Dillion Harper'],
     'Best Friends With Nice Tits!': ["April O'Neil", 'Victoria Rae Black'],
 }
 
