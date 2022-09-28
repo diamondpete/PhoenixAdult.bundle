@@ -34,7 +34,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h1')[0].text_content(), siteNum).replace('’', '\'').replace('W/','w/').replace('Aj', 'AJ')
+    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h1')[0].text_content(), siteNum)
 
     # Summary
     metadata.summary = detailsPageElements.xpath('//div[@class="vdoDesc"]')[0].text_content().strip()
@@ -82,9 +82,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         for poster in detailsPageElements.xpath(xpath):
             if not poster.startswith('http'):
                 poster = 'http:' + poster
-            if 'big' not in poster:
+            if 'bangbros/big' not in poster and 'big_trailer' not in poster:
                 (poster, filename) = poster.rsplit('/', 1)
-                poster = poster + '/big' + filename
+                poster = '%s/big%s' % (poster, filename)
 
             art.append(poster)
 
