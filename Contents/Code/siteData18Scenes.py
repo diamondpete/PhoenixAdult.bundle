@@ -216,11 +216,13 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             tagline = PAutils.parseTitle(PAutils.studio(detailsPageElements.xpath('//p[contains(., "Serie")]//a[@title]')[0].text_content().strip(), siteNum), siteNum)
             metadata.title = ("%s [Scene %s]" % (metadata_id[3], metadata_id[4]))
 
+        tagline = PAutils.parseTitle(PAutils.studio(tagline, siteNum), siteNum)
+
         if not metadata.studio:
-            metadata.studio = PAutils.studio(tagline, siteNum)
+            metadata.studio = tagline
         else:
-            metadata.tagline = PAutils.parseTitle(tagline, siteNum)
-        metadata.collections.add(PAutils.parseTitle(tagline, siteNum))
+            metadata.tagline = tagline
+        metadata.collections.add(tagline)
     except:
         metadata.collections.add(metadata.studio)
 

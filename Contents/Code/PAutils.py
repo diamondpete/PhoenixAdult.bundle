@@ -385,6 +385,8 @@ def parseTitleSymbol(word, siteNum, symbol):
 
 
 def postParseTitle(output):
+    replace= [('“', '\"'), ('”', '\"'), ('’', '\''), ('W/','w/'), ('Aj', 'AJ')]
+
     # Add space after a punctuation if missing
     output = re.sub(r'(?=[\!|\:|\?|\.|\,]\b)\S(?!(co\b|net\b|com\b|org\b|porn\b))', lambda m: m.group(0) + ' ', output, flags=re.IGNORECASE)
     # Remove single period at end of title
@@ -397,6 +399,9 @@ def postParseTitle(output):
     output = re.sub(r'(?<=[\(|\&])(\w)', lambda m: m.group(0).upper() + m.group(1)[1:], output)
     # Override lowercase if last word
     output = re.sub(r'\S+$', lambda m: m.group(0)[0].capitalize() + m.group(0)[1:], output)
+
+    for value in replace:
+        output = output.replace(value[0], value[1])
 
     return output
 
@@ -415,7 +420,7 @@ def studio(name, siteNum):
     studios = (
         'Mile High Media', 'Evil Angel', 'Blacked RAW', 'Reality Kings', '40 Inch Plus', 'HD Love',
         'CFNM Secret', 'Pure 18', 'RK Prime', 'Let\'s Try Anal', 'Public Pick-Ups', 'ArchAngel', 'BangBros',
-        'BellaPass', 'Pornstars Like It Big', 'Look At Her Now', 'Digital Playground'
+        'BellaPass', 'Pornstars Like It Big', 'Look At Her Now', 'Digital Playground', 'Big Tit Cream Pie',
     )
 
     if name == '':
