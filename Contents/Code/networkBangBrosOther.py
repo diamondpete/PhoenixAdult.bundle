@@ -40,11 +40,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.summary = summary[0].strip()
 
     # Studio
-    metadata.studio = 'Bang Bros'
+    metadata.studio = 'BangBros'
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    tagline = detailsPageElements.xpath('//span[@class="fn"]')[0].text_content()
+    tagline = PAutils.studio(detailsPageElements.xpath('//span[@class="fn"]')[0].text_content(), siteNum)
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
