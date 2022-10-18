@@ -75,7 +75,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     for genreLink in detailsPageElements.xpath('//div[@class="categories"]/a'):
         genreName = genreLink.text_content().strip()
 
-        movieGenres.addGenre(genreName)
+        if '.com' not in genreName.lower() and '.xxx' not in genreName.lower():
+            movieGenres.addGenre(genreName)
 
     # Actors
     movieActors.clearActors()
