@@ -16,14 +16,14 @@ def search(results, lang, siteNum, searchData):
 
     googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum)
     for sceneURL in googleResults:
-        if ('videos/' in sceneURL and '/page/' not in sceneURL) and sceneURL not in searchResults:
+        if ('videos/' in sceneURL or 'galleries/' in sceneURL and '/page/' not in sceneURL) and sceneURL not in searchResults:
             searchResults.append(sceneURL)
 
     for sceneURL in searchResults:
         req = PAutils.HTTPRequest(sceneURL)
         if req.ok:
             detailsPageElements = HTML.ElementFromString(req.text)
-            titleNoFormatting = detailsPageElements.xpath('//h1[@class="customhcolor"]')[0].text_content()
+            titleNoFormatting = PAutils.parseTitle(detailsPageElements.xpath('//h1[@class="customhcolor"]')[0].text_content(), siteNum)
             if 'http' not in sceneURL:
                 sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + sceneID
             curID = PAutils.Encode(sceneURL)
@@ -50,7 +50,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1[@class="customhcolor"]')[0].text_content()
+    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h1[@class="customhcolor"]')[0].text_content(), siteNum)
 
     # Summary
     metadata.summary = detailsPageElements.xpath('//*[@class="customhcolor2"]')[0].text_content().strip()
