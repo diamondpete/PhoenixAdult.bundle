@@ -473,7 +473,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     title = title.replace('BONUS-', 'BONUS - ').replace('BTS-', 'BTS - ')
 
-    metadata.title = title
+    metadata.title = PAutils.parseTitle(title, siteNum)
 
     # Posters
 
