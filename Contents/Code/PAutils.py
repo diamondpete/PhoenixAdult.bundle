@@ -438,12 +438,12 @@ def manualWordFix(word):
     exceptions = (
         'im', 'theyll', 'cant', 'ive', 'shes', 'theyre', 'tshirt', 'dont', 'wasnt', 'youre', 'ill', 'whats', 'didnt',
         'isnt', 'senor', 'senorita', 'thats', 'gstring', 'milfs', 'oreilly', 'vs', 'bangbros', 'bday', 'dms', 'bffs',
-        'ohmy', 'wont', 'whos'
+        'ohmy', 'wont', 'whos', 'shouldnt'
     )
     corrections = (
         'I\'m', 'They\'ll', 'Can\'t', 'I\'ve', 'She\'s', 'They\'re', 'T-Shirt', 'Don\'t', 'Wasn\'t', 'You\'re',
         'I\'ll', 'What\'s', 'Didn\'t', 'Isn\'t', 'Señor', 'Señorita', 'That\'s', 'G-String', 'MILFs', 'O\'Reilly',
-        'vs.', 'BangBros', 'B-Day', 'DMs', 'BFFs', 'OhMy', 'Won\'t', 'Who\'s'
+        'vs.', 'BangBros', 'B-Day', 'DMs', 'BFFs', 'OhMy', 'Won\'t', 'Who\'s', 'Shouldn\'t'
     )
     pattern = re.compile(r'\W')
     cleanWord = re.sub(pattern, '', word)
