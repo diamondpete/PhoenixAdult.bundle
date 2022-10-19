@@ -22,7 +22,7 @@ class PhoenixActors:
         for actorLink in self.actorsTable:
             skip = False
             # Save the potential new Actor or Actress to a new variable, replace &nbsp; with a true space, and strip off any surrounding whitespace
-            actorName = PAutils.parseTitle(actorLink['name'].replace('\xc2\xa0', ' ').replace(',', '').strip(), 0)
+            actorName = PAutils.parseTitle(actorLink['name'].replace('\xc2\xa0', ' ').replace(',', '').strip().lower(), 0)
             actorPhoto = actorLink['photo'].strip()
 
             actorName = ' '.join(actorName.split())

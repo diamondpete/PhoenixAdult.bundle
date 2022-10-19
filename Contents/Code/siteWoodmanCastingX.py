@@ -23,7 +23,7 @@ def search(results, lang, siteNum, searchData):
     for searchResult in searchResults.xpath('//div[contains(@class, "items")]/a[contains(@class, "scene")]'):
         sceneURL = searchResult.xpath('./@href')[0]
         if not sceneURL.startswith('http'):
-            titleNoFormatting = searchResult.xpath('./img/@alt')[0]
+            titleNoFormatting = PAutils.parseTitle(searchResult.xpath('./img/@alt')[0], siteNum)
             curID = PAutils.Encode(sceneURL)
 
             score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
@@ -44,7 +44,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.studio = 'Woodman Casting X'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
+    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h1')[0].text_content().strip(), siteNum)
 
     # Summary
     description = detailsPageElements.xpath('//p[@class="description"]')

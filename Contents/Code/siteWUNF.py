@@ -29,7 +29,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.studio = 'WakeUpNFuck'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//div[@class="block"]//h2')[0].text_content().strip()
+    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//div[@class="block"]//h2')[0].text_content().strip(), siteNum)
 
     # Tagline and Collection(s)
     metadata.collections.clear()
