@@ -1,4 +1,3 @@
-import site
 import PAsearchSites
 import PAutils
 
