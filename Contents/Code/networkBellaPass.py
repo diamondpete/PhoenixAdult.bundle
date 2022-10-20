@@ -78,7 +78,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.studio = 'BellaPass'
         tagline = PAsearchSites.getSearchSiteName(siteNum)
         metadata.tagline = tagline
-
     metadata.collections.add(tagline)
 
     # Genres

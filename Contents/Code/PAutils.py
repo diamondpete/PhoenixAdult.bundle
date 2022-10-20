@@ -385,7 +385,7 @@ def parseTitleSymbol(word, siteNum, symbol):
 
 
 def postParseTitle(output):
-    replace= [('“', '\"'), ('”', '\"'), ('’', '\''), ('W/','w/'), ('Aj', 'AJ')]
+    replace = [('“', '\"'), ('”', '\"'), ('’', '\''), ('W/','w/'), ('Aj', 'AJ')]
 
     # Add space after a punctuation if missing
     output = re.sub(r'(?=[\!|\:|\?|\.|\,]\b)\S(?!(co\b|net\b|com\b|org\b|porn\b|E\d|xxx\b))', lambda m: m.group(0) + ' ', output, flags=re.IGNORECASE)
@@ -441,9 +441,9 @@ def manualWordFix(word):
         'ohmy', 'wont', 'whos', 'shouldnt'
     )
     corrections = (
-        'I\'m', 'They\'ll', 'Can\'t', 'I\'ve', 'She\'s', 'They\'re', 'T-Shirt', 'Don\'t', 'Wasn\'t', 'You\'re',
-        'I\'ll', 'What\'s', 'Didn\'t', 'Isn\'t', 'Señor', 'Señorita', 'That\'s', 'G-String', 'MILFs', 'O\'Reilly',
-        'vs.', 'BangBros', 'B-Day', 'DMs', 'BFFs', 'OhMy', 'Won\'t', 'Who\'s', 'Shouldn\'t'
+        'I\'m', 'They\'ll', 'Can\'t', 'I\'ve', 'She\'s', 'They\'re', 'T-Shirt', 'Don\'t', 'Wasn\'t', 'You\'re', 'I\'ll', 'What\'s', 'Didn\'t',
+        'Isn\'t', 'Señor', 'Señorita', 'That\'s', 'G-String', 'MILFs', 'O\'Reilly', 'vs.', 'BangBros', 'B-Day', 'DMs', 'BFFs',
+        'OhMy', 'Won\'t', 'Who\'s', 'Shouldn\'t'
     )
     pattern = re.compile(r'\W')
     cleanWord = re.sub(pattern, '', word)

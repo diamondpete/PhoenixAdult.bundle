@@ -87,6 +87,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//li[@class="update_models"]')
 
+    # Manually Add Actors
     if not actors:
         match = re.search(r'(?<=s/).*(?=\.html)', sceneURL)
         if match:
