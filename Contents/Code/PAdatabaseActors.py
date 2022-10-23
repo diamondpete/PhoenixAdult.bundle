@@ -5440,6 +5440,10 @@ ActorsReplaceStudios = {
         'Mia Malkova': ['Mia Malkova (aka Madison Swan)'],
         'Riley Ray': ['Ashlyn (aka Riley Ray)'],
         'Risi Simms': ['Risi Simms (Aka Trudy)'],
+    },
+    63: {  # PornPros
+        'Sydnee Capri': ['Sydnee'],
+        'Briella Bounce': ['Breilla'],
     }
 }
 
@@ -5507,4 +5511,5 @@ ActorsStudioIndexes = {
     60: ['PornCZ'],
     61: ['Fantasy Massage'],
     62: ['Allure Media'],
+    63: ['PornPros'],
 }
