@@ -131,7 +131,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     movieGenres.clearGenres()
     genres = []
     for key, value in genresDB.items():
-        if key.lower() == siteName.lower():
+        if key.lower() == siteName.replace(' ', '').lower():
             genres = value
             break
 
@@ -181,7 +181,7 @@ genresDB = {
     'Holed': ['Anal', 'Ass'],
     'Lubed': ['Lube', 'Raw', 'Wet'],
     'MassageCreep': ['Massage', 'Oil'],
-    'PassionHD': ['Hardcore'],
+    'Passion-HD': ['Hardcore'],
     'POVD': ['Gonzo', 'POV'],
     'PureMature': ['MILF', 'Mature'],
 }
