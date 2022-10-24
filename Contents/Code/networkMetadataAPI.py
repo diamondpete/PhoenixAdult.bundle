@@ -99,7 +99,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     movieActors.clearActors()
     for actorLink in detailsPageElements['performers']:
         actorName = actorLink['name']
-        actorPhotoURL = actorLink['image']
+        if 'default' not in actorLink['image']:
+            actorPhotoURL = actorLink['image']
+        else:
+            actorPhotoURL = ''
 
         if 'parent' in actorLink and actorLink['parent'] and 'name' in actorLink['parent']:
             actorName = actorLink['parent']['name']
