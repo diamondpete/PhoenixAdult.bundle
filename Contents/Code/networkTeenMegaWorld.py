@@ -47,7 +47,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    tagline = detailsPageElements.xpath('//div[@class="site"]/a')[0].text_content().replace('.com', '').strip()
+    tagline = PAutils.parseTitle(detailsPageElements.xpath('//div[@class="site"]/a')[0].text_content().replace('.com', '').strip(), siteNum)
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
