@@ -95,7 +95,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.studio = 'TeamSkeet'
 
     # Collections / Tagline
-    siteName = PAutils.parseTitle(detailsPageElements['site']['name'] if 'site' in detailsPageElements else PAsearchSites.getSearchSiteName(siteNum), siteNum)
+    siteName = PAutils.studio(PAutils.parseTitle(detailsPageElements['site']['name'] if 'site' in detailsPageElements else PAsearchSites.getSearchSiteName(siteNum), siteNum), siteNum)
     metadata.collections.clear()
     metadata.tagline = siteName
     metadata.collections.add(siteName)
