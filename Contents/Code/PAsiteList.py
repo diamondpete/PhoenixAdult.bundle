@@ -397,9 +397,9 @@ searchSites = {
     208: ('Solo Interviews', 'https://www.teamskeet.com', '/movies'),
     209: ('Team Skeet Extras', 'https://www.teamskeet.com', '/movies'),
     210: ('Dyked', 'https://www.teamskeet.com', '/movies'),
-    211: ('Badmilfs', 'https://www.teamskeet.com', '/movies'),
+    211: ('Bad MILFs', 'https://www.teamskeet.com', '/movies'),
     212: ('Gingerpatch', 'https://www.teamskeet.com', '/movies'),
-    213: ('BraceFaced', 'https://www.teamskeet.com', '/movies'),
+    213: ('Brace Faced', 'https://www.teamskeet.com', '/movies'),
     214: ('TeenJoi', 'https://www.teamskeet.com', '/movies'),
     215: ('StepSiblings', 'https://www.teamskeet.com', '/movies'),
     216: ('Lets Doe It', 'https://letsdoeit.com', '/search.en.html?q='),
@@ -821,8 +821,8 @@ searchSites = {
     632: ('18 First Sex', 'http://teenmegaworld.net', '/search.php?query='),
     633: ('ATMovs', 'http://teenmegaworld.net', '/search.php?query='),
     634: ('About Girls Love', 'http://teenmegaworld.net', '/search.php?query='),
-    635: ('Anal Angels', 'http://anal-angels.com', '/search.php?query='),
-    636: ('Anal Beauty', 'http://anal-beauty.com', '/search.php?query='),
+    635: ('Anal-Angels', 'http://anal-angels.com', '/search.php?query='),
+    636: ('Anal-Beauty', 'http://anal-beauty.com', '/search.php?query='),
     637: ('Beauty 4K', 'http://beauty4k.com', '/search.php?query='),
     638: ('BeautyAngels', 'http://beauty-angels.com', '/search.php?query='),
     639: ('Coeds Reality', 'http://teenmegaworld.net', '/search.php?query='),
@@ -840,7 +840,7 @@ searchSites = {
     651: ('No Boring', 'http://noboring.com', '/search.php?query='),
     652: ('Nubile Girls HD', 'http://nubilegirlshd.com', '/search.php?query='),
     653: ('NylonsX', 'http://teenmegaworld.net', '/search.php?query='),
-    654: ('Old N Young', 'http://old-n-young.com', '/search.php?query='),
+    654: ('Old-n-Young', 'http://old-n-young.com', '/search.php?query='),
     655: ('Private Teen Video', 'http://teenmegaworld.net', '/search.php?query='),
     656: ('Solo Teen Girls', 'http://soloteengirls.net', '/search.php?query='),
     657: ('Squirting Virgin', 'http://teenmegaworld.net', '/search.php?query='),
@@ -851,7 +851,7 @@ searchSites = {
     662: ('Tricky Masseur', 'http://trickymasseur.com', '/search.php?query='),
     663: ('WOW Orgasms', 'http://teenmegaworld.net', '/search.php?query='),
     664: ('Watch Me Fucked', 'http://teenmegaworld.net', '/search.php?query='),
-    665: ('X Angels', 'http://x-angels.com', '/search.php?query='),
+    665: ('X-Angels', 'http://x-angels.com', '/search.php?query='),
     666: ('Teen Sex Movs', 'http://teensexmovs.com', '/search.php?query='),
     667: ('PJGirls', 'http://www.pjgirls.com', '/en/videos/?fulltext='),
     668: ('Screwbox', 'https://screwbox.com', '/search.php?query='),
@@ -953,7 +953,7 @@ searchSites = {
     764: ('ToughLoveX', 'https://tour.toughlovex.com', '/models?letter='),
     765: ('Cum Louder', 'https://www.cumlouder.com', '/search?q='),
     766: ('Deep Lush', 'https://deeplush.com', '/video/'),
-    767: ('All Anal', 'https://tour.allanal.com', '/_next/data/kUgHoOUp_o0wQBOur_sHM'),
+    767: ('All Anal', 'https://tour.allanal.com', '/_next/data/19DrKPpPoq1qbD81QV6bz'),
     768: ('Turning Twistys', 'https://www.twistys.com', 'https://site-api.project1service.com'),
     769: ('GirlCum', 'https://www.girlcum.com', '/video/'),
     770: ('Zero Tolerance', 'http://www.ztod.com', '/videos?query='),
@@ -1910,6 +1910,7 @@ abbreviations = (
     ('^tlm ', 'TeensLoveMoney '),
     ('^tog ', 'TonightsGirlfriend '),
     ('^togc ', 'TonightsGirlfriendClassic '),
+    ('^trenchcoatx ', 'Deeper '),
     ('^trwo ', 'TheRealWorkout '),
     ('^tspa ', 'TrickySpa '),
     ('^tss ', 'ThatSitcomShow '),
@@ -1936,12 +1937,8 @@ def getProviderFromSiteNum(siteNum):
     provider = None
 
     if siteNum is not None:
-        # Blacked Raw
-        if siteNum == 0:
-            provider = networkStrike3
-
-        # Blacked
-        elif siteNum == 1:
+        # Strike3
+        if (0 <= siteNum <= 1) or siteNum == 52 or siteNum == 136 or (670 <= siteNum <= 671) or siteNum == 1357:
             provider = networkStrike3
 
         # Brazzers
@@ -1955,10 +1952,6 @@ def getProviderFromSiteNum(siteNum):
         # Naughty America
         elif (5 <= siteNum <= 51) or siteNum == 341 or (393 <= siteNum <= 396) or (467 <= siteNum <= 468) or siteNum == 581 or siteNum == 620 or siteNum == 625 or siteNum == 691 or siteNum == 749 or (1569 <= siteNum <= 1573):
             provider = siteNaughtyAmerica
-
-        # Vixen
-        elif siteNum == 52:
-            provider = networkStrike3
 
         # GirlsWay
         elif siteNum == 53 or (375 <= siteNum <= 379) or (795 <= siteNum <= 797):
@@ -2091,10 +2084,6 @@ def getProviderFromSiteNum(siteNum):
         # Bang Bros
         elif (83 <= siteNum <= 135):
             provider = networkBangBros
-
-        # Tushy
-        elif siteNum == 136:
-            provider = networkStrike3
 
         # Reality Kings
         elif (137 <= siteNum <= 182) or (822 <= siteNum <= 828):
@@ -2307,14 +2296,6 @@ def getProviderFromSiteNum(siteNum):
         # DorcelClub
         elif siteNum == 669:
             provider = siteDorcelClub
-
-        # Tushy
-        elif siteNum == 670:
-            provider = networkStrike3
-
-        # Deeper
-        elif siteNum == 671:
-            provider = networkStrike3
 
         # MissaX / AllHerLuv / AmateurBoxxx / Exposed Whores / She Seduced Me / House of Fyre / Philavise / Lauren Phillips
         elif siteNum == 672 or siteNum == 673 or siteNum == 1252 or (1254 <= siteNum <= 1255) or (1264 <= siteNum <= 1265) or siteNum == 1327:
@@ -2974,10 +2955,6 @@ def getProviderFromSiteNum(siteNum):
         # HotwifeXXX
         elif siteNum == 1353:
             provider = siteHotwifeXXX
-
-        # Slayed
-        elif siteNum == 1357:
-            provider = networkStrike3
 
         # POVR
         elif siteNum == 1359:
