@@ -421,14 +421,14 @@ def studio(name, siteNum):
         'Mile High Media', 'Evil Angel', 'Blacked RAW', 'Reality Kings', '40 Inch Plus', 'HD Love',
         'CFNM Secret', 'Pure 18', 'RK Prime', 'Let\'s Try Anal', 'Public Pick-Ups', 'ArchAngel', 'BangBros',
         'BellaPass', 'Pornstars Like It Big', 'Look At Her Now', 'Digital Playground', 'Big Tit Creampie',
-        'Mom Is Horny', 'BangBros Clips', 'Modern Day Sins'
+        'Mom Is Horny', 'BangBros Clips', 'Modern Day Sins', 'Brace Faced'
     )
 
     if name == '':
         return ''
 
     for studio in studios:
-        if name.lower().replace(' ', '').replace('\'', '') in studio.lower().replace(' ', ''):
+        if name.lower().replace(' ', '').replace('\'', '') == studio.lower().replace(' ', ''):
             return studio
 
     return parseTitle(name, siteNum)
