@@ -16,7 +16,7 @@ def search(results, lang, siteNum, searchData):
     titleNoActors = ' '.join(searchData.title.split(' ')[2:])
     if titleNoActors.startswith('and'):
         titleNoActors = ' '.join(searchData.title.split(' ')[3:])
-    directURL = slugify(titleNoActors, lowercase=True)
+    directURL = slugify(titleNoActors.replace('\'', ''), lowercase=True)
     if '/' not in directURL:
         directURL = directURL.replace('-', '/', 1)
 
