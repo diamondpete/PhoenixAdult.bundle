@@ -13,7 +13,10 @@ def getJSONfromPage(url):
 
 
 def search(results, lang, siteNum, searchData):
-    directURL = slugify(searchData.title, lowercase=True)
+    titleNoActors = ' '.join(searchData.title.split(' ')[2:])
+    if titleNoActors.startswith('and'):
+        titleNoActors = ' '.join(searchData.title.split(' ')[3:])
+    directURL = slugify(titleNoActors, lowercase=True)
     if '/' not in directURL:
         directURL = directURL.replace('-', '/', 1)
 
@@ -64,7 +67,7 @@ def search(results, lang, siteNum, searchData):
                 if searchData.date and displayDate:
                     score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
                 else:
-                    score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                    score = 80 - Util.LevenshteinDistance(titleNoActors.lower(), titleNoFormatting.lower())
 
                 results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, releaseDate, sceneType), name='%s [%s] %s' % (titleNoFormatting, subSite, displayDate), score=score, lang=lang))
 
