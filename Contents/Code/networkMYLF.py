@@ -91,7 +91,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     # Tagline and Collection(s)
     metadata.collections.clear()
     if 'site' in detailsPageElements:
-        subSite = detailsPageElements['site']['name']
+        subSite = PAutils.studio(detailsPageElements['site']['name'], siteNum)
     else:
         subSite = PAsearchSites.getSearchSiteName(siteNum)
     metadata.tagline = subSite
