@@ -408,7 +408,7 @@ def postParseTitle(output):
 
 def preParseTitle(input):
     exceptions_pattern = [r't\sshirt', r'j\smac|jmac', r'mr(?!\.)', r'mrs(?!\.)', r'ms(?!\.)', r'dr(?!\.)']
-    corrections = ['tshirt', 'J-Mac', 'mr.', 'mrs.', 'ms.', 'dr.']
+    corrections = ['tshirt', 'j-mac', 'mr.', 'mrs.', 'ms.', 'dr.']
 
     for idx, pattern in enumerate(exceptions_pattern, 0):
         output = re.sub(pattern, corrections[idx], input, flags=re.IGNORECASE)
