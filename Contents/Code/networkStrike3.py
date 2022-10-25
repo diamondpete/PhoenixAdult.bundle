@@ -152,6 +152,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     return metadata
 
 
-search_query = '{searchVideos(input:{query:\"%s\",site:%s,first:10}){edges{node{videoId,title,releaseDate,slug}}}}'
+search_query = '{searchVideos(input:{query:\"%s\",site:%s,first:20}){edges{node{videoId,title,releaseDate,slug}}}}'
 update_query = '{findOneVideo(input:{slug:\"%s\",site:%s}){videoId,title,description,releaseDate,models{name,slug,images{listing{highdpi{double}}}},directors{name},categories{name},carousel{listing{highdpi{triple}}}}}'
 search_id_query = '{findOneVideo(input:{videoId:\"%s\",site:%s}){videoId,title,releaseDate,slug}}'
