@@ -1043,7 +1043,7 @@ searchSites = {
     854: ('Mylf x Teamskeet', 'https://www.mylf.com', '/movies/'),
     855: ('Mylf x Hussie Pass', 'https://www.mylf.com', '/movies/'),
     856: ('Mylf of the Month', 'https://www.mylf.com', '/movies/'),
-    857: ('Mylfselects', 'https://www.mylf.com', '/movies/'),
+    857: ('Mylf Selects', 'https://www.mylf.com', '/movies/'),
     858: ('Mylf x Lady Fyre', 'https://www.mylf.com', '/movies/'),
     859: ('Deviant Hardcore', 'https://www.devianthardcore.com', 'https://site-api.project1service.com'),
     860: ('She Will Cheat', 'https://www.shewillcheat.com', 'https://site-api.project1service.com'),
