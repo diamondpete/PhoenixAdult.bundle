@@ -1557,7 +1557,7 @@ searchSites = {
     1368: ('Killergram', 'https://killergram.com', '/episodes.asp?page=episodes&id='),
     1369: ('Killergram Platinum', 'https://killergram.com', '/platinum.asp?page=platinum&id='),
     1370: ('Data18 Movie Scene', 'https://data18.com', '/sys/search.php?index=&key='),
-    1371: ('Perv Therapy', 'http://www.pervtherapy.com', '/movies/'),
+    1371: ('PervTherapy', 'http://www.pervtherapy.com', '/movies/'),
     1372: ('Hijab Hookup', 'http://www.hijabhookup.com', '/movies/'),
     1373: ('Kissing Sis', 'https://www.teamskeet.com', '/movies/'),
     1374: ('Mr Lucky POV', 'https://www.mrluckypov.com', '/search.php?query='),
