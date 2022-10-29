@@ -312,7 +312,7 @@ def parseWord(word, siteNum):
     upper_exceptions = (
         'bbc', 'xxx', 'bbw', 'bf', 'bff', 'bts', 'pov', 'dp', 'gf', 'bj', 'wtf', 'cfnm', 'bwc', 'fm', 'tv', 'ai',
         'hd', 'milf', 'gilf', 'dilf', 'dtf', 'zz', 'xxxl', 'usa', 'nsa', 'hr', 'ii', 'iii', 'iv', 'bbq', 'avn', 'xtc', 'atv',
-        'joi', 'rpg', 'wunf'
+        'joi', 'rpg', 'wunf', 'uk'
     )
     symbolsClean = ['-', '/', '.', '+', '\'']
     symbolsEsc = ['-', '/', r'\.', r'\+', r'\'']
@@ -350,17 +350,12 @@ def any(s):
 
 
 def parseTitleSymbol(word, siteNum, symbol):
-    symbol_exceptions = ['vs', 'v', 'n']
     contraction_exceptions = ['re', 't', 's', 'd', 'll', 've', 'm']
-    pattern = re.compile(r'\W')
     word_list = re.split(symbol, word)
     symbols = ['-', '/', r'\.', r'\+']
-    clean_word = re.sub(pattern, '', word)
 
     firstWord = parseWord(word_list[0], siteNum)
-    if clean_word.lower() in symbol_exceptions and symbol == r'\.':
-        firstWord = clean_word.lower()
-    elif re.search(r'^\W', firstWord):
+    if re.search(r'^\W', firstWord):
         firstWord = firstWord[0:2].upper() + firstWord[2:]
     elif len(firstWord) > 1:
         firstWord = firstWord[0].capitalize() + firstWord[1:]
@@ -385,7 +380,7 @@ def parseTitleSymbol(word, siteNum, symbol):
 
 
 def postParseTitle(output):
-    replace = [('“', '\"'), ('”', '\"'), ('’', '\''), ('W/', 'w/'), ('Aj', 'AJ')]
+    replace = [('“', '\"'), ('”', '\"'), ('’', '\''), ('W/', 'w/'), ('Aj', 'AJ'), ('\xc2\xa0', ' ')]
 
     # Add space after a punctuation if missing
     output = re.sub(r'(?=[\!|\:|\?|\.|\,]\b)\S(?!(co\b|net\b|com\b|org\b|porn\b|E\d|xxx\b))', lambda m: m.group(0) + ' ', output, flags=re.IGNORECASE)
@@ -407,8 +402,10 @@ def postParseTitle(output):
 
 
 def preParseTitle(input):
-    exceptions_pattern = [r't\sshirt', r'j\smac|jmac', r'\bmr\b(?!\.)', r'\bmrs\b(?!\.)', r'\bms\b(?!\.)', r'\bdr\b(?!\.)']
-    corrections = ['tshirt', 'j-mac', 'mr.', 'mrs.', 'ms.', 'dr.']
+    exceptions_pattern = {
+        r't\sshirt', r'j\smac|jmac', r'\bmr\b', r'\bmrs\b', r'\bms\b', r'\bdr\b', r'\bvs\b', r'\bst\b'
+    }
+    corrections = ['tshirt', 'j-mac', 'mr.', 'mrs.', 'ms.', 'dr.', 'vs.', 'st.']
 
     for idx, pattern in enumerate(exceptions_pattern, 0):
         output = re.sub(pattern, corrections[idx], input, flags=re.IGNORECASE)
@@ -422,7 +419,7 @@ def studio(name, siteNum):
         'CFNM Secret', 'Pure 18', 'RK Prime', 'Let\'s Try Anal', 'Public Pick-Ups', 'ArchAngel', 'BangBros',
         'BellaPass', 'Pornstars Like It Big', 'Look At Her Now', 'Digital Playground', 'Big Tit Creampie',
         'Mom Is Horny', 'BangBros Clips', 'Modern Day Sins', 'Brace Faced', 'Bad MILFs', 'MILF Body', 'Mile High',
-        'Mylf Boss'
+        'Mylf Boss', 'Day With a Pornstar'
     )
 
     if name == '':
@@ -438,12 +435,12 @@ def studio(name, siteNum):
 def manualWordFix(word):
     exceptions = (
         'im', 'theyll', 'cant', 'ive', 'shes', 'theyre', 'tshirt', 'dont', 'wasnt', 'youre', 'ill', 'whats', 'didnt',
-        'isnt', 'senor', 'senorita', 'thats', 'gstring', 'milfs', 'oreilly', 'vs', 'bangbros', 'bday', 'dms', 'bffs',
+        'isnt', 'senor', 'senorita', 'thats', 'gstring', 'milfs', 'oreilly', 'bangbros', 'bday', 'dms', 'bffs',
         'ohmy', 'wont', 'whos', 'shouldnt'
     )
     corrections = (
         'I\'m', 'They\'ll', 'Can\'t', 'I\'ve', 'She\'s', 'They\'re', 'T-Shirt', 'Don\'t', 'Wasn\'t', 'You\'re', 'I\'ll', 'What\'s', 'Didn\'t',
-        'Isn\'t', 'Señor', 'Señorita', 'That\'s', 'G-String', 'MILFs', 'O\'Reilly', 'vs.', 'BangBros', 'B-Day', 'DMs', 'BFFs',
+        'Isn\'t', 'Señor', 'Señorita', 'That\'s', 'G-String', 'MILFs', 'O\'Reilly', 'BangBros', 'B-Day', 'DMs', 'BFFs',
         'OhMy', 'Won\'t', 'Who\'s', 'Shouldn\'t'
     )
     pattern = re.compile(r'\W')
