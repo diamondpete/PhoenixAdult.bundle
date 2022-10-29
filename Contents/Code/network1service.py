@@ -112,10 +112,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    tagline = PAsearchSites.getSearchSiteName(siteNum).strip()
+    tagline = PAutils.studio(PAsearchSites.getSearchSiteName(siteNum).strip(), siteNum)
     try:
         if tagline == metadata.studio:
-            tagline = detailsPageElements['collections'][0]['name']
+            tagline = PAutils.studio(detailsPageElements['collections'][0]['name'], siteNum)
     except:
         pass
     metadata.tagline = tagline
