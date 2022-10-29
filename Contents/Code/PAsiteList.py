@@ -876,7 +876,7 @@ searchSites = {
     687: ('Chantas Bitches', 'http://www.kink.com', '/search?channelIds=chantasbitches&q='),
     688: ('Hegre', 'http://www.hegre.com', '/search?q='),
     689: ('Femdom Empire', 'https://femdomempire.com', '/tour/search.php?st=advanced&qany='),
-    690: ('Day With A Porn Star', 'http://www.brazzers.com', 'https://site-api.project1service.com'),
+    690: ('Day With a Pornstar', 'http://www.brazzers.com', 'https://site-api.project1service.com'),
     691: ('Watch Your Mom', 'https://tour.naughtyamerica.com', 'https://i6p9q9r18e-3.algolianet.com/1/indexes/*/queries'),
     692: ('Butt Plays', 'http://www.21sextury.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
     693: ('Dorcel Vision', 'https://www.dorcelvision.com', '/en/search?type=4&keyword='),
