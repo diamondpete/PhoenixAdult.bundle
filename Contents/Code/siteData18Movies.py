@@ -223,7 +223,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     # Summary
     summary = detailsPageElements.xpath('//div[@class="gen12"]/div[contains(., "Description")][contains(., "Studio ") or contains(., "Network ")]')[0].text_content().split('---')[-1].split('Description -')[-1].strip()
     if len(summary) > 1:
-        metadata.summary = summary
+        metadata.summary = summary.replace('\xc2\xa0', ' ')
 
     # Studio
     try:
@@ -276,7 +276,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     actors.extend(detailsPageElements.xpath('//b[contains(., "Cast")]//following::div//img[contains(@data-original, "user")]'))
     actors.extend(detailsPageElements.xpath('//h3[contains(., "Cast")]//following::div[@style]//img'))
     for actorLink in actors:
-        actorName = actorLink.xpath('./@alt')[0].strip()
+        actorName = actorLink.xpath('./@alt')[0].strip().replace('\xc2\xa0', ' ')
         try:
             actorPhotoURL = actorLink.xpath('./@data-src')[0].strip()
         except:

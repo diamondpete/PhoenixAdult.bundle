@@ -186,7 +186,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         except:
             summary = ''
 
-    metadata.summary = summary. replace('�', '\'')
+    metadata.summary = summary.replace('�', '\'').replace('\xc2\xa0', ' ')
 
     # Studio
     try:
