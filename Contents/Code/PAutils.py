@@ -353,6 +353,7 @@ def parseTitleSymbol(word, siteNum, symbol):
     contraction_exceptions = ['re', 't', 's', 'd', 'll', 've', 'm']
     word_list = re.split(symbol, word)
     symbols = ['-', '/', r'\.', r'\+']
+    pattern = re.compile(r'\W')
 
     firstWord = parseWord(word_list[0], siteNum)
     if re.search(r'^\W', firstWord):
@@ -364,12 +365,13 @@ def parseTitleSymbol(word, siteNum, symbol):
     nhword = firstWord + symbol.replace('\\', '')
 
     for idx, hword in enumerate(word_list[1:], 1):
+        cleanWord = re.sub(pattern, '', hword)
         if symbol in symbols:
             if len(hword) > 1:
                 nhword += parseWord(hword, siteNum)
             else:
                 nhword += hword.capitalize()
-        elif hword.lower() in contraction_exceptions:
+        elif cleanWord.lower() in contraction_exceptions:
             nhword += hword.lower()
         else:
             nhword += parseWord(hword, siteNum)
@@ -380,7 +382,7 @@ def parseTitleSymbol(word, siteNum, symbol):
 
 
 def postParseTitle(output):
-    replace = [('“', '\"'), ('”', '\"'), ('’', '\''), ('W/', 'w/'), ('Aj', 'AJ'), ('\xc2\xa0', ' ')]
+    replace = [('“', '\"'), ('”', '\"'), ('’', '\''), ('W/', 'w/'), ('Aj', 'AJ')]
 
     # Add space after a punctuation if missing
     output = re.sub(r'(?=[\!|\:|\?|\.|\,]\b)\S(?!(co\b|net\b|com\b|org\b|porn\b|E\d|xxx\b))', lambda m: m.group(0) + ' ', output, flags=re.IGNORECASE)
@@ -403,12 +405,14 @@ def postParseTitle(output):
 
 def preParseTitle(input):
     exceptions_pattern = {
-        r't\sshirt', r'j\smac|jmac', r'\bmr\b', r'\bmrs\b', r'\bms\b', r'\bdr\b', r'\bvs\b', r'\bst\b'
+        (r't\sshirt', 'tshirt'), (r'j\smac|jmac', 'j-mac'), (r'\bmr\b', 'mr.'), (r'\bmrs\b', 'mrs.'), (r'\bms\b', 'ms.'),
+        (r'\bdr\b', 'dr.'), (r'\bvs\b', 'vs.'), (r'\bst\b', 'st.'), (r'\s\s+', ' ')
     }
-    corrections = ['tshirt', 'j-mac', 'mr.', 'mrs.', 'ms.', 'dr.', 'vs.', 'st.']
 
-    for idx, pattern in enumerate(exceptions_pattern, 0):
-        output = re.sub(pattern, corrections[idx], input, flags=re.IGNORECASE)
+    input = input.replace('\xc2\xa0', ' ')
+
+    for value in exceptions_pattern:
+        output = re.sub(value[0], value[1], input, flags=re.IGNORECASE)
 
     return output
 
