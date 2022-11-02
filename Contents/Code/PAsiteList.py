@@ -1117,7 +1117,7 @@ searchSites = {
     928: ('BBW Channel PornPortal', 'https://bbw-channel.pornportal.com', 'https://site-api.project1service.com'),
     929: ('VR Channel PornPortal', 'https://vr-channel.pornportal.com', 'https://site-api.project1service.com'),
     930: ('Raw Couples', 'http://rawcouples.com', '/search.php?query='),
-    931: ('All Anal All The Time', 'https://www.allanalallthetime.com', '/videos/'),
+    931: ('All Anal All the Time', 'https://www.allanalallthetime.com', '/videos/'),
     932: ('QueenSnake', 'https://queensnake.com', '/previewmovie/'),
     933: ('QueenSect', 'https://queensect.com', '/previewmovie/'),
     934: ('StraponSquad', 'http://www.kink.com', '/search?channelIds=straponsquad&q='),
