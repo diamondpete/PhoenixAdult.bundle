@@ -55,9 +55,9 @@ def search(results, lang, siteNum, searchData):
         displayDate = releaseDate if date else ''
 
         if searchData.date:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         if sceneURL not in searchResults:
             results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
