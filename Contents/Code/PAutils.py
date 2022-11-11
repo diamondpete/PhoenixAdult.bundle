@@ -8,6 +8,7 @@ import cloudscraper
 import requests
 from requests_toolbelt.utils import dump
 from requests_response import FakeResponse
+from HTMLParser import HTMLParser
 
 import PAsearchSites
 
@@ -460,6 +461,7 @@ def manualWordFix(word):
 
 def cleanHTML(text):
     data = re.sub(r'<.*?>', '', text)
+    data = HTMLParser().unescape(data)
     data = data.strip()
 
     return data
