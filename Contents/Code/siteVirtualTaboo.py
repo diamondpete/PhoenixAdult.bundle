@@ -1,4 +1,3 @@
-# coding=utf-8
 import PAsearchSites
 import PAutils
 
@@ -7,7 +6,7 @@ def search(results, lang, siteNum, searchData):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//a[@class="video-card__item"]'):
-        titleNoFormatting = searchResult.xpath('.//div[@class="video-card__title"]')[0].text_content()
+        titleNoFormatting = PAutils.parseTitle(searchResult.xpath('.//div[@class="video-card__title"]')[0].text_content(), siteNum)
         sceneUrl = searchResult.get('href')
         curID = PAutils.Encode(sceneUrl)
         actors = searchResult.xpath('.//div[@class="video-card__actors"]')[0].text_content()
@@ -28,7 +27,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//div[contains(@class, "right-info")]//h1')[0].text_content().strip()
+    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//div[contains(@class, "right-info")]//h1')[0].text_content().strip(), siteNum)
 
     # Studio
     metadata.studio = PAsearchSites.getSearchSiteName(siteNum)
