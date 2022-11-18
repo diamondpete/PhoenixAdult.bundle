@@ -93,7 +93,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         actorPageURL = PAsearchSites.getSearchBaseURL(siteNum) + actorLink.get('href')
         req = PAutils.HTTPRequest(actorPageURL)
         actorPage = HTML.ElementFromString(req.text)
-        actorPhotoURL = actorPage.xpath('//img[@class="girl-details-photo"]/@src')[0].split('?')[0]
+        try:
+            actorPhotoURL = actorPage.xpath('//img[@class="girl-details-photo"]/@src')[0].split('?')[0]
+        except:
+            actorPhotoURL = ''
 
         movieActors.addActor(actorName, actorPhotoURL)
 
