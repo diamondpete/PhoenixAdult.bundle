@@ -46,17 +46,20 @@ def search(results, lang, siteNum, searchData):
                 else:
                     releaseDate = searchData.dateFormat() if searchData.date else ''
             except:
-                releaseDate = searchData.dateFormat() if searchData.date else ''
+                releaseDate = ''
+            displayDate = releaseDate if date else ''
 
             if sceneID in scenes:
                 score = 100
+            elif searchData.date and displayDate:
+                score = 80 - Util.LevenshteinDistance(searchData.date, displayDate)
             else:
                 score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             if searchData.date:
                 score = score - Util.LevenshteinDistance(searchData.date, releaseDate)
 
-            results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, releaseDate, PAutils.Encode(searchPage)), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, releaseDate, PAutils.Encode(searchPage)), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
 
             if int(score) == 80:
                 break
@@ -180,7 +183,7 @@ xPathDB = {
 siteDB = {
     'Trick Your GF': [7, 4],
     'Make Him Cuckold': [9, 5],
-    'She Is Nerdy': [10, 12],
+    'She Is Nerdy': [10, 13],
     'Tricky Agent': [11, 4],
 }
 
