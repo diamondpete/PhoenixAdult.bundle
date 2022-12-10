@@ -3,7 +3,8 @@ import PAutils
 
 
 def search(results, lang, siteNum, searchData):
-    searchData.encoded = ' '.join(searchData.title.replace('sons', '').replace('mothers', '').replace('moms', '').split(' ')).lower().replace(' ', '+').replace('\'', '')
+    titleNoActors = ' '.join(searchData.title.replace('sons', '').replace('mothers', '').replace('moms', '').split(' ')[2:]).lower()
+    searchData.encoded = titleNoActors.replace(' ', '+').replace('\'', '')
     searchURL = PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded
     req = PAutils.HTTPRequest(searchURL)
     searchResults = HTML.ElementFromString(req.text)
