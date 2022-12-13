@@ -77,6 +77,13 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         for img in detailsPageElements.xpath(xpath):
             art.append(img)
 
+    for idx in range(1, 3):
+        photoPageURL = '%s/photoset?page=%d' % (sceneURL, idx)
+        req = PAutils.HTTPRequest(photoPageURL, cookies=cookies)
+        photoPageElements = HTML.ElementFromString(req.text)
+        for img in photoPageElements.xpath('//img[@class="card-img-top"]/@src'):
+            art.append(img)
+
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
@@ -87,10 +94,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
-                if width > 1 or height > width:
+                if height > width:
                     # Item is a poster
                     metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
-                if width > 100 and width > height:
+                if width > 1000 and width > height:
                     # Item is an art item
                     metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
