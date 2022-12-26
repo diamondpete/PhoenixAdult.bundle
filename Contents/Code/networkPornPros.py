@@ -139,16 +139,15 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         movieGenres.addGenre(genreName)
 
     # Posters
-    xpaths = [
-        '//video/@poster',
-        '(//img[contains(@src, "handtouched")])[position() < 5]/@src'
-    ]
-    for xpath in xpaths:
-        for poster in detailsPageElements.xpath(xpath):
-            if not poster.startswith('http'):
-                poster = 'http:' + poster
+    poster = detailsPageElements.xpath('//video/@poster')[0].split('?')[0]
+    if not poster.startswith('http'):
+        poster = 'http:' + poster
 
-            art.append(poster)
+    art.append(poster)
+
+    for idx in range(1, 25):
+        posterUrl = '%s/%03d.jpg' % (poster.rsplit('/', 1)[0], idx)
+        art.append(posterUrl)
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
@@ -160,14 +159,14 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
-                if width > 1:
+                if width >= 850:
                     # Item is a poster
                     metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
-                if width > 100:
+                if width >= 850:
                     # Item is an art item
                     metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
-                pass
+                break
 
     return metadata
 
