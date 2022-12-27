@@ -317,14 +317,13 @@ def parseWord(word, siteNum):
     )
     symbolsClean = ['-', '/', '.', '+', '\'']
     symbolsEsc = ['-', '/', r'\.', r'\+', r'\'']
-    sitename = PAsearchSites.getSearchSiteName(siteNum).replace(' ', '')
 
     pattern = re.compile(r'\W')
     cleanWord = re.sub(pattern, '', word)
-    cleanSiteName = re.sub(pattern, '', sitename)
+    cleanSiteName = re.sub(pattern, '', PAsearchSites.getSearchSiteName(siteNum).replace(' ', ''))
 
     if cleanSiteName.lower() == cleanWord.lower():
-        word = sitename
+        word = PAsearchSites.getSearchSiteName(siteNum)
     elif any(symbol in word for symbol in symbolsClean):
         for idx, symbol in enumerate(symbolsClean, 0):
             if symbol in word:
@@ -351,18 +350,20 @@ def any(s):
 
 
 def parseTitleSymbol(word, siteNum, symbol):
+    lower_exceptions = ['vs']
     contraction_exceptions = ['re', 't', 's', 'd', 'll', 've', 'm']
     word_list = re.split(symbol, word)
     symbols = ['-', '/', r'\.', r'\+']
     pattern = re.compile(r'\W')
 
     firstWord = parseWord(word_list[0], siteNum)
-    if re.search(r'^\W', firstWord):
-        firstWord = firstWord[0:2].upper() + firstWord[2:]
-    elif len(firstWord) > 1:
-        firstWord = firstWord[0].capitalize() + firstWord[1:]
-    else:
-        firstWord = firstWord.upper()
+    if firstWord not in lower_exceptions:
+        if re.search(r'^\W', firstWord):
+            firstWord = firstWord[0:2].upper() + firstWord[2:]
+        elif len(firstWord) > 1:
+            firstWord = firstWord[0].capitalize() + firstWord[1:]
+        else:
+            firstWord = firstWord.upper()
     nhword = firstWord + symbol.replace('\\', '')
 
     for idx, hword in enumerate(word_list[1:], 1):
@@ -406,14 +407,14 @@ def postParseTitle(output):
 
 def preParseTitle(input):
     exceptions_pattern = {
-        (r't\sshirt', 'tshirt'), (r'j\smac|jmac', 'j-mac'), (r'\bmr\b', 'mr.'), (r'\bmrs\b', 'mrs.'), (r'\bms\b', 'ms.'),
-        (r'\bdr\b', 'dr.'), (r'\bvs\b', 'vs.'), (r'\bst\b', 'st.'), (r'\s\s+', ' ')
+        (r't\sshirt', 'tshirt'), (r'j\smac|jmac', 'j-mac'), (r'\bmr(?=\s)', 'mr.'), (r'\bmrs(?=\s)', 'mrs.'),
+        (r'\bms(?=\s)', 'ms.'), (r'\bdr(?=\s)', 'dr.'), (r'\bvs(?=\s)', 'vs.'), (r'\bst(?=\s)', 'st.'), (r'\s\s+', ' ')
     }
 
-    input = input.replace('\xc2\xa0', ' ')
+    output = input.replace('\xc2\xa0', ' ')
 
     for value in exceptions_pattern:
-        output = re.sub(value[0], value[1], input, flags=re.IGNORECASE)
+        output = re.sub(value[0], value[1], output, flags=re.IGNORECASE)
 
     return output
 
