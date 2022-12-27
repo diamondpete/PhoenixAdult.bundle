@@ -177,7 +177,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             except:
                 break
 
-    Log('%s' % imgHQcount)
     # Add Low Res images to posters if only 1 HQ image found
     if not imgHQcount > 1:
         for idx, image in enumerate(images, 1):
