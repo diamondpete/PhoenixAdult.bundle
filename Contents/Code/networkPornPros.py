@@ -139,16 +139,23 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         movieGenres.addGenre(genreName)
 
     # Posters
-    poster = detailsPageElements.xpath('//video/@poster')[0].split('?')[0]
-    if not poster.startswith('http'):
-        poster = 'http:' + poster
+    try:
+        poster = detailsPageElements.xpath('//video/@poster')[0].split('?')[0]
+    except:
+        poster = detailsPageElements.xpath('(//img[contains(@src, "handtouched")])[position() < 5]/@src')[0].split('?')[0]
 
-    art.append(poster)
+    if poster:
+        if not poster.startswith('http'):
+            poster = 'http:' + poster
 
-    for idx in range(1, 25):
-        posterUrl = '%s/%03d.jpg' % (poster.rsplit('/', 1)[0], idx)
-        art.append(posterUrl)
+        art.append(poster)
 
+        for idx in range(1, 25):
+            posterUrl = '%s/%03d.jpg' % (poster.rsplit('/', 1)[0], idx)
+            art.append(posterUrl)
+
+    images = []
+    imgHQcount = 0
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
@@ -156,17 +163,34 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             try:
                 image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
+                images.append(image)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
                 if width >= 850:
                     # Item is a poster
                     metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+                    imgHQcount += 1
                 if width >= 850:
                     # Item is an art item
                     metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 break
+
+    Log('%s' % imgHQcount)
+    # Add Low Res images to posters if only 1 HQ image found
+    if not imgHQcount > 1:
+        for idx, image in enumerate(images, 1):
+            try:
+                im = StringIO(image.content)
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                # Add the image proxy items to the collection
+                if width > 1:
+                    # Item is a poster
+                    metadata.posters[art[idx - 1]] = Proxy.Media(image.content, sort_order=idx)
+            except:
+                pass
 
     return metadata
 
@@ -187,7 +211,7 @@ genresDB = {
 
 actorsDB = {
     'Poke Her In The Front': ['Sara Luvv', 'Dillion Harper'],
-    'Best Friends With Nice Tits!': ["April O'Neil", 'Victoria Rae Black'],
+    'Best Friends With Nice Tits!': ['April O\'Neil', 'Victoria Rae Black'],
 }
 
 plurals = {
