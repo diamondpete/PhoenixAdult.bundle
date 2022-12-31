@@ -187,7 +187,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                 # Add the image proxy items to the collection
                 if width > 1:
                     # Item is a poster
-                    metadata.posters[art[idx - 1]] = Proxy.Media(image.content, sort_order=idx)
+                    metadata.posters[art[idx + (imgHQcount - 1)]] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 
