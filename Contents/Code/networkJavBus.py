@@ -7,7 +7,7 @@ def search(results, lang, siteNum, searchData):
     splitSearchTitle = searchData.title.split()
     if len(splitSearchTitle) > 1:
         if unicode(splitSearchTitle[1], 'UTF-8').isdigit():
-            searchJAVID = '%s%%2B%s' % (splitSearchTitle[0], splitSearchTitle[1])
+            searchJAVID = '%s-%s' % (splitSearchTitle[0], splitSearchTitle[1])
 
     if searchJAVID:
         searchData.encoded = searchJAVID
@@ -55,7 +55,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     # Title
     javTitle = detailsPageElements.xpath('//head/title')[0].text_content().strip().replace(' - JavBus', '')
     if JAVID.replace('-', '').replace('_', '').replace(' ', '').isdigit():
-        javTitle = javStudio + ' ' + javTitle
+        javTitle = '[%s] %s' % (javStudio, javTitle)
+    else:
+        JID = javTitle.split(' ', 1)[0]
+        title = javTitle.split(' ', 1)[-1]
+        javTitle = '[%s] %s' % (JID, title)
     metadata.title = javTitle
 
     # Studio
