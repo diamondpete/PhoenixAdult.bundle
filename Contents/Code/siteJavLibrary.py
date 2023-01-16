@@ -100,6 +100,18 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Actors
     movieActors.clearActors()
+
+    # Manually Add Actors
+    # Add Actor Based on JAV ID
+    actors = []
+    for key, value in actorsDB.items():
+        if key.lower() == javID.lower():
+            actors = value
+            break
+
+    for actor in actors:
+        movieActors.addActor(actor, '')
+
     for actor in detailsPageElements.xpath('//span[@class="star"]/a'):
         actorName = actor.text_content().strip()
 
@@ -167,3 +179,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                 pass
 
     return metadata
+
+
+actorsDB = {
+    'ANCI-038': ['Lily Glee', 'Lana Sharapova'],
+    'KTKL-112': ['Madi Collins'],
+}
