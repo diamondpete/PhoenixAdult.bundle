@@ -68,14 +68,21 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     title = detailsPageElements.xpath('//meta[@property="og:title"]/@content')[0].strip().split(' ', 1)[-1].replace(' - JAVLibrary', '')
     metadata.title = '%s %s' % (javID, PAutils.parseTitle(title, siteNum))
 
-
-    # Studio, Tagline and Collection(s)
-    metadata.collections.clear()
+    # Studio
     studio = detailsPageElements.xpath('//td[contains(text(), "Maker:")]/following-sibling::td/span/a')
     if studio:
         metadata.studio = studio[0].text_content().strip()
+
+    # Tagline and Collection(s)
+    metadata.collections.clear()
+    tagline = detailsPageElements.xpath('//td[contains(text(), "Label:")]/following-sibling::td/span/a')
+    if tagline:
+        metadata.tagline = tagline[0].text_content().strip()
+        metadata.collections.add(metadata.tagline)
+    elif studio:
         metadata.collections.add(metadata.studio)
-    metadata.collections.add('Japan Adult Video')
+    else:
+        metadata.collections.add('Japan Adult Video')
 
     # Director
     director = metadata.directors.new()
