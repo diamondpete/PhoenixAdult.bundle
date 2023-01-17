@@ -125,17 +125,18 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
             art.append(poster)
 
-    coverImage = detailsPageElements.xpath('//a[contains(@href, "/cover/")]/@href')
-    coverImageCode = coverImage[0].rsplit('/', 1)[1].split('.')[0].split('_')[0]
-    imageHost = coverImage[0].rsplit('/', 2)[0]
-    coverImage = imageHost + '/thumb/' + coverImageCode + '.jpg'
-    if coverImage.count('/images.') == 1:
-        coverImage = coverImage.replace('thumb', 'thumbs')
+    coverImage = detailsPageElements.xpath('//a[contains(@href, "/cover/")]/@href|//img[contains(@src, "/sample/")]/@src')
+    if coverImage:
+        coverImageCode = coverImage[0].rsplit('/', 1)[1].split('.')[0].split('_')[0]
+        imageHost = coverImage[0].rsplit('/', 2)[0]
+        coverImage = imageHost + '/thumb/' + coverImageCode + '.jpg'
+        if coverImage.count('/images.') == 1:
+            coverImage = coverImage.replace('thumb', 'thumbs')
 
-    if not coverImage.startswith('http'):
-        coverImage = PAsearchSites.getSearchBaseURL(siteNum) + coverImage
+        if not coverImage.startswith('http'):
+            coverImage = PAsearchSites.getSearchBaseURL(siteNum) + coverImage
 
-    art.append(coverImage)
+        art.append(coverImage)
 
     images = []
     posterExists = False
