@@ -331,10 +331,18 @@ def getFromJavBus(actorName, actorEncoded, metadata):
 
     req = PAutils.HTTPRequest('https://www.javbus.com/en/searchstar/' + actorEncoded)
     actorSearch = HTML.ElementFromString(req.text)
-    img = actorSearch.xpath('//div[@class="photo-frame"]//img/@src')
-    if img:
-        if 'nowprinting' not in img[0]:
-            actorPhotoURL = 'https://www.javbus.com' + img[0]
+    results = actorSearch.xpath('//div[@class="photo-frame"]//img')
+    score = 100
+    for actor in results:
+        img = actor.xpath('./@src')[0]
+        actorName = actor.xpath('./@title')[0].strip()
+
+        if Util.LevenshteinDistance(actorName, actorSeachName) < score:
+            if 'nowprinting' not in img:
+                actorPhotoURL = 'https://www.javbus.com' + img
+                score = Util.LevenshteinDistance(actorName, actorSeachName)
+                if int(score) == 0:
+                    break
 
     return actorPhotoURL, 'female'
 
