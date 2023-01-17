@@ -114,11 +114,11 @@ def actorDBfinder(actorName, metadata):
         'Boobpedia': getFromBoobpedia,
         'Babes and Stars': getFromBabesandStars,
         'Babepedia': getFromBabepedia,
-        'JAVBus': getFromJAVBus,
+        'JavBus': getFromJavBus,
         'Local Storage': getFromLocalStorage,
     }
 
-    searchOrder = ['Local Storage', 'Freeones', 'IAFD', 'Indexxx', 'AdultDVDEmpire', 'Boobpedia', 'Babes and Stars', 'Babepedia', 'JAVBus']
+    searchOrder = ['Local Storage', 'Freeones', 'IAFD', 'Indexxx', 'AdultDVDEmpire', 'Boobpedia', 'Babes and Stars', 'Babepedia', 'JavBus']
     if Prefs['order_enable']:
         searchOrder = [sourceName.strip() for sourceName in Prefs['order_list'].split(',') if sourceName.strip() in searchResults]
 
@@ -321,7 +321,7 @@ def getFromBabepedia(actorName, actorEncoded, metadata):
     return actorPhotoURL, 'female'
 
 
-def getFromJAVBus(actorName, actorEncoded, metadata):
+def getFromJavBus(actorName, actorEncoded, metadata):
     actorPhotoURL = ''
 
     for actorSeachName, names in PAdatabaseActors.actorsReplaceJavBusSearch.items():
