@@ -1,5 +1,6 @@
 import PAutils
 import PAdatabaseActors
+import PAsearchSites
 
 
 class PhoenixActors:
@@ -18,7 +19,7 @@ class PhoenixActors:
     def clearActors(self):
         self.actorsTable = []
 
-    def processActors(self, metadata):
+    def processActors(self, metadata, siteNum):
         for actorLink in self.actorsTable:
             skip = False
             # Save the potential new Actor or Actress to a new variable, replace &nbsp; with a true space, and strip off any surrounding whitespace
@@ -38,7 +39,7 @@ class PhoenixActors:
             if not skip:
                 searchStudioIndex = None
                 for studioIndex, studioList in PAdatabaseActors.ActorsStudioIndexes.items():
-                    if metadata.studio in studioList:
+                    if metadata.studio.lower() in map(str.lower, studioList) or PAsearchSites.getSearchSiteName(siteNum).lower() in map(str.lower, studioList):
                         searchStudioIndex = studioIndex
                         break
 
@@ -328,6 +329,8 @@ def getFromJavBus(actorName, actorEncoded, metadata):
         if actorName.lower() in map(str.lower, names):
             actorEncoded = urllib.quote(actorSeachName)
             break
+    else:
+        actorSeachName = actorName
 
     req = PAutils.HTTPRequest('https://www.javbus.com/en/searchstar/' + actorEncoded)
     actorSearch = HTML.ElementFromString(req.text)
@@ -337,12 +340,14 @@ def getFromJavBus(actorName, actorEncoded, metadata):
         img = actor.xpath('./@src')[0]
         actorName = actor.xpath('./@title')[0].strip()
 
-        if Util.LevenshteinDistance(actorName, actorSeachName) < score:
+        if Util.LevenshteinDistance(actorName, actorSeachName) < int(score):
+            score = Util.LevenshteinDistance(actorName, actorSeachName)
             if 'nowprinting' not in img:
                 actorPhotoURL = 'https://www.javbus.com' + img
-                score = Util.LevenshteinDistance(actorName, actorSeachName)
                 if int(score) == 0:
                     break
+            else:
+                actorPhotoURL = ''
 
     return actorPhotoURL, 'female'
 
