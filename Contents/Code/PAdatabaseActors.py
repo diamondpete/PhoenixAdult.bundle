@@ -5567,4 +5567,6 @@ actorsReplaceJavBusSearch = {
     'Huzisawa reo': ['Fujisawa Rio'],
     'Mizuho Nagayama': ['Eiyama Mizuho'],
     'Nagata riu': ['Nagata Reiame'],
+    'Kizaki Jieshika': ['Kizaki Jessica'],
+    'shokawamomoka': ['Ogawa Momoka'],
 }

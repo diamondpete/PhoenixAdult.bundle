@@ -5,6 +5,7 @@ import PAutils
 def search(results, lang, siteNum, searchData):
     searchJAVID = None
     splitSearchTitle = searchData.title.split()
+    searchResults = []
     if splitSearchTitle[0].startswith('3dsvr'):
         splitSearchTitle[0] = splitSearchTitle[0].replace('3dsvr', 'dsvr')
     elif splitSearchTitle[0].startswith('13dsvr'):
@@ -22,26 +23,28 @@ def search(results, lang, siteNum, searchData):
     for searchResult in searchPageElements.xpath('//div[@class="video"]'):
         titleNoFormatting = searchResult.xpath('./a/@title')[0].strip()
         JAVID = titleNoFormatting.split(' ')[0]
-        sceneURL = '%s/en/%s' % (PAsearchSites.getSearchBaseURL(siteNum), searchResult.xpath('./a/@href')[0].split('.')[-1].strip())
+        sceneURL = '%s/en%s' % (PAsearchSites.getSearchBaseURL(siteNum), searchResult.xpath('./a/@href')[0].split('.')[-1].strip())
         curID = PAutils.Encode(sceneURL)
+        searchResults.append(sceneURL)
 
         score = 80 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (JAVID, titleNoFormatting), score=score, lang=lang))
     else:
-        searchResultsURLs = []
-        searchResultsURLs.append(req.url)
+        googleResultsURLs = []
+        if '?v=jav' in req.url:
+            googleResultsURLs.append(req.url)
         googleResults = PAutils.getFromGoogleSearch('%s %s' % (splitSearchTitle[0], splitSearchTitle[1]), siteNum)
         for sceneURL in googleResults:
-            if sceneURL not in searchResultsURLs:
-                if '?v=jav' in sceneURL and sceneURL not in searchResultsURLs:
-                    englishSceneURL = sceneURL.replace('/ja/', '/en/').replace('/tw/', '/en/').replace('/cn/', '/en/')
-                    if not englishSceneURL.lower().startswith('http'):
-                        searchResultsURLs.append('http://' + englishSceneURL)
-                    else:
-                        searchResultsURLs.append(englishSceneURL)
+            if '?v=jav' in sceneURL and 'videoreviews' not in sceneURL:
+                englishSceneURL = sceneURL.replace('/ja/', '/en/').replace('/tw/', '/en/').replace('/cn/', '/en/')
+                if not englishSceneURL.lower().startswith('http'):
+                    englishSceneURL = 'http://' + englishSceneURL
 
-        for sceneURL in searchResultsURLs:
+                if englishSceneURL not in searchResults and englishSceneURL not in googleResultsURLs:
+                    googleResultsURLs.append(englishSceneURL)
+
+        for sceneURL in googleResultsURLs:
             req = PAutils.HTTPRequest(sceneURL)
             if req.ok:
                 try:
@@ -101,13 +104,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     # Actors
     movieActors.clearActors()
 
-    # Manually Add Actors
-    # Add Actor Based on JAV ID
+    # Manually Add Actors By JAV ID
     actors = []
-    for key, value in actorsDB.items():
-        if key.lower() == javID.lower():
-            actors = value
-            break
+    for actorName, scenes in actorsDB.items():
+        if javID.lower() in map(str.lower, scenes):
+            actors.append(actorName)
 
     for actor in actors:
         movieActors.addActor(actor, '')
@@ -142,6 +143,41 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         else:
             art.append(thumbnailURL)
 
+    # JavBus Images
+    javBusURL = PAsearchSites.getSearchSearchURL(912) + javID
+    req = PAutils.HTTPRequest(javBusURL)
+    javbusPageElements = HTML.ElementFromString(req.text)
+
+    if '404 Page' in req.text and date:
+            javBusURL = '%s_%s' % (javBusURL, date_object.strftime('%Y-%m-%d'))
+            req = PAutils.HTTPRequest(javBusURL)
+            javbusPageElements = HTML.ElementFromString(req.text)
+
+    if '404 Page' not in req.text:
+        xpaths = [
+            '//a[contains(@href, "/cover/")]/@href',
+            '//a[@class="sample-box"]/@href',
+        ]
+        for xpath in xpaths:
+            for poster in javbusPageElements.xpath(xpath):
+                if not poster.startswith('http'):
+                    poster = PAsearchSites.getSearchBaseURL(912) + poster
+
+                art.append(poster)
+
+        coverImage = javbusPageElements.xpath('//a[contains(@href, "/cover/")]/@href|//img[contains(@src, "/sample/")]/@src')
+        if coverImage:
+            coverImageCode = coverImage[0].rsplit('/', 1)[1].split('.')[0].split('_')[0]
+            imageHost = coverImage[0].rsplit('/', 2)[0]
+            coverImage = imageHost + '/thumb/' + coverImageCode + '.jpg'
+            if coverImage.count('/images.') == 1:
+                coverImage = coverImage.replace('thumb', 'thumbs')
+
+            if not coverImage.startswith('http'):
+                coverImage = PAsearchSites.getSearchBaseURL(912) + coverImage
+
+            art.append(coverImage)
+
     images = []
     posterExists = False
     Log('Artwork found: %d' % len(art))
@@ -158,7 +194,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                 if height > width:
                     # Item is a poster
                     metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
-                    posterExists = True
+
+                    if 'javbus.com/pics/thumb' not in posterUrl:
+                        posterExists = True
                 if width > height:
                     # Item is an art item
                     metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
@@ -182,6 +220,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
 
 actorsDB = {
-    'ANCI-038': ['Lily Glee', 'Lana Sharapova'],
-    'KTKL-112': ['Madi Collins'],
+    'Lily Glee': ['ANCI-038'],
+    'Lana Sharapova': ['ANCI-038'],
+    'Madi Collins': ['KTKL-112'],
 }
