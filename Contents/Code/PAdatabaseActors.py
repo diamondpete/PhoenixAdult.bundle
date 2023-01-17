@@ -23,7 +23,6 @@ ActorsReplace = {
     'Anita Bellini Berlusconi': ['Anita Bellini'],
     'Anna De Ville': ['Anna Deville', 'Anna DeVille'],
     'Annika Albrite': ['Anikka Albrite'],
-    'Aoi Kururigi': ['Wooden Floor Pl'],
     'Apolonia Lapiedra': ['Apolonia', 'Apolonia La Piedra', 'Apolina'],
     'April O\'Neil': ['April O\'neil', 'April ONeil', 'April Oneil'],
     'Ashlee Graham': ['Ashley Graham'],
@@ -5486,6 +5485,11 @@ ActorsReplaceStudios = {
         'Eve Madison': ['Eve'],
         'Kapri Styles': ['Capri'],
         'Stacy Adams': ['Stacy'],
+    },
+    64: { # JAVLibrary & JavBus
+        'Miduki Angelia': ['Angelia'],
+        'Aoi Kururigi': ['Wooden Floor Pl'],
+        'Asuna Koharu': ['Koharu'],
     }
 }
 
@@ -5554,6 +5558,7 @@ ActorsStudioIndexes = {
     61: ['Fantasy Massage'],
     62: ['Allure Media'],
     63: ['PornPros'],
+    64: ['JavBus', 'JAVLibrary'],
 }
 
 
@@ -5580,4 +5585,22 @@ actorsReplaceJavBusSearch = {
     'Aoi': ['Ono Yuuko'],
     'Inagawa Natsume': ['Kurokawa Sumire'],
     'Takasaka Honami': ['Sawamura Reiko'],
+    'Kataoka Makina': ['Nakaoka Tamaki'],
+    'Nozomi Hanyu': ['Hanyuu Nozomi'],
+    'Aimi Rei': ['Manami Rei'],
+    'Forest Saki Mio': ['Morisaki Mio'],
+    'Hotaka Yuuki': ['Hodaka Yuuki'],
+    'Mizuki Anjie': ['Miduki Angelia'],
+    'Tsubaki is considerable': ['Tsubaki Kanari'],
+    'Hata Ichika': ['Kamihata Ichika'],
+    'Tree south day': ['Kinami Hina'],
+    'Hazuki Naho': ['Haduki Naho'],
+    'Ohashi Hirtomi': ['Oohashi Hitomi'],
+    'Mari Fujitani': ['Touya Shinri'],
+    'Sasaki Ren Umi': ['Sasaki Remi'],
+    'Marina Isshiki': ['Isshoku Marina'],
+    'Maika (mew)': ['Maika'],
+    'Ooshima Airu': ['Kitajima An'],
+    'Fujiura Megu': ['Meguri'],
+    'Abu Miku': ['Abeno Miku'],
 }
