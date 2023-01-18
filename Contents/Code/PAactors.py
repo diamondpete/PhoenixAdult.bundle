@@ -324,30 +324,33 @@ def getFromBabepedia(actorName, actorEncoded, metadata):
 
 def getFromJavBus(actorName, actorEncoded, metadata):
     actorPhotoURL = ''
+    actorID = ''
 
-    for actorSeachName, names in PAdatabaseActors.actorsReplaceJavBusSearch.items():
+    for id, names in PAdatabaseActors.actorsReplaceJavBusSearch.items():
         if actorName.lower() in map(str.lower, names):
-            actorEncoded = urllib.quote(actorSeachName)
+            actorID = id
             break
-    else:
-        actorSeachName = actorName
 
-    req = PAutils.HTTPRequest('https://www.javbus.com/en/searchstar/' + actorEncoded)
+    if actorID:
+        req = PAutils.HTTPRequest('https://www.javbus.com/en/star/' + actorID)
+    else:
+        req = PAutils.HTTPRequest('https://www.javbus.com/en/searchstar/' + actorEncoded)
+
     actorSearch = HTML.ElementFromString(req.text)
     results = actorSearch.xpath('//div[@class="photo-frame"]//img')
     score = 100
     for actor in results:
         img = actor.xpath('./@src')[0]
-        actorName = actor.xpath('./@title')[0].strip()
+        actorSeachName = actor.xpath('./@title')[0].strip()
 
         if Util.LevenshteinDistance(actorName, actorSeachName) < int(score):
             score = Util.LevenshteinDistance(actorName, actorSeachName)
-            if 'nowprinting' not in img:
+
+            if 'nowprinting' not in img and 'dmm' not in img:
                 actorPhotoURL = 'https://www.javbus.com' + img
+
                 if int(score) == 0:
                     break
-            else:
-                actorPhotoURL = ''
 
     return actorPhotoURL, 'female'
 
