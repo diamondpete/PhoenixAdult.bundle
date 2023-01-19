@@ -70,7 +70,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     # Title
     javID = detailsPageElements.xpath('//meta[@property="og:title"]/@content')[0].strip().split(' ', 1)[0]
     title = detailsPageElements.xpath('//meta[@property="og:title"]/@content')[0].strip().split(' ', 1)[-1].replace(' - JAVLibrary', '')
-    metadata.title = '[%s] %s' % (javID, PAutils.parseTitle(title, siteNum))
+    metadata.title = '[%s] %s' % (javID.upper(), PAutils.parseTitle(title, siteNum))
 
     # Studio
     studio = detailsPageElements.xpath('//td[contains(text(), "Maker:")]/following-sibling::td/span/a')
@@ -144,6 +144,13 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             art.append(thumbnailURL)
 
     # JavBus Images
+
+    # Manually Match JavBus to JAVLibrary
+    actors = []
+    for javLibraryID, javBusID in crossSiteDB.items():
+        if javID.lower() == javLibraryID.lower():
+            javID = javBusID
+
     javBusURL = PAsearchSites.getSearchSearchURL(912) + javID
     req = PAutils.HTTPRequest(javBusURL)
     javbusPageElements = HTML.ElementFromString(req.text)
@@ -225,4 +232,27 @@ actorsDB = {
     'Lily Glee': ['ANCI-038'],
     'Lana Sharapova': ['ANCI-038'],
     'Madi Collins': ['KTKL-112'],
+}
+
+
+crossSiteDB = {
+    'UMD-421': 'UD-597R',
+    'UMD-354': 'UD-529R',
+    'SUN-39': 'SUN-039',
+    'SS-028': 'SS-028_2009-08-04',
+    'CHD-029': 'CHD-029_3trz',
+    'STAR-128S': 'STAR-128_2008-11-06',
+    'Wife-40': 'Wife-040',
+    'DVAJ-0003': 'DVAJ-003',
+    'DVAJ-0013': 'DVAJ-013',
+    'DVAJ-0021': 'DVAJ-021',
+    'DVAJ-0027': 'DVAJ-027',
+    'DVAJ-0031': 'DVAJ-031',
+    'DVAJ-0032': 'DVAJ-032',
+    'DVAJ-0039': 'DVAJ-039',
+    'DVAJ-312': 'DVAJ-312_2018-02-11',
+    'AKA-001': 'AKA-001_2013-06-28',
+    'HODV-20467': 'HRDV-591',
+    'SERO-0306': 'SERO-306_2016-02-12',
+    'AKB-035': 'HITMA-130',
 }

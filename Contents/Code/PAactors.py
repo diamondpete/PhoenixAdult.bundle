@@ -343,7 +343,10 @@ def getFromJavBus(actorName, actorEncoded, metadata):
         img = actor.xpath('./@src')[0]
         actorSeachName = actor.xpath('./@title')[0].strip()
 
-        if Util.LevenshteinDistance(actorName, actorSeachName) < int(score):
+        if actorID:
+            actorPhotoURL = 'https://www.javbus.com' + img
+            break
+        elif Util.LevenshteinDistance(actorName, actorSeachName) < int(score):
             score = Util.LevenshteinDistance(actorName, actorSeachName)
 
             if 'nowprinting' not in img and 'dmm' not in img:
