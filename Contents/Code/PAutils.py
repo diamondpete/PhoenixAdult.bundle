@@ -311,9 +311,9 @@ def parseTitle(s, siteNum):
 def parseWord(word, siteNum):
     lower_exceptions = ['a', 'y', 'n', 'an', 'of', 'the', 'and', 'for', 'to', 'onto', 'but', 'or', 'nor', 'at', 'with', 'vs', 'in', 'on', 'com', 'co', 'org']
     upper_exceptions = (
-        'bbc', 'xxx', 'bbw', 'bf', 'bff', 'bts', 'pov', 'dp', 'gf', 'bj', 'wtf', 'cfnm', 'bwc', 'fm', 'tv', 'ai',
+        'bbc', 'xxx', 'bbw', 'bf', 'bff', 'bts', 'pov', 'dp', 'gf', 'bj', 'wtf', 'cfnm', 'bwc', 'fm', 'tv', # 'ai',
         'hd', 'milf', 'gilf', 'dilf', 'dtf', 'zz', 'xxxl', 'usa', 'nsa', 'hr', 'ii', 'iii', 'iv', 'bbq', 'avn', 'xtc', 'atv',
-        'joi', 'rpg', 'wunf', 'uk', 'asap'
+        'joi', 'rpg', 'wunf', 'uk', 'asap', 'sss'
     )
     symbolsClean = ['-', '/', '.', '+', '\'']
     symbolsEsc = ['-', '/', r'\.', r'\+', r'\'']
