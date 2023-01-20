@@ -49,7 +49,7 @@ def search(results, lang, siteNum, searchData):
             if req.ok:
                 try:
                     searchResult = HTML.ElementFromString(req.text)
-                    titleNoFormatting = searchResult.xpath('//h3[@class="post-title text"]/a')[0].text_content().strip()
+                    titleNoFormatting = PAutils.parseTitle(searchResult.xpath('//h3[@class="post-title text"]/a')[0].text_content().strip().split(' ', 1)[1], siteNum)
                     JAVID = searchResult.xpath('//td[contains(text(), "ID:")]/following-sibling::td')[0].text_content().strip()
                     curID = PAutils.Encode(searchResult.xpath('//meta[@property="og:url"]/@content')[0].strip().replace('//www', 'https://www'))
                     score = 80 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
@@ -144,12 +144,17 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             art.append(thumbnailURL)
 
     # JavBus Images
-
     # Manually Match JavBus to JAVLibrary
     actors = []
     for javLibraryID, javBusID in crossSiteDB.items():
         if javID.lower() == javLibraryID.lower():
             javID = javBusID
+            break
+
+    numLen = len(javID.split('-', 1)[-1])
+    if int(numLen) < 3:
+        for idx in range(1, 4 - numLen):
+            javID = '%s-0%s' % (javID.split('-')[0], javID.split('-')[-1])
 
     javBusURL = PAsearchSites.getSearchSearchURL(912) + javID
     req = PAutils.HTTPRequest(javBusURL)
@@ -232,17 +237,16 @@ actorsDB = {
     'Lily Glee': ['ANCI-038'],
     'Lana Sharapova': ['ANCI-038'],
     'Madi Collins': ['KTKL-112'],
+    'Tsubomi': ['WA-192'],
 }
 
 
 crossSiteDB = {
     'UMD-421': 'UD-597R',
     'UMD-354': 'UD-529R',
-    'SUN-39': 'SUN-039',
     'SS-028': 'SS-028_2009-08-04',
     'CHD-029': 'CHD-029_3trz',
     'STAR-128S': 'STAR-128_2008-11-06',
-    'Wife-40': 'Wife-040',
     'DVAJ-0003': 'DVAJ-003',
     'DVAJ-0013': 'DVAJ-013',
     'DVAJ-0021': 'DVAJ-021',
@@ -255,4 +259,6 @@ crossSiteDB = {
     'HODV-20467': 'HRDV-591',
     'SERO-0306': 'SERO-306_2016-02-12',
     'AKB-035': 'HITMA-130',
+    'DBD-3008': 'DBD-008',
+    'SW-041': 'SW-041_2011-07-04',
 }

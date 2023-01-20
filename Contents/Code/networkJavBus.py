@@ -48,6 +48,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     if not sceneURL.startswith('http'):
         sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + sceneURL
+    if '/en/' not in sceneURL:
+        sceneURL = sceneURL.replace('.com/', '.com/en/')
+
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
     JAVID = sceneURL.rsplit('/', 1)[1]
