@@ -5490,6 +5490,8 @@ ActorsReplaceStudios = {
         'Miduki Angelia': ['Angelia'],
         'Aoi Kururigi': ['Wooden Floor Pl'],
         'Asuna Koharu': ['Koharu'],
+        'Yuizuki Koharu': ['Yuiduki Koharu'],
+        'Kawakawita Meisa': ['めいさ'],
     }
 }
 
@@ -5681,4 +5683,13 @@ actorsReplaceJavBusSearch = {
     '2cj': ['Inoue Masami'],
     'ntz': ['Kawana Hikaru'],
     '94z': ['Aisu Kokoa'],
+    '2fn': ['Hatsumi Saki'],
+    '29v': ['Asaka Ryou'],
+    'n5s': ['Onda Honoka'],
+    '1ib': ['Noa'],
+    'qn5': ['Sazanami Aya'],
+    '2db': ['Kasumi Leon'],
+    '76b': ['Himeno Mirai'],
+    '85q': ['Ayashiro Yurina'],
+    'mg9': ['Aoba Yuuka'],
 }
