@@ -6,6 +6,7 @@ def search(results, lang, siteNum, searchData):
     searchJAVID = None
     splitSearchTitle = searchData.title.split()
     searchResults = []
+    bluRayExceptions = ['blu-ray', 'blue-ray', 'blue-lay']
     if splitSearchTitle[0].startswith('3dsvr'):
         splitSearchTitle[0] = splitSearchTitle[0].replace('3dsvr', 'dsvr')
     elif splitSearchTitle[0].startswith('13dsvr'):
@@ -28,6 +29,10 @@ def search(results, lang, siteNum, searchData):
         searchResults.append(sceneURL)
 
         score = 80 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
+
+        for exception in  bluRayExceptions:
+            if exception.lower() in titleNoFormatting.lower().replace(' ', ''):
+                score = score - 1
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (JAVID, titleNoFormatting), score=score, lang=lang))
     else:
@@ -53,6 +58,10 @@ def search(results, lang, siteNum, searchData):
                     JAVID = searchResult.xpath('//td[contains(text(), "ID:")]/following-sibling::td')[0].text_content().strip()
                     curID = PAutils.Encode(searchResult.xpath('//meta[@property="og:url"]/@content')[0].strip().replace('//www', 'https://www'))
                     score = 80 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
+
+                    for exception in  bluRayExceptions:
+                        if exception.lower() in titleNoFormatting.lower().replace(' ', ''):
+                            score = score - 1
 
                     results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (JAVID, titleNoFormatting), score=score, lang=lang))
                 except:
