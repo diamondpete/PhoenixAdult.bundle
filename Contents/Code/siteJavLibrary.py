@@ -22,7 +22,7 @@ def search(results, lang, siteNum, searchData):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchPageElements = HTML.ElementFromString(req.text)
     for searchResult in searchPageElements.xpath('//div[@class="video"]'):
-        titleNoFormatting = searchResult.xpath('./a/@title')[0].strip()
+        titleNoFormatting = PAutils.parseTitle(searchResult.xpath('./a/@title')[0].strip(), siteNum)
         JAVID = titleNoFormatting.split(' ')[0]
         sceneURL = '%s/en%s' % (PAsearchSites.getSearchBaseURL(siteNum), searchResult.xpath('./a/@href')[0].split('.')[-1].strip())
         curID = PAutils.Encode(sceneURL)
@@ -270,4 +270,17 @@ crossSiteDB = {
     'AKB-035': 'HITMA-130',
     'DBD-3008': 'DBD-008',
     'SW-041': 'SW-041_2011-07-04',
+    'NTRD-021': 'NTRD-021_2015-03-05',
+    'ONED-136': 'ONE-136',
+    'ONED-104': 'ONE-104',
+    'MILD-781': 'BDMILD-059',
+    'MILD-787': 'BDMILD-063',
+    'MILD-798': 'BDMILD-068',
+    'MILD-752': 'BDMILD-045',
+    'MILD-769': 'BDMILD-052',
+    'MILD-776': 'BDMILD-057',
+    'MILD-720': 'BDMILD-034',
+    'MILD-729': 'BDMILD-036',
+    'MILD-734': 'BDMILD-038',
+    'MILD-748': 'BDMILD-044',
 }
