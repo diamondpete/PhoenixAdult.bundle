@@ -35,11 +35,11 @@ def search(results, lang, siteNum, searchData):
         displayDate = releaseDate if date else ''
 
         if searchJAVID:
-            score = 100 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
+            score = 80 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
         elif searchData.date and displayDate:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='[%s] %s %s' % (JAVID, displayDate, titleNoFormatting), score=score, lang=lang))
 
