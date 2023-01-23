@@ -391,13 +391,13 @@ def postParseTitle(output):
     # Remove single period at end of title
     output = re.sub(r'(?<=[^\.].)(?<=\w)(?:\.)$', '', output)
     # Remove space between word and punctuation
-    output = re.sub(r'\s+(?=[.,!:])', '', output)
-    # Remove space between hashtag and word
-    output = re.sub(r'(?<=[#])\s+', '', output)
+    output = re.sub(r'\s+(?=[.,!:\'\)])', '', output)
+    # Remove space between punctuation and word
+    output = re.sub(r'(?<=[#\()])\s+', '', output)
     # Override lowercase if word follows a punctuation
     output = re.sub(r'(?<=!|:|\?|\.|-)(\s)(\S)', lambda m: m.group(1) + m.group(2).upper(), output)
     # Override lowercase if word follows a parenthesis
-    output = re.sub(r'(?<=[\(|\&|\"|\[|\*])(\w)', lambda m: m.group(0).upper() + m.group(1)[1:], output)
+    output = re.sub(r'(?<=[\(|\&|\"|\[|\*|\~])(\w)', lambda m: m.group(0).upper() + m.group(1)[1:], output)
     # Override lowercase if last word
     output = re.sub(r'\S+$', lambda m: m.group(0)[0].capitalize() + m.group(0)[1:], output)
 
