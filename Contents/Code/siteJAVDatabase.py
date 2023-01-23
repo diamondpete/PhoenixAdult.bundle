@@ -254,4 +254,5 @@ censoredWordsDB = {
 
 crossSiteDB = {
     'STAR-128': 'STAR-128_2008-11-06',
+    'STAR-134': 'STAR-134_2008-12-18',
 }
