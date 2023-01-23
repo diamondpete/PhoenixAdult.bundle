@@ -134,6 +134,12 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             art.append(img)
 
     # JavBus Images
+    # Manually Match JavBus to JAVLibrary
+    for javLibraryID, javBusID in crossSiteDB.items():
+        if javID.lower() == javLibraryID.lower():
+            javID = javBusID
+            break
+
     javBusURL = PAsearchSites.getSearchSearchURL(912) + javID
     req = PAutils.HTTPRequest(javBusURL)
     javbusPageElements = HTML.ElementFromString(req.text)
@@ -243,4 +249,9 @@ censoredWordsDB = {
     'T******e': 'Tentacle',
     'T*****e': 'Torture',
     'V*****e': 'Violate',
+}
+
+
+crossSiteDB = {
+    'STAR-128': 'STAR-128_2008-11-06',
 }
