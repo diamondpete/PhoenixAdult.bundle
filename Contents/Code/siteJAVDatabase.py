@@ -145,8 +145,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # JavBus Images
     # Manually Match JavBus to JAVDatabase
-    for javLibraryID, javBusID in crossSiteDB.items():
-        if javID.lower() in javLibraryID.lower():
+    for javDatabaseID, javBusID in crossSiteDB.items():
+        if javID.lower() in javDatabaseID.lower():
             javID = javID.replace(javID, javBusID)
             break
 
