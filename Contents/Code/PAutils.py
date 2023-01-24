@@ -398,6 +398,8 @@ def postParseTitle(output):
     output = re.sub(r'(?<=!|:|\?|\.|-)(\s)(\S)', lambda m: m.group(1) + m.group(2).upper(), output)
     # Override lowercase if word follows a parenthesis
     output = re.sub(r'(?<=[\(|\&|\"|\[|\*|\~])(\w)', lambda m: m.group(0).upper() + m.group(1)[1:], output)
+    # Override lowercase if last word in section
+    output = re.sub(r'\S+[\]\)\"\~\:]', lambda m: m.group(0)[0].capitalize() + m.group(0)[1:], output)
     # Override lowercase if last word
     output = re.sub(r'\S+$', lambda m: m.group(0)[0].capitalize() + m.group(0)[1:], output)
 
