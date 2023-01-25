@@ -145,9 +145,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # JavBus Images
     # Manually Match JavBus to JAVDatabase
-    for javDatabaseID, javBusID in crossSiteDB.items():
-        if javID.lower() in javDatabaseID.lower():
-            javID = javID.replace(javID, javBusID)
+    for javBusID, javDatabaseIDs in crossSiteDB.items():
+        if javID.lower() in map(str.lower, javDatabaseIDs):
+            javID = javID.replace(javDatabaseIDs[0], javBusID)
             break
 
     numLen = len(javID.split('-', 1)[-1])
@@ -314,7 +314,8 @@ censoredWordsDB = {
 
 
 crossSiteDB = {
-    'STAR-128': 'STAR-128_2008-11-06',
-    'STAR-134': 'STAR-134_2008-12-18',
-    'DVAJ-': 'DVAJ-0',
+    'STAR-128_2008-11-06': ['STAR-128'],
+    'STAR-134_2008-12-18': ['STAR-134'],
+    'DVAJ-': ['DVAJ-0', 'DVAJ-0003', 'DVAJ-0013', 'DVAJ-0021', 'DVAJ-0031', 'DVAJ-0039'],
+    'DVAJ-0': ['DVAJ-00', 'DVAJ-0027', 'DVAJ-0032'],
 }
