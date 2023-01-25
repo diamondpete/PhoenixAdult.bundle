@@ -367,7 +367,7 @@ def getFromJAVDatabase(actorName, actorEncoded, metadata):
     req = PAutils.HTTPRequest('https://www.javdatabase.com/?wpessid=391488&s=' + actorEncoded)
 
     actorSearch = HTML.ElementFromString(req.text)
-    results = actorSearch.xpath('//div[@class="row"]/div')
+    results = actorSearch.xpath('//div[@id="content"]//div[@class="row"]/div')
     lastScore = 100
     for actor in results:
         actorSeachName = actor.xpath('.//h2/a')[0].text_content().strip().split('(')[0]
