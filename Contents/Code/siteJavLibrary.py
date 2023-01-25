@@ -144,7 +144,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     if 'https' not in posterURL:
         posterURL = 'https:' + posterURL
 
-    art.append(posterURL)
+    if '/removed.png' not in posterURL:
+        art.append(posterURL)
 
     # Images
     urlRegEx = re.compile(r'-([1-9]+).jpg')

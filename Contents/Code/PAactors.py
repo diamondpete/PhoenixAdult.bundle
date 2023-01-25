@@ -116,10 +116,11 @@ def actorDBfinder(actorName, metadata):
         'Babes and Stars': getFromBabesandStars,
         'Babepedia': getFromBabepedia,
         'JAVBus': getFromJavBus,
+        'JAVDatabase': getFromJAVDatabase,
         'Local Storage': getFromLocalStorage,
     }
 
-    searchOrder = ['Local Storage', 'Freeones', 'IAFD', 'Indexxx', 'AdultDVDEmpire', 'Boobpedia', 'Babes and Stars', 'Babepedia', 'JAVBus']
+    searchOrder = ['Local Storage', 'Freeones', 'IAFD', 'Indexxx', 'AdultDVDEmpire', 'Boobpedia', 'Babes and Stars', 'Babepedia', 'JAVBus', 'JAVDatabase']
     if Prefs['order_enable']:
         searchOrder = [sourceName.strip() for sourceName in Prefs['order_list'].split(',') if sourceName.strip() in searchResults]
 
@@ -354,6 +355,35 @@ def getFromJavBus(actorName, actorEncoded, metadata):
 
                 if int(score) == 0:
                     break
+
+    return actorPhotoURL, 'female'
+
+
+def getFromJAVDatabase(actorName, actorEncoded, metadata):
+    actorPhotoURL = ''
+    actorID = ''
+    actorEncoded = actorName.replace(' ', '+')
+
+    req = PAutils.HTTPRequest('https://www.javdatabase.com/?wpessid=391488&s=' + actorEncoded)
+
+    actorSearch = HTML.ElementFromString(req.text)
+    results = actorSearch.xpath('//div[@class="row"]/div')
+    lastScore = 100
+    for actor in results:
+        actorSeachName = actor.xpath('.//h2/a')[0].text_content().strip().split('(')[0]
+
+        score = Util.LevenshteinDistance(actorName, actorSeachName)
+
+        if score < lastScore:
+            lastScore = score
+            actorPhotoURL = actor.xpath('.//@src')[0]
+
+            req = PAutils.HTTPRequest(actorPhotoURL)
+            if 'unknown.' in req.url:
+                actorPhotoURL = ''
+
+        if int(score) == 0:
+            break
 
     return actorPhotoURL, 'female'
 
