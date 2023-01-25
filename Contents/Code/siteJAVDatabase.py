@@ -319,9 +319,3 @@ crossSiteDB = {
     'DVAJ-': ['DVAJ-0', 'DVAJ-0003', 'DVAJ-0013', 'DVAJ-0021', 'DVAJ-0031', 'DVAJ-0039'],
     'DVAJ-0': ['DVAJ-00', 'DVAJ-0027', 'DVAJ-0032'],
 }
-
-
-crossSiteDB = {
-    'STAR-128': 'STAR-128_2008-11-06',
-    'STAR-134': 'STAR-134_2008-12-18',
-}
