@@ -122,7 +122,13 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         if 'unknown.' in req.url:
             actorPhotoURL = ''
 
-        movieActors.addActor(actorName, actorPhotoURL)
+        if javID not in (actorsCorrectionDB.keys()):
+            movieActors.addActor(actorName, actorPhotoURL)
+        else:
+            for javCorrectionID, actors in actorsDB.items():
+                if javID.lower() == javCorrectionID.lower() and actorName.lower() in map(str.lower, actors):
+                    movieActors.addActor(actorName, actorPhotoURL)
+
 
     # Manually Add Actors By JAV ID
     actors = []
@@ -307,13 +313,19 @@ actorsDB = {
     'Mona Kasuga': ['NMP-006'],
     'Monami Takarada': ['HJMO-496'],
     'Nana Usami': ['DANDY-275'],
+    'Nanako Mori': ['SDMS-990'],
+    'Nanami Matsumoto': ['DVDMS-635', 'MIMK-098'],
+    'Nene Tanaka': ['JYMA-011', 'KAM-090'],
+    'Nina Nishimura': ['JYMA-013', 'CLUB-651'],
     'Rei Manami': ['MBM-029'],
-    'Ren Ayase': ['MDB-433'],
+    'Ren Ayase': ['MDB-433', 'SAIT-003'],
+    'Rie Matsuo': ['JUTA-132'],
     'Riko Honda': ['MBM-029'],
     'Rin Aoki': ['DISM-003'],
     'Risa Kasumi': ['MDB-433'],
     'Risa Murakami': ['DANDY-275'],
     'Rurika Misato': ['HJMO-486'],
+    'Sakura Kirishima': ['WANZ-461'],
     'Shiori Tsukada': ['TNOZ-015', 'SVDVD-455', 'FLAV-277', 'CHRV-138', 'SVDVD-460', 'CJOD-330'],
     'Shizuku Hanai': ['HJMO-486'],
     'Tiffany Tatum': ['CRDD-004'],
@@ -330,6 +342,11 @@ actorsDB = {
 }
 
 
+actorsCorrectionDB = {
+    'JUTA-132': ['Rie Matsuo']
+}
+
+
 censoredWordsDB = {
     'A***e': 'Abuse',
     'B******y': 'Brutally',
@@ -338,6 +355,7 @@ censoredWordsDB = {
     'Cum-Drink': 'Cum-Drunk',
     'D******e': 'Disgrace',
     'D***k': 'Drink',
+    'D***k-Fucking': 'Drunk-Fucking',
     'D***kest': 'Drunkest',
     'D***king': 'Drinking',
     'D**g': 'Drug',
