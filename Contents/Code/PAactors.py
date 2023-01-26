@@ -361,7 +361,6 @@ def getFromJavBus(actorName, actorEncoded, metadata):
 
 def getFromJAVDatabase(actorName, actorEncoded, metadata):
     actorPhotoURL = ''
-    actorID = ''
     actorEncoded = actorName.replace(' ', '+')
 
     req = PAutils.HTTPRequest('https://www.javdatabase.com/?wpessid=391488&s=' + actorEncoded)
@@ -374,7 +373,7 @@ def getFromJAVDatabase(actorName, actorEncoded, metadata):
 
         score = Util.LevenshteinDistance(actorName, actorSeachName)
 
-        if score < lastScore:
+        if score < lastScore or not actorPhotoURL:
             lastScore = score
             actorPhotoURL = actor.xpath('.//@src')[0]
 
@@ -382,7 +381,7 @@ def getFromJAVDatabase(actorName, actorEncoded, metadata):
             if 'unknown.' in req.url:
                 actorPhotoURL = ''
 
-        if int(score) == 0:
+        if actorPhotoURL and int(score) == 0:
             break
 
     return actorPhotoURL, 'female'
