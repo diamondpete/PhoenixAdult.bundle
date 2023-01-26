@@ -69,7 +69,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Title
     javID = detailsPageElements.xpath('//meta[@property="og:title"]/@content')[0].strip().split(' ', 1)[0]
-    title = detailsPageElements.xpath('//meta[@property="og:title"]/@content')[0].strip().split(' ', 1)[-1].replace(' - JAVLibrary', '')
+    title = detailsPageElements.xpath('//meta[@property="og:title"]/@content')[0].strip().split(' ', 1)[-1].replace(' - JAVLibrary', '').replace(javID, '').strip()
 
     if len(title) > 80:
         metadata.title = '[%s] %s' % (javID.upper(), PAutils.parseTitle(title, siteNum))
