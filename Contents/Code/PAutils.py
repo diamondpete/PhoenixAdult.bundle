@@ -369,7 +369,9 @@ def parseTitleSymbol(word, siteNum, symbol):
     for idx, hword in enumerate(word_list[1:], 1):
         cleanWord = re.sub(pattern, '', hword)
         if symbol in symbols:
-            if len(hword) > 1:
+            if idx == 1 and not firstWord:
+                nhword += hword.capitalize()
+            elif len(hword) > 1:
                 nhword += parseWord(hword, siteNum)
             else:
                 nhword += hword.capitalize()
