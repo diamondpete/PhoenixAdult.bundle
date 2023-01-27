@@ -284,6 +284,7 @@ actorsDB = {
     'Honami Akagi': ['BANK-052'],
     'Honoka Tsuji': ['DVDMS-699'],
     'Io Hayami': ['KTKC-135'],
+    'Itsuki Maino': ['NNPJ-136'],
     'Jillian Janson': ['CRDD-004', 'CRDD-007', 'CRDD-013'],
     'Julia Yoshine': ['DVDMS-623', 'HJMO-439', 'MIMK-078'],
     'June Lovejoy': ['DVDMS-553'],
