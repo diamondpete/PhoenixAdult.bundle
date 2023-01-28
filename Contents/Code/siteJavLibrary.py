@@ -144,8 +144,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     if 'https' not in posterURL:
         posterURL = 'https:' + posterURL
 
-    if '/removed.png' not in posterURL:
-        art.append(posterURL)
+    art.append(posterURL)
 
     # Images
     urlRegEx = re.compile(r'-([1-9]+).jpg')
@@ -213,7 +212,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             # Download image file for analysis
             try:
                 image = PAutils.HTTPRequest(posterUrl)
-                if 'now_printing' not in image.url:
+                if 'now_printing' not in image.url and '/removed.png' not in image.url:
                     im = StringIO(image.content)
                     images.append(image)
                     resized_image = Image.open(im)

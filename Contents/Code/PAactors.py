@@ -351,7 +351,10 @@ def getFromJavBus(actorName, actorEncoded, metadata):
             score = Util.LevenshteinDistance(actorName, actorSeachName)
 
             if 'nowprinting' not in img and 'dmm' not in img:
-                actorPhotoURL = 'https://www.javbus.com' + img
+                if 'http' not in img:
+                    actorPhotoURL = 'https://www.javbus.com' + img
+                else:
+                    actorPhotoURL = img
 
                 if int(score) == 0:
                     break
