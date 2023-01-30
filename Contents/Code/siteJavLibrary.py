@@ -165,7 +165,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             break
 
     numLen = len(javID.split('-', 1)[-1])
-    if int(numLen) < 3:
+    if int(numLen) < 3 and javID.split('-')[0].lower() not in map(str.lower, ignoreList):
         for idx in range(1, 4 - numLen):
             javID = '%s-0%s' % (javID.split('-')[0], javID.split('-')[-1])
 
@@ -253,7 +253,6 @@ actorsDB = {
     'Tsubomi': ['WA-192'],
 }
 
-
 crossSiteDB = {
     'UMD-421': 'UD-597R',
     'UMD-354': 'UD-529R',
@@ -287,4 +286,9 @@ crossSiteDB = {
     'MILD-729': 'BDMILD-036',
     'MILD-734': 'BDMILD-038',
     'MILD-748': 'BDMILD-044',
+}
+
+
+ignoreList = {
+    'SEXY', 'MEEL', 'SKOT', 'SCD', 'GDSC'
 }
