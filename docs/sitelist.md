@@ -54,6 +54,11 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Conor Coxxx
   - JaysPOV
   - SpankMonster
++ #### Adult Prime Studios | ✅
+  - 4K CFNM
+  - Beauty and the Senior
+  - Club SweetHearts
+  - Perfect 18
 + #### Adult Time Studios | ✅
   - AdultTime
   - FameDigital
@@ -262,7 +267,6 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Wild on Cam
 + #### Clips4Sale | ❌ - **StudioID with Title Search**
 + #### ClubFilly | ❌ - **SceneID, DVDs not supported**
-+ #### ClubSeventeen | ❌ - **Direct URL**
 + #### Couple Fantasies | ✅ - **Date Add**
   - Common Sensual
   - Foxhouse Films

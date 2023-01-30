@@ -70,7 +70,6 @@ import siteClubFilly
 import networkIntersec
 import networkCherryPimps
 import site18OnlyGirls
-import siteClubSweethearts
 import siteElegantAngel
 import siteReidMyLips
 import sitePlayboyPlus
@@ -189,6 +188,7 @@ import siteCaribbeancom
 import siteVRAllure
 import siteKin8tengoku
 import siteJAVDatabase
+import networkAdultPrime
 
 searchSites = {
     0: ('BlackedRaw', 'https://www.blackedraw.com', '/api'),
@@ -991,7 +991,7 @@ searchSites = {
     797: ('We Like Girls', 'https://www.girlsway.com', '/en/video/1/1/'),
     798: ('Lil Humpers', 'https://www.realitykings.com', 'https://site-api.project1service.com'),
     799: ('Bellesa Films', 'https://www.bellesafilms.com', 'https://site-api.project1service.com'),
-    800: ('ClubSweethearts', 'https://www.clubsweethearts.com', '/video.php?slug='),
+    800: ('ClubSweethearts', 'https://adultprime.com', '/studios/search?type='),
     801: ('Elegant Angel', 'https://www.elegantangel.com', '/Search?q='),
     802: ('Family Sinners', 'https://www.familysinners.com', 'https://site-api.project1service.com'),
     803: ('ReidMyLips', 'https://www.reidmylips.com', '/updates/'),
@@ -1692,6 +1692,9 @@ searchSites = {
     1598: ('VRAllure', 'https://www.vrallure.com', '/scenes/'),
     1599: ('Kin8tengoku', 'https://en.kin8tengoku.com', '/gateway/entry.phpgw?en=1&provider_id=4034&action=list&q='),
     1600: ('JAVDatabase', 'https://www.javdatabase.com', '/?wpessid=391487&s='),
+    1601: ('Adult Prime', 'https://adultprime.com', '/studios/search?q='),
+    1602: ('Beauty and the Senior', 'https://adultprime.com', '/studios/search?q='),
+    1603: ('4K CFNM', 'https://adultprime.com', '/studios/search?type='),
 }
 
 abbreviations = (
@@ -1714,6 +1717,7 @@ abbreviations = (
     ('^aw ', 'AngelaWhite '),
     ('^ba ', 'BBCSurprise '),
     ('^baebz ', 'Baeb '),
+    ('^bandts ', 'BeautyandtheSenior '),
     ('^bblib ', 'BigButtsLikeItBig '),
     ('^bcasting ', 'BangCasting '),
     ('^bcb ', 'BigCockBully '),
@@ -2504,9 +2508,9 @@ def getProviderFromSiteNum(siteNum):
         elif siteNum == 799 or siteNum == 876:
             provider = network1service
 
-        # ClubSeventeen / ClubSweethearts
-        elif siteNum == 800:
-            provider = siteClubSweethearts
+        # Adult Prime
+        elif siteNum == 800 or (1601 <= siteNum <= 1603):
+            provider = networkAdultPrime
 
         # Elegant Angel
         elif siteNum == 801:
