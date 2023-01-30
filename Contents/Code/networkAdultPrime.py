@@ -3,12 +3,6 @@ import PAutils
 
 
 def search(results, lang, siteNum, searchData):
-    # sceneID = None
-    # parts = searchData.title.split()
-    # if unicode(parts[0], 'UTF-8').isdigit():
-    #     sceneID = parts[0]
-    #     searchData.title = searchData.title.replace(sceneID, '', 1).strip()
-
     searchData.encoded = searchData.title.replace(' ', '+')
     req = PAutils.HTTPRequest('%svideo&q=%s' % (PAsearchSites.getSearchSearchURL(siteNum), searchData.encoded))
     searchPageElements = HTML.ElementFromString(req.text)
