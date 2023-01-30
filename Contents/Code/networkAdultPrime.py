@@ -49,16 +49,16 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h2')[0].text_content().strip(), siteNum)
 
     # Summary
-    siteName = detailsPageElements.xpath('//p[@class="update-info-line regular"][./b[contains(., "Studio")]]//a')[0].text_content().strip()
-    if siteName.lower() not in map(str.lower, skipGeneric):
-        metadata.summary = detailsPageElements.xpath('//p[contains(@class, "description")]')[0].text_content().strip()
+    summary = detailsPageElements.xpath('//p[contains(@class, "description")]')[0].text_content().strip()
+    if not summary.lower().startswith(tuple(map(str.lower, skipGeneric))):
+        metadata.summary = summary
 
     # Studio
     metadata.studio = 'Adult Prime'
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    tagline = siteName
+    tagline = detailsPageElements.xpath('//p[@class="update-info-line regular"][./b[contains(., "Studio")]]//a')[0].text_content().strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
@@ -134,5 +134,34 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
 
 skipGeneric = {
-    'Perfect 18', '4K CFNM'
+    'One-stop shop for all your dirty needs',
+    'CFNM stands for clothed-female-nude-male',
+    'Coming straight from Germany, on BBVideo',
+    'BeautyAndTheSenior is all about giving some',
+    'Perfect18 brings you fresh new girls',
+    'If you are somebody who truly appreciates the beauty of the bondage',
+    'Submissed has a rather straightforward name',
+    'Latina girls are known to be some of the most beautiful',
+    'It\'s the BreedBus, come on hop and join us',
+    'ClubBangBoys is one of the hottest gay porn',
+    'With such a straightforward name, one can already guess what ClubCastings',
+    'Welcome to our dirty filthy porn hospital at DirtyHospital.com',
+    'Distorded.com brings you a big fetish variety',
+    'Coming to you exclusively from Nathan Blake Production, ElegantRaw',
+    'Evil Playgrounds is a great brand if you like tight young Eastern European',
+    'FamilyScrew is all about keeping it in the family',
+    'We all have different preferences when it comes to porn, which is why FetishPrime',
+    'Fixxxion is an adventurous fantasy',
+    'Welcome to FreshPOV.com videos',
+    'FuckingSkinny gives you exactly that',
+    'Gonzo2000.com is bringing you a selection',
+    'The older the babes, the more experience they have',
+    'If you want to watch experienced older couples',
+    'GroupBanged is filled with the most cum-thirsty',
+    'GroupMams.com is bringing you exactly what it says',
+    'When a group of horny people gets together',
+    'When you remember that Amsterdam is the sex capital of the world',
+    'From couples having some passionate fun to hardcore threesomes',
+    'Jim Slip follows the life of the luckiest man on Earth',
+    'All the videos featured on YoungBusty',
 }
