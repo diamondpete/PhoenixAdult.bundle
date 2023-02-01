@@ -56,6 +56,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     JAVID = sceneURL.rsplit('/', 1)[1]
 
     # Title
+    javStudio = detailsPageElements.xpath('//p/a[contains(@href, "/studio/")]')[0].text_content().strip()
     javTitle = detailsPageElements.xpath('//head/title')[0].text_content().strip().replace(' - JavBus', '')
     if JAVID.replace('-', '').replace('_', '').replace(' ', '').isdigit():
         javTitle = '[%s] %s' % (javStudio, javTitle)
@@ -66,7 +67,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.title = javTitle
 
     # Studio
-    javStudio = detailsPageElements.xpath('//p/a[contains(@href, "/studio/")]')[0].text_content().strip()
     metadata.studio = javStudio
 
     # Director
