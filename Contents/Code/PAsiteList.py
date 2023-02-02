@@ -1970,6 +1970,7 @@ abbreviations = (
     ('^prdi ', 'PrettyDirty '),
     ('^ps ', 'PropertySex '),
     ('^ptt ', 'Petite '),
+    ('^pyx ', 'PurgatoryX '),
     ('^pud ', 'PublicDisgrace '),
     ('^reg ', 'RealExGirlfriends '),
     ('^rkp ', 'RKPrime '),
