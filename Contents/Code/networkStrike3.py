@@ -27,7 +27,7 @@ def search(results, lang, siteNum, searchData):
             if sceneId and int(sceneId) == int(videoId):
                 score == 100
             elif searchData.date:
-                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
                 score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
