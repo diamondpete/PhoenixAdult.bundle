@@ -1777,7 +1777,7 @@ searchSites = {
     1682: ('AltErotic', 'https://alterotic.com', '/search/'),
     1683: ('Lezkey', 'https://lezkey.com', '/search/'),
     1684: ('Side Chick', 'https://sidechick.com', '/search/'),
-    1685: ('Side Chick', 'https://sidechick.com', '/search/'),
+    1685: ('JAV888', 'https://jav888.com', '/search/'),
 }
 
 abbreviations = (
@@ -3115,7 +3115,7 @@ def getProviderFromSiteNum(siteNum):
             provider = siteJAVDatabase
 
         # Radical Cash
-        elif (1675 <= siteNum <= 1677):
+        elif (1675 <= siteNum <= 1685):
             provider = networkRadicalCash
 
     return provider

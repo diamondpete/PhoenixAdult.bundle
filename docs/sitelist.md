@@ -1138,15 +1138,18 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
 + #### QueenSect | ❌ - **Exact Title Only**
 + #### QueenSnake | ❌ - **Exact Title Only**
 + #### Radical Cash | ✅
+  - AltErotic
   - Benefit Monkey
+  - BJRAW
+  - ComeInside - **Actor Name Only**
   - GotFilled
+  - Inserted
   - JAV888
   - Lezkey
   - Ricky's Room
   - Sexy Modern Bull
   - Side Chick
 + #### Other Radical Cash Sites | ✅
-  - ComeInside - **Actor Name Only**
   - PurgatoryX
   - ToughLoveX - **Actor Name Only or Title Name Only**
 + #### Reality Kings Network | ✅
