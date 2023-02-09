@@ -1765,7 +1765,7 @@ searchSites = {
     1671: ('VR Teens', 'https://adultprime.com', '/studios/search?type='),
     1672: ('Young Busty', 'https://adultprime.com', '/studios/search?type='),
     1673: ('Abuse Me', 'http://bangbrosportal.com', '/?s='),
-    1674: ('DirtyAuditions', 'https://dirtyauditions.com', '/_next/data/'),
+    1674: ('Dirty Auditions', 'https://dirtyauditions.com', '/_next/data/'),
 }
 
 abbreviations = (

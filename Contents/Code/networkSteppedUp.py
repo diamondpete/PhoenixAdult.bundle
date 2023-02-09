@@ -59,7 +59,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    tagline = detailsPageElements['site']
+    tagline = PAutils.studio(detailsPageElements['site'], siteNum)
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
@@ -90,6 +90,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         if imageType in detailsPageElements:
             for image in list(detailsPageElements[imageType]):
                 art.append(image)
+
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
