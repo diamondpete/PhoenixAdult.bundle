@@ -1134,10 +1134,21 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - HeyLittleDick
   - LadyVoyeurs
   - PureCFNM
-+ #### PurgatoryX | ✅
 + #### Putalocura | ✅
 + #### QueenSect | ❌ - **Exact Title Only**
 + #### QueenSnake | ❌ - **Exact Title Only**
++ #### Radical Cash | ✅
+  - Benefit Monkey
+  - GotFilled
+  - JAV888
+  - Lezkey
+  - Ricky's Room
+  - Sexy Modern Bull
+  - Side Chick
++ #### Other Radical Cash Sites | ✅
+  - ComeInside - **Actor Name Only**
+  - PurgatoryX
+  - ToughLoveX - **Actor Name Only or Title Name Only**
 + #### Reality Kings Network | ✅
   - 40 Inch Plus
   - 8th Street Latinas
@@ -1453,7 +1464,6 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Facials Forever
   - Pounded Petite
   - She's Brand New
-+ #### ToughLoveX | ✅ - **Actor only, Date Add**
 + #### TransAngels | ✅
 + #### True Amateurs | ✅
 + #### Twistys | ✅
