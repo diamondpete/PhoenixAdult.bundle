@@ -507,6 +507,7 @@ def dictValuesFromKey(dictDB, identifier):
         for key in keys:
             if key.lower() == identifier.lower():
                 return values
+
     return []
 
 
@@ -517,4 +518,5 @@ def dictKeyFromValues(dictDB, identifier):
             if item.lower() == identifier.lower():
                 values.append(key)
                 break
+
     return values
