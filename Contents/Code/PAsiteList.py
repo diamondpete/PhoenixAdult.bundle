@@ -1783,6 +1783,9 @@ searchSites = {
     1687: ('Pie4k', 'https://pie4k.com', '/'),
     1688: ('Shower 4K', 'https://shower4k.org', '/'),
     1689: ('Kinky Sluts 4K', 'https://kinkysluts4k.org', '/'),
+    1690: ('Property Exploits', 'https://propertyexploits.org', '/'),
+    1691: ('Asians Exploited', 'https://asiansexploited.org', '/'),
+    1692: ('Strip Club Tryouts', 'https://stripclubtryouts.org', '/'),
 }
 
 abbreviations = (
@@ -3124,7 +3127,7 @@ def getProviderFromSiteNum(siteNum):
             provider = networkRadicalCash
 
         # Porn Pros Other
-        elif (1688 <= siteNum <= 1689):
+        elif (1688 <= siteNum <= 1692):
             provider = networkPornProsOther
 
     return provider
