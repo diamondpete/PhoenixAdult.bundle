@@ -1097,6 +1097,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Facials4k
   - FantasyHD
   - Holed
+  - Kinky Sluts 4K
   - Lubed
   - Mom4k
   - MyVeryFirstTime
@@ -1104,6 +1105,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Passion-HD
   - POVD
   - PureMature
+  - Shower 4K
   - SpyFam
   - Tiny4k
 + #### PornstarPlatinum | ✅
