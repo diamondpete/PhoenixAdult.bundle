@@ -1788,7 +1788,7 @@ searchSites = {
     1693: ('MomCum', 'https://pornplus.com', '/video/'),
     1694: ('VIP4K', 'https://vip4k.com', '/en/search/'),
     1695: ('PornPlus', 'https://pornplus.com', '/video/'),
-    1696: ('BBCPOVD', 'https://pornplus.com', '/video/'),
+    1696: ('BBC POVD', 'https://pornplus.com', '/video/'),
     1697: ('Girl Scout Sex', 'https://pornplus.com', '/video/'),
     1698: ('Exploited Cheerleaders', 'https://pornplus.com', '/video/'),
     1699: ('School of Cock', 'https://pornplus.com', '/video/'),
