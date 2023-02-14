@@ -1795,6 +1795,7 @@ searchSites = {
     1700: ('GloryHole 4K', 'https://pornplus.com', '/video/'),
     1701: ('Creepy Pa', 'https://pornplus.com', '/video/'),
     1702: ('Caged Sex', 'https://pornplus.com', '/video/'),
+    1703: ('Teeny Taboo', 'https://teenytaboo.com', '/videos/'),
 }
 
 abbreviations = (
@@ -1815,6 +1816,7 @@ abbreviations = (
     ('^legalporno ', 'AnalVids '),
     ('^ap ', 'AssParade '),
     ('^aw ', 'AngelaWhite '),
+    ('^atkg', 'ATKGirlfriends'),
     ('^ba ', 'BBCSurprise '),
     ('^baebz ', 'Baeb '),
     ('^bandts ', 'BeautyandtheSenior '),
