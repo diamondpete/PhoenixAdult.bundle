@@ -11,6 +11,7 @@ def search(results, lang, siteNum, searchData):
         searchData.title = searchData.title.replace(sceneID, '', 1).strip()
         searchResults.append(PAsearchSites.getSearchSearchURL(siteNum) + sceneID)
 
+    googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum)
     for sceneURL in googleResults:
         sceneURL = sceneURL.rsplit('/', 1)[0]
         if '/videos/' in sceneURL and sceneURL not in searchResults:
@@ -40,9 +41,9 @@ def search(results, lang, siteNum, searchData):
                 if sceneID and sceneID == searchID:
                     score = 100
                 elif searchData.date:
-                    score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                    score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
                 else:
-                    score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                    score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
                 results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
 
