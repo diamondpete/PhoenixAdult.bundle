@@ -190,6 +190,7 @@ import siteKin8tengoku
 import siteJAVDatabase
 import networkAdultPrime
 import networkRadicalCash
+import siteTeenyTaboo
 
 searchSites = {
     0: ('Blacked RAW', 'https://www.blackedraw.com', '/search?q='),
@@ -3136,5 +3137,9 @@ def getProviderFromSiteNum(siteNum):
         # Radical Cash
         elif (1675 <= siteNum <= 1685):
             provider = networkRadicalCash
+
+        # Teeny Taboo
+        elif siteNum == 1703:
+            provider = siteTeenyTaboo
 
     return provider
