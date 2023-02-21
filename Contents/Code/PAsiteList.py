@@ -1981,6 +1981,8 @@ abbreviations = (
     ('^nubc ', 'NubilesCasting '),
     ('^nubet ', 'NubilesET '),
     ('^nubilef ', 'NubileFilms '),
+    ('^Nubiles.net ', 'Nubiles'),
+    ('^NubilesNet ', 'Nubiles'),
     ('^num ', 'NuruMassage '),
     ('^nvg ', 'NetVideoGirls '),
     ('^nw ', 'NaughtyWeddings '),
