@@ -924,7 +924,7 @@ searchSites = {
     728: ('Czech Wife Swap', 'https://czechwifeswap.com', '/tour/search/?q='),
     729: ('ArchAngel', 'https://www.archangelvideo.com', '/tour/search.php?query='),
     730: ('We Are Hairy', 'https://www.wearehairy.com', '/search/?query='),
-    731: ('Love Her Feet', 'https://www.loveherfeet.com', '/tour/search.php?query='),
+    731: ('LoveHerFeet', 'https://www.loveherfeet.com', '/tour/search.php?query='),
     732: ('Mom POV', 'http://www.mompov.com', '/tour/?s='),
     733: ('Property Sex', 'https://www.propertysex.com', 'https://site-api.project1service.com'),
     734: (),
