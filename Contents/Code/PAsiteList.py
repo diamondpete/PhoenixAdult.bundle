@@ -193,7 +193,7 @@ import networkRadicalCash
 import siteTeenyTaboo
 
 searchSites = {
-    0: ('Blacked RAW', 'https://www.blackedraw.com', '/graphql'),
+    0: ('BlackedRaw', 'https://www.blackedraw.com', '/graphql'),
     1: ('Blacked', 'https://www.blacked.com', '/graphql'),
     2: ('Brazzers', 'http://www.brazzers.com', 'https://site-api.project1service.com'),
     3: ('MetadataAPI', 'https://metadataapi.net', 'https://api.metadataapi.net'),
@@ -863,7 +863,7 @@ searchSites = {
     667: ('PJGirls', 'http://www.pjgirls.com', '/en/videos/?fulltext='),
     668: ('Screwbox', 'https://screwbox.com', '/search.php?query='),
     669: ('Dorcel Club', 'https://www.dorcelclub.com', '/en/search?s='),
-    670: ('Tushy RAW', 'https://www.tushyraw.com', '/graphql'),
+    670: ('TushyRaw', 'https://www.tushyraw.com', '/graphql'),
     671: ('Deeper', 'https://www.deeper.com', '/graphql'),
     672: ('MissaX', 'https://missax.com', '/tour/search.php?query='),
     673: ('AllHerLuv', 'https://allherluv.com', '/tour/search.php?query='),

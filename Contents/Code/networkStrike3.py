@@ -26,7 +26,7 @@ def search(results, lang, siteNum, searchData):
             curID = PAutils.Encode(searchResult['findOneVideo']['slug'])
 
             if searchData.date:
-                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
                 score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
@@ -41,9 +41,9 @@ def search(results, lang, siteNum, searchData):
                 curID = PAutils.Encode(searchResult['node']['slug'])
 
                 if searchData.date:
-                    score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                    score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
                 else:
-                    score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                    score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
                 results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 
@@ -71,7 +71,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         director.name = video['directors'][0]['name']
 
     # Studio
-    metadata.studio = PAutils.parseTitle(PAsearchSites.getSearchSiteName(siteNum), siteNum)
+    studioName = PAsearchSites.getSearchSiteName(siteNum)
+    metadata.studio = PAutils.studio(studioName)
 
     # Tagline and Collection(s)
     metadata.collections.clear()
@@ -84,7 +85,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Genres
     movieGenres.clearGenres()
-    if metadata.studio == 'Tushy' or metadata.studio == 'TushyRaw':
+    if studioName == 'Tushy' or studioName == 'TushyRaw':
         movieGenres.addGenre('Anal')
 
     if video['categories']:
