@@ -72,7 +72,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Studio
     studioName = PAsearchSites.getSearchSiteName(siteNum)
-    metadata.studio = PAutils.studio(studioName)
+    metadata.studio = PAutils.studio(studioName, siteNum)
 
     # Tagline and Collection(s)
     metadata.collections.clear()
