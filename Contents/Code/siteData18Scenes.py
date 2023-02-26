@@ -206,7 +206,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             tagline = detailsPageElements.xpath('//p[contains(., "Site:")]//following-sibling::a[@class="bold"]')[0].text_content().strip()
         except:
             try:
-                tagline = detailsPageElements.xpath('//b[contains(., "Studio")]//following-sibling::b')[0].text_content().strip()
+                tagline = detailsPageElements.xpath('//b[contains(., "Network")]//following-sibling::a')[0].text_content().strip()
             except:
                 tagline = detailsPageElements.xpath('//p[contains(., "Movie:")]/a')[0].text_content()
                 metadata.collections.add(metadata.studio)
