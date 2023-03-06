@@ -1803,6 +1803,17 @@ searchSites = {
     1707: ('SheLovesBlack', 'https://www.shelovesblack.com', '/tour/search.php?query='),
     1708: ('Try Teens', 'https://teencoreclub.com', '/video/'),
     1709: ('Young Throats', 'https://teencoreclub.com', '/video/'),
+    1710: ('Bride 4K', 'https://vip4k.com', '/en/search/'),
+    1711: ('Dyke 4K', 'https://vip4k.com', '/en/search/'),
+    1712: ('Ignore 4K', 'https://vip4k.com', '/en/search/'),
+    1713: ('Buttmuse', 'https://www.littlecaprice-dreams.com', '/?s='),
+    1714: ('Caprice Divas', 'https://www.littlecaprice-dreams.com', '/?s='),
+    1715: ('NasstyX', 'https://www.littlecaprice-dreams.com', '/?s='),
+    1716: ('POVDreams', 'https://www.littlecaprice-dreams.com', '/?s='),
+    1717: ('Streetfuck', 'https://www.littlecaprice-dreams.com', '/?s='),
+    1718: ('SuperprivateX', 'https://www.littlecaprice-dreams.com', '/?s='),
+    1719: ('Wecumtoyou', 'https://www.littlecaprice-dreams.com', '/?s='),
+    1720: ('Xpervo', 'https://www.littlecaprice-dreams.com', '/?s='),
 }
 
 abbreviations = (
@@ -2484,7 +2495,7 @@ def getProviderFromSiteNum(siteNum):
             provider = siteStraplezz
 
         # LittleCaprice
-        elif siteNum == 742:
+        elif siteNum == 742 or (1713 <= siteNum <= 1720):
             provider = siteLittleCaprice
 
         # WowGirls
@@ -3087,7 +3098,7 @@ def getProviderFromSiteNum(siteNum):
             provider = siteKillergram
 
         # VIP4K
-        elif (1376 <= siteNum <= 1388) or siteNum == 1687 or siteNum == 1694:
+        elif (1376 <= siteNum <= 1388) or siteNum == 1687 or siteNum == 1694 or (1710 <= siteNum <= 1712):
             provider = networkVIP4K
 
         # Dirty Flix Network
