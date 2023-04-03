@@ -182,22 +182,23 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         summary = detailsPageElements.xpath('//div[@class="gen12"]/div[contains(., "Story")]')[0].text_content().split('Story -')[-1].strip()
     except:
         try:
-            summary = detailsPageElements.xpath('//div[@class="gen12"]/div[contains(., "Description")][contains(., "Studio ") or contains(., "Network ")]')[0].text_content().split('---')[-1].split('Description -')[-1].strip()
+            summary = detailsPageElements.xpath('//div[@class="gen12"]//div[@class="hideContent boxdesc" and contains(., "Description")]')[0].text_content().rsplit('---')[-1].strip().split('Description -')[-1].strip()
         except:
-            summary = ''
+            try:
+                summary = detailsPageElements.xpath('//div[@class="gen12"]/div[contains(., "Movie Description")]')[0].text_content().rsplit('--')[-1].strip()
+            except:
+                summary = ''
 
     metadata.summary = summary.replace('�', '\'').replace('\xc2\xa0', ' ')
 
     # Studio
     try:
-        studio = detailsPageElements.xpath('//b[contains(., "Network")]//following-sibling::b')[0].text_content().strip()
+        metadata.studio = detailsPageElements.xpath('//b[contains(., "Studio") or contains(., "Network")]//following-sibling::b')[0].text_content().strip()
     except:
         try:
-            studio = detailsPageElements.xpath('//b[contains(., "Studio")]//following-sibling::a')[0].text_content().strip()
+            metadata.studio = detailsPageElements.xpath('//p[contains(., "Site:")]//following-sibling::a[@class="bold"]')[0].text_content().strip()
         except:
-            studio = ''
-
-    metadata.studio = PAutils.parseTitle(PAutils.studio(studio, siteNum), siteNum)
+            metadata.studio = ''
 
     # Tagline and Collection(s)
     metadata.collections.clear()
