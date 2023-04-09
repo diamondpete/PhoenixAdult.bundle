@@ -238,6 +238,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.title = re.sub(r'(,\sthe)$', '', metadata.title, flags=re.IGNORECASE)
         metadata.title = 'The ' + metadata.title
 
+    if re.search(r'(,\sA)$', metadata.title, re.IGNORECASE):
+        metadata.title = re.sub(r'(,\sA)$', '', metadata.title, flags=re.IGNORECASE)
+        metadata.title = 'A ' + metadata.title
+
     # Summary
     try:
         if '\n' in detailsPageElements.xpath('//div[@class="container"][.//h2]//parent::p')[0].text_content():
