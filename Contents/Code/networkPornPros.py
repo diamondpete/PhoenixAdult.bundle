@@ -3,7 +3,8 @@ import PAutils
 
 
 def search(results, lang, siteNum, searchData):
-    searchData.title = ' '.join(searchData.title.split(' ')[2:])
+    if not PAsearchSites.getSearchSiteName(siteNum) == 'Casting Couch-X':
+        searchData.title = ' '.join(searchData.title.split(' ')[2:])
     directURL = PAsearchSites.getSearchSearchURL(siteNum) + slugify(searchData.title)
     searchResults = [directURL]
 
