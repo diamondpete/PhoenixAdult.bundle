@@ -34,7 +34,7 @@ def search(results, lang, siteNum, searchData):
             else:
                 score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
     else:
         search_variables = json.dumps({'query': searchData.title, 'site': PAsearchSites.getSearchSiteName(siteNum).upper(), 'first': 10, 'skip': 0})
         searchResults = getDatafromAPI(PAsearchSites.getSearchSearchURL(siteNum), search_query, search_variables, PAsearchSites.getSearchBaseURL(siteNum))
@@ -49,7 +49,7 @@ def search(results, lang, siteNum, searchData):
                 else:
                     score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-                results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
+                results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
 
