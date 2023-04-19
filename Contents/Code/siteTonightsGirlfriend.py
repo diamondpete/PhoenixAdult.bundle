@@ -71,13 +71,13 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         pass
 
     # Studio
-    studio = 'Naughty America'
-    metadata.studio = studio
+    metadata.studio = 'Naughty America'
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    metadata.tagline = studio
-    metadata.collections.add(studio)
+    tagline = 'Tonight\'s Girlfriend'
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
 
     # Release Date
     try:
