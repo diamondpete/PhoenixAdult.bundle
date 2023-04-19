@@ -434,8 +434,20 @@ def studio(name, siteNum):
         'Mylf Boss', 'Day With a Pornstar', 'Gangbang Creampie', 'Dirty Auditions'
     )
 
+    studiosReplace = {
+        'Pretty Dirty Teens': 'pdt',
+        'Sex Working': 'sw',
+        'Forgive Me Father': 'fmf',
+        'Love Her Ass': 'lha',
+    }
+
     if name == '':
         return ''
+
+    for newStudioName, alias in studiosReplace.items():
+        if name.lower() == alias.lower():
+            name = newStudioName
+            break
 
     for studio in studios:
         if name.lower().replace(' ', '').replace('\'', '') == studio.lower().replace(' ', ''):
