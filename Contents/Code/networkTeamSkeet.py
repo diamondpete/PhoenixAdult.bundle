@@ -13,7 +13,10 @@ def getJSONfromPage(url):
 
 
 def search(results, lang, siteNum, searchData):
-    titleNoActors = ' '.join(searchData.title.split(' ')[2:])
+    if siteNum == 846:
+        titleNoActors = ' '.join(searchData.title.split(' ')[4:])
+    else:
+        titleNoActors = ' '.join(searchData.title.split(' ')[2:])
     if titleNoActors.startswith('and '):
         titleNoActors = ' '.join(titleNoActors.split(' ')[3:])
     directURL = slugify(titleNoActors.replace('\'', ''), lowercase=True)
