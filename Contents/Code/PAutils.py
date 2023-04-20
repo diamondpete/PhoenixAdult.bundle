@@ -386,7 +386,7 @@ def parseTitleSymbol(word, siteNum, symbol):
 
 
 def postParseTitle(output):
-    replace = [('“', '\"'), ('”', '\"'), ('’', '\''), ('W/', 'w/'), ('Aj', 'AJ')]
+    replace = [('“', '\"'), ('”', '\"'), ('’', '\''), ('W/', 'w/'), ('A. J.', 'A.J.'), ('T. J.', 'T.J.')]
 
     # Add space after a punctuation if missing
     output = re.sub(r'(?=[\!|\:|\?|\.](?=(\w{1,}))\b)\S(?!(co\b|net\b|com\b|org\b|porn\b|E\d|xxx\b))', lambda m: m.group(0) + ' ', output, flags=re.IGNORECASE)

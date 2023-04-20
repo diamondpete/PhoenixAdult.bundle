@@ -6,7 +6,7 @@ ActorsReplace = {
     'Addie Juniper': ['Ms Addie Juniper'],
     'Addison Lee': ['Addi Lee'],
     'Adriana Chechik': ['Adriana Chechick', 'Adrianna Chechik'],
-    'AJ Applegate': ['Aj Applegate', 'A.J. Applegate', 'A. J. Applegate'],
+    'A.J. Applegate': ['Aj Applegate', 'A. J. Applegate'],
     'Alex D.': ['Alex D'],
     'Alex Kane': ['Sabrina Snow'],
     'Aliz': ['Liz Valery'],
