@@ -1828,6 +1828,7 @@ searchSites = {
     1731: ('Aunt Judys', 'https://auntjudys.com', '/tour/search.php?query='),
     1732: ('Gilfed', 'https://gilfed.com', 'https://site-api.project1service.com'),
     1733: ('Dilfed', 'https://dilfed.com', 'https://site-api.project1service.com'),
+    1734: ('Mylf After Dark', 'https://www.mylf.com', '/movies/'),
 }
 
 abbreviations = (
@@ -2428,7 +2429,7 @@ def getProviderFromSiteNum(siteNum):
             provider = siteMissaX
 
         # Mylf
-        elif (674 <= siteNum <= 683) or siteNum == 757 or siteNum == 842 or (siteNum >= 853 and siteNum <= 858) or (881 <= siteNum <= 887) or siteNum == 1329 or (1426 <= siteNum <= 1445) or siteNum == 1589:
+        elif (674 <= siteNum <= 683) or siteNum == 757 or siteNum == 842 or (siteNum >= 853 and siteNum <= 858) or (881 <= siteNum <= 887) or siteNum == 1329 or (1426 <= siteNum <= 1445) or siteNum == 1589 or siteNum == 1734:
             provider = networkMYLF
 
         # Manually Add Actors
