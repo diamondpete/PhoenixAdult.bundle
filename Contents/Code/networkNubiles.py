@@ -3,6 +3,10 @@ import PAutils
 
 
 def search(results, lang, siteNum, searchData):
+    titleNoActors = ' '.join(searchData.title.split(' ')[2:])
+    if titleNoActors.startswith('and '):
+        titleNoActors = ' '.join(titleNoActors.split(' ')[3:])
+
     if searchData.date:
         url = PAsearchSites.getSearchSearchURL(siteNum) + 'date/' + searchData.date + '/' + searchData.date
         req = PAutils.HTTPRequest(url)
