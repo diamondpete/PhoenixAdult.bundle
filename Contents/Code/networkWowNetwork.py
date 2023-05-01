@@ -61,7 +61,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Studio
-    metadata.studio = 'Venus Network'
+    metadata.studio = 'Wow Network'
 
     # Tagline and Collection(s)
     metadata.collections.clear()
