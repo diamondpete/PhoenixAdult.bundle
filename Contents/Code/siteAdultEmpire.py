@@ -267,13 +267,17 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         tagline = re.sub(r'\(.*\)', '', detailsPageElements.xpath('//h2/a[@label="Series"]/text()')[0].strip().split('"')[1]).strip()
         tagline = PAutils.parseTitle(tagline, siteNum)
 
-        if re.search(r'(,\sthe)(?=:)', tagline):
-            tagline = re.sub(r'(,\sthe)(?=:)', '', tagline)
+        if re.search(r'(,\sthe)(?=:)', tagline, re.IGNORECASE):
+            tagline = re.sub(r'(,\sthe)(?=:)', '', tagline, flags=re.IGNORECASE)
             tagline = 'The ' + tagline
 
-        if re.search(r'(,\sthe)$', tagline):
-            tagline = re.sub(r'(,\sthe)$', '', tagline)
+        if re.search(r'(,\sthe)$', tagline, re.IGNORECASE):
+            tagline = re.sub(r'(,\sthe)$', '', tagline, flags=re.IGNORECASE)
             tagline = 'The ' + tagline
+
+        if re.search(r'(,\sA)$', tagline, re.IGNORECASE):
+            tagline = re.sub(r'(,\sA)$', '', tagline, flags=re.IGNORECASE)
+            tagline = 'A ' + tagline
 
         metadata.tagline = tagline
         metadata.collections.add(tagline)
