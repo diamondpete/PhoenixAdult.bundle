@@ -67,7 +67,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
         movieActors.addActor(actorName, '')
 
-    if metadata.title.lower().startswith('bic_'):
+    if actors and metadata.title.lower().startswith('bic_'):
         if len(actors) == 1:
             metadata.title = actors[0]
         elif len(actors) == 2:
