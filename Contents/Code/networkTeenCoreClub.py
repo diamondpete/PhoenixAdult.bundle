@@ -22,9 +22,9 @@ def search(results, lang, siteNum, searchData):
         if sceneID and int(sceneID) == searchID:
             score = 100
         elif searchData.date:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
 
         actors = []
         for actorData in searchResult['actors']:
