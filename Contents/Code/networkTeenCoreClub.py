@@ -54,7 +54,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    tagline = data['video']['labels'][0]['name'].replace('.com', '').strip()
+    tagline = data['video']['labels'][0]['name'].split('.')[0].strip()
+    tagline = re.sub(r'(\w)([A-Z])', r'\1 \2', tagline)
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
