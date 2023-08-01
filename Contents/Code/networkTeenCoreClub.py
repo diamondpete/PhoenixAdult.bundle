@@ -9,29 +9,38 @@ def search(results, lang, siteNum, searchData):
         sceneID = parts[0]
         searchData.encoded = urllib.quote(searchData.title.replace(sceneID, '', 1).strip())
 
-    url = PAsearchSites.getSearchSearchURL(siteNum) + 'videos/browse/search/' + searchData.encoded + '?page=1&sg=false&sort=release&video_type=scene&lang=en&site_id=10&genre=0&dach=false'
+
+    url = '%svideos/browse/search/%s?page=1&sg=false&sort=release&video_type=scene&lang=en&site_id=10&genre=0&dach=false' % (PAsearchSites.getSearchSearchURL(siteNum), searchData.encoded)
     data = PAutils.HTTPRequest(url)
     data = data.json()
 
-    for searchResult in data['videos']['data']:
-        titleNoFormatting = searchResult['title']['en']
-        releaseDate = parse(searchResult['publication_date']).strftime('%Y-%m-%d')
-        searchID = searchResult['id']
-        curID = PAutils.Encode(PAsearchSites.getSearchSearchURL(siteNum) + '/videodetail/' + str(searchID))
+    lastpage = data['videos']['last_page'] + 1
 
-        if sceneID and int(sceneID) == searchID:
-            score = 100
-        elif searchData.date:
-            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
-        else:
-            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
+    for idx in range(1, lastpage):
 
-        actors = []
-        for actorData in searchResult['actors']:
-            actors.append(actorData['name'])
-        actorsList = ', '.join(actors)
+        for searchResult in data['videos']['data']:
+            titleNoFormatting = PAutils.parseTitle(searchResult['title']['en'], siteNum)
+            releaseDate = parse(searchResult['publication_date']).strftime('%Y-%m-%d')
+            searchID = searchResult['id']
+            curID = PAutils.Encode(PAsearchSites.getSearchSearchURL(siteNum) + '/videodetail/' + str(searchID))
 
-        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s (%s) [%s] %s' % (titleNoFormatting, actorsList, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+            if sceneID and int(sceneID) == searchID:
+                score = 100
+            elif searchData.date:
+                score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            else:
+                score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
+
+            actors = []
+            for actorData in searchResult['actors']:
+                actors.append(actorData['name'])
+            actorsList = ', '.join(actors)
+
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s (%s) [%s] %s' % (titleNoFormatting, actorsList, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+
+        url = '%svideos/browse/search/%s?page=%d&sg=false&sort=release&video_type=scene&lang=en&site_id=10&genre=0&dach=false' % (PAsearchSites.getSearchSearchURL(siteNum), searchData.encoded, idx)
+        data = PAutils.HTTPRequest(url)
+        data = data.json()
 
     return results
 
@@ -75,6 +84,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             metadata.title = ' & '.join(actors)
         else:
             metadata.title = ', '.join(actors)
+    else:
+        metadata.title = PAutils.parseTitle(metadata.title, siteNum)
 
     # Date
     date = data['video']['publication_date']
