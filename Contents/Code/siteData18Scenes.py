@@ -84,11 +84,11 @@ def search(results, lang, siteNum, searchData):
             req = PAutils.HTTPRequest(searchURL, headers={'Referer': 'https://www.data18.com'}, cookies={'data_user_captcha': '1'})
             searchPageElements = HTML.ElementFromString(req.text)
 
-    googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum)
-    for sceneURL in googleResults:
-        sceneURL = sceneURL.replace('/content/', '/scenes/').replace('http:', 'https:')
-        if ('/scenes/' in sceneURL and '.html' not in sceneURL and sceneURL not in searchResults and sceneURL not in siteResults):
-            searchResults.append(sceneURL)
+    # googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum)
+    # for sceneURL in googleResults:
+    #     sceneURL = sceneURL.replace('/content/', '/scenes/').replace('http:', 'https:')
+    #     if ('/scenes/' in sceneURL and '.html' not in sceneURL and sceneURL not in searchResults and sceneURL not in siteResults):
+    #         searchResults.append(sceneURL)
 
     for sceneURL in searchResults:
         req = PAutils.HTTPRequest(sceneURL, cookies={'data_user_captcha': '1'})
@@ -210,7 +210,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                 tagline = detailsPageElements.xpath('//b[contains(., "Network")]//following-sibling::a')[0].text_content().strip()
             except:
                 tagline = detailsPageElements.xpath('//p[contains(., "Movie:")]/a')[0].text_content()
-                metadata.collections.add(metadata.studio)
+                if 'rk prime' in tagline.lower():
+                    tagline = 'RK Prime'
+                else:
+                    metadata.collections.add(metadata.studio)
 
         if len(metadata_id) > 3:
             Log('Using original series information')
