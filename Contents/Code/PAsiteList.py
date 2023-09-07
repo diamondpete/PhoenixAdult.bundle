@@ -9,7 +9,6 @@ import sitePrivate
 import networkFullPornNetwork
 import networkSteppedUp
 import networkGammaEnt
-import networkDogfart
 import siteJulesJordan
 import networkPerfectGonzo
 import networkPornFidelity
@@ -602,30 +601,30 @@ searchSites = {
     405: ('Female Fake Taxi', 'https://www.fakehub.com', 'https://site-api.project1service.com'),
     406: ('Fake Driving School', 'https://www.fakehub.com', 'https://site-api.project1service.com'),
     407: ('Fake Hostel', 'https://www.fakehub.com', 'https://site-api.project1service.com'),
-    408: ('Dogfart', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    409: ('Blacks On Blondes', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    410: ('Cuckold Sessions', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    411: ('Glory Hole', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    412: ('Blacks On Cougars', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    413: ('We Fuck Black Girls', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    414: ('Watching My Mom Go Black', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    415: ('Interracial Blowbang', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    416: ('CumBang', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    417: ('Interracial Pickups', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    418: ('Watching My Daughter Go Black', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    419: ('Zebra Girls', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    420: ('Glory Hole Initiations', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    421: ('Dogfart Behind The Scenes', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    422: ('Black Meat White Feet', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    423: ('Spring Thomas', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    424: ('Katie Thomas', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    425: ('Ruth Blackwell', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    426: ('Candy Monroe', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    427: ('Wife Writing', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    428: ('Barb Cummings', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    429: ('The Minion', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    430: ('Blacks On Boys', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
-    431: ('Gloryholes And Handjobs', 'https://www.dogfartnetwork.com', '/tour/search.php?search='),
+    408: ('Dogfart', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    409: ('Blacks On Blondes', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    410: ('Cuckold Sessions', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    411: ('Glory Hole', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    412: ('Blacks On Cougars', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    413: ('We Fuck Black Girls', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    414: ('Watching My Mom Go Black', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    415: ('Interracial Blowbang', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    416: ('CumBang', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    417: ('Interracial Pickups', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    418: ('Watching My Daughter Go Black', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    419: ('Zebra Girls', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    420: ('Glory Hole Initiations', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    421: ('Dogfart Behind The Scenes', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    422: ('Black Meat White Feet', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    423: ('Spring Thomas', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    424: ('Katie Thomas', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    425: ('Ruth Blackwell', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    426: ('Candy Monroe', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    427: ('Wife Writing', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    428: ('Barb Cummings', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    429: ('The Minion', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    430: ('Blacks On Boys', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    431: ('Gloryholes And Handjobs', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
     432: ('Jules Jordan', 'https://www.julesjordan.com', '/trial/search.php?query='),
     433: ('DDFNetwork', 'https://ddfnetwork.com', '/videos/freeword/'),
     434: ('Sandys Fantasies', 'https://ddfnetwork.com', '/videos/freeword/'),
@@ -2314,7 +2313,7 @@ def getProviderFromSiteNum(siteNum):
 
         # DogfartNetwork
         elif (408 <= siteNum <= 431):
-            provider = networkDogfart
+            provider = networkGammaEntOther
 
         # FakeHub
         elif siteNum == 340 or (397 <= siteNum <= 407):
