@@ -13,7 +13,7 @@ def search(results, lang, siteNum, searchData):
     else:
         sceneID = re.sub(r'\D', '', searchData.title)
         actorName = re.sub(r'\s\d.*', '', searchData.title).replace(' ', '-')
-        directURL = '%s%s/%s' % (PAsearchSites.getSearchSearchURL(siteNum), actorName, sceneID)
+        directURL = '%s%s/%s/' % (PAsearchSites.getSearchSearchURL(siteNum), actorName, sceneID)
         searchResults.append(directURL)
 
     urlID = PAsearchSites.getSearchSearchURL(siteNum).replace(PAsearchSites.getSearchBaseURL(siteNum), '')
