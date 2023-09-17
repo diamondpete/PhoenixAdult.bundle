@@ -442,7 +442,7 @@ def studio(name, siteNum):
         'CFNM Secret', 'Pure 18', 'RK Prime', 'Let\'s Try Anal', 'Public Pick-Ups', 'ArchAngel', 'BangBros',
         'BellaPass', 'Pornstars Like It Big', 'Look At Her Now', 'Digital Playground', 'Big Tit Creampie',
         'Mom Is Horny', 'BangBros Clips', 'Modern Day Sins', 'Brace Faced', 'Bad MILFs', 'MILF Body', 'Mile High',
-        'Mylf Boss', 'Day With a Pornstar', 'Gangbang Creampie', 'Dirty Auditions'
+        'Mylf Boss', 'Day With a Pornstar', 'Gangbang Creampie', 'Dirty Auditions', 'Big Tits, Round Asses'
     )
 
     studiosReplace = {
@@ -461,7 +461,7 @@ def studio(name, siteNum):
             break
 
     for studio in studios:
-        if name.lower().replace(' ', '').replace('\'', '') == studio.lower().replace(' ', ''):
+        if re.sub(r'\W', '', name).lower() == re.sub(r'\W', '', studio).lower():
             return studio
 
     return parseTitle(name, siteNum)
