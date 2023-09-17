@@ -28,17 +28,6 @@ def get_Token(siteNum):
 
 
 def search(results, lang, siteNum, searchData):
-    token = get_Token(siteNum)
-    headers = {
-        'Instance': token,
-    }
-
-    sceneID = None
-    parts = searchData.title.split()
-    if unicode(parts[0], 'UTF-8').isdigit():
-        sceneID = parts[0]
-        searchData.title = searchData.title.replace(sceneID, '', 1).strip()
-
     if Prefs['data18_override']:
         return siteData18Scenes.search(results, lang, siteNum, searchData)
     else:
@@ -46,6 +35,12 @@ def search(results, lang, siteNum, searchData):
         headers = {
             'Instance': token,
         }
+
+    sceneID = None
+    parts = searchData.title.split()
+    if unicode(parts[0], 'UTF-8').isdigit():
+        sceneID = parts[0]
+        searchData.title = searchData.title.replace(sceneID, '', 1).strip()
 
     for sceneType in ['scene', 'movie', 'serie', 'trailer']:
         if sceneID and not searchData.title:
@@ -66,13 +61,14 @@ def search(results, lang, siteNum, searchData):
                     subSite = searchResult['collections'][0]['name']
                 siteDisplay = '%s/%s' % (siteName, subSite) if subSite else siteName
 
-                score = 100
+                score = 80
                 if sceneID:
                     score = score - Util.LevenshteinDistance(sceneID, curID)
                 else:
                     if searchData.date:
                         score = score - 2 * Util.LevenshteinDistance(searchData.date, releaseDate)
-                    score = score - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                    else:
+                        score = score - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
                 if sceneType == 'trailer':
                     titleNoFormatting = '[%s] %s' % (sceneType.capitalize(), titleNoFormatting)
@@ -113,10 +109,19 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.summary = description
 
     # Studio
-    metadata.studio = PAutils.parseTitle(detailsPageElements['brand'], siteNum)
+    metadata.studio = PAutils.studio(PAutils.parseTitle(detailsPageElements['brand'], siteNum), siteNum)
 
     # Tagline and Collection(s)
     metadata.collections.clear()
+    tagline = PAutils.studio(PAsearchSites.getSearchSiteName(siteNum).strip(), siteNum)
+    try:
+        if tagline == metadata.studio:
+            tagline = PAutils.studio(detailsPageElements['collections'][0]['name'], siteNum)
+    except:
+        pass
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
+
     # seriesNames = []
 
     # if 'collections' in detailsPageElements and detailsPageElements['collections']:
