@@ -129,14 +129,22 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Studio
     if not detailsPageElements['network_name']:
-        metadata.studio = PAutils.studio(detailsPageElements['studio_name'], siteNum)
+        if 'filthykings' in PAsearchSites.getSearchBaseURL(siteNum):
+            metadata.studio = PAutils.studio(detailsPageElements['sitename_pretty'], siteNum)
+        else:
+            metadata.studio = PAutils.studio(detailsPageElements['studio_name'], siteNum)
     else:
         metadata.studio = PAutils.studio(detailsPageElements['network_name'], siteNum)
 
     # Tagline and Collection(s)
     metadata.collections.clear()
     if not detailsPageElements['network_name']:
-        metadata.collections.add(PAutils.studio(detailsPageElements['studio_name'], siteNum))
+        if 'filthykings' in PAsearchSites.getSearchBaseURL(siteNum):
+            tagline = PAutils.parseTitle(detailsPageElements['serie_name'])
+            metadata.collections.add(tagline)
+            metadata.tagline = tagline
+        else:
+            metadata.collections.add(PAutils.studio(detailsPageElements['studio_name'], siteNum))
     elif 'serie_name' in detailsPageElements:
         metadata.collections.add(PAutils.parseTitle(detailsPageElements['serie_name'].replace("Devils Film", "Devil's Film"), siteNum))
         metadata.tagline = PAutils.parseTitle(detailsPageElements['serie_name'].replace("Devils Film", "Devil's Film"), siteNum)
