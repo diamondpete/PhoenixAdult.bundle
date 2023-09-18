@@ -64,7 +64,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
         movieActors.addActor(actorName, actorPhotoURL)
 
-
     # Posters/Background
     xpaths = [
         '//video/@poster',
