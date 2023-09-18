@@ -114,7 +114,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     title = None
     if 'dogfart' in PAsearchSites.getSearchBaseURL(siteNum).lower():
         title = '%s from %s.com' % (PAutils.parseTitle(detailsPageElements['title'], siteNum), detailsPageElements['serie_name'])
-    elif sceneType == 'scenes' and len(scenesPagesElements) > 1:
+    elif sceneType == 'scenes' and len(scenesPagesElements) > 1 and 'filthykings' not in PAsearchSites.getSearchBaseURL(siteNum):
         for idx, scene in scenesPagesElements:
             if scene['clip_id'] == sceneID:
                 title = '%s, Scene %d' % (PAutils.parseTitle(detailsPageElements['title'], siteNum), idx)
@@ -140,7 +140,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.collections.clear()
     if not detailsPageElements['network_name']:
         if 'filthykings' in PAsearchSites.getSearchBaseURL(siteNum):
-            tagline = PAutils.parseTitle(detailsPageElements['serie_name'])
+            tagline = PAutils.parseTitle(detailsPageElements['serie_name'], siteNum)
             metadata.collections.add(tagline)
             metadata.tagline = tagline
         else:
