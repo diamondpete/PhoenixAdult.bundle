@@ -3,7 +3,11 @@ import PAutils
 
 
 def search(results, lang, siteNum, searchData):
-    searchData.encoded = searchData.title.replace(' ', '-')
+    titleNoActors = ' '.join(searchData.title.split(' ')[2:])
+    if titleNoActors.startswith('and '):
+        titleNoActors = ' '.join(titleNoActors.split(' ')[3:])
+
+    searchData.encoded = titleNoActors.replace(' ', '-')
     searchResultsURLs = [
         PAsearchSites.getSearchSearchURL(siteNum) + 'updates/' + searchData.encoded + '.html',
         PAsearchSites.getSearchSearchURL(siteNum) + 'updates/' + searchData.encoded + '-.html',
