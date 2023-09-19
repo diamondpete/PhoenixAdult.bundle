@@ -1946,7 +1946,6 @@ abbreviations = (
     ('^ext ', 'ExxxtraSmall '),
     ('^Exxtra ', 'BrazzersExxtra '),
     ('^family ', 'Taboo '),
-    ('^familyxxx ', 'Taboo '),
     ('^fams ', 'FamilyStrokes '),
     ('^faq ', 'FirstAnalQuest '),
     ('^fds ', 'FakeDrivingSchool '),
