@@ -86,13 +86,12 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.studio = 'TeamSkeet'
 
     # Tagline and Collection(s)
-    metadata.collections.clear()
     if 'site' in detailsPageElements:
-        subSite = PAutils.studio(detailsPageElements['site']['name'], siteNum)
+        tagline = PAutils.studio(detailsPageElements['site']['name'], siteNum)
     else:
-        subSite = PAsearchSites.getSearchSiteName(siteNum)
-    metadata.tagline = subSite
-    metadata.collections.add(subSite)
+        tagline = PAsearchSites.getSearchSiteName(siteNum)
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
 
     # Release Date
     if sceneDate:
@@ -100,8 +99,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
-    # Actors
-    movieActors.clearActors()
+    # Actor(s)
     actors = detailsPageElements['models']
     for actorLink in actors:
         actorID = actorLink['modelId']
@@ -115,7 +113,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Genres
-    movieGenres.clearGenres()
     genres = []
 
     if 'tags' in detailsPageElements and detailsPageElements['tags']:

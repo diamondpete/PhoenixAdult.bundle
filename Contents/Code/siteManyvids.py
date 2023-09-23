@@ -10,19 +10,19 @@ def search(results, lang, siteNum, searchData):
         sceneTitle = ''
 
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + sceneID)
-    searchResults = HTML.ElementFromString(req.text)
-    for searchResult in searchResults.xpath('//div[@class="video-details"]'):
-        titleNoFormatting = PAutils.parseTitle(searchResult.xpath('//h2[@class="h2 m-0"]')[0].text_content(), siteNum)
-        curID = searchData.title.lower().replace(' ', '-')
-        subSite = searchResult.xpath('//a[@class="username "]')[0].text_content().strip()
-        releaseDate = searchData.dateFormat() if searchData.date else ''
+    searchResult = HTML.ElementFromString(req.text)
 
-        if sceneTitle:
-            score = 80 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
-        else:
-            score = 90
+    titleNoFormatting = searchResult.xpath('//h1[contains(@class, "title")]')[0].text_content()
+    curID = searchData.title.lower().replace(' ', '-')
+    subSite = searchResult.xpath('//a[@aria-label="model-profile"]')[0].text_content().strip()
+    releaseDate = searchData.dateFormat() if searchData.date else ''
 
-        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [ManyVids/%s]' % (titleNoFormatting, subSite), score=score, lang=lang))
+    if sceneTitle:
+        score = 80 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
+    else:
+        score = 79
+
+    results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [ManyVids/%s]' % (titleNoFormatting, subSite), score=score, lang=lang))
 
     return results
 
@@ -59,8 +59,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     # Studio
     metadata.studio = 'ManyVids'
 
-    # Collections / Tagline
-    metadata.collections.clear()
+    # Tagline and Collection(s)
     tagline = detailsPageElements.xpath('//a[contains(@class, "username ")]')[0].text_content().strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
@@ -72,14 +71,12 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.year = metadata.originally_available_at.year
 
     # Genres
-    movieGenres.clearGenres()
     for genreLink in videoPageElements['tags']:
         genreName = genreLink.strip()
 
         movieGenres.addGenre(genreName)
 
-    # Actors
-    movieActors.clearActors()
+    # Actor(s)
     actorName = detailsPageElements.xpath('//a[contains(@class, "username ")]')[0].text_content()
     actorPhotoURL = ''
 

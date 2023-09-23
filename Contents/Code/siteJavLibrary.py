@@ -92,7 +92,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.studio = studio[0].text_content().strip()
 
     # Tagline and Collection(s)
-    metadata.collections.clear()
     tagline = detailsPageElements.xpath('//td[contains(text(), "Label:")]/following-sibling::td/span/a')
     if tagline:
         metadata.tagline = tagline[0].text_content().strip()
@@ -103,10 +102,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.collections.add('Japan Adult Video')
 
     # Director
-    director = metadata.directors.new()
-    directorName = detailsPageElements.xpath('//td[contains(text(), "Director:")]/following-sibling::td/span/a')
-    if directorName:
-        director.name = directorName[0].text_content().strip()
+    directorLink = detailsPageElements.xpath('//td[contains(text(), "Director:")]/following-sibling::td/span/a')
+    if directorLink:
+        directorName = directorLink[0].text_content().strip()
+
+        movieActors.addDirector(directorName, '')
 
     # Release Date
     date = detailsPageElements.xpath('//td[contains(text(), "Release Date:")]/following-sibling::td')
@@ -115,8 +115,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
-    # Actors
-    movieActors.clearActors()
+    # Actor(s)
 
     # Manually Add Actors By JAV ID
     actors = []
@@ -133,7 +132,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         movieActors.addActor(actorName, '')
 
     # Genres
-    movieGenres.clearGenres()
     for genreLink in detailsPageElements.xpath('//a[@rel="category tag"]'):
         genreName = genreLink.text_content().strip()
 

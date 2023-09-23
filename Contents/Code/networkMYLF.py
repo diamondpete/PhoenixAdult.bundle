@@ -83,7 +83,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.studio = 'MYLF'
 
     # Tagline and Collection(s)
-    metadata.collections.clear()
     if 'site' in detailsPageElements:
         subSite = PAutils.studio(detailsPageElements['site']['name'], siteNum)
     else:
@@ -97,8 +96,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
-    # Actors
-    movieActors.clearActors()
+    # Actor(s)
     actors = detailsPageElements['models']
     for actorLink in actors:
         actorID = actorLink['modelId']
@@ -112,7 +110,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Genres
-    movieGenres.clearGenres()
     genres = ['MILF', 'Mature']
 
     if 'tags' in detailsPageElements and detailsPageElements['tags']:

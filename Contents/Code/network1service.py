@@ -113,7 +113,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.studio = PAutils.studio(detailsPageElements['brand'], siteNum)
 
     # Tagline and Collection(s)
-    metadata.collections.clear()
     tagline = PAutils.studio(PAsearchSites.getSearchSiteName(siteNum).strip(), siteNum)
     try:
         if tagline == metadata.studio:
@@ -152,15 +151,13 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.year = metadata.originally_available_at.year
 
     # Genres
-    movieGenres.clearGenres()
     genres = detailsPageElements['tags']
     for genreLink in genres:
         genreName = genreLink['name']
 
         movieGenres.addGenre(genreName)
 
-    # Actors
-    movieActors.clearActors()
+    # Actor(s)
     actors = detailsPageElements['actors']
     for actorLink in actors:
         actorPageURL = PAsearchSites.getSearchSearchURL(siteNum) + '/v1/actors?id=%d' % actorLink['id']

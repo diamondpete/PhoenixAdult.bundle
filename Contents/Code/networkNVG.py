@@ -101,15 +101,14 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     else:
         metadata.title = PAutils.parseTitle(detailsPageElements['updates']['short_title'], siteNum)
 
-    # Studio
-    metadata.studio = 'NVG Network'
-
     # Summary
     if summaryPageElements:
         metadata.summary = summaryPageElements.xpath('//div[@class="the-content"]/p')[0].text_content().strip()
 
+    # Studio
+    metadata.studio = 'NVG Network'
+
     # Tagline and Collection(s)
-    metadata.collections.clear()
     tagline = PAsearchSites.getSearchSiteName(siteNum)
     metadata.tagline = tagline
     metadata.collections.add(tagline)
@@ -121,10 +120,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.year = metadata.originally_available_at.year
 
     # Genres
-    movieGenres.clearGenres()
 
-    # Actors
-    movieActors.clearActors()
+    # Actor(s)
     for actor in actors.split(' and '):
         actorName = actor.strip()
         actorPhotoURL = ''
