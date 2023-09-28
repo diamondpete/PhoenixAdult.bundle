@@ -410,19 +410,58 @@ def getFromIndexxx(actorName, actorEncoded, metadata):
 
 def getFromAdultDVDEmpire(actorName, actorEncoded, metadata):
     actorPhotoURL = ''
+    gender = ''
+    results = []
 
-    req = PAutils.HTTPRequest('https://www.adultdvdempire.com/performer/search?q=' + actorEncoded)
-    actorSearch = HTML.ElementFromString(req.text)
-    actorPageURL = actorSearch.xpath('//div[@id="performerlist"]/div//a/@href')
-    if actorPageURL:
-        actorPageURL = 'https://www.adultdvdempire.com' + actorPageURL[0]
-        req = PAutils.HTTPRequest(actorPageURL)
-        actorPage = HTML.ElementFromString(req.text)
-        img = actorPage.xpath('//div[contains(@class, "performer-image-container")]/a/@href')
-        if img:
-            actorPhotoURL = img[0]
+    req = PAutils.HTTPRequest('https://www.adultdvdempire.com/performer/search?fq=ag_cast_gender%3AF&fq=' + actorEncoded)
+    femaleActorSearch = HTML.ElementFromString(req.text)
+    req = PAutils.HTTPRequest('https://www.adultdvdempire.com/performer/search?fq=ag_cast_gender%3AT&fq=' + actorEncoded)
+    transActorSearch = HTML.ElementFromString(req.text)
+    req = PAutils.HTTPRequest('https://www.adultdvdempire.com/hottest-pornstars.html?fq=ag_cast_gender%3AM&fq=' + actorEncoded)
+    maleActorSearch = HTML.ElementFromString(req.text)
 
-    return actorPhotoURL, ''
+    searchResults = femaleActorSearch.xpath('//div[@id="performerlist"]/div')
+    searchResults.extend(transActorSearch.xpath('//div[@id="performerlist"]/div'))
+
+    lastScore = 100
+    for actor in searchResults:
+        actorSeachName = actor.text_content().strip()
+
+        resultScore = Util.LevenshteinDistance(actorName, actorSeachName)
+
+        if 'nophoto' in actor.xpath('.//a//img/@src')[0]:
+            resultScore = resultScore + 1
+
+        if resultScore == lastScore:
+            results.append([actor, 'female'])
+        elif resultScore < lastScore:
+            lastScore = resultScore
+            results = [[actor, 'female']]
+
+    for actor in maleActorSearch.xpath('//div[@id="performerlist"]/div'):
+        actorSeachName = actor.text_content().strip()
+
+        resultScore = Util.LevenshteinDistance(actorName, actorSeachName)
+
+        if 'nophoto' in actor.xpath('.//a//img/@src')[0]:
+            resultScore = resultScore + 1
+
+        if resultScore == lastScore:
+            results.append([actor, 'male'])
+        elif resultScore < lastScore:
+            lastScore = resultScore
+            results = [[actor, 'male']]
+
+    if results:
+        actor = random.choice(results)
+        imgLink = actor[0].xpath('.//a//img/@src')[0]
+        imgID = imgLink.split('actor/')[-1].split('_')[0].split('/')[-1]
+
+        if imgID != 'nophoto':
+            gender = actor[1]
+            actorPhotoURL = 'https://imgs1cdn.adultempire.com/actors/%sh.jpg' % imgID
+
+    return actorPhotoURL, gender
 
 
 def getFromBoobpedia(actorName, actorEncoded, metadata):
