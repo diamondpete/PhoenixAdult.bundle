@@ -33,7 +33,6 @@ def search(results, lang, siteNum, searchData):
                     searchResults = HTML.ElementFromString(req.text)
                     titleNoFormatting = PAutils.parseTitle(re.sub(r'^\d+', '', searchResults.xpath('//h1/text()|//h4/span/text()')[0]).strip().lower(), siteNum)
 
-
         curID = PAutils.Encode(sceneURL)
 
         releaseDate = searchData.dateFormat() if searchData.date else ''
