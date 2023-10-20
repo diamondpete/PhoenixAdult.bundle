@@ -55,7 +55,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     try:
         dvdName = detailsPageElements.xpath('//div[@class="player-scene-description"]//span[contains(text(), "Movie:")]/..')[0].text_content().replace('Movie:', '').replace('Feature: ', '').strip()
         metadata.tagline = dvdName
-        metadata.collections.add(dvdName)
     except:
         pass
 
