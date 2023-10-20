@@ -104,7 +104,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     ]
 
     sceneBaseURL = detailsPageElements.xpath('//div[contains(@class, "gallery-item")]/@data-big-image')[0].rsplit('_', 1)[0].split('.jpg')[0]
-    for idx in range(1, 50):
+    photoNum = int(detailsPageElements.xpath('//span[@class="gallery-zip-info"]/text()')[0].split('photos')[0].strip()) + 2
+    for idx in range(1, photoNum):
         img = '%s_%d.jpg' % (sceneBaseURL, idx)
 
         art.append(img)
@@ -142,7 +143,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             posterExists = True
 
     if not posterExists:
-        for idx, image in enumerate(images, 1):
+        for idx, (image, posterUrl) in enumerate(images, 1):
             try:
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
@@ -150,7 +151,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                 # Add the image proxy items to the collection
                 if width > 1:
                     # Item is a poster
-                    metadata.posters[art[idx - 1]] = Proxy.Media(image.content, sort_order=idx)
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 
