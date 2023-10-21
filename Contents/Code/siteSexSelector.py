@@ -51,9 +51,9 @@ def search(results, lang, siteNum, searchData):
             displayDate = releaseDate if date else ''
 
             if searchData.date and displayDate:
-                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(searchData.title, titleNoFormatting)
+                score = 80 - Util.LevenshteinDistance(searchData.title, titleNoFormatting)
 
             results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
 
