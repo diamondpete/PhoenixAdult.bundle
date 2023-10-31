@@ -126,7 +126,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             try:
                 image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
-                images.append(image)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
@@ -136,6 +135,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                     posterExists = True
                 if width > height:
                     # Item is an art item
+                    images.append((image, posterUrl))
                     metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
