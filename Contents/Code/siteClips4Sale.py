@@ -49,7 +49,7 @@ def search(results, lang, siteNum, searchData):
             else:
                 releaseDate = searchData.dateFormat() if searchData.date else ''
 
-            score = 100
+            score = 80
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, subSite, releaseDate), score=score, lang=lang))
 
@@ -69,9 +69,9 @@ def search(results, lang, siteNum, searchData):
             releaseDate = searchData.dateFormat() if searchData.date else ''
 
         if searchData.date:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, subSite, releaseDate), score=score, lang=lang))
 
