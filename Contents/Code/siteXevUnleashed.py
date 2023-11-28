@@ -3,6 +3,30 @@ import PAutils
 
 
 def search(results, lang, siteNum, searchData):
+    directURL = '%s/updates/%s.html' % (PAsearchSites.getSearchBaseURL(siteNum), slugify(searchData.title))
+    req = PAutils.HTTPRequest(directURL)
+
+    if req.ok:
+        detailsPageElements = HTML.ElementFromString(req.text)
+        titleNoFormatting = PAutils.parseTitle(detailsPageElements.xpath('//span[@class="update_title"]')[0].text_content().strip(), siteNum)
+        curID = PAutils.Encode(directURL)
+        date = detailsPageElements.xpath('//span[@class="availdate"]/br/preceding-sibling::text()')
+
+        if date:
+            releaseDate = parse(date[0].strip()).strftime('%Y-%m-%d')
+        else:
+            releaseDate = searchData.dateFormat() if searchData.date else ''
+
+        displayDate = releaseDate if date else ''
+
+        if searchData.date and displayDate:
+            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
+        else:
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+
+        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
+
+
     url = PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded
     req = PAutils.HTTPRequest(url)
     searchResults = HTML.ElementFromString(req.text)
@@ -21,9 +45,9 @@ def search(results, lang, siteNum, searchData):
         displayDate = releaseDate if date else ''
 
         if searchData.date and displayDate:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
 
