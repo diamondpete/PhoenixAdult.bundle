@@ -103,7 +103,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     posterExists = False
     for idx, posterUrl in enumerate(art, 1):
         # Remove Timestamp and Token from URL
-        cleanUrl = posterUrl.split('?')[0]
+        cleanUrl = re.sub(r'\/expiretime=.*?(?<=\/).*?(?=\/)', '', posterUrl.split('?')[0])
         art[idx - 1] = cleanUrl
         if not PAsearchSites.posterAlreadyExists(cleanUrl, metadata):
             # Download image file for analysis
@@ -127,7 +127,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             posterExists = True
 
     if not posterExists:
-        for idx, (image, posterUrl) in enumerate(images, 1):
+        for idx, (image, cleanUrl) in enumerate(images, 1):
             try:
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
@@ -135,7 +135,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                 # Add the image proxy items to the collection
                 if width > 1:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+                    metadata.posters[cleanUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 
