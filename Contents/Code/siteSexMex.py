@@ -36,7 +36,15 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h4')[0].text_content().strip(), siteNum)
+    title = detailsPageElements.xpath('//h4')[0].text_content().strip().replace(' Analìa ', ' Analia ').replace(' Kary ', ' Kari ')
+    if PAutils.any(map(title.lower().startswith, titleDB)):
+        title = title.replace('.', ':')
+    else:
+        for actorName in detailsPageElements.xpath('//p[@class]/a'):
+            title = re.split('\.\s%s' % actorName.text_content().strip(), title, flags=re.IGNORECASE)[0]
+            title = re.split('%s\s\.' % actorName.text_content().strip(), title, flags=re.IGNORECASE)[-1]
+
+    metadata.title = PAutils.parseTitle(title, siteNum)
 
     # Summary
     metadata.summary = detailsPageElements.xpath('//div[@class="panel-body"]/p')[0].text_content().strip()
@@ -56,7 +64,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     for genreLink in detailsPageElements.xpath('//meta[@name="keywords"]/@content')[0].split(','):
         genreName = genreLink.strip()
 
-        movieGenres.addGenre(genreName)
+        if genreName.lower() not in map(str.lower, detailsPageElements.xpath('//p[@class]/a/text()')):
+            movieGenres.addGenre(genreName)
 
     # Actor(s)
     for actorLink in detailsPageElements.xpath('//p[@class]/a'):
@@ -105,3 +114,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                 pass
 
     return metadata
+
+
+titleDB = {
+    'pov', 'debut', 'casting', 'porn casting', 'mesmerized'
+}
