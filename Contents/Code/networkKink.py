@@ -189,10 +189,14 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
         for actorLink in actors:
             actorName = actorLink.text_content().replace(',', '').strip()
-            actorPageURL = PAsearchSites.getSearchBaseURL(siteNum) + actorLink.get('href')
-            req = PAutils.HTTPRequest(actorPageURL)
-            actorPage = HTML.ElementFromString(req.text)
-            actorPhotoURL = actorPage.xpath('//div[contains(@class, "biography-container")]//img/@src')[0]
+            actorPhotoURL = ''
+            try:
+                actorPageURL = PAsearchSites.getSearchBaseURL(siteNum) + actorLink.get('href')
+                req = PAutils.HTTPRequest(actorPageURL)
+                actorPage = HTML.ElementFromString(req.text)
+                actorPhotoURL = actorPage.xpath('//div[contains(@class, "biography-container")]//img/@src')[0]
+            except:
+                pass
 
             movieActors.addActor(actorName, actorPhotoURL)
 
@@ -200,8 +204,16 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     directors = detailsPageElements.xpath('//span[contains(@class, "director-name")]/a')
     for directorLink in directors:
         directorName = directorLink.text_content().strip()
+        directorPhotoURL = ''
+        try:
+            directorPageURL = PAsearchSites.getSearchBaseURL(siteNum) + directorLink.get('href')
+            req = PAutils.HTTPRequest(directorPageURL)
+            directorPage = HTML.ElementFromString(req.text)
+            directorPhotoURL = directorPage.xpath('//div[contains(@class, "biography-container")]//img/@src')[0]
+        except:
+            pass
 
-        movieActors.addDirector(directorName, '')
+        movieActors.addDirector(directorName, directorPhotoURL)
 
     # Posters
     xpaths = [
@@ -211,7 +223,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     ]
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
-            art.append(poster)
+            art.append(poster.split('?')[0])
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
