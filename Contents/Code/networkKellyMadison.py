@@ -65,16 +65,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         # Studio
         metadata.studio = 'Kelly Madison Productions'
 
-        # Tagline and Collection(s)
-        if 'teenfidelity' in metadata.title.lower():
-            tagline = 'TeenFidelity'
-        elif 'kelly madison' in metadata.title.lower():
-            tagline = 'Kelly Madison'
-        else:
-            tagline = 'PornFidelity'
-        metadata.tagline = tagline
-        metadata.collections.add(tagline)
-
         # Actors
         actors = detailsPageElements.xpath('//a[@class="is-underlined"]')
     except:
@@ -84,13 +74,18 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         # Studio
         metadata.studio = 'Kelly Madison Productions'
 
-        # Tagline and Collection(s)
-        tagline = PAsearchSites.getSearchSiteName(siteNum)
-        metadata.tagline = tagline
-        metadata.collections.add(tagline)
-
         # Actors
         actors = searchResult.xpath('.//a[contains(@href, "/models/")]')
+
+    # Tagline and Collection(s)
+    if 'teenfidelity' in metadata.title.lower():
+        tagline = 'TeenFidelity'
+    elif 'kelly madison' in metadata.title.lower():
+        tagline = 'Kelly Madison'
+    else:
+        tagline = PAsearchSites.getSearchSiteName(siteNum)
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
 
     # Release Date
     date = detailsPageElements.xpath('//li[.//i[@class="fas fa-calendar"]]')

@@ -705,7 +705,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Karups Hometown Amateurs
   - Karups Older Women
   - Karups Private Collection
-+ #### Kelly Madison Productions | ✅
++ #### Kelly Madison Productions | ✅ - **Episode ID or URL ID** (Date and Summary not always available)
   - Kelly Madison
   - PornFidelity
   - TeenFidelity
