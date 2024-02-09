@@ -46,8 +46,6 @@ def search(results, lang, siteNum, searchData):
                 score = 100
             elif sourceID and int(sourceID) == searchResult['source_id']:
                 score = 100
-            elif searchData.date:
-                score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
                 score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
