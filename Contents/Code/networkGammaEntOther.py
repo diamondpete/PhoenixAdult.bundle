@@ -79,16 +79,38 @@ def search(results, lang, siteNum, searchData):
                 curID = searchResult['movie_id']
 
             titleNoFormatting = PAutils.parseTitle(searchResult['title'], siteNum)
+
+            subSite = searchResult['mainChannel']['name'].strip()
+
+            # Check if Scene matches the Sub Site
+            if subSite.replace(' ', '').lower() == PAsearchSites.getSearchSiteName(siteNum).replace(' ', '').lower():
+                score = 80
+            else:
+                score = 79
+
+            # Check if Scene is a Behind the Scenes
+            if 'BTS' in titleNoFormatting:
+                score = score - 1
+            for channel in searchResult['channels']:
+                if 'behindthescenes' in channel['id'] and 'BTS' not in titleNoFormatting:
+                    titleNoFormatting = titleNoFormatting + ' BTS'
+                    score = score - 1
+
             releaseDate = releaseDate.strftime('%Y-%m-%d')
 
             if sceneID:
-                score = 80 - Util.LevenshteinDistance(sceneID, curID)
+                score = score - Util.LevenshteinDistance(sceneID, curID)
             elif searchData.date:
-                score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                score = score - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                score = score - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%d|%d|%s|%s' % (curID, siteNum, sceneType, releaseDate), name='[%s] %s %s' % (sceneType.capitalize(), titleNoFormatting, releaseDate), score=score, lang=lang))
+            if 'dogfartnetwork' in PAsearchSites.getSearchBaseURL(siteNum):
+                name = '%s [%s] %s' % (titleNoFormatting, subSite, releaseDate)
+            else:
+                name = '[%s] %s %s' % (sceneType.capitalize(), titleNoFormatting, releaseDate)
+
+            results.Append(MetadataSearchResult(id='%d|%d|%s|%s' % (curID, siteNum, sceneType, releaseDate), name=name, score=score, lang=lang))
 
     return results
 
@@ -132,9 +154,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         if 'filthykings' in PAsearchSites.getSearchBaseURL(siteNum):
             metadata.studio = PAutils.studio(detailsPageElements['sitename_pretty'], siteNum)
         else:
-            metadata.studio = PAutils.studio(detailsPageElements['studio_name'], siteNum)
+            metadata.studio = PAutils.studio(detailsPageElements['studio_name'], siteNum).replace('DFXtra', 'DogFart Network')
     else:
-        metadata.studio = PAutils.studio(detailsPageElements['network_name'], siteNum)
+        metadata.studio = PAutils.studio(detailsPageElements['network_name'], siteNum).replace('DFXtra', 'DogFart Network')
 
     # Tagline and Collection(s)
     if not detailsPageElements['network_name']:
@@ -145,10 +167,12 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         else:
             metadata.collections.add(PAutils.studio(detailsPageElements['studio_name'], siteNum))
     elif 'serie_name' in detailsPageElements:
-        metadata.collections.add(PAutils.parseTitle(detailsPageElements['serie_name'].replace("Devils Film", "Devil's Film"), siteNum))
-        metadata.tagline = PAutils.parseTitle(detailsPageElements['serie_name'].replace("Devils Film", "Devil's Film"), siteNum)
+        tagline = PAutils.parseTitle(detailsPageElements['serie_name'].replace("Devils Film", "Devil's Film"), siteNum)
+        metadata.collections.add(PAutils.studio(tagline, siteNum))
+        metadata.tagline = PAutils.studio(tagline, siteNum)
     elif 'studio_name' in detailsPageElements:
-        metadata.collections.add(PAutils.parseTitle(detailsPageElements['studio_name'].replace("Devils Film", "Devil's Film"), siteNum))
+        tagline = PAutils.parseTitle(detailsPageElements['studio_name'].replace("Devils Film", "Devil's Film"), siteNum)
+        metadata.collections.add(PAutils.studio(tagline, siteNum))
 
     # for collectionName in ['studio_name', 'serie_name']:
     #     if collectionName in detailsPageElements:

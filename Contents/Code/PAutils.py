@@ -467,7 +467,8 @@ def studio(name, siteNum):
         'CFNM Secret', 'Pure 18', 'RK Prime', 'Let\'s Try Anal', 'Public Pick-Ups', 'ArchAngel', 'BangBros',
         'BellaPass', 'Pornstars Like It Big', 'Look At Her Now', 'Digital Playground', 'Big Tit Creampie',
         'Mom Is Horny', 'BangBros Clips', 'Modern Day Sins', 'Brace Faced', 'Bad MILFs', 'MILF Body', 'Mile High',
-        'Mylf Boss', 'Day With a Pornstar', 'Gangbang Creampie', 'Dirty Auditions', 'Big Tits, Round Asses'
+        'Mylf Boss', 'Day With a Pornstar', 'Gangbang Creampie', 'Dirty Auditions', 'Big Tits, Round Asses',
+        'Black Meat White Feet'
     )
 
     studiosReplace = {
@@ -475,6 +476,7 @@ def studio(name, siteNum):
         'Sex Working': 'sw',
         'Forgive Me Father': 'fmf',
         'Love Her Ass': 'lha',
+        'Let\'s Post It': 'lpi',
     }
 
     if name == '':
