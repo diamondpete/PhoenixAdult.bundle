@@ -186,7 +186,6 @@ import networkWowNetwork
 import networkAuntJudys
 import siteColette
 import networkThickCashOther
-import siteSexSelector
 import siteXevUnleashed
 import networkPKJMedia
 import networkBellesa
@@ -1852,7 +1851,7 @@ searchSites = {
     1755: ('Shady Spa', 'https://www.shadyspa.com', '/models/'),
     1756: ('Breed Me', 'https://www.breedme.com', '/models/'),
     1757: ('MrLuckyRAW', 'https://www.mrluckyraw.com', '/search.php?query='),
-    1758: ('Sex Selector', 'https://www.sexselector.com', '/'),
+    1758: ('Sex Selector', 'https://www.sexselector.com', 'https://site-api.project1service.com'),
     1759: ('Xev Unleashed', 'https://xevunleashed.com', '/search.php?query='),
     1760: ('My POV Fam', 'https://www.mypovfam.com', '/?s='),
     1761: ('Perverted POV', 'https://www.pervertedpov.com', '/?s='),
@@ -3212,7 +3211,7 @@ def getProviderFromSiteNum(siteNum):
 
         # Sex Selector
         elif siteNum == 1758:
-            provider = siteSexSelector
+            provider = network1service
 
         # Xev Unleashed
         elif siteNum == 1759:
