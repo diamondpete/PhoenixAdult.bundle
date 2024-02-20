@@ -31,7 +31,6 @@ def search(results, lang, siteNum, searchData):
             curID = PAutils.Encode(searchResult['findOneVideo']['slug'])
             videoID = int(searchResult['findOneVideo']['videoId'])
 
-
             if int(sceneID) == videoID:
                 score = 100
             elif searchData.date:
@@ -147,7 +146,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                     posterExists = True
                 if width > height:
                     # Item is an art item
-                    images.append((image, posterUrl))
+                    images.append((image, cleanUrl))
                     metadata.art[cleanUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
@@ -155,8 +154,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             posterExists = True
 
     if not posterExists:
-        for idx, (image, posterUrl) in enumerate(images, 1):
-            cleanUrl = posterUrl.split('?')[0]
+        for idx, (image, cleanUrl) in enumerate(images, 1):
             try:
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
