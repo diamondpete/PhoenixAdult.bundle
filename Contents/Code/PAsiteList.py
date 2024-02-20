@@ -1899,6 +1899,7 @@ searchSites = {
     1803: ('Real Bikini Girls', 'https://www.realbikinigirls.com', '/search'),
     1804: ('Lingerie Tales', 'https://www.lingerietales.com', '/search'),
     1805: ('DFXtra', 'https://www.dogfartnetwork.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    1806: ('Milfy', 'https://www.milfy.com', '/graphql'),
 }
 
 abbreviations = (
@@ -2195,7 +2196,7 @@ def getProviderFromSiteNum(siteNum):
 
     if siteNum is not None:
         # Strike3
-        if (0 <= siteNum <= 1) or siteNum == 52 or siteNum == 136 or (670 <= siteNum <= 671) or siteNum == 1357:
+        if (0 <= siteNum <= 1) or siteNum == 52 or siteNum == 136 or (670 <= siteNum <= 671) or siteNum == 1357 or siteNum == 1806:
             provider = networkStrike3
 
         # Brazzers
