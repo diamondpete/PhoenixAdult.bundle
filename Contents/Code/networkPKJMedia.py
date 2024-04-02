@@ -28,12 +28,12 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Summary
     try:
-        summary = detailsPageElements.xpath('//div[@class="post-entry"]/p/text()')
+        summary = detailsPageElements.xpath('//div[@class="post-entry"]/p/text()')[0]
     except:
-        summary = detailsPageElements.xpath('//div[@class="post-entry"]/p/span/text()')
+        summary = detailsPageElements.xpath('//div[@class="post-entry"]/p/span/text()')[0]
 
     if summary:
-        metadata.summary = summary[0].strip()
+        metadata.summary = summary.strip()
 
     # Studio
     metadata.studio = 'PKJ Media'
@@ -79,7 +79,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
 
 genresDB = {
-    'MyPOVFam': ['Pov', 'Family'],
-    'PervertedPOV': ['Pov'],
-    'RawWhiteMeat': ['Interracial'],
+    'My POV Fam': ['Pov', 'Family'],
+    'Perverted POV': ['Pov'],
+    'Raw White Meat': ['Interracial'],
 }
