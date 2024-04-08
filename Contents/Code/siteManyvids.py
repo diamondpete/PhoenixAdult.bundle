@@ -2,6 +2,22 @@ import PAsearchSites
 import PAutils
 
 
+def getJSONfromPage(url):
+    req = PAutils.HTTPRequest(url)
+    detailsPageElements = HTML.ElementFromString(req.text)
+
+    if req.ok:
+        data = None
+        node = detailsPageElements.xpath('//script[@type="application/ld+json"]')
+        if node:
+            data = node[0].text_content().strip()
+
+        if data:
+            return json.loads(data)
+
+    return None
+
+
 def search(results, lang, siteNum, searchData):
     sceneID = None
     parts = searchData.title.split()
@@ -10,14 +26,19 @@ def search(results, lang, siteNum, searchData):
         searchData.title = searchData.title.replace(sceneID, '', 1).strip()
 
     sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + sceneID
-    req = PAutils.HTTPRequest(sceneURL)
-    searchResult = HTML.ElementFromString(req.text)
+    searchResult = getJSONfromPage(sceneURL)
 
-    titleNoFormatting = searchResult.xpath('//h1[contains(@class, "title")]')[0].text_content()
+    titleNoFormatting = searchResult['name']
     curID = PAutils.Encode(sceneURL)
     searchID = sceneURL.rsplit('/')[-1].split('-')[0]
-    subSite = searchResult.xpath('//a[@aria-label="model-profile"]')[0].text_content().strip()
-    releaseDate = searchData.dateFormat() if searchData.date else ''
+    subSite = searchResult['creator']['name']
+
+    date = searchResult['uploadDate']
+    if date:
+        releaseDate = parse(date).strftime('%Y-%m-%d')
+    else:
+        releaseDate = searchData.dateFormat() if searchData.date else ''
+    displayDate = releaseDate if date else ''
 
     if sceneID and sceneID == searchID:
         score = 100
@@ -26,7 +47,7 @@ def search(results, lang, siteNum, searchData):
     else:
         score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-    results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [ManyVids/%s]' % (titleNoFormatting, subSite), score=score, lang=lang))
+    results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [ManyVids/%s] %s' % (titleNoFormatting, subSite, displayDate), score=score, lang=lang))
 
     return results
 
