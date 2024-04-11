@@ -1381,6 +1381,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - BFFs
   - Black Valley Girls
   - BraceFaced
+  - Breeding Material
   - CFNM Teens
   - DadCrush
   - DaughterSwap
@@ -1399,6 +1400,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Little Asians
   - Lust HD
   - My Babysitters Club
+  - Mormon Girlz
   - Not My Grandpa
   - Oye Loca
   - PervDoctor
@@ -1407,6 +1409,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - POV Life
   - Rub A Teen
   - Self Desire
+  - Sex and Grades
   - She's New
   - Shoplyfter
   - ShoplyfterMylf

@@ -1909,6 +1909,9 @@ searchSites = {
     1813: ('Tiger Moms', 'https://www.mylf.com', '/movies/'),
     1814: ('Ask Your Mother', 'https://www.mylf.com', '/movies/'),
     1815: ('Mylf X Manko88', 'https://www.mylf.com', '/movies/'),
+    1816: ('Breeding Material', 'https://www.teamskeet.com', '/movies/'),
+    1817: ('Mormon Girlz', 'https://www.teamskeet.com', '/movies/'),
+    1818: ('Sex and Grades', 'https://www.teamskeet.com', '/movies/'),
 }
 
 abbreviations = (
@@ -2329,7 +2332,7 @@ def getProviderFromSiteNum(siteNum):
             provider = networkKellyMadison
 
         # TeamSkeet
-        elif (187 <= siteNum <= 215) or (566 <= siteNum <= 567) or siteNum == 626 or siteNum == 686 or siteNum == 748 or siteNum == 807 or (845 <= siteNum <= 851) or siteNum == 875 or (997 <= siteNum <= 1011) or (1249 <= siteNum <= 1251) or (1354 <= siteNum <= 1356) or (1362 <= siteNum <= 1363) or (1371 <= siteNum <= 1373) or siteNum == 1390 or (1399 <= siteNum <= 1425) or (1584 <= siteNum <= 1588) or siteNum == 1736 or (1808 <= siteNum <= 1810):
+        elif (187 <= siteNum <= 215) or (566 <= siteNum <= 567) or siteNum == 626 or siteNum == 686 or siteNum == 748 or siteNum == 807 or (845 <= siteNum <= 851) or siteNum == 875 or (997 <= siteNum <= 1011) or (1249 <= siteNum <= 1251) or (1354 <= siteNum <= 1356) or (1362 <= siteNum <= 1363) or (1371 <= siteNum <= 1373) or siteNum == 1390 or (1399 <= siteNum <= 1425) or (1584 <= siteNum <= 1588) or siteNum == 1736 or (1808 <= siteNum <= 1810) or (1816 <= siteNum <= 1818):
             provider = networkTeamSkeet
 
         # Porndoe Premium
