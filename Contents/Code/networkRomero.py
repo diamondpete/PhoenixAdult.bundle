@@ -116,14 +116,14 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             if 'src' in link:
                 poster = link['src'][0]
 
-            art.append(poster)
+            art.append(poster.replace('-scaled', ''))
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl)
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': sceneURL})
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
