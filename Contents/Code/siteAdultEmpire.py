@@ -58,13 +58,20 @@ def search(results, lang, siteNum, searchData):
                 siteResults.append(movieURL)
 
                 releaseDate, displayDate = getReleaseDateAndDisplayDate('', searchData)
+                searchVolNum = re.sub(r'[^0-9a-zA-Z]+', '', parts[-1])
+
+                if unicode(searchVolNum, 'UTF-8').isdigit():
+                    resultVolNum = re.sub(r'[^0-9a-zA-Z]+', '', titleNoFormatting.split()[-1])
+                    baseScore = 80 - Util.LevenshteinDistance(searchVolNum, resultVolNum)
+                else:
+                    baseScore = 80
 
                 if sceneID == urlID:
                     score = 100
                 elif searchData.date and displayDate:
-                    score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                    score = baseScore - Util.LevenshteinDistance(searchData.date, releaseDate)
                 else:
-                    score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                    score = baseScore - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
                 if score > 70:
                     sceneURL = PAutils.Decode(curID)
@@ -83,9 +90,9 @@ def search(results, lang, siteNum, searchData):
                     if sceneID == urlID:
                         score = 100
                     elif searchData.date and displayDate:
-                        score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                        score = baseScore - Util.LevenshteinDistance(searchData.date, releaseDate)
                     else:
-                        score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                        score = baseScore - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
                     if score == 80:
                         count += 1
