@@ -42,7 +42,7 @@ def search(results, lang, siteNum, searchData):
             directID = True
 
     if not directID:
-        searchData.encoded = searchData.title.replace('&', '').replace('\'', '').replace(',', '').replace('#', '').replace(' ', '+')
+        searchData.encoded = searchData.title.replace('&', '').replace('\'', '').replace(',', '').replace('#', '').replace(' ', '+').split('scene')[0]
         searchURL = '%s%s' % (PAsearchSites.getSearchSearchURL(siteNum), searchData.encoded)
         req = PAutils.HTTPRequest(searchURL, headers={'Referer': 'http://www.data18.empirestores.co'})
         searchPageElements = HTML.ElementFromString(req.text)
@@ -59,6 +59,7 @@ def search(results, lang, siteNum, searchData):
 
                 releaseDate, displayDate = getReleaseDateAndDisplayDate('', searchData)
                 searchVolNum = re.sub(r'[^0-9a-zA-Z]+', '', parts[-1])
+                resultVolNum = ''
 
                 if unicode(searchVolNum, 'UTF-8').isdigit():
                     resultVolNum = re.sub(r'[^0-9a-zA-Z]+', '', titleNoFormatting.split()[-1])
@@ -94,11 +95,21 @@ def search(results, lang, siteNum, searchData):
                     else:
                         score = baseScore - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
+                    if unicode(resultVolNum, 'UTF-8').isdigit():
+                        cleanTitle = ' '.join(titleNoFormatting.split(' ')[:-1])
+                        match = re.search(r'(Vol|Vol\.)$', cleanTitle)
+                        if match:
+                            searchDisplay = '%s [Vol. %s] %s [%s] [%s]' % (displayDate, resultVolNum, ' '.join(cleanTitle.split(' ')[:-1]), studio, resultType)
+                        else:
+                            searchDisplay = '%s [Vol. %s] %s [%s] [%s]' % (displayDate, resultVolNum, cleanTitle, studio, resultType)
+                    else:
+                        searchDisplay = '%s %s [%s] [%s]' % (displayDate, titleNoFormatting, studio, resultType)
+
                     if score == 80:
                         count += 1
-                        temp.append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] [%s] %s' % (titleNoFormatting, studio, resultType, displayDate), score=score, lang=lang))
+                        temp.append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name=searchDisplay, score=score, lang=lang))
                     else:
-                        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] [%s] %s' % (titleNoFormatting, studio, resultType, displayDate), score=score, lang=lang))
+                        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name=searchDisplay, score=score, lang=lang))
 
                     # Split Scenes
                     scenes = []
