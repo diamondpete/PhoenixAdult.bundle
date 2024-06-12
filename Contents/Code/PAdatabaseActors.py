@@ -6082,6 +6082,10 @@ ActorsReplaceStudios = {
     },
     69: {  # Adult Empire
         'Ice La Fox': ['Ice LaFox'],
+        'Jesus Reyes Vazquez': ['Jesus Reyes Vazqeuz'],
+        'Lutro Steel': ['Lutro Steele'],
+        'Oskar Meier': ['Oskar Mayer'],
+        'Talon': ['Talon Valenti'],
     },
 }
 

@@ -305,6 +305,9 @@ def actorDBfinder(actorName, metadata):
     if actorPhotoURL:
         Log('%s found in %s ' % (actorName, databaseName))
         Log('PhotoURL: %s' % actorPhotoURL)
+    elif Prefs['gender_enable']:
+        gender = genderCheck(actorName)
+        Log('%s image not found' % actorName)
     else:
         Log('%s not found' % actorName)
 
@@ -313,6 +316,13 @@ def actorDBfinder(actorName, metadata):
 
 def genderCheck(actorName):
     actorEncoded = urllib.quote(re.sub(r'(?<=\w)\.\s(?=\w\.)', '', actorName).replace('.', ''))
+    period_corrections = {
+        (r'^dr%20', 'Dr.%20'), (r'%20st%20', '%20St.%20')
+    }
+
+    for value in period_corrections:
+        actorEncoded = re.sub(value[0], value[1], actorEncoded, flags=re.IGNORECASE)
+
     gender = ''
 
     url = 'http://www.iafd.com/results.asp?searchtype=comprehensive&searchstring=' + actorEncoded
@@ -494,7 +504,14 @@ def getFromBabesandStars(actorName, actorEncoded, metadata):
 def getFromIAFD(actorName, actorEncoded, metadata):
     actorPhotoURL = ''
     gender = ''
-    req = PAutils.HTTPRequest('http://www.iafd.com/results.asp?searchtype=comprehensive&searchstring=' + actorEncoded.replace('.', ''))
+    period_corrections = {
+        (r'^dr%20', 'Dr.%20'), (r'%20st%20', '%20St.%20')
+    }
+
+    for value in period_corrections:
+        actorEncoded = re.sub(value[0], value[1], actorEncoded, flags=re.IGNORECASE)
+
+    req = PAutils.HTTPRequest('http://www.iafd.com/results.asp?searchtype=comprehensive&searchstring=' + actorEncoded)
 
     actorSearch = HTML.ElementFromString(req.text)
     actorThumbs = actorSearch.xpath('//table[@id="tblFem" or @id="tblMal"]//tbody//td[1]//a')
