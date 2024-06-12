@@ -98,6 +98,9 @@ class PhoenixAdultAgent(Agent.Movies):
         if not searchTitle:
             searchTitle = title
         searchDate = searchSettings['searchDate']
+
+        if filename and '5.1080p' in filename.lower():
+            searchTitle = searchTitle + ' 5'
         search = PAsearchData.SearchData(media, searchTitle, searchDate, filepath)
 
         if siteNum is not None:
