@@ -317,7 +317,7 @@ def actorDBfinder(actorName, metadata):
 def genderCheck(actorName):
     actorEncoded = urllib.quote(re.sub(r'(?<=\w)\.\s(?=\w\.)', '', actorName).replace('.', ''))
     period_corrections = {
-        (r'^dr%20', 'Dr.%20'), (r'%20st%20', '%20St.%20')
+        (r'^dr%20', 'Dr%2E%20'), (r'%20st%20', '%20St.%20'), (r'^j%20', 'J%2E%20')
     }
 
     for value in period_corrections:
@@ -505,7 +505,7 @@ def getFromIAFD(actorName, actorEncoded, metadata):
     actorPhotoURL = ''
     gender = ''
     period_corrections = {
-        (r'^dr%20', 'Dr.%20'), (r'%20st%20', '%20St.%20')
+        (r'^dr%20', 'Dr%2E%20'), (r'%20st%20', '%20St.%20'), (r'^j%20', 'J%2E%20')
     }
 
     for value in period_corrections:

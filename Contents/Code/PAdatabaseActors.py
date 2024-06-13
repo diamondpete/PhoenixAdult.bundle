@@ -6086,6 +6086,7 @@ ActorsReplaceStudios = {
         'Lutro Steel': ['Lutro Steele'],
         'Oskar Meier': ['Oskar Mayer'],
         'Talon': ['Talon Valenti'],
+        'Zeus': ['Jesus "Zeus"Munoz'],
     },
 }
 
