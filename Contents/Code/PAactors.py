@@ -514,7 +514,6 @@ def getFromIAFD(actorName, actorEncoded, metadata):
     req = PAutils.HTTPRequest('http://www.iafd.com/results.asp?searchtype=comprehensive&searchstring=' + actorEncoded)
 
     actorSearch = HTML.ElementFromString(req.text)
-    actorThumbs = actorSearch.xpath('//table[@id="tblFem" or @id="tblMal"]//tbody//td[1]//a')
     actorResults = actorSearch.xpath('//table[@id="tblFem" or @id="tblMal"]//tbody//td[2]//a')
     actorAlias = actorSearch.xpath('//table[@id="tblFem" or @id="tblMal"]//tbody//td[@class="text-left"]')
     maleActorURLs = actorSearch.xpath('//table[@id="tblMal"]//tbody//td[2]//a/@href')
@@ -534,12 +533,11 @@ def getFromIAFD(actorName, actorEncoded, metadata):
                 if metadata.studio.replace(' ', '').lower() in actorAlias[idx].text_content().replace(' ', '').lower():
                     resultScore = 0
 
-            if 'th_iafd_ad' not in actorThumbs[idx].xpath('.//@src')[0]:
-                if resultScore == score:
-                    results.append(actor)
-                elif resultScore < score:
-                    score = resultScore
-                    results = [actor]
+            if resultScore == score:
+                results.append(actor)
+            elif resultScore < score:
+                score = resultScore
+                results = [actor]
 
         if results:
             actor = random.choice(results)
@@ -549,7 +547,7 @@ def getFromIAFD(actorName, actorEncoded, metadata):
         req = PAutils.HTTPRequest('http://www.iafd.com' + actorPageURL)
         actorPage = HTML.ElementFromString(req.text)
         img = actorPage.xpath('//div[@id="headshot"]//img/@src')
-        if img and 'nophoto' not in img[0]:
+        if img and 'nophoto' not in img[0] and 'th_iafd_ad' not in img[0]:
             actorPhotoURL = img[0]
 
         gender = 'male' if actorPageURL in maleActorURLs else 'female'
