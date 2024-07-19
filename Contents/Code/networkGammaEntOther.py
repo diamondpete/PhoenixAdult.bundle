@@ -106,9 +106,9 @@ def search(results, lang, siteNum, searchData):
                 score = score - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             if 'dogfartnetwork' in PAsearchSites.getSearchBaseURL(siteNum):
-                name = '%s [%s] %s' % (titleNoFormatting, subSite, releaseDate)
+                name = '%s [%s] %s' % (PAutils.parseTitle(titleNoFormatting, siteNum), subSite, releaseDate)
             else:
-                name = '[%s] %s %s' % (sceneType.capitalize(), titleNoFormatting, releaseDate)
+                name = '[%s] %s %s' % (sceneType.capitalize(), PAutils.parseTitle(titleNoFormatting, siteNum), releaseDate)
 
             results.Append(MetadataSearchResult(id='%d|%d|%s|%s' % (curID, siteNum, sceneType, releaseDate), name=name, score=score, lang=lang))
 
@@ -135,7 +135,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     # Title
     title = None
     if 'dogfart' in PAsearchSites.getSearchBaseURL(siteNum).lower():
-        title = '%s from %s.com' % (PAutils.parseTitle(detailsPageElements['title'], siteNum), detailsPageElements['serie_name'])
+        title = '%s from %s.com' % (detailsPageElements['title'], detailsPageElements['serie_name'])
     elif sceneType == 'scenes' and len(scenesPagesElements) > 1 and 'filthykings' not in PAsearchSites.getSearchBaseURL(siteNum):
         for idx, scene in scenesPagesElements:
             if scene['clip_id'] == sceneID:
@@ -144,7 +144,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     if not title:
         title = PAutils.parseTitle(detailsPageElements['title'], siteNum)
 
-    metadata.title = title
+    metadata.title = PAutils.parseTitle(title, siteNum)
 
     # Summary
     metadata.summary = detailsPageElements['description'].replace('</br>', '\n').replace('<br>', '\n')
