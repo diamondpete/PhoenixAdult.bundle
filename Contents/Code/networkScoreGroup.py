@@ -28,7 +28,7 @@ def search(results, lang, siteNum, searchData):
         searchPageElements = HTML.ElementFromString(req.text)
         titleNoFormatting = PAutils.parseTitle(searchPageElements.xpath('//h1')[0].text_content().strip(), siteNum)
 
-        if '404' not in titleNoFormatting:
+        if '404' not in titleNoFormatting and 'Latest Videos' not in titleNoFormatting:
             match = re.search(r'(?<=\/)\d+(?=\/)', sceneURL)
             if match:
                 searchID = match.group(0)
@@ -91,16 +91,14 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.collections.add(metadata.tagline)
 
     # Release Date
-    if sceneDate:
-        date_object = parse(sceneDate)
-        metadata.originally_available_at = date_object
-        metadata.year = metadata.originally_available_at.year
-
-    # Release Date
     date = detailsPageElements.xpath('//div/span[@class="value"]')
     if date:
         date = date[1].text_content().strip()
         date_object = parse(date)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+    elif sceneDate:
+        date_object = parse(sceneDate)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
@@ -143,9 +141,16 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             if not poster.startswith('http'):
                 poster = 'http:' + poster
 
-            if 'shared-bits' not in poster:
+            if 'PosterThumbs' in poster:
+                match = re.search(r'(?<=PosterThumbs)\/\d\d', poster)
+                if match:
+                    for idx in range(1,7):
+                        art.append(poster.replace(match.group(0), '/{0:02d}'.format(idx)))
+            elif 'shared-bits' not in poster and '/join' not in poster:
                 art.append(poster)
 
+    images = []
+    posterExists = False
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
@@ -156,12 +161,29 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
+                if height > width:
+                    # Item is a poster
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+                    posterExists = True
+                if width > height:
+                    # Item is an art item
+                    images.append((image, posterUrl))
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+            except:
+                pass
+        elif PAsearchSites.posterOnlyAlreadyExists(posterUrl, metadata):
+            posterExists = True
+
+    if not posterExists:
+        for idx, (image, posterUrl) in enumerate(images, 1):
+            try:
+                im = StringIO(image.content)
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                # Add the image proxy items to the collection
                 if width > 1:
                     # Item is a poster
                     metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
-                if width > 100:
-                    # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 
