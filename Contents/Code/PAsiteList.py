@@ -2,7 +2,6 @@ import siteNaughtyAmerica
 import siteXart
 import sitePorndoePremium
 import siteAnalVids
-import siteGloryHoleSecrets
 import siteNewSensations
 import siteSpizoo
 import sitePrivate
@@ -472,7 +471,7 @@ searchSites = {
     276: ('Stepmom Lessons', 'https://www.babes.com', 'https://site-api.project1service.com'),
     277: ('Evil Angel', 'https://www.evilangel.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
     278: ('HardX', 'https://www.xempire.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
-    279: ('GloryHoleSecrets', 'http://www.gloryholesecrets.com', '/tour/search.php?query='),
+    279: ('GloryHoleSecrets', 'http://www.gloryholesecrets.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
     280: ('New Sensations', 'http://www.newsensations.com', '/tour_ns/'),
     281: ('Pure Taboo', 'https://www.puretaboo.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
     282: ('Swallowed', 'https://tour.swallowed.com', '/_next/data/'),
@@ -2356,7 +2355,7 @@ def getProviderFromSiteNum(siteNum):
 
         # GloryHoleSecrets
         elif siteNum == 279:
-            provider = siteGloryHoleSecrets
+            provider = networkGammaEntOther
 
         # NewSensations
         elif siteNum == 280 or siteNum == 1266:
