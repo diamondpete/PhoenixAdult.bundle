@@ -144,7 +144,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             if 'PosterThumbs' in poster:
                 match = re.search(r'(?<=PosterThumbs)\/\d\d', poster)
                 if match:
-                    for idx in range(1,7):
+                    for idx in range(1, 7):
                         art.append(poster.replace(match.group(0), '/{0:02d}'.format(idx)))
             elif 'shared-bits' not in poster and '/join' not in poster:
                 art.append(poster)
