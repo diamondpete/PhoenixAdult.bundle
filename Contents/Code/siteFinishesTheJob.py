@@ -40,7 +40,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1[@itemprop="name"]')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//span[@itemprop="name"]')[0].text_content().strip()
 
     # Summary
     metadata.summary = detailsPageElements.xpath('//p[@itemprop="description"]')[0].text_content().strip()
@@ -60,7 +60,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.year = metadata.originally_available_at.year
 
     # Actor(s)
-    actors = detailsPageElements.xpath('//h3[contains(., "Starring")]//a')
+    actors = detailsPageElements.xpath('//h2[contains(., "Starring")]//a')
     for actorLink in actors:
         actorName = actorLink.text_content().strip()
         actorPhotoURL = ''
