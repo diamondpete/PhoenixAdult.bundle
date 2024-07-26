@@ -190,6 +190,7 @@ import networkPKJMedia
 import networkBellesa
 import siteBrandNewAmateurs
 import sitePornbox
+import siteJesseLoadsMonsterFacials
 
 searchSites = {
     0: ('BlackedRaw', 'https://www.blackedraw.com', '/graphql'),
@@ -1916,6 +1917,7 @@ searchSites = {
     1821: ('TeamSkeet X Harmony Films', 'https://www.teamskeet.com', '/movies/'),
     1822: ('TeamSkeet X Jonathan Jordan', 'https://www.teamskeet.com', '/movies/'),
     1823: ('After Dark', 'https://www.teamskeet.com', '/movies/'),
+    1824: ('Jesse Loads Monster Facials', 'http://jesseloadsmonsterfacials.com', '/visitors'),
 }
 
 abbreviations = (
@@ -2052,6 +2054,7 @@ abbreviations = (
     ('^irpass ', 'InterracialPass '),
     ('^itc ', 'InTheCrack '),
     ('^jb ', 'JavBus '),
+    ('^jlmf ', 'JesseLoadsMonsterFacials '),
     ('^jowm', 'JerkOffWithMe'),
     ('^jp ', 'JaysPOV '),
     ('^kha ', 'KarupsHA '),
@@ -3245,5 +3248,9 @@ def getProviderFromSiteNum(siteNum):
         # Pornbox
         elif siteNum == 1801:
             provider = sitePornbox
+
+        # Jesse Loads Monster Facials
+        elif siteNum == 1824:
+            provider = siteJesseLoadsMonsterFacials
 
     return provider
