@@ -39,13 +39,13 @@ def search(results, lang, siteNum, searchData):
             displayDate = releaseDate if date else ''
 
             if searchData.date and displayDate:
-                score = 100 - Util.LevenshteinDistance(searchData.date, displayDate)
+                score = 80 - Util.LevenshteinDistance(searchData.date, displayDate)
             else:
-                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d|%s|%s|%s' % (curID, siteNum, releaseDate, actorNameID, summaryID), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
 
-            if searchData.date and int(score - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())) == 100:
+            if searchData.date and int(score - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())) == 80:
                 break
         else:
             idx += 1
