@@ -1918,6 +1918,9 @@ searchSites = {
     1822: ('TeamSkeet X Jonathan Jordan', 'https://www.teamskeet.com', '/movies/'),
     1823: ('After Dark', 'https://www.teamskeet.com', '/movies/'),
     1824: ('Jesse Loads Monster Facials', 'http://jesseloadsmonsterfacials.com', '/visitors'),
+    1825: ('Mr. Lucky LIFE', 'https://www.mrluckylife.com', '/search.php?query='),
+    1826: ('Cream Her', 'https://www.creamher.com', '/search.php?query='),
+    1827: ('DR. Daddy POV', 'https://www.drdaddypov.com', '/search.php?query='),
 }
 
 abbreviations = (
@@ -2375,7 +2378,7 @@ def getProviderFromSiteNum(siteNum):
             provider = network1service
 
         # Spizoo
-        elif siteNum == 293 or (571 <= siteNum <= 577) or (1374 <= siteNum <= 1375) or siteNum == 1757:
+        elif siteNum == 293 or (571 <= siteNum <= 577) or (1374 <= siteNum <= 1375) or siteNum == 1757 or (1825 <= siteNum <= 1827):
             provider = siteSpizoo
 
         # Private
