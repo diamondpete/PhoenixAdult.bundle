@@ -7,24 +7,33 @@ def search(results, lang, siteNum, searchData):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
 
-    for searchResult in searchResults.xpath('//div[@class="category_listing_wrapper_updates"]'):
-        titleNoFormatting = searchResult.xpath('.//h3')[0].text_content().strip()
+    searchXPath = PAutils.getDictValuesFromKey(searchXPathDB, siteNum)
+
+    for searchResult in searchResults.xpath(searchXPath[0]):
+        titleNoFormatting = searchResult.xpath(PAutils.getDictValuesFromKey(searchTitleXPathDB, siteNum)[0])[0].text_content().strip()
         if titleNoFormatting[-3:] == ' 4k':
             titleNoFormatting = titleNoFormatting[:-3].strip()
         curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
 
         try:
-            xPath = PAutils.getDictValuesFromKey(xPathDB, str(siteNum))
-            releaseDate = parse(searchResult.xpath(xPath[0])[-1].strip()).strftime('%Y-%m-%d')
+            dateXPath = PAutils.getDictValuesFromKey(searchDateXPathDB, siteNum)
+            date = parse(searchResult.xpath(dateXPath[0])[-1].strip()).strftime('%Y-%m-%d')
         except:
-            releaseDate = ''
+            date = ''
 
-        if searchData.date and releaseDate:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+        if date:
+            releaseDate = date
+        else:
+            releaseDate = searchData.dateFormat() if searchData.date else ''
+
+        displayDate = releaseDate if date else ''
+
+        if searchData.date and displayDate:
+            score = 100 - Util.LevenshteinDistance(searchData.date, displayDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (PAutils.parseTitle(titleNoFormatting, siteNum), PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
 
     return results
 
@@ -32,13 +41,16 @@ def search(results, lang, siteNum, searchData):
 def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    sceneDate = ''
+    if len(metadata_id) > 2:
+        sceneDate = metadata_id[2]
     if not sceneURL.startswith('http'):
         sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    title = detailsPageElements.xpath('//h1/text() | //video/@data-video')[0].strip()
+    title = detailsPageElements.xpath(PAutils.getDictValuesFromKey(titleXPathDB, siteNum)[0])[0].strip()
     if title[-3:] == ' 4k':
         title = title[:-3].strip()
     metadata.title = PAutils.parseTitle(title, siteNum)
@@ -65,6 +77,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         date_object = datetime.strptime(date, '%Y-%m-%d')
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
+    elif sceneDate:
+        date_object = parse(sceneDate)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
     # Genres
     genres = detailsPageElements.xpath('//div[@class="categories-holder"]/a|//div[./h3[contains(., "Categories")]]/a')
@@ -75,24 +91,23 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             movieGenres.addGenre(genreName)
 
     # Actor(s)
-    if siteNum == 1374:
-        xPath = '//div[./h3[contains(., "Girls")]]/a'
-    elif siteNum == 577:
-        xPath = '//div[./h3[contains(., "playmates")]]/a'
-    else:
-        xPath = '//h3[text()="Pornstars:"]/../a'
-
-    for actorLink in detailsPageElements.xpath(xPath):
+    for actorLink in detailsPageElements.xpath(PAutils.getDictValuesFromKey(actorXPathDB, siteNum)[0]):
         actorName = actorLink.text_content().replace('.', '').strip()
         actorPhotoURL = ''
+        actorPageURL = actorLink.get('href')
 
-        actorPageURL = PAsearchSites.getSearchBaseURL(siteNum) + actorLink.get('href')
+        if 'http' not in actorPageURL:
+            actorPageURL = PAsearchSites.getSearchBaseURL(siteNum) + actorLink.get('href')
         req = PAutils.HTTPRequest(actorPageURL)
         actorPage = HTML.ElementFromString(req.text)
+
         try:
-            actorPhotoURL = actorPage.xpath('//div[@class="model-bio-pic"]/img/@src')[0]
+            actorPhotoURL = actorPage.xpath(PAutils.getDictValuesFromKey(modelPhotoXPathDB, siteNum)[0])[0]
         except:
-            actorPhotoURL = actorPage.xpath('//div[@class="model-bio-pic"]/img/@src0_1x')[0]
+            try:
+                actorPhotoURL = actorPage.xpath(PAutils.getDictValuesFromKey(modelPhotoXPathDB, siteNum)[1])[0]
+            except:
+                pass
 
         if actorPhotoURL:
             if 'http' not in actorPhotoURL:
@@ -103,7 +118,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     # Posters
     xpaths = [
         '//section[@id="photos-tour"]//img[contains(@class, "update_thumb thumbs")]/@src',
-        '//div[@class="content-block-video"]//img/@alt'
+        '//div[@class="row photos-holder"]//img/@src',
+        '//div[@class="content-block-video"]//img/@alt',
+        '//div[@id="block-content"]//img[@class]/@src',
     ]
 
     for xpath in xpaths:
@@ -138,7 +155,42 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     return metadata
 
 
-xPathDB = {
+searchXPathDB = {
+    ('571', '572', '573', '574', '575', '576', '1374', '577', '1757'): ['//div[@class="category_listing_wrapper_updates"]'],
+    ('293'): ['//div[@class="category_listing_block"]'],
+    ('1825', '1826', '1827'): ['//div[@class="result-content row"]'],
+}
+
+
+searchTitleXPathDB = {
+    ('293', '571', '572', '573', '574', '575', '576', '577', '1374', '1757'): ['.//h3'],
+    ('1825', '1826', '1827'): ['.//h3/a'],
+}
+
+
+searchDateXPathDB = {
     ('293', '571', '572', '573', '574', '575', '576', '1374'): ['.//div[./h4[contains(., "date")]]/text()'],
-    ('577', '1757'): ['.//div[./h4[contains(., "date")]]/p/text()']
+    ('577', '1757'): ['.//div[./h4[contains(., "date")]]/p/text()'],
+}
+
+
+titleXPathDB = {
+    ('293', '571', '572', '573', '574', '575', '576', '1374', '577', '1757', '1826', '1827'): ['//h1/text() | //video/@data-video'],
+    ('1825'): ['//h2/text()'],
+}
+
+
+actorXPathDB = {
+    ('293', '571', '572', '573', '574', '575', '576', '1757'): ['//h3[text()="Pornstars:"]/../a'],
+    ('577'): ['//div[./h3[contains(., "playmates")]]/a'],
+    ('1374'): ['//div[./h3[contains(., "Girls")]]/a'],
+    ('1825'): ['//div[./h2[contains(., "GIRLS")]]//a'],
+    ('1826'): ['//div[./h2[contains(., "Pornstars")]]//a'],
+    ('1827'): ['//div[./h2[contains(., "Girls")]]//a'],
+}
+
+
+modelPhotoXPathDB = {
+    ('293', '571', '572', '573', '574', '575', '576', '1374', '577', '1757'): ['//div[@class="model-bio-pic"]/img/@src', '//div[@class="model-bio-pic"]/img/@src0_1x'],
+    ('1825', '1826', '1827'): ['//div[@class="model-thumbnail"]/img/@src'],
 }
