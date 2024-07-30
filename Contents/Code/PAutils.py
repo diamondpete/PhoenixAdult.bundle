@@ -522,7 +522,7 @@ def getDictValuesFromKey(dictDB, identifier):
     for key, values in dictDB.items():
         keys = list(key) if type(key) == tuple else [key]
         for key in keys:
-            if key.lower() == identifier.lower():
+            if key.lower() == str(identifier).lower():
                 return values
 
     return []
