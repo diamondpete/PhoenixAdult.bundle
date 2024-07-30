@@ -144,7 +144,7 @@ GenresReplace = {
     'Pussy Eating': ['cunilingus', 'pussy lick', 'pussy licking', 'licking pussy', 'eating pussy'],
     'Reality Porn': ['reality'],
     'Redhead': ['red head', 'red heads'],
-    'Reverse Cowgirl (Position)': ['cowgirl - pov', 'reverse cow girl', 'reverse cowgirl', 'reverse cowgirl (pov)'],
+    'Reverse Cowgirl (Position)': ['cowgirl - pov', 'reverse cow girl', 'reverse cowgirl', 'reverse cowgirl (pov)', 'reverse cowgril'],
     'Rim Job': ['rimjob', 'rimming'],
     'Schoolgirl Outfit': ['school girl', 'schoolgirl'],
     'Sci-Fi and Fantasy': ['sci fi'],
