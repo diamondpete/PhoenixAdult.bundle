@@ -1348,6 +1348,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Cream Her
   - DrDaddyPOV
   - FirstClassPOV
+  - Goth Girlfriends
   - IntimateLesbians
   - JessicaJaymesXXX
   - MrLuckyLIFE

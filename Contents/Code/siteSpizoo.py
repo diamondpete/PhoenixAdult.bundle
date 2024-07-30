@@ -158,13 +158,13 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 searchXPathDB = {
     ('571', '572', '573', '574', '575', '576', '1374', '577', '1757'): ['//div[@class="category_listing_wrapper_updates"]'],
     ('293'): ['//div[@class="category_listing_block"]'],
-    ('1825', '1826', '1827'): ['//div[@class="result-content row"]'],
+    ('1825', '1826', '1827', '1828'): ['//div[@class="result-content row"]'],
 }
 
 
 searchTitleXPathDB = {
     ('293', '571', '572', '573', '574', '575', '576', '577', '1374', '1757'): ['.//h3'],
-    ('1825', '1826', '1827'): ['.//h3/a'],
+    ('1825', '1826', '1827', '1828'): ['.//h3/a'],
 }
 
 
@@ -175,7 +175,7 @@ searchDateXPathDB = {
 
 
 titleXPathDB = {
-    ('293', '571', '572', '573', '574', '575', '576', '1374', '577', '1757', '1826', '1827'): ['//h1/text() | //video/@data-video'],
+    ('293', '571', '572', '573', '574', '575', '576', '1374', '577', '1757', '1826', '1827', '1828'): ['//h1/text() | //video/@data-video'],
     ('1825'): ['//h2/text()'],
 }
 
@@ -185,12 +185,12 @@ actorXPathDB = {
     ('577'): ['//div[./h3[contains(., "playmates")]]/a'],
     ('1374'): ['//div[./h3[contains(., "Girls")]]/a'],
     ('1825'): ['//div[./h2[contains(., "GIRLS")]]//a'],
-    ('1826'): ['//div[./h2[contains(., "Pornstars")]]//a'],
+    ('1826', '1828'): ['//div[./h2[contains(., "Pornstars")]]//a'],
     ('1827'): ['//div[./h2[contains(., "Girls")]]//a'],
 }
 
 
 modelPhotoXPathDB = {
     ('293', '571', '572', '573', '574', '575', '576', '1374', '577', '1757'): ['//div[@class="model-bio-pic"]/img/@src', '//div[@class="model-bio-pic"]/img/@src0_1x'],
-    ('1825', '1826', '1827'): ['//div[@class="model-thumbnail"]/img/@src'],
+    ('1825', '1826', '1827', '1828'): ['//div[@class="model-thumbnail"]/img/@src'],
 }
