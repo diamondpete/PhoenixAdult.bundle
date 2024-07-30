@@ -11,7 +11,7 @@ def search(results, lang, siteNum, searchData):
 
     for searchResult in searchResults.xpath(searchXPath[0]):
         titleNoFormatting = searchResult.xpath(PAutils.getDictValuesFromKey(searchTitleXPathDB, siteNum)[0])[0].text_content().strip()
-        if titleNoFormatting[-3:] == ' 4k':
+        if titleNoFormatting[-3:].lower() == ' 4k':
             titleNoFormatting = titleNoFormatting[:-3].strip()
         curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
 
@@ -51,7 +51,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Title
     title = detailsPageElements.xpath(PAutils.getDictValuesFromKey(titleXPathDB, siteNum)[0])[0].strip()
-    if title[-3:] == ' 4k':
+    if title[-3:].lower() == ' 4k':
         title = title[:-3].strip()
     metadata.title = PAutils.parseTitle(title, siteNum)
 
