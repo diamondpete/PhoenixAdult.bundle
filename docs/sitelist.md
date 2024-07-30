@@ -1345,9 +1345,13 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Pissing in Action
   - Slime Wave
 + #### Spizoo | ✓
+  - Cream Her
+  - DrDaddyPOV
   - FirstClassPOV
+  - Goth Girlfriends
   - IntimateLesbians
   - JessicaJaymesXXX
+  - MrLuckyLIFE
   - MrLuckyPOV
   - MrLuckyRAW
   - PornGoesPro
