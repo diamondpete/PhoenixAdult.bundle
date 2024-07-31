@@ -89,9 +89,13 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     genres = detailsPageElements.xpath('//div[@class="categories-holder"]/a|//div[./h3[contains(., "Categories")]]/a')
     if genres:
         for genreLink in genres:
-            genreName = genreLink.text_content().lower().strip()
-
-            movieGenres.addGenre(genreName)
+            if ',' in genreLink.text_content().lower().strip():
+                for genreLink in genreLink.text_content().lower().strip().split(','):
+                    genreName = genreLink.strip()
+                    movieGenres.addGenre(genreName)
+            else:
+                genreName = genreLink.text_content().lower().strip()
+                movieGenres.addGenre(genreName)
 
     # Actor(s)
     for actorLink in detailsPageElements.xpath(PAutils.getDictValuesFromKey(actorXPathDB, siteNum)[0]):
