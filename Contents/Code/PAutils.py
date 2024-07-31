@@ -565,7 +565,7 @@ def getDictKeyFromValues(dictDB, identifier):
     keys = []
     for key, values in dictDB.items():
         for item in values:
-            if item.lower() == identifier.lower():
+            if item.lower() == str(identifier).lower():
                 keys.append(key)
                 break
 
