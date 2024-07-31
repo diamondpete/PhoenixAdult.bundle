@@ -64,10 +64,13 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     # Tagline and Collection(s)
     try:
         tagline = detailsPageElements.xpath('//i[@id="site"]/@value')[0].strip()
+        metadata.tagline = tagline
     except:
         if 'Spizoo' not in PAsearchSites.getSearchSiteName(siteNum):
             tagline = PAsearchSites.getSearchSiteName(siteNum)
-    metadata.tagline = tagline
+            metadata.tagline = tagline
+        else:
+            tagline = metadata.studio
     metadata.collections.add(tagline)
 
     # Release Date
