@@ -157,7 +157,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
 searchXPathDB = {
     ('571', '572', '573', '574', '575', '576', '1374', '577', '1757'): ['//div[@class="category_listing_wrapper_updates"]'],
-    ('293'): ['//div[@class="category_listing_block"]'],
+    ('293'): ['//div[@class="model-update row"]'],
     ('1825', '1826', '1827', '1828'): ['//div[@class="result-content row"]'],
 }
 
