@@ -1241,20 +1241,57 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
 + #### QueenSnake | ❌ - **Exact Title Only**
 + #### Radical Cash | ✅
   - AltErotic
+  - Amazing Films
+  - Bemefi
   - Benefit Monkey
-  - BJRAW
-  - ComeInside - **Actor Name Only**
+  - BJ Raw
+  - BlackBullChallenge
+  - Cannon Prod
+  - Come Inside - **Actor Name Only**
+  - Dark Shade
+  - Dick HD Daily
+  - Dire Desires
   - Divine-DD
+  - FreakMobMedia
   - GotFilled
+  - Hard Werk
+  - Hoby Buchanon
   - Inserted
   - JAV888
+  - LegendaryX
   - Lezkey
+  - Lucid Flix
+  - Nick Marxx
+  - Passion POV
+  - POV Perv
+  - Purity VR
+  - Queer Crush
   - Ricky's Room
+  - S3XUS
   - Sexy Modern Bull
   - Side Chick
+  - Top Web Models
+    - 2 Girls 1 Camera
+    - Big Gulp Girls
+    - Cougar Season
+    - Deep Throat Sirens
+    - Facials Forever
+    - Pounded Petite
+    - She's Brand New
+  - TwoWebMedia
+    - BoppingBabes
+    - DownblouseJerk
+    - LingerieTales
+    - RealBikiniGirls
+    - UpskirtJerk
+    - WankItNow
+  - VRHush
+  - XFul
+  - Yes Girlz
+  - Z Filmz Originals
 + #### Other Radical Cash Sites | ✅
   - PurgatoryX
-  - ToughLoveX - **Actor Name Only or Title Name Only**
+  - ToughLoveX - **Actor Name Only or Title Only**
 + #### Reality Kings Network | ✅
   - 40 Inch Plus
   - 8th Street Latinas
@@ -1586,14 +1623,6 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Over 40 Handjobs
   - Shady Spa
   - Teen Tugs
-+ #### Top Web Models | ✅
-  - 2 Girls 1 Camera
-  - Big Gulp Girls
-  - Cougar Season
-  - Deepthroat Sirens
-  - Facials Forever
-  - Pounded Petite
-  - She's Brand New
 + #### TransAngels | ✅
 + #### True Amateurs | ✅
 + #### Twistys | ✅
@@ -1602,13 +1631,6 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Twistys
   - TwistysHard
   - WhenGirlsPlay
-+ #### TwoWebMedia | ✅
-  - Bopping Babes
-  - Downblouse Jerk
-  - Lingerie Tales
-  - Real Bikini Girls
-  - Upskirt Jerk
-  - Wank It Now
 + #### Ultrafilms | ✓
 + #### VIPissy | ✓
 + #### VirtualPorn | ✅
