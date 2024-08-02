@@ -125,6 +125,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             for image in list(content[imageType]):
                 art.append(image)
 
+    if len(art) <= 4:
+        if 'thumbs' in content:
+            for image in content['thumbs']:
+                art.append(image)
+
     images = []
     posterExists = False
     Log('Artwork found: %d' % len(art))
