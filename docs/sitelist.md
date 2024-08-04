@@ -651,10 +651,10 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - TGirls.xxx
 + #### Hegre | ✓ - **Title only**
 + #### HentaiPros | ✅
-+ #### HighTechVR Network | ❌ - **SceneID**
-  - SexBabesVR
-  - SinsVR
-  - StasyQVR
++ #### HighTechVR Network | ❌
+  - SexBabesVR - **Direct URL**
+  - SinsVR - **Direct URL**
+  - StasyQVR - **SceneID**
 + #### Holly Randall | ✓
 + #### HotwifeXXX | ✅
 + #### HuCows | ✅
@@ -789,6 +789,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - MetArtX
   - Rylsky Art
   - SexArt
+  - Straplezz
   - Stunning18
   - TheLifeErotic
   - Viv Thomas
@@ -1348,7 +1349,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Wives in Pantyhose
 + #### Reality Kings Other Sites | ✅
   - Lil Humpers
-+ #### RealJamVR | ✅
++ #### RealJamVR | ❌ - **Direct URL**
 + #### ReidMyLips | ❌ - **Direct URL**
 + #### Romero Multimedia Network | ✓
   - Deafeated XXX
@@ -1404,7 +1405,6 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Nymphos
   - Swallowed
   - TrueAnal
-+ #### Straplezz | ❌ - **Direct URL**
 + #### StraponCum | ❌ - **Direct URL**
 + #### Strike3 Network | ✅
   - Blacked

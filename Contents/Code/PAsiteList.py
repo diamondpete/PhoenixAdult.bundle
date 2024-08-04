@@ -46,7 +46,6 @@ import siteWeAreHairy
 import networkLoveHerFilms
 import siteMomPOV
 import networkFuelVirtual
-import siteStraplezz
 import siteLittleCaprice
 import siteVIPissy
 import siteGirlsOutWest
@@ -932,7 +931,7 @@ searchSites = {
     738: ('Girls Gone Pink', 'https://www.mofos.com', 'https://site-api.project1service.com'),
     739: ('Real Slut Party', 'https://www.mofos.com', 'https://site-api.project1service.com'),
     740: ('Mofos Lab', 'https://www.mofos.com', 'https://site-api.project1service.com'),
-    741: ('Straplezz', 'https://straplezz.com', '/updates/'),
+    741: ('Straplezz', 'https://straplezz.com', '/api'),
     742: ('Little Caprice Dreams', 'https://www.littlecaprice-dreams.com', '/?s='),
     743: ('Wow Girls', 'https://www.wowgirlsblog.com', '/?s='),
     744: ('VIPissy', 'https://www.vipissy.com', '/updates?search='),
@@ -2618,7 +2617,7 @@ def getProviderFromSiteNum(siteNum):
 
         # Straplezz
         elif siteNum == 741:
-            provider = siteStraplezz
+            provider = networkMetArt
 
         # LittleCaprice
         elif siteNum == 742 or (1713 <= siteNum <= 1720):

@@ -33,8 +33,7 @@ xPathMap = {
 
 
 def search(results, lang, siteNum, searchData):
-    siteName = PAsearchSites.getSearchSiteName(siteNum).lower() + '-'
-    searchData.encoded = searchData.filename.lower().replace(' ', '-').replace('_', ' ').replace(siteName, '')
+    searchData.encoded = slugify(searchData.title.lower())
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
 
