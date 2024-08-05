@@ -117,7 +117,7 @@ import networkModelCentro
 import siteAlettaOceanLive
 import networkPornWorld
 import siteMormonGirlz
-import sitePurgatoryX
+import networkRadicalCashOther
 import sitePlumperPass
 import networkFTV
 import siteJacquieEtMichel
@@ -1941,6 +1941,18 @@ searchSites = {
     1848: ('Z Filmz Originals', 'https://z-filmz-originals.com', '/videos'),
     1849: ('Hoby Buchanon', 'https://hobybuchanon.com', '/updates'),
     1850: ('VRHush', 'https://vrhush.com', '/scenes'),
+    1851: ('Hitzefrei', 'https://hitzefrei.com', 'https://tour.hitzefrei.com/search/'),
+    1852: ('Unleashed', 'https://unleashed.hitzefrei.com', 'https://unleashed.hitzefrei.com/search/'),
+    1853: ('CityCheck', 'https://citycheck.hitzefrei.com', 'https://citycheck.hitzefrei.com/search/'),
+    1854: ('Milf Hunters', 'https://milfhunters.hitzefrei.com', 'https://milfhunters.hitzefrei.com/search/'),
+    1855: ('Cuff em All', 'https://cuffemall.hitzefrei.com', 'https://cuffemall.hitzefrei.com/search/'),
+    1856: ('fANALarm', 'https://fanalarm.hitzefrei.com', 'https://fanalarm.hitzefrei.com/search/'),
+    1857: ('Fuck On Arrival', 'https://fuckonarrival.hitzefrei.com', 'https://fuckonarrival.hitzefrei.com/search/'),
+    1858: ('Family Affairs', 'https://familyaffairs.hitzefrei.com', 'https://familyaffairs.hitzefrei.com/search/'),
+    1859: ('Patti\'s Anal', 'https://pattisanals.hitzefrei.com', 'https://pattisanals.hitzefrei.com/search/'),
+    1860: ('Gonzo Living', 'https://www.gonzoliving.com', 'https://tour.gonzoliving.com/search/'),
+    1861: ('Teen Gonzo', 'https://www.teengonzo.com', 'https://tour.teengonzo.com/search/'),
+    1862: ('Milf Gonzo', 'https://www.milfgonzo.com', 'https://tour.milfgonzo.com/search/'),
 }
 
 abbreviations = (
@@ -2996,8 +3008,8 @@ def getProviderFromSiteNum(siteNum):
             provider = siteMormonGirlz
 
         # PurgatoryX
-        elif siteNum == 1066:
-            provider = sitePurgatoryX
+        elif siteNum == 1066 or (1851 <= siteNum <= 1862):
+            provider = networkRadicalCashOther
 
         # PlumperPass
         elif siteNum == 1067:

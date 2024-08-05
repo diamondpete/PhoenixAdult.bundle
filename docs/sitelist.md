@@ -1290,7 +1290,19 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - XFul
   - Yes Girlz
   - Z Filmz Originals
-+ #### Other Radical Cash Sites | ✅
++ #### Radical Cash Other Sites | ✅
+  - Hitzefrei
+    - Unleashed
+    - CityCheck
+    - Milf Hunters
+    - Cuff em All
+    - fANALarm
+    - Fuck On Arrival
+    - Family Affairs
+    - Patti's Anal
+  - Gonzo Living
+    - Milf Gonzo
+    - Teen Gonzo
   - PurgatoryX
   - ToughLoveX - **Actor Name Only or Title Only**
 + #### Reality Kings Network | ✅
