@@ -21,9 +21,9 @@ def xPathResultBuilder(titleXPath, dateXPath, dateFormat, redirectURL, sceneURL,
         displayDate = releaseDate if date else ''
 
         if searchData.date and displayDate:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         result = MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (displayDate, PAsearchSites.getSearchSiteName(siteNum), PAutils.parseTitle(titleNoFormatting, siteNum)), score=score, lang=lang)
 
