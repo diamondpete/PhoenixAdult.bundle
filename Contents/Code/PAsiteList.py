@@ -188,6 +188,7 @@ import networkBellesa
 import siteBrandNewAmateurs
 import sitePornbox
 import siteJesseLoadsMonsterFacials
+import networkGASM
 
 searchSites = {
     0: ('BlackedRaw', 'https://www.blackedraw.com', '/graphql'),
@@ -1953,6 +1954,23 @@ searchSites = {
     1860: ('Gonzo Living', 'https://www.gonzoliving.com', 'https://tour.gonzoliving.com/search/'),
     1861: ('Teen Gonzo', 'https://www.teengonzo.com', 'https://tour.teengonzo.com/search/'),
     1862: ('Milf Gonzo', 'https://www.milfgonzo.com', 'https://tour.milfgonzo.com/search/'),
+    1866: ('GASM', 'https://www.gasm.com', '/search/videos?s='),
+    1867: ('Magma Film', 'https://www.gasm.com', '/search/videos?s='),
+    1868: ('JapanHD', 'https://www.gasm.com', '/search/videos?s='),
+    1869: ('Pure XXX Films', 'https://www.gasm.com', '/search/videos?s='),
+    1870: ('Harmony Vision', 'https://www.gasm.com', '/search/videos?s='),
+    1871: ('Paradise Films', 'https://www.gasm.com', '/search/videos?s='),
+    1872: ('Leche69', 'https://www.gasm.com', '/search/videos?s='),
+    1873: ('Cosplay Babes', 'https://www.gasm.com', '/search/videos?s='),
+    1874: ('Fun Movies', 'https://www.gasm.com', '/search/videos?s='),
+    1875: ('MMV Films', 'https://www.gasm.com', '/search/videos?s='),
+    1876: ('Inflagranti', 'https://www.gasm.com', '/search/videos?s='),
+    1877: ('Hot Gold', 'https://www.gasm.com', '/search/videos?s='),
+    1878: ('The Undercover Lover', 'https://www.gasm.com', '/search/videos?s='),
+    1879: ('Herzog', 'https://www.gasm.com', '/search/videos?s='),
+    1880: ('Butt Formation', 'https://www.gasm.com', '/search/videos?s='),
+    1881: ('PornXN', 'https://www.gasm.com', '/search/videos?s='),
+    1882: ('Filthy and Fisting', 'https://www.gasm.com', '/search/videos?s='),
 }
 
 abbreviations = (
@@ -2084,6 +2102,7 @@ abbreviations = (
     ('^ht ', 'Hogtied '),
     ('^hussieauditions', 'HussiePass'),
     ('^hustl3r ', 'Hustler '),
+    ('^hv ', 'HarmonyVision '),
     ('^ihaw ', 'IHaveAWife '),
     ('^iktg ', 'IKnowThatGirl '),
     ('^il ', 'ImmoralLive '),
@@ -2179,6 +2198,7 @@ abbreviations = (
     ('^ps ', 'PropertySex '),
     ('^ptt ', 'Petite '),
     ('^pud ', 'PublicDisgrace '),
+    ('^pxf ', 'PureXXXFilms '),
     ('^pyx ', 'PurgatoryX '),
     ('^reg ', 'RealExGirlfriends '),
     ('^rkp ', 'RKPrime '),
@@ -3279,5 +3299,9 @@ def getProviderFromSiteNum(siteNum):
         # Jesse Loads Monster Facials
         elif siteNum == 1824:
             provider = siteJesseLoadsMonsterFacials
+
+        # GASM
+        elif 1866 <= siteNum <= 1882:
+            provider = networkGASM
 
     return provider
