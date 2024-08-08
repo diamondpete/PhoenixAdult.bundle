@@ -636,6 +636,23 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - POV Perverts
   - Twisted Visual
 + #### Gangbang Creampie | ✅
++ #### GASM | ✅
+  - Butt Formation
+  - Cosplay Babes
+  - Filthy and Fisting
+  - Fun Movies
+  - Harmony Vision
+  - Herzog
+  - Hot Gold
+  - Inflagranti
+  - JapanHD
+  - Leche69
+  - Magma Film
+  - MMV Films
+  - Paradise Films
+  - PornXN
+  - Pure XXX Films
+  - The Undercover Lover
 + #### Gender X | ✅
 + #### Girl Grind | ✅
 + #### GirlfriendsFilms | ✅
