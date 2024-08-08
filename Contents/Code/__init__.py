@@ -11,7 +11,7 @@ import time
 import urllib
 import urlparse
 from cStringIO import StringIO
-from datetime import datetime
+from datetime import datetime, timedelta
 from dateutil.parser import parse
 from PIL import Image
 from slugify import slugify
@@ -109,7 +109,7 @@ class PhoenixAdultAgent(Agent.Movies):
                 providerName = getattr(provider, '__name__')
                 Log('Provider: %s' % providerName)
                 try:
-                    provider.search(results, lang, siteNum, search)
+                    PAutils.functionTimer(provider.search, 'Search Duration', results, lang, siteNum, search)
                 except Exception as e:
                     Log.Error(format_exc())
 
@@ -160,25 +160,20 @@ class PhoenixAdultAgent(Agent.Movies):
         provider = PAsiteList.getProviderFromSiteNum(siteNum)
         if provider is not None:
             providerName = getattr(provider, '__name__')
-            Log('Provider: %s' % providerName)
-            provider.update(metadata, lang, siteNum, movieGenres, movieActors, valid_images)
+            PAutils.functionTimer(provider.update, 'Provider: %s - Duration' % providerName, metadata, lang, siteNum, movieGenres, movieActors, valid_images)
 
         # Cleanup Genres and Add
-        Log('Genres')
-        movieGenres.processGenres(metadata, siteNum)
+        PAutils.functionTimer(movieGenres.processGenres, 'Genres - Duration', metadata, siteNum)
         metadata.genres = sorted(metadata.genres)
 
         # Cleanup Actors and Add
-        Log('Actors')
-        movieActors.processActors(metadata, siteNum)
+        PAutils.functionTimer(movieActors.processActors, 'Actors - Duration', metadata, siteNum)
 
         # Cleanup Directors and Add
-        Log('Directors')
-        movieActors.processDirectors(metadata, siteNum)
+        PAutils.functionTimer(movieActors.processDirectors, 'Directors - Duration', metadata, siteNum)
 
         # Cleanup Producers and Add
-        Log('Producers')
-        movieActors.processProducers(metadata, siteNum)
+        PAutils.functionTimer(movieActors.processProducers, 'Producers - Duration', metadata, siteNum)
 
         # Add Content Rating
         metadata.content_rating = 'XXX'

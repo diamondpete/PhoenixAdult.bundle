@@ -41,7 +41,6 @@ def search(results, lang, siteNum, searchData):
             titleNoFormatting = searchResult.xpath('.//a[@class="post_title"]')[0].text_content()
             curID = PAutils.Encode(searchResult.xpath('.//a[@class="post_title"]/@href')[0])
             subSite = PAutils.parseTitle(searchResult.xpath('.//a[@class="post_channel"]')[0].text_content().split(':')[-1].strip(), siteNum)
-            searchID = searchResult.xpath('.//div[contains(@class, "post_item")]/@data-post-id')[0]
 
             releaseDate = searchData.dateFormat() if searchData.date else ''
 
@@ -66,7 +65,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h1[@class="post_title"]/span')[0].text_content().strip(), siteNum)
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//h2[@class="post_description"]')[0].text_content()
+    metadata.summary = detailsPageElements.xpath('//h2[@class="post_description"]')[0].text_content().replace('´', '\'')
 
     # Studio
     metadata.studio = 'GASM'

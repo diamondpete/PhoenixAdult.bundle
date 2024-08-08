@@ -589,3 +589,10 @@ def strip_tags(html):
     s = MLStripper()
     s.feed(html)
     return s.get_data()
+
+
+def functionTimer(fun, msg, *args):
+    start_time = time.time()
+    fun(*args)
+    end_time = time.time()
+    Log('%s: %s' % (msg, str(timedelta(seconds=(end_time - start_time)))))
