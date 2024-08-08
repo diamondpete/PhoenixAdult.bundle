@@ -3,6 +3,7 @@ import PAutils
 
 
 def search(results, lang, siteNum, searchData):
+    cookies = {'WarningModal': 'true'}
     sceneID = None
     parts = searchData.title.split()
     if unicode(parts[0], 'UTF-8').isdigit():
@@ -11,7 +12,7 @@ def search(results, lang, siteNum, searchData):
 
     if sceneID:
         sceneURL = '%s/post/details/%s' % (PAsearchSites.getSearchBaseURL(siteNum), sceneID)
-        req = PAutils.HTTPRequest(sceneURL)
+        req = PAutils.HTTPRequest(sceneURL, cookies=cookies)
         searchResult = HTML.ElementFromString(req.text)
 
         titleNoFormatting = searchResult.xpath('//h1[@class="post_title"]/span')[0].text_content()
@@ -33,7 +34,7 @@ def search(results, lang, siteNum, searchData):
         searchURL = PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded
         if 1867 <= siteNum <= 1882:
             searchURL = '%s&channel=%s' % (searchURL, PAutils.getDictKeyFromValues(channelIdDB, PAsearchSites.getSearchSiteName(siteNum).lower())[0])
-        req = PAutils.HTTPRequest(searchURL)
+        req = PAutils.HTTPRequest(searchURL, cookies=cookies)
         searchResults = HTML.ElementFromString(req.text)
 
         for searchResult in searchResults.xpath('//div[contains(@class, "results_item")]'):
@@ -52,12 +53,13 @@ def search(results, lang, siteNum, searchData):
 
 
 def update(metadata, lang, siteNum, movieGenres, movieActors, art):
+    cookies = {'WarningModal': 'true'}
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
         sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
     sceneDate = metadata_id[2]
-    req = PAutils.HTTPRequest(sceneURL)
+    req = PAutils.HTTPRequest(sceneURL, cookies=cookies)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
@@ -73,6 +75,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     tagline = PAutils.parseTitle(detailsPageElements.xpath('//a[contains(@href, "/studio/profile/")]')[0].text_content().strip(), siteNum)
     metadata.tagline = tagline
     metadata.collections.add(tagline)
+
+    dvd = detailsPageElements.xpath('//div[@class="post_item dvd"]/h1')
+    if dvd:
+        metadata.collections.add(PAutils.parseTitle(dvd[0].text_content().lower(), siteNum))
 
     # Release Date
     date = detailsPageElements.xpath('//h3[@class="post_date"]')
