@@ -288,6 +288,7 @@ def parseTitle(s, siteNum):
     s = re.sub(r'\,(?![\s|\d])', ', ', s)
     s = s.replace('_', ' ')
     s = s.replace('’', '\'')
+    s = s.replace('´', '\'')
     s = preParseTitle(s)
     word_list = re.split(' ', s)
 

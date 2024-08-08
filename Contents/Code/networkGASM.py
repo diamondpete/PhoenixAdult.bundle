@@ -103,7 +103,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Posters/Background
     xpaths = [
-        '//img[@class="item_cover"]/@src'
+        '//img[@class="item_cover"]/@src',
+        '//meta[@name="twitter:image"]/@content'
     ]
 
     for xpath in xpaths:
