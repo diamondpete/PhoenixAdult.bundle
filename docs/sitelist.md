@@ -173,6 +173,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
     - Teen Sneaks
   - FameDigital
     - AllGirlMassage
+    - BSkow
     - CumshotOasis
     - DevilsFilm
     - FantasyMassage
@@ -198,7 +199,9 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
     - SextapeLesbians
     - SilviaSaint
     - SoapyMassage
+    - TabooHeat
     - TeraPatrick
+    - TouchMyWife
     - TrickySpa
     - WebYoung
     - WeLikeGirls

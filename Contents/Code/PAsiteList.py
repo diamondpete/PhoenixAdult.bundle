@@ -1953,6 +1953,9 @@ searchSites = {
     1860: ('Gonzo Living', 'https://www.gonzoliving.com', 'https://tour.gonzoliving.com/search/'),
     1861: ('Teen Gonzo', 'https://www.teengonzo.com', 'https://tour.teengonzo.com/search/'),
     1862: ('Milf Gonzo', 'https://www.milfgonzo.com', 'https://tour.milfgonzo.com/search/'),
+    1863: ('Touch My Wife', 'http://www.touchmywife.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    1864: ('Taboo Heat', 'http://www.tabooheat.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    1865: ('B Skow', 'http://www.bskow.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
 }
 
 abbreviations = (
@@ -2832,7 +2835,7 @@ def getProviderFromSiteNum(siteNum):
             provider = siteRealityLovers
 
         # Adult Time
-        elif siteNum == 478 or siteNum == 878 or (1554 <= siteNum <= 1561) or (1722 <= siteNum <= 1729):
+        elif siteNum == 478 or siteNum == 878 or (1554 <= siteNum <= 1561) or (1722 <= siteNum <= 1729) or (1863 <= siteNum <= 1865):
             provider = networkGammaEntOther
 
         # RealJamVR
