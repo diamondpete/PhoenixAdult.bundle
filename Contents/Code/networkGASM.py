@@ -44,10 +44,7 @@ def search(results, lang, siteNum, searchData):
 
             releaseDate = searchData.dateFormat() if searchData.date else ''
 
-            if sceneID and int(sceneID) == searchID:
-                score = 100
-            else:
-                score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s]' % (PAutils.parseTitle(titleNoFormatting, siteNum), subSite), score=score, lang=lang))
 
