@@ -65,7 +65,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h1[@class="post_title"]/span')[0].text_content().strip(), siteNum)
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//h2[@class="post_description"]')[0].text_content().replace('´', '\'')
+    metadata.summary = detailsPageElements.xpath('//h2[@class="post_description"]')[0].text_content().replace('´', '\'').replace('’', '\'')
 
     # Studio
     metadata.studio = 'GASM'

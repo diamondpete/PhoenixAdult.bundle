@@ -125,6 +125,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     # Posters
     xpaths = [
         '//section[@id="photos-tour"]//img[contains(@class, "update_thumb thumbs")]/@src',
+        '//section[@id="scene"]//div[@id="noMore"]/img/@alt',
+        '//section[@id="scene"]//video[@id="the-video"]//@poster',
         '//div[@class="row photos-holder"]//img/@src',
         '//div[@class="content-block-video"]//img/@alt',
         '//div[@id="block-content"]//img[@class]/@src',
