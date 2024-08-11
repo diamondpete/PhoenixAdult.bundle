@@ -3,6 +3,11 @@ PhoenixAdult metadata agent
 ===========================
 This metadata agent helps fill Plex with information for your adult videos by pulling from the original site.
 
+Attention - Third Party Plug-Ins have been declared EOL
+--------
+
+Plex is removing support for any third-party plug-ins, starting with the Nvidia Shield and server version **1.41.0**. See the [Plex Forum](https://forums.plex.tv/t/important-information-for-users-running-plex-media-server-on-nvidia-shield-devices/883484) for more information.
+
 Features
 --------
 Currently the features of this metadata agent are:
@@ -29,7 +34,7 @@ File Naming
 -----------
 The agent will try to match your file automatically, usually based on the filename. You can assist it by renaming your video appropriately.
 If the video is not successfully matched, you can try to manually match it using the [Match...] function in Plex. See the [manual searching document](./docs/manualsearch.md) for more information.
-Best practice for each site is listed in the [sitelist document](./docs/sitelist.md). 
+Best practice for each site is listed in the [sitelist document](./docs/sitelist.md).
 
 **`Plex Video Files` needs to be set as the library scanner for best results.**
 
