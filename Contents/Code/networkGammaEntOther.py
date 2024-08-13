@@ -80,7 +80,10 @@ def search(results, lang, siteNum, searchData):
 
             titleNoFormatting = PAutils.parseTitle(searchResult['title'], siteNum)
 
-            subSite = searchResult['mainChannel']['name'].strip()
+            if 'mainchannel' in searchResult:
+                subSite = searchResult['mainChannel']['name'].strip()
+            else:
+                subSite = ''
 
             # Check if Scene matches the Sub Site
             if subSite.replace(' ', '').lower() == PAsearchSites.getSearchSiteName(siteNum).replace(' ', '').lower():
