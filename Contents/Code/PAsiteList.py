@@ -1974,6 +1974,8 @@ searchSites = {
     1880: ('Butt Formation', 'https://www.gasm.com', '/search/videos?s='),
     1881: ('PornXN', 'https://www.gasm.com', '/search/videos?s='),
     1882: ('Filthy and Fisting', 'https://www.gasm.com', '/search/videos?s='),
+    1883: ('Voodooed', 'https://voodooed.com', '/?s='),
+    1884: ('Vored', 'https://vored.com', '/?s='),
 }
 
 abbreviations = (
@@ -2875,7 +2877,7 @@ def getProviderFromSiteNum(siteNum):
             provider = networkGammaEntOther
 
         # Romero Multimedia
-        elif (895 <= siteNum <= 896) or (1594 <= siteNum <= 1596) or (1797 <= siteNum <= 1798):
+        elif (895 <= siteNum <= 896) or (1594 <= siteNum <= 1596) or (1797 <= siteNum <= 1798) or (1883 <= siteNum <= 1884):
             provider = networkRomero
 
         # XVirtual

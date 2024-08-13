@@ -1391,6 +1391,8 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Hentaied
   - Parasited
   - Plants vs Cunts
+  - Voodooed
+  - Vored
 + #### SapphiX Network | Matching type: ✅
   - Fist Flush
   - Give Me Pink
