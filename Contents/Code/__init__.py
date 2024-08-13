@@ -109,7 +109,7 @@ class PhoenixAdultAgent(Agent.Movies):
                 providerName = getattr(provider, '__name__')
                 Log('Provider: %s' % providerName)
                 try:
-                    PAutils.functionTimer(provider.search, 'Provider: %s - Duration' % providerName, results, lang, siteNum, search)
+                    provider.search(results, lang, siteNum, search)
                 except Exception as e:
                     Log.Error(format_exc())
 
@@ -161,24 +161,24 @@ class PhoenixAdultAgent(Agent.Movies):
         if provider is not None:
             providerName = getattr(provider, '__name__')
             Log('Provider: %s' % providerName)
-            PAutils.functionTimer(provider.update, 'Provider: %s - Duration' % providerName, metadata, lang, siteNum, movieGenres, movieActors, valid_images)
+            provider.update(metadata, lang, siteNum, movieGenres, movieActors, valid_images)
 
         # Cleanup Genres and Add
         Log('Genres')
-        PAutils.functionTimer(movieGenres.processGenres, 'Genres - Duration', metadata, siteNum)
+        movieGenres.processGenres(metadata, siteNum)
         metadata.genres = sorted(metadata.genres)
 
         # Cleanup Actors and Add
         Log('Actors')
-        PAutils.functionTimer(movieActors.processActors, 'Actors - Duration', metadata, siteNum)
+        movieActors.processActors(metadata, siteNum)
 
         # Cleanup Directors and Add
         Log('Directors')
-        PAutils.functionTimer(movieActors.processDirectors, 'Directors - Duration', metadata, siteNum)
+        movieActors.processDirectors(metadata, siteNum)
 
         # Cleanup Producers and Add
         Log('Producers')
-        PAutils.functionTimer(movieActors.processProducers, 'Producers - Duration', metadata, siteNum)
+        movieActors.processProducers(metadata, siteNum)
 
         # Add Content Rating
         metadata.content_rating = 'XXX'
