@@ -72,7 +72,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h2')[0].text_content().strip(), siteNum)
+    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h1')[0].text_content().split(':')[-1].strip(), siteNum)
 
     # Summary
     summary = detailsPageElements.xpath('//p[contains(@class, "description")]')[0].text_content().strip()
