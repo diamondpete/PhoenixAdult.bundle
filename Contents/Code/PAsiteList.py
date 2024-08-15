@@ -1976,6 +1976,7 @@ searchSites = {
     1882: ('Filthy and Fisting', 'https://www.gasm.com', '/search/videos?s='),
     1883: ('Voodooed', 'https://voodooed.com', '/?s='),
     1884: ('Vored', 'https://vored.com', '/?s='),
+    1885: ('Latina MILF', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
 }
 
 abbreviations = (
@@ -2409,7 +2410,7 @@ def getProviderFromSiteNum(siteNum):
             provider = sitePorndoePremium
 
         # LetsDoeIt
-        elif (216 <= siteNum <= 218) or (220 <= siteNum <= 223) or (225 <= siteNum <= 227) or (230 <= siteNum <= 231) or siteNum == 233 or siteNum == 235 or siteNum == 238 or (243 <= siteNum <= 244) or siteNum == 247:
+        elif (216 <= siteNum <= 218) or (220 <= siteNum <= 223) or (225 <= siteNum <= 227) or (230 <= siteNum <= 231) or siteNum == 233 or siteNum == 235 or siteNum == 238 or (243 <= siteNum <= 244) or siteNum == 247 or siteNum == 1885:
             provider = network1service
 
         # AnalVids

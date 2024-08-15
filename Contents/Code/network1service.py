@@ -58,7 +58,7 @@ def search(results, lang, siteNum, searchData):
                 siteName = PAutils.studio(searchResult['brand'].title(), siteNum)
                 subSite = ''
                 if 'collections' in searchResult and searchResult['collections']:
-                    subSite = searchResult['collections'][0]['name']
+                    subSite = searchResult['collections'][0]['name'].strip()
                 siteDisplay = '%s/%s' % (siteName, subSite) if subSite else siteName
 
                 score = 80

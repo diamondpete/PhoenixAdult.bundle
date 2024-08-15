@@ -208,11 +208,14 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             try:
                 tagline = detailsPageElements.xpath('//b[contains(., "Network")]//following-sibling::a')[0].text_content().strip()
             except:
-                tagline = detailsPageElements.xpath('//p[contains(., "Movie:")]/a')[0].text_content()
-                if 'rk prime' in tagline.lower():
-                    tagline = 'RK Prime'
-                else:
-                    metadata.collections.add(metadata.studio)
+                try:
+                    tagline = detailsPageElements.xpath('//p[contains(., "Webserie:")]/a')[0].text_content().strip()
+                except:
+                    tagline = detailsPageElements.xpath('//p[contains(., "Movie:")]/a')[0].text_content().strip()
+                    if 'rk prime' in tagline.lower():
+                        tagline = 'RK Prime'
+                    else:
+                        metadata.collections.add(metadata.studio)
 
         if len(metadata_id) > 3:
             Log('Using original series information')

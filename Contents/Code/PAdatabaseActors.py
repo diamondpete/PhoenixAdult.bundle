@@ -20,7 +20,7 @@ ActorsReplace = {
     'Amirah Adara': ['Amirah', 'Amira Adara'],
     'Amy Reid': ['Amy Reed', 'Amy Ried', 'Devin Valencia'],
     'Ana Foxxx': ['Ana Fox', 'Ana Foxx'],
-    'Anabelle Evans': ['Ana Bell Evans', 'Ana Belle', 'Anabelle', 'Anabelle Sonic'],
+    'Anabelle Evans': ['Ana Bell Evans', 'Ana Belle', 'Anabelle', 'Anabelle Sonic', 'Pd Anabell'],
     'Anastasia Morna': ['Anna Morna'],
     'Andreina Deluxe': ['Andreina De Lux', 'Andreina De Luxe', 'Andreina Dlux'],
     'Angie Elif': ['Angie A'],
