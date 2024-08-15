@@ -470,7 +470,7 @@ def studio(name, siteNum):
         'BellaPass', 'Pornstars Like It Big', 'Look At Her Now', 'Digital Playground', 'Big Tit Creampie',
         'Mom Is Horny', 'BangBros Clips', 'Modern Day Sins', 'Brace Faced', 'Bad MILFs', 'MILF Body', 'Mile High',
         'Mylf Boss', 'Day With a Pornstar', 'Gangbang Creampie', 'Dirty Auditions', 'Big Tits, Round Asses',
-        'Black Meat White Feet'
+        'Black Meat White Feet', 'Lets Doe It'
     )
 
     studiosReplace = {
