@@ -779,6 +779,25 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - WhippedAss
   - WiredPussy
 + #### Kinky Spa | ✓
++ #### LetsDoeIt Network | ✅
+  - A Girl Knows
+  - Bitches Abroad
+  - Bums Besuch
+  - Bums Buero
+  - BumsBus
+  - Doe Girls
+  - Doe Projects
+  - Her Limit
+  - Horny Hostel
+  - Kinky Inlaws
+  - My Naughty Album
+  - Porno Academie
+  - Quest for Orgasm
+  - Relaxxxed
+  - Scam Angels
+  - The White Boxxx
+  - Xchimera
+  - XXXShades
 + #### Little Caprice | ✅
   - Buttmuse
   - Caprice Divas
@@ -1114,52 +1133,33 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Teen From Bohemia
   - VR Porn CZ
 + #### Porndoe Premium Network | ✅
-  - A Girl Knows
   - Badtime Stories
-  - Bitches Abroad
-  - Bums Besuch
-  - Bums Buero
-  - BumsBus
   - Carne Del Mercado
   - Casting Alla Italiana
   - Casting Francais
   - Chicas Loca
   - Crowd Bondage
   - Deutchland Report
-  - Doe Girls
-  - Doe Projects
   - Exposed Casting
   - Fucked In Traffic
   - Hausfrau Ficken
   - Her Big Ass
-  - Her Limit
-  - Horny Hostel
-  - Kinky Inlaws
   - La Cochonne
   - La Novice
   - Las Folladoras
   - Los Consoladores
-  - My Naughty Album
   - Narcos X
   - Operacion Limpieza
   - PinUp Sex
-  - Porndoe Premium
   - Porndoepedia
-  - Porno Academie
-  - Quest for Orgasm
   - Reife Swinger
-  - Relaxxxed
-  - Scam Angels
   - Scambisti Maturi
   - Special Feet Force
   - STG
-  - The White Boxxx
   - Trans Taboo
   - Transbella
   - Tu Venganza
-  - Xchimera
   - XXX Omas
-  - XXXShades
 + #### PornPortal | ✅
   - 3dxstar Channel PornPortal
   - Anal Channel PornPortal

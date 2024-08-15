@@ -407,38 +407,38 @@ searchSites = {
     213: ('Brace Faced', 'https://www.teamskeet.com', '/movies/'),
     214: ('Teen JOI', 'https://www.teamskeet.com', '/movies/'),
     215: ('Step Siblings', 'https://www.teamskeet.com', '/movies/'),
-    216: ('Lets Doe It', 'https://letsdoeit.com', '/search.en.html?q='),
-    217: ('The White Boxxx', 'https://letsdoeit.com', '/search.en.html?q='),
-    218: ('Scam Angels', 'https://letsdoeit.com', '/search.en.html?q='),
+    216: ('Lets Doe It', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
+    217: ('The White Boxxx', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
+    218: ('Scam Angels', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
     219: ('Chicas Loca', 'https://mamacitaz.com', '/search.en.html?q='),
-    220: ('Her Limit', 'https://letsdoeit.com', '/search.en.html?q='),
-    221: ('A Girl Knows', 'https://letsdoeit.com', '/search.en.html?q='),
-    222: ('Porno Academie', 'https://letsdoeit.com', '/search.en.html?q='),
-    223: ('Xchimera', 'https://letsdoeit.com', '/search.en.html?q='),
+    220: ('Her Limit', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
+    221: ('A Girl Knows', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
+    222: ('Porno Academie', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
+    223: ('Xchimera', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
     224: ('Carne Del Mercado', 'https://mamacitaz.com', '/search.en.html?q='),
-    225: ('XXX Shades', 'https://letsdoeit.com', '/search.en.html?q='),
-    226: ('Bums Bus', 'https://letsdoeit.com', '/search.en.html?q='),
-    227: ('Bitches Abroad', 'https://letsdoeit.com', '/search.en.html?q='),
+    225: ('XXX Shades', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
+    226: ('Bums Bus', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
+    227: ('Bitches Abroad', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
     228: ('La Cochonne', 'https://amateureuro.com', '/search.en.html?q='),
     229: ('Crowd Bondage', 'https://forbondage.com', '/search.en.html?q='),
-    230: ('Relaxxxed', 'https://letsdoeit.com', '/search.en.html?q='),
-    231: ('My Naughty Album', 'https://letsdoeit.com', '/search.en.html?q='),
+    230: ('Relaxxxed', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
+    231: ('My Naughty Album', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
     232: ('Tu Venganza', 'https://mamacitaz.com', '/search.en.html?q='),
-    233: ('Bums Buero', 'https://letsdoeit.com', '/search.en.html?q='),
+    233: ('Bums Buero', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
     234: ('Los Consoladores', 'https://vipsexvault.com', '/search.en.html?q='),
-    235: ('Quest for Orgasm', 'https://letsdoeit.com', '/search.en.html?q='),
+    235: ('Quest for Orgasm', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
     236: ('Trans Bella', 'https://transbella.com', '/search.en.html?q='),
     237: ('Her Big Ass', 'https://mamacitaz.com', '/search.en.html?q='),
-    238: ('Horny Hostel', 'https://letsdoeit.com', '/search.en.html?q='),
+    238: ('Horny Hostel', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
     239: ('Fucked In Traffic', 'https://vipsexvault.com', '/search.en.html?q='),
     240: ('Las Folladoras', 'https://amateureuro.com', '/search.en.html?q='),
     241: ('Badtime Stories', 'https://forbondage.com', '/search.en.html?q'),
     242: ('Exposed Casting', 'https://vipsexvault.com', '/search.en.html?q='),
-    243: ('Kinky Inlaws', 'https://letsdoeit.com', '/search.en.html?q='),
-    244: ('Doe Projects', 'https://letsdoeit.com', '/search.en.html?q='),
+    243: ('Kinky Inlaws', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
+    244: ('Doe Projects', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
     245: ('Porndoepedia', 'https://vipsexvault.com', '/search.en.html?q='),
     246: ('Casting Francais', 'https://amateureuro.com', '/search.en.html?q='),
-    247: ('Bums Besuch', 'https://letsdoeit.com', '/search.en.html?q='),
+    247: ('Bums Besuch', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
     248: ('Special Feet Force', 'https://forbondage.com', '/search.en.html?q'),
     249: ('Trans Taboo', 'https://transbella.com', '/search.en.html?q='),
     250: ('Operacion Limpieza', 'https://mamacitaz.com', '/search.en.html?q='),
@@ -1091,7 +1091,7 @@ searchSites = {
     897: ('XVirtual', 'https://xvirtual.com', '/tour/search/?q='),
     898: ('Lust Reality', 'https://www.lustreality.com', '/virtualreality/scene/id/'),
     899: ('Sex Like Real', 'https://www.sexlikereal.com', '/scenes/'),
-    900: ('Doe Girls', 'https://doegirls.com', '/search.en.html?q='),
+    900: ('Doe Girls', 'https://doegirls.com', 'https://site-api.project1service.com'),
     901: ('Xillimite', 'https://www.xillimite.com', '/en/search?type=4&keyword='),
     902: ('VRPFilms', 'https://vrpfilms.com', '/m/'),
     903: ('VR Latina', 'https://vrlatina.com', '/video/'),
@@ -2405,8 +2405,12 @@ def getProviderFromSiteNum(siteNum):
             provider = networkTeamSkeet
 
         # Porndoe Premium
-        elif (216 <= siteNum <= 259):
+        elif siteNum == 219 or siteNum == 224 or (228 <= siteNum <= 229) or siteNum == 232 or siteNum == 234 or (236 <= siteNum <= 237) or (239 <= siteNum <= 242) or (245 <= siteNum <= 246) or (248 <= siteNum <= 259):
             provider = sitePorndoePremium
+
+        # LetsDoeIt
+        elif (216 <= siteNum <= 218) or (220 <= siteNum <= 223) or (225 <= siteNum <= 227) or (230 <= siteNum <= 231) or siteNum == 233 or siteNum == 235 or siteNum == 238 or (243 <= siteNum <= 244) or siteNum == 247:
+            provider = network1service
 
         # AnalVids
         elif siteNum == 260:
@@ -2894,7 +2898,7 @@ def getProviderFromSiteNum(siteNum):
 
         # DoeGirls
         elif siteNum == 900:
-            provider = sitePorndoePremium
+            provider = network1service
 
         # Xillimite
         elif siteNum == 901:
