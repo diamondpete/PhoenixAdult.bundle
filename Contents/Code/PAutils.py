@@ -395,7 +395,7 @@ def postParseTitle(output):
     # Remove single period at end of title
     output = re.sub(r'(?<=[^\.].)(?<=\w)(?:\.)$', '', output)
     # Remove space between word and certain punctuation
-    output = re.sub(r'\s+(?=[.,!:\'\)])', '', output)
+    output = re.sub(r'\s+(?=[.,!\'\)]|(:(?!\))))', '', output)
     # Add space between word and opening quote
     output = re.sub(r'(?<=\S)([\"]\S+)', lambda m: ' ' + m.group(1), output)
     # Remove space between punctuation and word
@@ -467,12 +467,12 @@ def manualWordFix(word):
     exceptions = (
         'im', 'theyll', 'cant', 'ive', 'shes', 'theyre', 'tshirt', 'dont', 'wasnt', 'youre', 'ill', 'whats', 'didnt',
         'isnt', 'senor', 'senorita', 'thats', 'gstring', 'milfs', 'oreilly', 'bangbros', 'bday', 'dms', 'bffs',
-        'ohmy', 'wont', 'whos', 'shouldnt', 'lasirena'
+        'ohmy', 'wont', 'whos', 'shouldnt', 'lasirena', 'espanol'
     )
     corrections = (
         'I\'m', 'They\'ll', 'Can\'t', 'I\'ve', 'She\'s', 'They\'re', 'T-Shirt', 'Don\'t', 'Wasn\'t', 'You\'re', 'I\'ll', 'What\'s', 'Didn\'t',
         'Isn\'t', 'Señor', 'Señorita', 'That\'s', 'G-String', 'MILFs', 'O\'Reilly', 'BangBros', 'B-Day', 'DMs', 'BFFs',
-        'OhMy', 'Won\'t', 'Who\'s', 'Shouldn\'t', 'LaSirena'
+        'OhMy', 'Won\'t', 'Who\'s', 'Shouldn\'t', 'LaSirena', 'español'
     )
     pattern = re.compile(r'\d|\W')
     cleanWord = re.sub(pattern, '', word)
