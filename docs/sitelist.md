@@ -669,6 +669,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - TGirl Japan Hardcore
   - TGirls.porn
   - TGirls.xxx
++ #### Heavy on Hotties | ✅
 + #### Hegre | ✓ - **Title only**
 + #### HentaiPros | ✅
 + #### HighTechVR Network | ❌

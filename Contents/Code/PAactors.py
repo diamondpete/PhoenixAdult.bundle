@@ -79,6 +79,7 @@ class PhoenixActors:
 
                             if searchStudioIndex == 32 and actorName != 'QueenSnake':
                                 actorName = '%s QueenSnake' % actorName
+                            searchActorName = actorName.lower()
 
                             break
 

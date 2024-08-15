@@ -189,6 +189,7 @@ import siteBrandNewAmateurs
 import sitePornbox
 import siteJesseLoadsMonsterFacials
 import networkGASM
+import siteHeavyOnHotties
 
 searchSites = {
     0: ('BlackedRaw', 'https://www.blackedraw.com', '/graphql'),
@@ -1977,6 +1978,7 @@ searchSites = {
     1883: ('Voodooed', 'https://voodooed.com', '/?s='),
     1884: ('Vored', 'https://vored.com', '/?s='),
     1885: ('Latina MILF', 'https://letsdoeit.com', 'https://site-api.project1service.com'),
+    1886: ('Heavy on Hotties', 'https://www.heavyonhotties.com', '/'),
 }
 
 abbreviations = (
@@ -3313,5 +3315,9 @@ def getProviderFromSiteNum(siteNum):
         # GASM
         elif 1866 <= siteNum <= 1882:
             provider = networkGASM
+
+        # Heavy on Hotties
+        elif siteNum == 1886:
+            provider = siteHeavyOnHotties
 
     return provider
