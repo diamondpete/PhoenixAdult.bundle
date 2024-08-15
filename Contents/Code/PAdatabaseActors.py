@@ -6088,6 +6088,10 @@ ActorsReplaceStudios = {
         'Talon': ['Talon Valenti'],
         'Zeus': ['Jesus "Zeus"Munoz'],
     },
+    70: {  # Heavy on Hotties
+        'Josephine Jackson': ['Josephine'],
+        'Natasha Sweet': ['Nadiya'],
+    },
 }
 
 ActorsStudioIndexes = {
@@ -6161,6 +6165,7 @@ ActorsStudioIndexes = {
     67: ['Data18'],
     68: ['Mofos'],
     69: ['Adult Empire'],
+    70: ['Heavy on Hotties'],
 }
 
 
