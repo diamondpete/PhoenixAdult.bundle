@@ -29,9 +29,9 @@ def getJSONfromPage(url, lang, siteNum):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     if req:
-            scriptData = detailsPageElements.xpath('//div[./div[@id="profile_page"]]/script')[0].text_content()
-            jsonData = re.search(r'\{.*\}', scriptData)
-            return json.loads(jsonData.group(0))
+        scriptData = detailsPageElements.xpath('//div[./div[@id="profile_page"]]/script')[0].text_content()
+        jsonData = re.search(r'\{.*\}', scriptData)
+        return json.loads(jsonData.group(0))
 
     return None
 
