@@ -6089,8 +6089,20 @@ ActorsReplaceStudios = {
         'Zeus': ['Jesus "Zeus"Munoz'],
     },
     70: {  # Heavy on Hotties
+        'Alice Wonderbang': ['Sasha'],
+        'Ashley Stillar': ['Nicol'],
+        'Cindy White': ['Cindy'],
+        'Jana Maho': ['Angelia'],
         'Josephine Jackson': ['Josephine'],
+        'Lilu Moon': ['Lilu4u'],
+        'Leony Dark': ['Leony'],
+        'Maggie Gold': ['Maggies'],
+        'Melissa Mandlikova': ['Pamela'],
         'Natasha Sweet': ['Nadiya'],
+        'Olga Winter': ['Olga'],
+        'Suzie Sun': ['Suzy'],
+        'Teena Lipoldino': ['Teena'],
+        'Victoria Ferrera': ['Roksolana'],
     },
 }
 

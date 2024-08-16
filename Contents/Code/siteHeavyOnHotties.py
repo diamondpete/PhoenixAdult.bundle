@@ -23,7 +23,7 @@ def search(results, lang, siteNum, searchData):
         try:
             req = PAutils.HTTPRequest(sceneURL)
             scenePageElements = HTML.ElementFromString(req.text)
-            titleNoFormatting = scenePageElements.xpath('//h1')[0].text_content().split(':')[-1].strip().strip('\"')
+            titleNoFormatting = scenePageElements.xpath('//h1')[0].text_content().split(':', 1)[-1].strip().strip('\"')
             curID = PAutils.Encode(sceneURL)
 
             date = scenePageElements.xpath('//span[@class="released title"]/strong')
@@ -35,9 +35,9 @@ def search(results, lang, siteNum, searchData):
             displayDate = releaseDate if date else ''
 
             if searchData.date and displayDate:
-                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+                score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (PAutils.parseTitle(titleNoFormatting, siteNum), PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
         except:
@@ -56,7 +56,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h1')[0].text_content().split(':')[-1].strip().strip('\"'), siteNum)
+    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h1')[0].text_content().split(':', 1)[-1].split(' - ')[-1].strip().strip('\"'), siteNum)
 
     # Summary
     summary = detailsPageElements.xpath('//div[@class="video_text"]')
