@@ -94,10 +94,11 @@ def search(results, lang, siteNum, searchData):
             # Check if Scene is a Behind the Scenes
             if 'BTS' in titleNoFormatting:
                 score = score - 1
-            for channel in searchResult['channels']:
-                if 'behindthescenes' in channel['id'] and 'BTS' not in titleNoFormatting:
-                    titleNoFormatting = titleNoFormatting + ' BTS'
-                    score = score - 1
+            if 'channels' in searchResult:
+                for channel in searchResult['channels']:
+                    if 'behindthescenes' in channel['id'] and 'BTS' not in titleNoFormatting:
+                        titleNoFormatting = titleNoFormatting + ' BTS'
+                        score = score - 1
 
             releaseDate = releaseDate.strftime('%Y-%m-%d')
 
