@@ -962,7 +962,7 @@ searchSites = {
     767: ('AllAnal', 'https://tour.allanal.com', '/_next/data/'),
     768: ('TurningTwistys', 'https://www.twistys.com', 'https://site-api.project1service.com'),
     769: ('GirlCum', 'https://www.girlcum.com', '/video/'),
-    770: ('Zero Tolerance', 'http://www.ztod.com', '/videos?query='),
+    770: ('Zero Tolerance', 'http://www.zerotolerancefilms.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
     771: ('ClubFilly', 'http://www.clubfilly.com', '/scenefocus.php?vnum=V'),
     772: ('Insex', 'https://www.insexondemand.com', '/iod/home.php?s='),
     773: ('Sexuallybroken', 'https://www.insexondemand.com', '/iod/home.php?d=sexuallybroken.com&s='),
@@ -2725,7 +2725,7 @@ def getProviderFromSiteNum(siteNum):
 
         # ZeroTolerance
         elif siteNum == 770:
-            provider = siteZTOD
+            provider = networkGammaEntOther
 
         # ClubFilly
         elif siteNum == 771:
