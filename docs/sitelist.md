@@ -599,7 +599,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
 + #### FamilyHookups | ✅
 + #### FemdomEmpire / Feminized | ✅
 + #### Femjoy | ✓ - **Model or Title (but not both), Date Add**
-+ #### FilthyKings | ✅
++ #### Filthy Kings | ✅
   - Fill Up My Mom
   - Filthy Blowjobs
   - Filthy Massage
@@ -609,6 +609,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - FK BTS
   - Hot Girls Raw
   - Its Anal
+  - MYLF Seeker
   - Night Creep
 + #### FinishesTheJob | ✅ - **Date Add**
   - ManoJob
