@@ -82,6 +82,8 @@ def search(results, lang, siteNum, searchData):
 
             if 'mainchannel' in searchResult:
                 subSite = searchResult['mainChannel']['name'].strip()
+            elif 'serie_name' in searchResult:
+                subSite = searchResult['serie_name'].strip()
             else:
                 subSite = ''
 
@@ -164,7 +166,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Tagline and Collection(s)
     if not detailsPageElements['network_name']:
-        if 'filthykings' in PAsearchSites.getSearchBaseURL(siteNum):
+        if 'filthykings' in PAsearchSites.getSearchBaseURL(siteNum) or 'touchmywife' in PAsearchSites.getSearchBaseURL(siteNum):
             tagline = PAutils.parseTitle(detailsPageElements['serie_name'], siteNum)
             metadata.collections.add(tagline)
             metadata.tagline = tagline
@@ -174,6 +176,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         tagline = PAutils.parseTitle(detailsPageElements['serie_name'].replace("Devils Film", "Devil's Film"), siteNum)
         metadata.collections.add(PAutils.studio(tagline, siteNum))
         metadata.tagline = PAutils.studio(tagline, siteNum)
+        metadata.collections.add(metadata.studio)
     elif 'studio_name' in detailsPageElements:
         tagline = PAutils.parseTitle(detailsPageElements['studio_name'].replace("Devils Film", "Devil's Film"), siteNum)
         metadata.collections.add(PAutils.studio(tagline, siteNum))
