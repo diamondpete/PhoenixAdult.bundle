@@ -85,12 +85,19 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Posters
     images = []
+    posters = []
     images.append('/members/models/%s/scenes/%s/videothumb.jpg' % (modelId, scene))
     for idx in range(1, detailsPageElements['galleryCount'] + 1):
         path = '/members/models/%s/scenes/%s/photos/thumbs/%s-%s-%d-%d.jpg' % (modelId, scene, PAsearchSites.getSearchSiteName(siteNum).lower(), modelId, sceneNum, idx)
         images.append(path)
 
-    posters = getGraphQL(assetQuery, 'paths', images, siteNum)['asset']['batch']['result']
+
+    if detailsPageElements['galleryCount'] > 25:
+        chunks = PAutils.chunks(images, 25)
+        for chunk in chunks:
+            posters.extend(getGraphQL(assetQuery, 'paths', chunk, siteNum)['asset']['batch']['result'])
+    else:
+        posters = getGraphQL(assetQuery, 'paths', images, siteNum)['asset']['batch']['result']
 
     for poster in posters:
         if poster:

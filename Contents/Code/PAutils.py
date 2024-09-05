@@ -597,3 +597,7 @@ def functionTimer(fun, msg, *args):
     fun(*args)
     end_time = time.time()
     Log('%s: %s' % (msg, str(timedelta(seconds=(end_time - start_time)))))
+
+
+def chunks(lst, n):
+    return [lst[i:i + n] for i in xrange(0, len(lst), n)]
