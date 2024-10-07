@@ -477,8 +477,6 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Hot Legs & Feet
   - House of Taboo
   - Only Blowjob
-+ #### DefeatedSexFight | ✅
-+ #### DefeatedXXX | ✅
 + #### Deranged Dollars | ✅
   - Assylum
   - SlaveMouth

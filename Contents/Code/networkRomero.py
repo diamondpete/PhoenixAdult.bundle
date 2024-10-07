@@ -88,7 +88,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         movieGenres.addGenre(genreName)
 
     # Actor(s)
-    for actorLink in detailsPageElements.xpath('//div[contains(@class, "tagsmodels")][./img[@alt="model icon"]]//a'):
+    if siteNum == 896:
+        actorXpath = '//div[contains(@class, "tagsmodels")]//a'
+    else:
+        actorXpath = '//div[contains(@class, "tagsmodels")][./img[@alt="model icon"]]//a'
+    for actorLink in detailsPageElements.xpath(actorXpath):
         actorName = actorLink.text_content().strip()
         actorPhotoURL = ''
 
