@@ -2004,6 +2004,7 @@ abbreviations = (
     ('^aw ', 'AngelaWhite '),
     ('^ba ', 'BBCSurprise '),
     ('^baebz ', 'Baeb '),
+    ('^badventures ', 'Bang '),
     ('^bandts ', 'BeautyandtheSenior '),
     ('^bblib ', 'BigButtsLikeItBig '),
     ('^bcasting ', 'BangCasting '),
