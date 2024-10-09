@@ -88,7 +88,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     tagline = ""
     dvdTitle = ""
     try:
-        tagline = re.sub(r'bang(?=(\s|$))(?!\!)', 'Bang!', PAutils.parseTitle(detailsPageElements.xpath('//p[contains(., "eries:")]/a[contains(@href, "video")]')[0].text_content().strip(), siteNum), flags=re.IGNORECASE)
+        tagline = re.sub(r'bang(?=(\s|$))(?!\!)', 'Bang!', PAutils.parseTitle(detailsPageElements.xpath('//p[contains(., "eries:")]/a[contains(@href, "originals")]')[0].text_content().strip(), siteNum), flags=re.IGNORECASE)
     except:
         pass
 
@@ -119,11 +119,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Actor(s)
     if siteNum == 1365:
-        actorXPATH = '//div[contains(@class, "clear-both")]//a[contains(@href, "pornstar")]'
+        actorXpath = '//div[contains(@class, "clear-both")]//a[contains(@href, "pornstar")]'
     else:
-        actorXPATH = '//div[contains(@class,"overflow-hidden")]//div[contains(@class, "name")]/a[contains(@href, "pornstar") and not(@aria-label)]'
+        actorXpath = '//div[contains(@class, "name")]/a[contains(@href, "pornstar") and not(@aria-label)]'
 
-    for actorLink in detailsPageElements.xpath(actorXPATH):
+    for actorLink in detailsPageElements.xpath(actorXpath):
         actorPhotoURL = ''
         if siteNum == 1365:
             actorName = actorLink.text_content()
