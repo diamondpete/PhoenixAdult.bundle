@@ -5641,8 +5641,10 @@ ActorsReplaceStudios = {
         'Luna Amor': ['Alexya'],
         'Luna Fae': ['Luna'],
         'Mella Megan': ['Mella'],
+        'Petra Vismekova': ['Petra'],
         'Reese Robbins': ['Reese'],
         'Siri Dahl': ['Siri'],
+        'Steve Hooper': ['Bailey Lincoln'],
     },
     57: {  # Desperate Amateurs
         'Stephie Staar': ['Stephie'],
