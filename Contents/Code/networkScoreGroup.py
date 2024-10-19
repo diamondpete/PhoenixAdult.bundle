@@ -99,18 +99,18 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h1')[0].text_content().strip(), siteNum)
+    title = detailsPageElements.xpath('//h1')[0].text_content().strip()
+    if not title:
+        actors = detailsPageElements.xpath('//div/span[@class="value"]/a/text()')
+        if len(actors) > 1:
+            title = ' and '.join(actors)
+        elif actors:
+            title = actors[0]
+    metadata.title = PAutils.parseTitle(title, siteNum).replace('Coming Soon:', '').strip()
 
     # Summary
-    summary_xpaths = [
-        '//div[@class="p-desc"]',
-        '//div[contains(@class, "desc")]'
-    ]
-
-    for xpath in summary_xpaths:
-        for summary in detailsPageElements.xpath(xpath):
-            metadata.summary = summary.text_content().replace('Read More »', '').strip()
-            break
+    summary = detailsPageElements.xpath('//div[contains(@class, "p-desc")]/text()')
+    metadata.summary = '\n'.join([x for x in summary if x]).strip()
 
     # Studio
     metadata.studio = 'Score Group'
@@ -134,21 +134,36 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
+    # Genres
+    genre_xpaths = [
+        '//div[@class="mb-3"]/a',
+        '//div[contains(@class, "desc")]//a[contains(@href, "tag") or contains(@href, "category")]'
+    ]
+
+    for xpath in genre_xpaths:
+        for genreLink in detailsPageElements.xpath(xpath):
+            genreName = genreLink.text_content().strip()
+
+            movieGenres.addGenre(genreName)
+
     # Actor(s)
     for actorLink in detailsPageElements.xpath('//div/span[@class="value"]/a'):
         actorName = actorLink.text_content().strip()
         actorPhotoURL = ''
 
+        try:
+            modelURL = actorLink.xpath('.//@href')[0].split('?')[0]
+            req = PAutils.HTTPRequest(modelURL)
+            modelPageElements = HTML.ElementFromString(req.text)
+
+            actorPhotoURL = modelPageElements.xpath('//div[@class="item-img pos-rel"]//img/@src')[0]
+        except:
+            pass
+
         movieActors.addActor(actorName, actorPhotoURL)
 
     if siteNum == 1344:
         movieActors.addActor('Christy Marks', '')
-
-    # Genres
-    for genreLink in detailsPageElements.xpath('//div[@class="mb-3"]/a'):
-        genreName = genreLink.text_content().strip()
-
-        movieGenres.addGenre(genreName)
 
     # Posters/Background
     match = re.search(r'posterImage: \'(.*)\'', req.text)
