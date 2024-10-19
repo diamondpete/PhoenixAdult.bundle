@@ -110,7 +110,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Summary
     summary = detailsPageElements.xpath('//div[contains(@class, "p-desc")]/text()')
-    metadata.summary = '\n'.join([x for x in summary if x]).strip()
+    metadata.summary = '\n'.join([x for x in summary if x and x != ' ']).strip()
 
     # Studio
     metadata.studio = 'Score Group'
