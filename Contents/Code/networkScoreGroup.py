@@ -6,7 +6,8 @@ def getSearchFromForm(query, siteNum):
     params = {
         'keywords': query,
         's_filters[type]': 'videos',
-        's_filters[site]': 'current'
+        's_filters[site]': 'current',
+        #'p_filters[sort]': 'older'
     }
     searchURL = '%s/search-es' % PAsearchSites.getSearchBaseURL(siteNum)
     req = PAutils.HTTPRequest(searchURL, params=params)
