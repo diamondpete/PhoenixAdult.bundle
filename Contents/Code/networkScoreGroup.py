@@ -42,6 +42,8 @@ def search(results, lang, siteNum, searchData):
         match = re.search(r'(?<=\/)\d+(?=\/)', sceneURL)
         if match:
             searchID = match.group(0)
+        actors = PAutils.Encode(searchResult.xpath('.//small[@class="i-model"]')[0].text_content())
+        img = PAutils.Encode(searchResult.xpath('.//img/@src')[0])
 
         releaseDate = searchData.dateFormat() if searchData.date else ''
 
@@ -50,7 +52,7 @@ def search(results, lang, siteNum, searchData):
         else:
             score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d|%s|%s|%s|%s' % (curID, siteNum, releaseDate, PAutils.Encode(titleNoFormatting), actors, img), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum)
     for sceneURL in googleResults:
@@ -106,11 +108,29 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             title = ' and '.join(actors)
         elif actors:
             title = actors[0]
+
+    if re.search('Latest.*Videos', title):
+        title = PAutils.Decode(metadata_id[3])
+        actors = PAutils.Decode(metadata_id[4]).split(',')
+        art.append(PAutils.Decode(metadata_id[5]))
+        for actorLink in actors:
+            actorName = actorLink.strip()
+            actorPhotoURL = ''
+
+            movieActors.addActor(actorName, actorPhotoURL)
     metadata.title = PAutils.parseTitle(title, siteNum).replace('Coming Soon:', '').strip()
 
     # Summary
-    summary = detailsPageElements.xpath('//div[contains(@class, "p-desc")]/text()')
-    metadata.summary = '\n'.join([x for x in summary if x and x != ' ']).strip()
+    summary_xpaths = [
+        '//div[contains(@class, "p-desc")]/text()',
+        '//div[contains(@class, "desc")]/text()'
+    ]
+
+    for xpath in summary_xpaths:
+        summary = detailsPageElements.xpath(xpath)
+        if summary:
+            metadata.summary = '\n'.join([x for x in summary if x and x != ' ']).strip()
+            break
 
     # Studio
     metadata.studio = 'Score Group'
@@ -160,7 +180,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         except:
             pass
 
-        movieActors.addActor(actorName, actorPhotoURL)
+        if actorName.lower() != 'extra':
+            movieActors.addActor(actorName, actorPhotoURL)
 
     if siteNum == 1344:
         movieActors.addActor('Christy Marks', '')
