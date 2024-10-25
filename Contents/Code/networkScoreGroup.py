@@ -20,6 +20,8 @@ def search(results, lang, siteNum, searchData):
     searchResults = []
     searchPageResults = []
     searchID = None
+    temp = []
+    count = 0
 
     parts = searchData.title.split()
     if unicode(parts[0], 'UTF-8').isdigit():
@@ -86,7 +88,17 @@ def search(results, lang, siteNum, searchData):
             else:
                 score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
+            if score == 80:
+                count += 1
+                temp.append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
+            else:
+                results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
+
+    for result in temp:
+        if count > 1 and result.score == 80:
+            results.Append(MetadataSearchResult(id=result.id, name=result.name, score=79, lang=lang))
+        else:
+            results.Append(MetadataSearchResult(id=result.id, name=result.name, score=result.score, lang=lang))
 
     return results
 
