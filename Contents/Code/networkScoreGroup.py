@@ -88,6 +88,9 @@ def search(results, lang, siteNum, searchData):
             else:
                 score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
+            if searchData.date and parse(releaseDate) > parse(searchData.dateFormat()):
+                releaseDate = searchData.dateFormat()
+
             if score == 80:
                 count += 1
                 temp.append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
@@ -154,12 +157,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.collections.add(metadata.tagline)
 
     # Release Date
-    try:
-        date = detailsPageElements.xpath('//div/span[@class="value"]')[1].text_content().strip()
-    except:
-        date = None
+    date = detailsPageElements.xpath('//div/span[@class="value"]')
     if date:
-        date_object = parse(date)
+        date_object = parse(date[1].text_content().strip())
+        if sceneDate and date_object > parse(sceneDate):
+            date_object = parse(sceneDate)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
     elif sceneDate:
