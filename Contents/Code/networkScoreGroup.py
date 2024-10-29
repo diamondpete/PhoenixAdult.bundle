@@ -185,9 +185,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     for actorLink in detailsPageElements.xpath('//div/span[@class="value"]/a'):
         actorName = actorLink.text_content().strip()
         actorPhotoURL = ''
+        gender = ''
 
         try:
             modelURL = actorLink.xpath('.//@href')[0].split('?')[0]
+            gender = 'male' if '/male-' in modelURL else ''
             req = PAutils.HTTPRequest(modelURL)
             modelPageElements = HTML.ElementFromString(req.text)
 
@@ -196,7 +198,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             pass
 
         if actorName.lower() != 'extra':
-            movieActors.addActor(actorName, actorPhotoURL)
+            movieActors.addActor(actorName, actorPhotoURL, gender=gender)
 
     if siteNum == 1344:
         movieActors.addActor('Christy Marks', '')
