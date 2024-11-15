@@ -1769,6 +1769,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - WowPorn
 + #### X-Art | ✅
 + #### XConfessions | ✓
+  - LustCinema
 + #### XEmpire | ✅
   - AllBlackX
   - Darkx

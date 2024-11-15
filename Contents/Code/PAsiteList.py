@@ -1981,6 +1981,7 @@ searchSites = {
     1887: ('Filthy Kings', 'https://www.filthykings.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
     1888: ('MYLF Seeker', 'https://www.filthykings.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
     1889: ('Score Classics', 'https://www.scoreclassics.com', '/classic-boob-videos/'),
+    1890: ('LustCinema', 'https://next-prod-api.lustcinema.com', '/api/search'),
 }
 
 abbreviations = (
@@ -3328,5 +3329,9 @@ def getProviderFromSiteNum(siteNum):
         # Heavy on Hotties
         elif siteNum == 1886:
             provider = siteHeavyOnHotties
+
+        # Lust Cinema
+        elif siteNum == 1890:
+            provider = siteXConfessions
 
     return provider
