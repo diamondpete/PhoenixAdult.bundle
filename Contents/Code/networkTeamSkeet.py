@@ -102,8 +102,12 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     # Actor(s)
     actors = detailsPageElements['models']
     for actorLink in actors:
-        actorID = actorLink['id']
-        actorName = actorLink['name']
+        try:
+            actorID = actorLink['modelId']
+            actorName = actorLink['modelName']
+        except:
+            actorID = actorLink['id']
+            actorName = actorLink['name']
         actorPhotoURL = ''
 
         try:
