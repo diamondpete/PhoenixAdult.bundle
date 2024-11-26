@@ -1443,7 +1443,7 @@ searchSites = {
     1249: ('Foster Tapes', 'https://www.teamskeet.com', '/movies/'),
     1250: ('Freeuse Fantasy', 'https://www.teamskeet.com', '/movies/'),
     1251: ('Not My Grandpa', 'https://www.teamskeet.com', '/movies/'),
-    1252: ('AmateurBoxxx', 'https://tour.amateurboxxx.com', '/search.php?query='),
+    1252: (),
     1253: ('AnalOnly', 'https://tour.analonly.com', '/_next/data/'),
     1254: ('Exposed Whores', 'https://exposedwhores.com/new-tour', '/search.php?query='),
     1255: ('She Seduced Me', 'https://www.sheseducedme.com', '/search.php?query='),
@@ -2601,8 +2601,8 @@ def getProviderFromSiteNum(siteNum):
         elif siteNum == 669:
             provider = siteDorcelClub
 
-        # MissaX / AllHerLuv / AmateurBoxxx / Exposed Whores / She Seduced Me / House of Fyre / Philavise / Lauren Phillips
-        elif siteNum == 672 or siteNum == 673 or siteNum == 1252 or (1254 <= siteNum <= 1255) or (1264 <= siteNum <= 1265) or siteNum == 1327:
+        # MissaX / AllHerLuv / Exposed Whores / She Seduced Me / House of Fyre / Philavise / Lauren Phillips
+        elif siteNum == 672 or siteNum == 673 or (1254 <= siteNum <= 1255) or (1264 <= siteNum <= 1265) or siteNum == 1327:
             provider = siteMissaX
 
         # Mylf
