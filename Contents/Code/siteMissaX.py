@@ -49,9 +49,14 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//span[@class="update_title"] | //p[@class="raiting-section__title"]')[0].text_content().strip(), siteNum)
 
     # Summary
-    summary = detailsPageElements.xpath('//span[@class="latest_update_description"] | //p[contains(@class, "text")]')
+    summary = ''
+    paragraphs = detailsPageElements.xpath('//span[@class="latest_update_description"] | //div[@class="container"]//p[@class="dvd-scenes__title"]/following-sibling::p')
+    for paragraph in paragraphs:
+        text = paragraph.text_content().replace('\xc2\xa0', '').strip()
+        if text:
+            summary = summary + text + '\n'
     if summary:
-        metadata.summary = summary[0].text_content().replace('Includes:', '').replace('Synopsis:', '').strip()
+        metadata.summary = summary.replace('Includes:', '').replace('Synopsis:', '').split('You Might Also Like')[0].strip()
 
     # Studio
     metadata.studio = PAsearchSites.getSearchSiteName(siteNum)
