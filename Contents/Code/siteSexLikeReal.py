@@ -41,7 +41,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
 
     # Summary
-    maybeSummary = detailsPageElements.xpath('//div[contains(@class, "u-mb--four u-lh--opt")]')
+    maybeSummary = detailsPageElements.xpath('//div[contains(@class, "u-lh--opt u-fs--fo u-wh")]')
     if maybeSummary and len(maybeSummary) == 1:
         metadata.summary = maybeSummary[0].text_content().strip()
 
@@ -52,7 +52,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.collections.add(metadata.studio)
 
     # Release Date
-    date = detailsPageElements.xpath('//time[contains(@class, "u-inline-block u-align-y--m u-ml--three desktop:u-ml--four")]/@datetime')[0]
+    date = detailsPageElements.xpath('//time[contains(@class, "u-inline-block u-align-y--m")]/@datetime')[0]
     date_object = parse(date)
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
@@ -69,7 +69,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
         req = PAutils.HTTPRequest(actorPageURL)
         actorPage = HTML.ElementFromString(req.text)
-        actorPhotoURL = actorPage.xpath('//div[contains(@class, "c-meta-model-poster")]//img/@data-src')[0]
+        actorPhotoURL = actorPage.xpath('//div[@class="u-ratio u-ratio--top u-ratio--model u-radius--two u-mb--four"]/img/@src')[0]
 
         movieActors.addActor(actorName, actorPhotoURL)
 

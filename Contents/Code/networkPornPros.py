@@ -63,7 +63,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Summary
     try:
-        if 'pornplus' in sceneURL:
+        if 'pornplus' or 'tiny4k' in sceneURL:
             summary = detailsPageElements.xpath('//div[contains(@class, "space-x-4 items-start")]//span')[0].text_content().strip()
         else:
             summary = detailsPageElements.xpath('//div[contains(@id, "description")]')[0].text_content().strip()
@@ -81,7 +81,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.collections.add(siteName)
 
     # Actor(s)
-    if 'pornplus' in sceneURL:
+    if 'pornplus' or 'tiny4k' in sceneURL:
         actors = detailsPageElements.xpath('//div[contains(@class, "space-y-4 p-4")]//a[contains(@href, "/models/")]')
     else:
         actors = detailsPageElements.xpath('//div[@id="t2019-sinfo"]//a[contains(@href, "/girls/")]')
