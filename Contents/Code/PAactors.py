@@ -435,15 +435,16 @@ def getFromIndexxx(actorName, actorEncoded, metadata):
 
 
 def getFromAdultDVDEmpire(actorName, actorEncoded, metadata):
+    cookies = {'ageConfirmed': 'true'}
     actorPhotoURL = ''
     gender = ''
     results = []
 
-    req = PAutils.HTTPRequest('https://www.adultdvdempire.com/performer/search?fq=ag_cast_gender%3AF&fq=' + actorEncoded)
+    req = PAutils.HTTPRequest('https://www.adultdvdempire.com/performer/search?fq=ag_cast_gender%3AF&fq=' + actorEncoded, cookies=cookies)
     femaleActorSearch = HTML.ElementFromString(req.text)
-    req = PAutils.HTTPRequest('https://www.adultdvdempire.com/performer/search?fq=ag_cast_gender%3AT&fq=' + actorEncoded)
+    req = PAutils.HTTPRequest('https://www.adultdvdempire.com/performer/search?fq=ag_cast_gender%3AT&fq=' + actorEncoded, cookies=cookies)
     transActorSearch = HTML.ElementFromString(req.text)
-    req = PAutils.HTTPRequest('https://www.adultdvdempire.com/hottest-pornstars.html?fq=ag_cast_gender%3AM&fq=' + actorEncoded)
+    req = PAutils.HTTPRequest('https://www.adultdvdempire.com/hottest-pornstars.html?fq=ag_cast_gender%3AM&fq=' + actorEncoded, cookies=cookies)
     maleActorSearch = HTML.ElementFromString(req.text)
 
     searchResults = femaleActorSearch.xpath('//div[@id="performerlist"]/div')
