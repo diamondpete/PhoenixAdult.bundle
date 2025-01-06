@@ -3,13 +3,14 @@ import PAutils
 
 
 def search(results, lang, siteNum, searchData):
+    cookies = {'18-plus-modal': 'hidden'}
     titleNoActors = ' '.join(searchData.title.split(' ')[2:])
     if titleNoActors.startswith('and '):
         titleNoActors = ' '.join(titleNoActors.split(' ')[3:])
 
     if searchData.date:
         url = PAsearchSites.getSearchSearchURL(siteNum) + 'date/' + searchData.date + '/' + searchData.date
-        req = PAutils.HTTPRequest(url)
+        req = PAutils.HTTPRequest(url, cookies=cookies)
         searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//div[contains(@class, "content-grid-item")]'):
             title = searchResult.xpath('.//span[@class="title"]/a')[0].text_content().split('-')
@@ -28,7 +29,7 @@ def search(results, lang, siteNum, searchData):
     sceneID = searchData.title.split()[0]
     if unicode(sceneID, 'utf-8').isdigit():
         sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + '/video/watch/' + sceneID
-        req = PAutils.HTTPRequest(sceneURL)
+        req = PAutils.HTTPRequest(sceneURL, cookies=cookies)
         detailsPageElements = HTML.ElementFromString(req.text)
 
         detailsPageElements = detailsPageElements.xpath('//div[contains(@class, "content-pane-title")]')[0]
@@ -44,9 +45,10 @@ def search(results, lang, siteNum, searchData):
 
 
 def update(metadata, lang, siteNum, movieGenres, movieActors, art):
+    cookies = {'18-plus-modal': 'hidden'}
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + '/video/watch/' + metadata_id[0]
-    req = PAutils.HTTPRequest(sceneURL)
+    req = PAutils.HTTPRequest(sceneURL, cookies=cookies)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
@@ -94,7 +96,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         actorName = actorLink.text_content().strip()
 
         actorPageURL = PAsearchSites.getSearchBaseURL(siteNum) + actorLink.get('href')
-        req = PAutils.HTTPRequest(actorPageURL)
+        req = PAutils.HTTPRequest(actorPageURL, cookies=cookies)
         actorPage = HTML.ElementFromString(req.text)
         actorPhotoURL = 'http:' + actorPage.xpath('//div[contains(@class, "model-profile")]//img/@src')[0]
 
@@ -151,7 +153,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                 sceneID = match.group(0)
             galleryURL = '%s/galleries/%s/screenshots' % (PAsearchSites.getSearchBaseURL(siteNum), sceneID)
 
-        req = PAutils.HTTPRequest(galleryURL)
+        req = PAutils.HTTPRequest(galleryURL, cookies=cookies)
         photoPageElements = HTML.ElementFromString(req.text)
         for poster in photoPageElements.xpath('//div[@class="img-wrapper"]//picture/source[1]/@srcset'):
             if not poster.startswith('http'):
