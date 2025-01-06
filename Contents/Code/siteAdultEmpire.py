@@ -244,12 +244,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Summary
     try:
-        if '\n' in detailsPageElements.xpath('//div[@class="container"][.//h2]//parent::p')[0].text_content():
-            summary = '\n'.join([line.text_content().strip() for line in detailsPageElements.xpath('//div[@class="container"][.//h2]//parent::p')])
-        else:
-            summary = detailsPageElements.xpath('//div[@class="container"][.//h2]//parent::p')[0].text_content().strip()
+        summary = '\n'.join([line.text_content().strip() for line in detailsPageElements.xpath('//div[@class="container"][.//h2]//parent::p')])
     except:
         summary = ''
+
     metadata.summary = summary
 
     # Studio
