@@ -70,8 +70,6 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Jonathan Jordan XXX
   - Kaiia Eve
   - Kings of Fetish
-  - Lethal Hardcore
-  - Lethal Hardcore VR
   - LeWood
   - Only 3x
   - Pornstar Stroker
@@ -778,6 +776,9 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - WhippedAss
   - WiredPussy
 + #### Kinky Spa | ✓
++ #### Lethal Hardcore | ✅
+  - Lethal Hardcore
+  - Lethal Hardcore VR
 + #### LetsDoeIt Network | ✅
   - A Girl Knows
   - Bitches Abroad
