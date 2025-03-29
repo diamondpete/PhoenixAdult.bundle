@@ -5,6 +5,8 @@ import PAutils
 def search(results, lang, siteNum, searchData):
     if not PAsearchSites.getSearchSiteName(siteNum) == 'Casting Couch-X':
         searchData.title = ' '.join(searchData.title.split(' ')[2:])
+        if searchData.title.startswith('and '):
+            searchData.title = ' '.join(searchData.title.split(' ')[3:])
     directURL = PAsearchSites.getSearchSearchURL(siteNum) + slugify(searchData.title)
     searchResults = [directURL]
 
