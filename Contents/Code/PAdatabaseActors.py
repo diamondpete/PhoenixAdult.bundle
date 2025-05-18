@@ -6094,6 +6094,7 @@ ActorsReplaceStudios = {
         'Krystal Banks': ['Krystal'],
     },
     69: {  # Adult Empire
+        'Addison Vodka': ['Addison'],
         'Ice La Fox': ['Ice LaFox'],
         'Jesus Reyes Vazquez': ['Jesus Reyes Vazqeuz'],
         'Lutro Steel': ['Lutro Steele'],
