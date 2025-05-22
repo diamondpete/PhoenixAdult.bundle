@@ -393,7 +393,9 @@ def postParseTitle(output):
     lower_exceptions = ['a', 'y', 'n', 'an', 'of', 'the', 'and', 'for', 'to', 'onto', 'but', 'or', 'nor', 'at', 'with', 'vs', 'com', 'co', 'org']
 
     # Add space after a punctuation if missing
-    output = re.sub(r'(?=[\!|\:|\?|\.](?=(\w{1,}))\b)\S(?!(co\b|net\b|com\b|org\b|porn\b|E\d|xxx\b))', lambda m: m.group(0) + ' ', output, flags=re.IGNORECASE)
+    output = re.sub(r'(?=[\!|\:|\?](?=(\w{1,}))\b)\S(?!(co\b|net\b|com\b|org\b|porn\b|E\d|xxx\b))', lambda m: m.group(0) + ' ', output, flags=re.IGNORECASE)
+    # Add space after a period if missing (skips numbers)
+    output = re.sub(r'(?=[\.](?=([A-z]{1,}))\b)\S(?!(co\b|net\b|com\b|org\b|porn\b|E\d|xxx\b))', lambda m: m.group(0) + ' ', output, flags=re.IGNORECASE)
     # Remove single period at end of title
     output = re.sub(r'(?<=[^\.].)(?<=\w)(?:\.)$', '', output)
     # Remove space between word and certain punctuation
