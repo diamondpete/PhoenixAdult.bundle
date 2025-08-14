@@ -89,8 +89,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.year = metadata.originally_available_at.year
 
     # Genres
-    genres = PAutils.getDictValuesFromKey(genresDB, PAsearchSites.getSearchSiteName(siteNum))
-    genres.extend(detailsPageElements['tags'])
+    genres = detailsPageElements['tags'] + PAutils.getDictValuesFromKey(genresDB, PAsearchSites.getSearchSiteName(siteNum).replace(' ', '').lower())
     for genreLink in genres:
         genreName = genreLink.replace('_', ' ').replace('-', ' ')
 
@@ -175,17 +174,17 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
 
 genresDB = {
-    'Anal4K': ['Anal', 'Ass', 'Creampie'],
-    'BBCPie': ['Interracial', 'BBC', 'Creampie'],
-    'Cum4K': ['Creampie'],
-    'DeepThroatLove': ['Blowjob', 'Deep Throat'],
-    'GirlCum': ['Orgasms', 'Girl Orgasm', 'Multiple Orgasms'],
-    'Holed': ['Anal', 'Ass'],
-    'Lubed': ['Lube', 'Raw', 'Wet'],
-    'MassageCreep': ['Massage', 'Oil'],
-    'Passion-HD': ['Hardcore'],
-    'POVD': ['Gonzo', 'POV'],
-    'PureMature': ['MILF', 'Mature'],
+    'anal4k': ['Anal', 'Ass', 'Creampie'],
+    'bbcpie': ['Interracial', 'BBC', 'Creampie'],
+    'cum4k': ['Creampie'],
+    'deepthroatlove': ['Blowjob', 'Deep Throat'],
+    'girlcum': ['Orgasms', 'Girl Orgasm', 'Multiple Orgasms'],
+    'holed': ['Anal', 'Ass'],
+    'lubed': ['Lube', 'Raw', 'Wet'],
+    'massagecreep': ['Massage', 'Oil'],
+    'passion-hd': ['Hardcore'],
+    'povd': ['Gonzo', 'POV'],
+    'puremature': ['MILF', 'Mature'],
 }
 
 actorsDB = {
