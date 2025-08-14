@@ -28,11 +28,20 @@ def search(results, lang, siteNum, searchData):
     titleNoFormatting = PAutils.parseTitle(searchResult['title'], siteNum)
     subSite = searchResult['sponsor']['name']
     curID = PAutils.Encode(searchData.encoded)
-    releaseDate = searchData.dateFormat() if searchData.date else ''
 
-    score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+    date = searchResult['releasedAt']
+    if date:
+        releaseDate = parse(date).strftime('%Y-%m-%d')
+    else:
+        releaseDate = searchData.dateFormat() if searchData.date else ''
+    displayDate = releaseDate if date else ''
 
-    results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s]' % (titleNoFormatting, subSite), score=score, lang=lang))
+    if searchData.date and displayDate:
+        score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+    else:
+        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+
+    results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, subSite, displayDate), score=score, lang=lang))
 
     return results
 
@@ -53,6 +62,31 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     # Studio
     metadata.studio = 'PornPros'
 
+    # Tagline and Collection(s)
+    tagline = PAsearchSites.getSearchSiteName(siteNum)
+    metadata.tagline = tagline
+    metadata.collections.add(metadata.tagline)
+
+    # Release Date
+    date = detailsPageElements['releasedAt']
+    if date:
+        date_object = parse(date)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+    elif sceneDate:
+        date_object = parse(sceneDate)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+
+    # Genres
+    genres = PAutils.getDictValuesFromKey(genresDB, PAsearchSites.getSearchSiteName(siteNum))
+    genres.extend(detailsPageElements['tags'])
+    for genreLink in genres:
+        genreName = genreLink.replace('_', ' ')
+
+        if genreName != tagline.lower() and genreName not in [str(actorName['name']).lower() for actorName in detailsPageElements['actors']]:
+            movieGenres.addGenre(genreName)
+
     # Actor(s)
     for actorLink in detailsPageElements['actors']:
         actorName = actorLink['name']
@@ -64,40 +98,27 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
         movieActors.addActor(actorName, actorPhotoURL)
 
-    # Tagline and Collection(s)
-    tagline = PAsearchSites.getSearchSiteName(siteNum)
-    metadata.tagline = tagline
-    metadata.collections.add(metadata.tagline)
-
     # Manually Add Actors
     # Add Actor Based on Title
     for actor in PAutils.getDictValuesFromKey(actorsDB, metadata.title):
         movieActors.addActor(actor, '')
 
-    # Release Date
-    if sceneDate:
-        date_object = parse(sceneDate)
-        metadata.originally_available_at = date_object
-        metadata.year = metadata.originally_available_at.year
-
-    # Genres
-    genres = PAutils.getDictValuesFromKey(genresDB, PAsearchSites.getSearchSiteName(siteNum))
-    genres.extend(detailsPageElements['tags'])
-    for genreLink in genres:
-        genreName = genreLink.strip()
-
-        movieGenres.addGenre(genreName)
-
     # Posters
     art.append(detailsPageElements['posterUrl'].split('?')[0])
 
-    thumbUrl = detailsPageElements['thumbUrls'][0].rsplit('/', 1)[0]
+    if detailsPageElements['thumbUrls']:
+        thumbUrl = detailsPageElements['thumbUrls'][0].rsplit('/', 1)[0]
+    elif detailsPageElements['thumbUrl']:
+        thumbUrl = detailsPageElements['thumbUrl'].rsplit('/', 1)[0]
 
     if 'handtouched' in thumbUrl:
         for idx in range(1, 20):
             art.append('%s/%03d.jpg' % (thumbUrl, idx))
     else:
-        art.extend([x.split('?')[0] for x in detailsPageElements['thumbUrls']])
+        if detailsPageElements['thumbUrls']:
+            art.extend([x.split('?')[0] for x in detailsPageElements['thumbUrls']])
+        elif detailsPageElements['thumbUrl']:
+            art.append(detailsPageElements['thumbUrl'].split('?')[0])
 
     images = []
     imgHQcount = 0
