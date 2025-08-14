@@ -28,9 +28,9 @@ def search(results, lang, siteNum, searchData):
         title = searchResult['title']
     except:
         searchResult = getDataFromAPI(siteNum, 'releases', PAutils.rreplace(searchData.encoded, '-', '--', 1))
-        title =searchResult['title']
-    
-    titleNoFormatting =  PAutils.parseTitle(title, siteNum)
+        title = searchResult['title']
+
+    titleNoFormatting = PAutils.parseTitle(title, siteNum)
     subSite = searchResult['sponsor']['name']
     curID = PAutils.Encode(searchData.encoded)
 
@@ -62,7 +62,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     except:
         detailsPageElements = getDataFromAPI(siteNum, 'releases', PAutils.rreplace(slug, '-', '--', 1))
         title = detailsPageElements['title']
-    
+
     # Title
     metadata.title = PAutils.parseTitle(title, siteNum)
 
