@@ -67,13 +67,17 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.title = PAutils.parseTitle(title, siteNum)
 
     # Summary
-    metadata.summary = detailsPageElements['description']
+    summary = detailsPageElements['description'].strip()
+    if summary.lower() != 'n/a':
+        metadata.summary = summary
+    else:
+        metadata.summary = ''
 
     # Studio
     metadata.studio = 'PornPros'
 
     # Tagline and Collection(s)
-    tagline = PAsearchSites.getSearchSiteName(siteNum)
+    tagline = detailsPageElements['sponsor']['name']
     metadata.tagline = tagline
     metadata.collections.add(metadata.tagline)
 
@@ -93,7 +97,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     for genreLink in genres:
         genreName = genreLink.replace('_', ' ').replace('-', ' ')
 
-        if genreName != tagline.lower() and genreName not in [str(actorName['name']).lower() for actorName in detailsPageElements['actors']] and genreName not in junkTags:
+        if genreName.replace(' ', '').lower() != tagline.replace(' ', '').lower() and genreName not in [str(actorName['name']).lower() for actorName in detailsPageElements['actors']] and genreName not in junkTags:
             movieGenres.addGenre(genreName)
 
     # Actor(s)
@@ -193,5 +197,5 @@ actorsDB = {
 }
 
 junkTags = (
-    't4k'
+    't4k', 'kyle mason', 'danny mountain', 'oliver faze', 'johnny castle. anal4k', 'pornplus', 'liza rowwe', 'marika hase'
 )
