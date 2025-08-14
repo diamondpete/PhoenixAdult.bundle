@@ -92,7 +92,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     genres = PAutils.getDictValuesFromKey(genresDB, PAsearchSites.getSearchSiteName(siteNum))
     genres.extend(detailsPageElements['tags'])
     for genreLink in genres:
-        genreName = genreLink.replace('_', ' ')
+        genreName = genreLink.replace('_', ' ').replace('-', ' ')
 
         if genreName != tagline.lower() and genreName not in [str(actorName['name']).lower() for actorName in detailsPageElements['actors']] and genreName not in junkTags:
             movieGenres.addGenre(genreName)
@@ -106,7 +106,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         if modelPageElements:
             actorPhotoURL = modelPageElements['thumbUrl'].split('?')[0]
 
-        movieActors.addActor(actorName, actorPhotoURL)
+        if '&' in actorName:
+            for actor in actorName.split('&'):
+                movieActors.addActor(actor.strip(), '')
+        else:
+            movieActors.addActor(actorName, actorPhotoURL)
 
     # Manually Add Actors
     # Add Actor Based on Title
