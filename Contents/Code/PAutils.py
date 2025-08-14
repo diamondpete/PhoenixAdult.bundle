@@ -611,3 +611,8 @@ def functionTimer(fun, msg, *args):
 
 def chunks(lst, n):
     return [lst[i:i + n] for i in xrange(0, len(lst), n)]
+
+
+def rreplace(s, r, n, o):
+    li = s.rsplit(r, o)
+    return n.join(li)

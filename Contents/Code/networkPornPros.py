@@ -23,9 +23,14 @@ def search(results, lang, siteNum, searchData):
             searchData.title = ' '.join(searchData.title.split(' ')[3:])
 
     searchData.encoded = slugify(searchData.title.lower())
-    searchResult = getDataFromAPI(siteNum, 'releases', searchData.encoded)
-
-    titleNoFormatting = PAutils.parseTitle(searchResult['title'], siteNum)
+    try:
+        searchResult = getDataFromAPI(siteNum, 'releases', searchData.encoded)
+        title = searchResult['title']
+    except:
+        searchResult = getDataFromAPI(siteNum, 'releases', PAutils.rreplace(searchData.encoded, '-', '--', 1))
+        title =searchResult['title']
+    
+    titleNoFormatting =  PAutils.parseTitle(title, siteNum)
     subSite = searchResult['sponsor']['name']
     curID = PAutils.Encode(searchData.encoded)
 
@@ -37,9 +42,9 @@ def search(results, lang, siteNum, searchData):
     displayDate = releaseDate if date else ''
 
     if searchData.date and displayDate:
-        score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+        score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
     else:
-        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+        score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
     results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, subSite, displayDate), score=score, lang=lang))
 
@@ -51,10 +56,15 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     slug = PAutils.Decode(metadata_id[0])
     sceneDate = metadata_id[2]
 
-    detailsPageElements = getDataFromAPI(siteNum, 'releases', slug)
-
+    try:
+        detailsPageElements = getDataFromAPI(siteNum, 'releases', slug)
+        title = detailsPageElements['title']
+    except:
+        detailsPageElements = getDataFromAPI(siteNum, 'releases', PAutils.rreplace(slug, '-', '--', 1))
+        title = detailsPageElements['title']
+    
     # Title
-    metadata.title = PAutils.parseTitle(detailsPageElements['title'], siteNum)
+    metadata.title = PAutils.parseTitle(title, siteNum)
 
     # Summary
     metadata.summary = detailsPageElements['description']
@@ -84,7 +94,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     for genreLink in genres:
         genreName = genreLink.replace('_', ' ')
 
-        if genreName != tagline.lower() and genreName not in [str(actorName['name']).lower() for actorName in detailsPageElements['actors']]:
+        if genreName != tagline.lower() and genreName not in [str(actorName['name']).lower() for actorName in detailsPageElements['actors']] and genreName not in junkTags:
             movieGenres.addGenre(genreName)
 
     # Actor(s)
@@ -178,3 +188,7 @@ actorsDB = {
     'Poke Her In The Front': ['Sara Luvv', 'Dillion Harper'],
     'Best Friends With Nice Tits!': ['April O\'Neil', 'Victoria Rae Black'],
 }
+
+junkTags = (
+    't4k'
+)
