@@ -69,7 +69,7 @@ def search(results, lang, siteNum, searchData):
     return results
 
 
-def update(metadata, lang, siteNum, movieGenres, movieActors, art):
+def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, art):
     cookies = {'age_verified': 'yes'}
     metadata_id = str(metadata.id).split('|')
     sceneName = metadata_id[0]
@@ -93,7 +93,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     else:
         tagline = PAsearchSites.getSearchSiteName(siteNum)
     metadata.tagline = tagline
-    metadata.collections.add(tagline)
+    movieCollections.addCollection(tagline)
 
     # Release Date
     if sceneDate:

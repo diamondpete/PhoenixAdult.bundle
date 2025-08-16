@@ -18,6 +18,7 @@ from slugify import slugify
 from traceback import format_exc
 import PAactors
 import PAgenres
+import PAcollections
 import PAsearchSites
 import PAsiteList
 import PAutils
@@ -128,12 +129,14 @@ class PhoenixAdultAgent(Agent.Movies):
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
+        movieCollections = PAcollections.PhoenixCollections()
         movieGenres = PAgenres.PhoenixGenres()
         movieActors = PAactors.PhoenixActors()
         valid_images = list()
 
         HTTP.ClearCache()
         metadata.collections.clear()
+        movieCollections.clearCollections()
 
         metadata.genres.clear()
         movieGenres.clearGenres()
@@ -161,7 +164,11 @@ class PhoenixAdultAgent(Agent.Movies):
         if provider is not None:
             providerName = getattr(provider, '__name__')
             Log('Provider: %s' % providerName)
-            provider.update(metadata, lang, siteNum, movieGenres, movieActors, valid_images)
+            provider.update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, valid_images)
+
+        # Cleanup Collections and Add
+        Log('Collections')
+        movieCollections.processCollections(metadata, siteNum)
 
         # Cleanup Genres and Add
         Log('Genres')

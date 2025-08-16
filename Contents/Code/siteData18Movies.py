@@ -201,7 +201,7 @@ def search(results, lang, siteNum, searchData):
     return results
 
 
-def update(metadata, lang, siteNum, movieGenres, movieActors, art):
+def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, art):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     sceneDate = metadata_id[2]
@@ -214,7 +214,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     if len(metadata_id) > 3:
         Log('Switching to Data18Scenes')
-        siteData18Scenes.update(metadata, lang, siteNum, movieGenres, movieActors, art)
+        siteData18Scenes.update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, art)
         return metadata
 
     # Title
@@ -241,10 +241,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.studio = PAutils.studio(studio, siteNum)
 
     # Tagline and Collection(s)
-    metadata.collections.add(metadata.studio)
+    movieCollections.addCollection(metadata.studio)
     try:
         tagline = detailsPageElements.xpath('//p[contains(., "Movie Series")]//a[@title]')[0].text_content().strip()
-        metadata.collections.add(tagline)
+        movieCollections.addCollection(tagline)
     except:
         tagline = ''
     metadata.tagline = tagline

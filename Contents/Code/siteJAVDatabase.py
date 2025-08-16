@@ -46,7 +46,7 @@ def search(results, lang, siteNum, searchData):
     return results
 
 
-def update(metadata, lang, siteNum, movieGenres, movieActors, art):
+def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, art):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     req = PAutils.HTTPRequest(sceneURL)
@@ -77,9 +77,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.studio = studioClean
 
     if studio and metadata.studio:
-        metadata.collections.add(metadata.studio)
+        movieCollections.addCollection(metadata.studio)
     else:
-        metadata.collections.add('Japan Adult Video')
+        movieCollections.addCollection('Japan Adult Video')
 
     # Release Date
     date = detailsPageElements.xpath('//*[text()="Release Date: "]/following-sibling::text()[1]')

@@ -154,7 +154,7 @@ def search(results, lang, siteNum, searchData):
     return results
 
 
-def update(metadata, lang, siteNum, movieGenres, movieActors, art):
+def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, art):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     sceneDate = metadata_id[2]
@@ -215,7 +215,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                     if 'rk prime' in tagline.lower():
                         tagline = 'RK Prime'
                     else:
-                        metadata.collections.add(metadata.studio)
+                        movieCollections.addCollection(metadata.studio)
 
         if len(metadata_id) > 3:
             Log('Using original series information')
@@ -228,9 +228,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
             metadata.studio = tagline
         else:
             metadata.tagline = tagline
-        metadata.collections.add(tagline)
+        movieCollections.addCollection(tagline)
     except:
-        metadata.collections.add(metadata.studio)
+        movieCollections.addCollection(metadata.studio)
 
     # Release Date
     date = detailsPageElements.xpath('//span[contains(., "Release date")]//following-sibling::a/b')
