@@ -14,7 +14,7 @@ def getDataFromAPI(siteNum, searchType, slug, site, searchSite):
         data = req.json()
     
     subSite = PAsearchSites.getSearchSiteName(siteNum).replace(' ', '').lower()
-    if not data and subSite not in searchSite:
+    if not data and subSite not in searchSite and 'pornplus' in site:
         data = getDataFromAPI(siteNum, searchType, slug, site.replace('pornplus', subSite), searchSite.replace('pornplus', subSite))
     if not data and '-' in slug and '--' not in slug:
         data = getDataFromAPI(siteNum, 'releases', PAutils.rreplace(slug, '-', '--', 1), site, searchSite)
@@ -200,4 +200,3 @@ actorsDB = {
     'Poke Her In The Front': ['Sara Luvv', 'Dillion Harper'],
     'Best Friends With Nice Tits!': ['April O\'Neil', 'Victoria Rae Black'],
 }
-
