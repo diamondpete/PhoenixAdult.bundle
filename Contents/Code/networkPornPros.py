@@ -13,10 +13,13 @@ def getDataFromAPI(siteNum, searchType, slug, site, searchSite):
     if req.ok:
         data = req.json()
     
-    if not data and siteNum == 1693 and 'momcum' not in searchSite:
-        data = getDataFromAPI(siteNum, searchType, slug, site.replace('pornplus', 'momcum'), searchSite.replace('pornplus', 'momcum'))
+    subSite = PAsearchSites.getSearchSiteName(siteNum).replace(' ', '').lower()
+    if not data and subSite not in searchSite:
+        data = getDataFromAPI(siteNum, searchType, slug, site.replace('pornplus', subSite), searchSite.replace('pornplus', subSite))
     if not data and '-' in slug and '--' not in slug:
         data = getDataFromAPI(siteNum, 'releases', PAutils.rreplace(slug, '-', '--', 1), site, searchSite)
+
+    # Log(json.dumps(data, indent=2))
 
     return data
 
@@ -27,7 +30,7 @@ def search(results, lang, siteNum, searchData):
         if searchData.title.startswith('and '):
             searchData.title = ' '.join(searchData.title.split(' ')[3:])
 
-    searchData.encoded = slugify(searchData.title.lower().replace('\'', '').replace('.', ''))
+    searchData.encoded = slugify(searchData.title.lower().replace('\'s', ' s').replace('\'', '').replace('.', ''))
 
     searchResult = getDataFromAPI(siteNum, 'releases', searchData.encoded, PAsearchSites.getSearchBaseURL(siteNum), PAsearchSites.getSearchSearchURL(siteNum))
 
@@ -91,7 +94,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     junkTags.append(tagline.replace(' ', '').lower())
     genres = detailsPageElements['tags'] + PAutils.getDictValuesFromKey(genresDB, PAsearchSites.getSearchSiteName(siteNum).replace(' ', '').lower())
     for genreLink in genres:
-        genreName = genreLink.replace('_', ' ').replace('-', ' ').strip()
+        genreName = genreLink.replace('_', ' ').replace('-', ' ').replace('’', '\'').strip()
 
         if '.' in genreName and 'st.' not in genreName:
             for genreLink in genreName.split('.'):
