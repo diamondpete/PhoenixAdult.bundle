@@ -110,19 +110,17 @@ name = False
 for file in files:
     filename = file.rsplit('\\', 1)[-1]
 
+    ext = filename.split('.')[-1]
     if '.4k' in filename:
-        quality = '.4k.mp4'
+        quality = '.4k'
     elif '.1080p' in filename:
-        quality = '.1080p.mp4'
+        quality = '.1080p'
     elif '.720p' in filename:
-        quality = '.720p.mp4'
+        quality = '.720p'
     elif '.480p' in filename:
-        quality = '.480p.mp4'
-    elif '.mpg' in filename:
-        quality = '.mpg'
-    else:
-        quality = '.mp4'
+        quality = '.480p'
 
+    quality = quality if quality else '.%s' % ext
     if name == True:
         slug = slugify(' '.join(filename.split('%s.' % site, 1)[-1].split(quality)[0].split('.')[2:]))
     else:
@@ -143,7 +141,10 @@ for file in files:
         date = parse(rawDate)
         parsedDate = date.strftime('%y.%m.%d')
         actorName = data['actors'][0]['name'].strip().lower().replace(' ', '.')
-        newFilename = '%s.%s.%s.%s%s' % (site, parsedDate, actorName, slug.replace('-', '.'), quality)
+        if quality == '.%s' % ext:
+            newFilename = '%s.%s.%s.%s.%s' % (site, parsedDate, actorName, slug.replace('-', '.'), ext)
+        else:
+            newFilename = '%s.%s.%s.%s%s.%s' % (site, parsedDate, actorName, slug.replace('-', '.'), quality, ext)
         newFilePath = '%s\\%s' % (file.rsplit('\\', 1)[0], newFilename)
 
         print(filename)
@@ -153,7 +154,10 @@ for file in files:
             renameFile(file, newFilePath)
         elif user_input == 'n':
             actorName = data['actors'][1]['name'].strip().lower().replace(' ', '.')
-            newFilename = '%s.%s.%s.%s%s' % (site, parsedDate, actorName, slug.replace('-', '.'), quality)
+            if quality == '.%s' % ext:
+                newFilename = '%s.%s.%s.%s.%s' % (site, parsedDate, actorName, slug.replace('-', '.'), ext)
+            else:
+                newFilename = '%s.%s.%s.%s%s.%s' % (site, parsedDate, actorName, slug.replace('-', '.'), quality, ext)
             newFilePath = '%s\\%s' % (file.rsplit('\\', 1)[0], newFilename)
             user_input = get_input_with_timeout('Change filename to: %s? ' % newFilePath, None)
             if not user_input:
