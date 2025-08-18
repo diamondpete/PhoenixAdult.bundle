@@ -9,6 +9,7 @@ import sys
 import threading
 import queue
 from dateutil.parser import parse
+from slugify import slugify
 
 def get_input_with_timeout(prompt, timeout):
     q = queue.Queue()
@@ -102,14 +103,34 @@ all_entries = os.listdir(directory_path)
 
 files = get_file_paths_os_listdir(directory_path)
 
+# Configs
+site = 'myveryfirsttime'
+name = False
+
 for file in files:
     filename = file.rsplit('\\', 1)[-1]
 
-    slug = filename.split('lubed.', 1)[-1].split('.4k')[0].replace('.', '-').strip()
+    if '.4k' in filename:
+        quality = '.4k.mp4'
+    elif '.1080p' in filename:
+        quality = '.1080p.mp4'
+    elif '.720p' in filename:
+        quality = '.720p.mp4'
+    elif '.480p' in filename:
+        quality = '.480p.mp4'
+    elif '.mpg' in filename:
+        quality = '.mpg'
+    else:
+        quality = '.mp4'
 
-    headers = {'x-site': 'https://lubed.com'}
+    if name == True:
+        slug = slugify(' '.join(filename.split('%s.' % site, 1)[-1].split(quality)[0].split('.')[2:]))
+    else:
+        slug = slugify(filename.split('%s.' % site, 1)[-1].split(quality)[0])
 
-    url = 'https://lubed.com/api/releases/%s' % slug
+    headers = {'x-site': 'https://%s.com' % site}
+
+    url = 'https://%s.com/api/releases/%s' % (site, slug)
 
     req = HTTPRequest(url, headers=headers)
 
@@ -122,22 +143,25 @@ for file in files:
         date = parse(rawDate)
         parsedDate = date.strftime('%y.%m.%d')
         actorName = data['actors'][0]['name'].strip().lower().replace(' ', '.')
-        newFilename = 'lubed.%s.%s.%s.4k.mp4' % (parsedDate, actorName, slug.replace('-', '.'))
+        newFilename = '%s.%s.%s.%s%s' % (site, parsedDate, actorName, slug.replace('-', '.'), quality)
         newFilePath = '%s\\%s' % (file.rsplit('\\', 1)[0], newFilename)
 
-        user_input = get_input_with_timeout('Change filename to: %s' % newFilePath, None)
+        print(filename)
+        user_input = get_input_with_timeout('Change filename to: %s? ' % newFilename, None)
 
         if not user_input:
             renameFile(file, newFilePath)
-        elif user_input == 'y':
+        elif user_input == 'n':
             actorName = data['actors'][1]['name'].strip().lower().replace(' ', '.')
-            newFilename = 'lubed.%s.%s.%s.4k.mp4' % (parsedDate, actorName, slug.replace('-', '.'))
+            newFilename = '%s.%s.%s.%s%s' % (site, parsedDate, actorName, slug.replace('-', '.'), quality)
             newFilePath = '%s\\%s' % (file.rsplit('\\', 1)[0], newFilename)
-            user_input = get_input_with_timeout('Change filename to: %s' % newFilePath, None)
+            user_input = get_input_with_timeout('Change filename to: %s? ' % newFilePath, None)
             if not user_input:
                 renameFile(file, newFilePath)
             else:
                 break
+        elif user_input == 's':
+            pass
         else:
             break
 
