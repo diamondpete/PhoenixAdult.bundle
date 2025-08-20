@@ -57,7 +57,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     for actorLink in detailsPageElements['models']:
         actorName = actorLink['title']
         actorPhotoURL = ''
-        
+
         if 'featuredImage' in actorLink and 'permalink' in actorLink['featuredImage']:
             actorPhotoURL = basePath + actorLink['featuredImage']['permalink']
         else:
@@ -68,7 +68,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
                 actorPhotoURL = basePath + modelPageElements['featuredImage']['permalink']
             except:
                 pass
-            
+
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
