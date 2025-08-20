@@ -1094,7 +1094,7 @@ searchSites = {
     901: ('Xillimite', 'https://www.xillimite.com', '/en/search?type=4&keyword='),
     902: ('VRPFilms', 'https://vrpfilms.com', '/m/'),
     903: ('VR Latina', 'https://vrlatina.com', '/video/'),
-    904: ('VRConk', 'https://www.vrconk.com', '/api/content/v1/search/'),
+    904: ('VR Conk', 'https://www.vrconk.com', '/api/content/v1/search/'),
     905: (),
     906: ('Evolved Fights', 'https://www.evolvedfights.com', '/updates/'),
     907: ('Evolved Fights Lesbian Edition', 'https://www.evolvedfightslez.com', '/updates/'),
