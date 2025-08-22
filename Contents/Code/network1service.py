@@ -74,7 +74,7 @@ def search(results, lang, siteNum, searchData):
                     titleNoFormatting = '[%s] %s' % (sceneType.capitalize(), titleNoFormatting)
                     score = score - 10
 
-                if siteNum != 328:
+                if siteNum not in [83, 328]:
                     if subSite and re.sub(r'\W', '', PAsearchSites.getSearchSiteName(siteNum)).lower() != re.sub(r'\W', '', subSite).lower():
                         score = score - 10
 
