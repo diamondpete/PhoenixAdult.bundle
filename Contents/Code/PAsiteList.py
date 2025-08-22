@@ -1556,7 +1556,7 @@ searchSites = {
     1363: ('I Made Porn', 'https://www.teamskeet.com', '/movies/'),
     1364: ('Facials4K', 'https://facials4k.com', '/api'),
     1365: ('Bang Movies', 'https://www.bang.com', '/movies?term='),
-    1366: ('VirtualPorn', 'https://virtualporn.com', '/videos?q='),
+    1366: ('VirtualPorn', 'https://virtualporn.com', 'https://site-api.project1service.com'),
     1367: ('JAVLibrary', 'https://www.javlibrary.com', '/en/vl_searchbyid.php?keyword='),
     1368: ('Killergram', 'https://killergram.com', '/episodes.asp?page=episodes&id='),
     1369: ('Killergram Platinum', 'https://killergram.com', '/platinum.asp?page=platinum&id='),
@@ -3237,7 +3237,7 @@ def getProviderFromSiteNum(siteNum):
 
         # Virtual Porn
         elif siteNum == 1366:
-            provider = siteVirtualPorn
+            provider = network1service
 
         # JAV Library
         elif siteNum == 1367:
