@@ -84,10 +84,17 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         actorName = actorLink.text_content().strip()
         actorPhotoURL = ''
 
-        modelURL = actorLink.xpath('.//@href')[0].replace(PAsearchSites.getSearchBaseURL(siteNum).replace('www.', ''), PAsearchSites.getSearchBaseURL(1165).replace('www.', ''))
-        req = PAutils.HTTPRequest(modelURL, cookies=cookies)
-        actorsPageElements = HTML.ElementFromString(req.text)
-        actorPhotoURL = actorsPageElements.xpath('//div[@class="starPic" or @class="bioBPic"]/img/@src')[0]
+        try:
+            modelURL = actorLink.xpath('.//@href')[0].replace(PAsearchSites.getSearchBaseURL(siteNum).replace('www.', ''), PAsearchSites.getSearchBaseURL(1165).replace('www.', ''))
+            req = PAutils.HTTPRequest(modelURL, cookies=cookies)
+            actorsPageElements = HTML.ElementFromString(req.text)
+            actorPhotoURL = actorsPageElements.xpath('//div[@class="starPic" or @class="bioBPic"]/img/@src')[0]
+        except:
+            modelURL = actorLink.xpath('.//@href')[0].replace('www.', '')
+            req = PAutils.HTTPRequest(modelURL, cookies=cookies)
+            actorsPageElements = HTML.ElementFromString(req.text)
+            actorPhotoURL = actorsPageElements.xpath('//div[@class="starPic" or @class="bioBPic"]/img/@src')[0]
+
 
         if not date:
             for scene in actorsPageElements.xpath('//div[@class="videoBlock" or @class="videoContent"]'):
