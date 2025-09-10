@@ -82,6 +82,7 @@ def search(results, lang, siteNum, searchData):
 
     return results
 
+
 def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, art):
     metadata_id = str(metadata.id).split('|')
     sceneID = metadata_id[0]
@@ -96,7 +97,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     detailsPageElements = req.json()['result'][0]
 
     # Title
-    metadata.title = PAutils.parseTitle(detailsPageElements['title'], siteNum).replace('ï¿½', '\'')
+    metadata.title = PAutils.parseTitle(detailsPageElements['title'].strip(), siteNum).replace('ï¿½', '\'')
 
     # Summary
     description = None
@@ -164,10 +165,21 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
 
         actorName = actorData['name']
         actorPhotoURL = ''
+
+        if 'gender' in actorData:
+            gender = actorData['gender']
+        else:
+            gender = ''
+
         if actorData['images'] and actorData['images']['profile']:
             actorPhotoURL = actorData['images']['profile']['0']['xs']['url']
 
-        movieActors.addActor(actorName, actorPhotoURL)
+        movieActors.addActor(actorName, actorPhotoURL, gender=gender)
+
+    # Manually Add Actors
+    # Add Actor Based on Scene ID
+    for actor in PAutils.getDictValuesFromKey(actorsDB, detailsPageElements['id']):
+        movieActors.addActor(actor, '')
 
     # Posters
     for imageType in ['poster', 'cover']:
@@ -196,3 +208,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
                 pass
 
     return metadata
+
+
+actorsDB = {
+    '9179301': ['Maria Kazi'],
+    '9577871': ['Armani Black'],
+}

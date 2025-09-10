@@ -41,7 +41,7 @@ def search(results, lang, siteNum, searchData):
             if searchData.date and releaseDate:
                 score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.replace('Parody', '').replace('XXX', '').replace(' a ', ' ').lower())
+                score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.replace('Parody', '').lower().strip())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s in %s %s' % (PAsearchSites.getSearchSiteName(siteNum), girlName, titleNoFormatting, releaseDate), score=score, lang=lang))
 
