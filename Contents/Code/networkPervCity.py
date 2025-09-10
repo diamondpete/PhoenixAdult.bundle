@@ -91,7 +91,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
 
         if not date:
             for scene in actorsPageElements.xpath('//div[@class="videoBlock" or @class="videoContent"]'):
-                if scene.xpath('.//h3')[0].text_content().replace('...', '').strip().lower() in metadata.title.lower() or scene.xpath('.//h2/a')[0].text_content().replace('...', '').strip().lower() in metadata.title.lower():
+                cleanTitle = re.sub(r'\W', '', metadata.title).lower()
+                h2CleanTitle = re.sub(r'\W', '', scene.xpath('.//h3')[0].text_content().replace('...', '').strip()).lower()
+                h3CleanTitle = re.sub(r'\W', '', scene.xpath('.//h2/a')[0].text_content().replace('...', '').strip()).lower()
+                if h2CleanTitle in cleanTitle or h3CleanTitle in cleanTitle:
                     date = actorsPageElements.xpath('.//div[@class="date"]')[0].text_content()
 
             if date:
