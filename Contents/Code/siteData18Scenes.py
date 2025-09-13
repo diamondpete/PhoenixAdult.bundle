@@ -218,7 +218,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
                         movieCollections.addCollection(metadata.studio)
 
         if len(metadata_id) > 3:
-            Log('Using original series information')
             tagline = PAutils.parseTitle(PAutils.studio(detailsPageElements.xpath('//p[contains(., "Serie")]//a[@title]')[0].text_content().strip(), siteNum), siteNum)
             metadata.title = ("%s [Scene %s]" % (metadata_id[3], metadata_id[4]))
 
