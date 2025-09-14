@@ -124,6 +124,7 @@ class PhoenixActors:
                         Log('Gender: %s' % gender)
                         if Prefs['gender_enable']:
                             if gender == 'male':
+                                Log('Actor: %s %s' % (displayActorName, actorPhoto))
                                 continue
                     elif Prefs['gender_enable']:
                         if actorLink['gender']:
@@ -133,6 +134,7 @@ class PhoenixActors:
                             actorLink['gender'] = gender
                         Log('Gender: %s' % gender)
                         if gender == 'male':
+                            Log('Actor: %s %s' % (displayActorName, actorPhoto))
                             continue
 
                     if actorPhoto:
