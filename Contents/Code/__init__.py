@@ -71,6 +71,10 @@ class PhoenixAdultAgent(Agent.Movies):
             media.name = media.primary_metadata.title
 
         title = PAutils.getSearchTitleStrip(media.name)
+
+        if filename and '5.1080p' in filename.lower():
+            title = title.replace(' 080p', ' 5 1080p').strip()
+
         title = PAutils.getCleanSearchTitle(title)
 
         Log('***MEDIA TITLE [from media.name]*** %s' % title)
@@ -100,8 +104,6 @@ class PhoenixAdultAgent(Agent.Movies):
             searchTitle = title
         searchDate = searchSettings['searchDate']
 
-        if filename and '5.1080p' in filename.lower():
-            searchTitle = searchTitle + ' 5'
         search = PAsearchData.SearchData(media, searchTitle, searchDate, filepath)
 
         if siteNum is not None:

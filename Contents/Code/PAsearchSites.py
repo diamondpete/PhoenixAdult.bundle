@@ -48,19 +48,19 @@ def getSiteNumByFilter(searchFilter):
 
 
 def getSearchSettings(mediaTitle, filename):
-    plexBlacklist = ['web', 'cam', 'internal', 'xxx']
-    
-    if filename:
-        cleanFilename = re.sub('\W', ' ', filename.rsplit('/', 1)[-1].lower()).strip().split()
-        splitMediaTitle = mediaTitle.split()       
+    plexScannerBlacklist = map(str.strip, map(str.lower, Prefs['blacklist_list'].split(',')))
 
-        for word in plexBlacklist:
+    if filename and Prefs['blacklist_enable']:
+        cleanFilename = re.sub(r'\W', ' ', filename.rsplit('/', 1)[-1].lower()).strip().split()
+        splitMediaTitle = mediaTitle.split()
+
+        for word in plexScannerBlacklist:
             if word in cleanFilename:
                 Log('Restoring %s to SearchTitle' % word)
 
                 for idx in [i for i, x in enumerate(cleanFilename) if x == word]:
                     replaceWord = splitMediaTitle[map(str.lower, splitMediaTitle).index(cleanFilename[idx - 1])]
-                    splitMediaTitle[map(str.lower, splitMediaTitle).index(cleanFilename[idx - 1])] = ' %s %s ' % (replaceWord, word)
+                    splitMediaTitle[map(str.lower, splitMediaTitle).index(cleanFilename[idx - 1])] = '%s %s' % (replaceWord, word)
 
                 mediaTitle = ' '.join(splitMediaTitle)
 
