@@ -725,10 +725,10 @@ def cacheActorPhoto(url, actorName, gender, **kwargs):
         extension = '.%s' % url.split('.')[-1]
 
     if extension and extension in validExtensions:
-        if not gender and Prefs['gender_enable']:
+        if not checkGender and Prefs['gender_enable']:
             checkGender = genderCheck(actorName)
 
-        if gender:
+        if checkGender:
             filename = '%s_%s%s' % (baseFileName, gender, extension)
         else:
             filename = '%s%s' % (baseFileName, extension)

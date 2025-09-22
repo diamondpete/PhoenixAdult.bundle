@@ -6127,6 +6127,9 @@ ActorsReplaceStudios = {
         'Teena Lipoldino': ['Teena'],
         'Victoria Ferrera': ['Roksolana'],
     },
+    71: { # Brazzers
+        'Alice Fabre': ['Alice']
+    }
 }
 
 ActorsStudioIndexes = {
@@ -6201,6 +6204,7 @@ ActorsStudioIndexes = {
     68: ['Mofos'],
     69: ['Adult Empire'],
     70: ['Heavy on Hotties'],
+    71: ['Brazzers'],
 }
 
 
