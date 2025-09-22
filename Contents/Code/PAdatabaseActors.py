@@ -6127,7 +6127,7 @@ ActorsReplaceStudios = {
         'Teena Lipoldino': ['Teena'],
         'Victoria Ferrera': ['Roksolana'],
     },
-    71: { # Brazzers
+    71: {  # Brazzers
         'Alice Fabre': ['Alice']
     }
 }
