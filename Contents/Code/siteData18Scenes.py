@@ -199,59 +199,58 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
             metadata.studio = detailsPageElements.xpath('//p[contains(., "Site:")]//following-sibling::a[@class="bold"]')[0].text_content().strip()
         except:
             metadata.studio = ''
+    metadata.studio = PAutils.studio(metadata.studio, siteNum)
 
     # Tagline and Collection(s)
     try:
-        try:
-            siteName = detailsPageElements.xpath('//p[contains(., "Site:")]//following-sibling::a[@class="bold"]')[0].text_content().strip()
-        except:
-            siteName = None
-
-        try:
-            subSite = detailsPageElements.xpath('//b[contains(., "Network")]//following-sibling::a')[0].text_content().strip()
-        except:
-            try:
-                subSite = detailsPageElements.xpath('//b[contains(., "Network")]//following-sibling::text()')[2].split('|')[-1].strip()
-                if subSite not in ['Brazzers Exxtra', 'Brazzers Live', 'Bangbros Clips']:
-                    subSite = None
-            except:
-                subSite = None
-
-        try:
-            serieName = detailsPageElements.xpath('//p[contains(., "Webserie:") or contains(., "Miniserie")/a')[0].text_content().strip()
-        except:
-            serieName = None
-
-        try:
-            movieName = detailsPageElements.xpath('//p[contains(., "Movie:")]/a')[0].text_content().strip()
-        except:
-            movieName = None
-
-        if len(metadata_id) > 3:
-            tagline = PAutils.parseTitle(PAutils.studio(detailsPageElements.xpath('//p[contains(., "Serie")]//a[@title]')[0].text_content().strip(), siteNum), siteNum)
-            metadata.title = ("%s [Scene %s]" % (metadata_id[3], metadata_id[4]))
-        elif siteName:
-            tagline = siteName
-        elif subSite:
-            tagline = subSite
-        elif serieName:
-            tagline = serieName
-        elif movieName:
-            tagline = movieName
-        else:
-            tagline = ''
-
-        if 'rk prime' in tagline.lower():
-            tagline = 'RK Prime'
-
-        tagline = PAutils.parseTitle(tagline, siteNum)
-
-        if not metadata.studio:
-            metadata.studio = tagline
-        elif metadata.studio.replace(' ', '').lower() != tagline.replace(' ', '').lower():
-            metadata.tagline = tagline
-        movieCollections.addCollection(tagline)
+        siteName = detailsPageElements.xpath('//p[contains(., "Site:")]//following-sibling::a[@class="bold"]')[0].text_content().strip()
     except:
+        siteName = None
+
+    try:
+        subSite = detailsPageElements.xpath('//b[contains(., "Network")]//following-sibling::a')[0].text_content().strip()
+    except:
+        try:
+            subSite = detailsPageElements.xpath('//b[contains(., "Network")]//following-sibling::text()')[2].split('|')[-1].strip()
+            if subSite not in ['Brazzers Exxtra', 'Brazzers Live', 'Bangbros Clips']:
+                subSite = None
+        except:
+            subSite = None
+
+    try:
+        serieName = detailsPageElements.xpath('//p[contains(., "Webserie:") or contains(., "Miniserie")/a')[0].text_content().strip()
+    except:
+        serieName = None
+
+    try:
+        movieName = detailsPageElements.xpath('//p[contains(., "Movie:")]/a')[0].text_content().strip()
+    except:
+        movieName = None
+
+    if len(metadata_id) > 3:
+        tagline = detailsPageElements.xpath('//p[contains(., "Serie")]//a[@title]')[0].text_content().strip()
+        metadata.title = ("%s [Scene %s]" % (metadata_id[3], metadata_id[4]))
+    elif siteName:
+        tagline = siteName
+    elif subSite:
+        tagline = subSite
+    elif serieName:
+        tagline = serieName
+    elif movieName:
+        tagline = movieName
+    else:
+        tagline = ''
+
+    tagline = PAutils.parseTitle(PAutils.studio(tagline, siteNum), siteNum)
+
+    if not metadata.studio:
+        metadata.studio = tagline
+    elif metadata.studio.replace(' ', '').lower() != tagline.replace(' ', '').lower():
+        metadata.tagline = tagline
+
+    if tagline:
+        movieCollections.addCollection(tagline)
+    else:
         movieCollections.addCollection(metadata.studio)
 
     # Release Date
