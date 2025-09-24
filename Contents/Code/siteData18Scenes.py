@@ -201,7 +201,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         except:
             try:
                 subSite = detailsPageElements.xpath('//b[contains(., "Network")]//following-sibling::text()')[2].split('|')[-1].strip()
-                if subSite not in ['Brazzers Exxtra', 'Brazzers Live']:
+                if subSite not in ['Brazzers Exxtra', 'Brazzers Live', 'Bangbros Clips']:
                     subSite = None
             except:
                 subSite = None
