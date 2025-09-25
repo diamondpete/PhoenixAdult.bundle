@@ -228,6 +228,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     for actor in combined:
         movieActors.addActor(actor[0], actor[1], gender=actor[2])
 
+    # Manually Add Actors
+    # Add Actor Based on SceneID
+    for actor in PAutils.getDictValuesFromKey(actorsDB, sceneID):
+        movieActors.addActor(actor[0], '', gender=actor[1])
+
     # Posters
     if not PAsearchSites.getSearchBaseURL(siteNum).endswith(('girlsway.com', 'puretaboo.com')):
         art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_title'].lower().replace('-', '_')))
@@ -280,3 +285,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
                 pass
 
     return metadata
+
+
+actorsDB = {
+    '218114': [('Lara Lee', 'female')],
+}
