@@ -56,7 +56,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//div[contains(@class, "content-title")]')[0].text_content().strip(), siteNum)
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[contains(@class, "content-desc")]')[0].text_content().strip()
+    metadata.summary = detailsPageElements.xpath('//div[contains(@class, "content-desc")]')[1].text_content().strip()
 
     # Studio
     metadata.studio = 'Caramel Cash'
