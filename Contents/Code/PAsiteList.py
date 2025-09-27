@@ -186,6 +186,7 @@ import sitePornbox
 import siteJesseLoadsMonsterFacials
 import networkGASM
 import siteHeavyOnHotties
+import networkCaramelCash
 
 searchSites = {
     0: ('BlackedRaw', 'https://www.blackedraw.com', '/graphql'),
@@ -2965,7 +2966,7 @@ def getProviderFromSiteNum(siteNum):
             provider = network1service
 
         # VNA Network
-        elif siteNum == 931 or (1287 <= siteNum <= 1326):
+        elif siteNum == 931 or (1287 <= siteNum <= 1307) or ( 1309 <= siteNum <= 1326):
             provider = networkVNA
 
         # QueenSnake
@@ -3350,5 +3351,9 @@ def getProviderFromSiteNum(siteNum):
         # Lethal Hardcore
         elif (1782 <= siteNum <= 1783):
             provider = networkGammaEntOther
+
+        # Caramel Cash
+        elif siteNum == 1308:
+            provider = networkCaramelCash
 
     return provider
