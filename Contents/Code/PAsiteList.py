@@ -1230,8 +1230,8 @@ searchSites = {
     1038: (),
     1039: ('Vina Sky XXX', 'https://www.vinaskyxxx.com', '/sapi/'),
     1040: ('Reality Sis', 'https://nubiles-porn.com', '/video/website/73/'),
-    1041: (),
-    1042: (),
+    1041: ('VrpmvBay', 'https://vrpmvbay.com', '/video/'),
+    1042: ('CuckoldWish', 'https://cuckoldwish.com', '/videos/'),
     1043: (),
     1044: (),
     1045: (),
@@ -1497,7 +1497,7 @@ searchSites = {
     1305: ('Tasha Reign', 'https://tashareign.com', '/videos/'),
     1306: ('Jelena Jensen', 'https://jelenajensen.com', '/videos/'),
     1307: ('Penny Pax Live', 'https://pennypaxlive.com', '/videos/'),
-    1308: ('Alex Legend', 'https://alexlegend.com', '/videos/'),
+    1308: ('Alex Legend', 'https://alexlegend.com', '/video/'),
     1309: ('Sex My Wife', 'https://sexmywife.com', '/videos/'),
     1310: ('Rubber Doll', 'https://rubberdoll.net', '/videos/'),
     1311: ('Fucked Feet', 'https://fuckedfeet.com', '/videos/'),
@@ -3354,7 +3354,7 @@ def getProviderFromSiteNum(siteNum):
             provider = networkGammaEntOther
 
         # Caramel Cash
-        elif siteNum == 1308:
+        elif (1041 <= siteNum <= 1042) or siteNum == 1308:
             provider = networkCaramelCash
 
     return provider
