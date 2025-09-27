@@ -371,11 +371,17 @@ def actorDBfinder(actorName, metadata, type):
     if actorPhotoURL:
         Log('%s found in %s ' % (actorName, databaseName))
         Log('PhotoURL: %s' % actorPhotoURL)
-    elif Prefs['gender_enable'] and type == 'actor' and not gender:
+    elif (Prefs['gender_enable'] or Prefs['generic_image_enable']) and type == 'actor' and not gender:
         gender = genderCheck(actorName)
         Log('%s image not found' % actorName)
     else:
         Log('%s not found' % actorName)
+
+    if Prefs['generic_image_enable']:
+        if gender == 'female' and not actorPhotoURL:
+            actorPhotoURL = 'https://t3.ftcdn.net/jpg/00/97/03/72/360_F_97037264_ZZfCG8aa12o7NEZmnhVHGW49VOdfYcxy.jpg'
+        elif gender == 'male' and not actorPhotoURL:
+            actorPhotoURL = 'https://t3.ftcdn.net/jpg/01/13/46/18/240_F_113461869_W12s5AqhOOZF0YT3n3izlwQLzj82MGsj.jpg'
 
     return actorPhotoURL, gender
 
