@@ -95,7 +95,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         except:
             actorPhotoURL = ''
 
-        movieActors.addActor(actorName, actorPhotoURL)
+        movieActors.addActor(actorName, actorPhotoURL, gender='female')
 
     # Posters
     xpaths = [
@@ -138,7 +138,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
                     images.append((image, posterUrl))
                     metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
-                pass
+                break
         elif PAsearchSites.posterOnlyAlreadyExists(posterUrl, metadata):
             posterExists = True
 

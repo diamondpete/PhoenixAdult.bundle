@@ -16,29 +16,32 @@ def search(results, lang, siteNum, searchData):
 
     googleResults = PAutils.getFromSearchEngine(searchData.title, siteNum)
     for sceneURL in googleResults:
-        if ('videos/' in sceneURL or 'galleries/' in sceneURL) and '/page/' not in sceneURL and sceneURL not in searchResults:
-            searchResults.append(sceneURL)
+        if ('video/' in sceneURL) and '/page/' not in sceneURL and sceneURL not in searchResults:
+            searchResults.append(sceneURL.split('?')[0])
 
     for sceneURL in searchResults:
         req = PAutils.HTTPRequest(sceneURL)
         if req.ok:
             detailsPageElements = HTML.ElementFromString(req.text)
-            titleNoFormatting = PAutils.parseTitle(detailsPageElements.xpath('//h1[@class="customhcolor"]')[0].text_content(), siteNum)
+            titleNoFormatting = PAutils.parseTitle(detailsPageElements.xpath('//h1')[0].text_content(), siteNum)
             if 'http' not in sceneURL:
                 sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + sceneID
             curID = PAutils.Encode(sceneURL)
 
-            releaseDate = ''
-            date = detailsPageElements.xpath('//*[@class="date"]')[0].text_content().strip()
+            date = detailsPageElements.xpath('//div[@class="content-date"]')
             if date:
-                releaseDate = parse(date).strftime('%Y-%m-%d')
+                releaseDate = datetime.strptime(date[0].text_content().strip(), '%d.%m.%Y').strftime('%Y-%m-%d')
+            else:
+                releaseDate = searchData.dateFormat() if searchData.date else ''
+
+            displayDate = releaseDate if date else ''
 
             if searchData.date and releaseDate:
                 score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
                 score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s %s' % (PAsearchSites.getSearchSiteName(siteNum), titleNoFormatting, releaseDate), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='[%s] %s %s' % (PAsearchSites.getSearchSiteName(siteNum), titleNoFormatting, displayDate), score=score, lang=lang))
 
     return results
 
@@ -46,21 +49,17 @@ def search(results, lang, siteNum, searchData):
 def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, art):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
-    sceneID = sceneURL.split('/')[-2]
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h1[@class="customhcolor"]')[0].text_content().strip(), siteNum)
+    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h1')[0].text_content().strip(), siteNum)
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//*[@class="customhcolor2"]')[0].text_content().strip()
-
-    if siteNum == 1287:
-        metadata.summary = metadata.summary.split('Don\'t forget to join me')[0]
+    metadata.summary = detailsPageElements.xpath('//div[@class="content-desc"]')[1].text_content().strip()
 
     # Studio
-    metadata.studio = 'VNA Network'
+    metadata.studio = 'Caramel Cash'
 
     # Tagline and Collection(s)
     tagline = PAsearchSites.getSearchSiteName(siteNum)
@@ -68,61 +67,35 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     movieCollections.addCollection(tagline)
 
     # Release Date
-    date = detailsPageElements.xpath('//*[@class="date"]')[0].text_content().strip()
-    date_object = parse(date)
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year
+    date = detailsPageElements.xpath('//div[@class="content-date"]')
+    if date:
+        date_object = datetime.strptime(date[0].text_content().strip(), '%d.%m.%Y')
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
     # Genres
-    genres = detailsPageElements.xpath('//h4[@class="customhcolor"]')[0].text_content().strip()
-    for genreLink in genres.split(','):
-        genreName = genreLink.strip()
+    genres = detailsPageElements.xpath('//div[@class="content-tags"]/a')
+    for genreLink in genres:
+        genreName = genreLink.text_content().strip()
 
         movieGenres.addGenre(genreName)
 
     # Actor(s)
-    actors = detailsPageElements.xpath('//h3[@class="customhcolor"]')[0].text_content().strip()
-
-    # Fixing previous values to compensate for broken html tags
-    if siteNum == 1288:
-        metadata.summary = metadata.summary.replace(actors, '').strip()
-        actors = actors.replace(genres, '')
-
-    for actorLink in actors.replace('&nbsp', '').split(','):
-        actorName = actorLink.strip()
+    actors = detailsPageElements.xpath('//section[@class="content-sec backdrop"]//div[@class="main__models"]/a')
+    for actorLink in actors:
+        actorName = actorLink.text_content().strip()
         actorPhotoURL = ''
-
-        if actorName.endswith(' XXX'):
-            actorName = actorName[:-4]
 
         movieActors.addActor(actorName, actorPhotoURL)
 
-    if siteNum == 1314:
-        movieActors.addActor('Siri', '')
-
-    # Manually Add Actors
-    # Add Actor Based on Title
-    for actor in PAutils.getDictValuesFromKey(actorsDB, sceneID):
-        movieActors.addActor(actor[0], '', gender=actor[1])
-
     # Posters/Background
     xpaths = [
-        '//center//img/@src',
+        '//section[@class="content-gallery-sec"]//a[@data-lightbox="gallery"]/@href'
     ]
 
     for xpath in xpaths:
         for img in detailsPageElements.xpath(xpath):
-            if 'http' not in img:
-                img = PAsearchSites.getSearchBaseURL(siteNum) + '/' + img
-
             art.append(img)
-
-    # add thumbnails not found on scene page
-    if art and 'thumb_1' in art[0]:
-        art.extend([
-            art[0].replace('thumb_1', 'thumb_2'),
-            art[0].replace('thumb_1', 'thumb_3'),
-        ])
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
@@ -144,8 +117,3 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
                 pass
 
     return metadata
-
-
-actorsDB = {
-    '36260': [('Sarah Arabic', 'female')],
-}
