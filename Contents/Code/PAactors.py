@@ -99,7 +99,7 @@ class PhoenixActors:
                         if actorLink['gender']:
                             gender = actorLink['gender']
                         else:
-                            actorLink.update({'gender': gender})
+                            actorLink['gender'] = gender
                         Log('Actor: %s %s' % (displayActorName, actorPhoto))
                         Log('Gender: %s' % gender)
                         if Prefs['gender_enable']:
@@ -126,11 +126,12 @@ class PhoenixActors:
 
                         if req.ok and Prefs['actor_cache_enable']:
                             (actorPhoto, gender) = cacheActorPhoto(actorPhoto, displayActorName, actorLink['gender'], 'actor', bypass=False)
+                            actorLink['gender'] = gender
 
                     if (not req or not req.ok) and not localActorPhoto:
                         (actorPhoto, gender) = actorDBfinder(displayActorName, metadata, 'actor')
                         if not actorLink['gender']:
-                            actorLink.update({'gender': gender})
+                            actorLink['gender'] = gender
                         else:
                             gender = actorLink['gender']
 
@@ -138,18 +139,15 @@ class PhoenixActors:
                             (actorPhoto, gender) = cacheActorPhoto(actorPhoto, displayActorName, actorLink['gender'], 'actor', bypass=False)
                     elif actorLink['gender']:
                         gender = actorLink['gender']
-                    elif Prefs['gender_enable']:
+                    elif not actorLink['gender'] and Prefs['gender_enable']:
                         gender = genderCheck(actorName)
-                        actorLink.update({'gender': gender})
+                        actorLink['gender'] = gender
 
                     if Prefs['gender_enable']:
                         Log('Gender: %s' % gender)
                         if actorLink['gender'] == 'male':
                             Log('Actor: %s %s' % (displayActorName, actorPhoto))
                             continue
-                    elif Prefs['gender_enable']:
-                        gender = genderCheck(actorName)
-                        actorLink.update({'gender': gender})
 
                     if actorPhoto:
                         actorPhoto = PAutils.getClearURL(actorPhoto)
