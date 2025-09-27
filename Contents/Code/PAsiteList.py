@@ -2966,7 +2966,7 @@ def getProviderFromSiteNum(siteNum):
             provider = network1service
 
         # VNA Network
-        elif siteNum == 931 or (1287 <= siteNum <= 1307) or ( 1309 <= siteNum <= 1326):
+        elif siteNum == 931 or (1287 <= siteNum <= 1307) or (1309 <= siteNum <= 1326):
             provider = networkVNA
 
         # QueenSnake
