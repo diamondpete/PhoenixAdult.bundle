@@ -101,7 +101,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         for img in detailsPageElements.xpath(xpath):
             art.append(img)
 
-
     Log('Artwork found: %d' % len(art))
     images = []
     posterExists = False
