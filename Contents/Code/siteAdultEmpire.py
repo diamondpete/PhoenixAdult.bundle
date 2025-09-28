@@ -242,6 +242,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     splitScene = False
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    sceneID = sceneURL.split('/')[-1]
     sceneDate = metadata_id[2]
     req = PAutils.HTTPRequest(sceneURL, cookies=cookies)
     detailsPageElements = HTML.ElementFromString(req.text)
@@ -323,6 +324,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
 
         if actorName:
             movieActors.addActor(actorName, actorPhotoURL)
+
+    # Manually Add Actors
+    # Add Actor Based on SceneID
+    for actor in PAutils.getDictValuesFromKey(actorsDB, sceneID):
+        movieActors.addActor(actor[0], '', gender=actor[1])
 
     # Director(s)
     directors = detailsPageElements.xpath('//div[./a[@name="cast"]]//li[./*[contains(., "Director")]]/a/text()')
@@ -407,3 +413,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
                 pass
 
     return metadata
+
+
+actorsDB = {
+    '3000202': [('Cherry', 'female'), ('Shannon', 'female'), ('Jamie', 'female'), ('Paige', 'female')],
+    '3539628': [('Natalie', 'female'), ('Baby Silver', 'female'), ('Unknown Female 1068738-B', 'female'), ('Unknown Female 393531-A', 'female'), ('Unknown Female 463877-A', 'female')],
+    '4637331': [('Angie Emerald', 'female'), ('Kristen Sweet', 'female'), ('Marsha', 'female'), ('Simone', 'female')],
+}
