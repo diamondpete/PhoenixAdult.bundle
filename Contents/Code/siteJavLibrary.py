@@ -168,7 +168,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
             javID = '%s-0%s' % (javID.split('-')[0], javID.split('-')[-1])
 
     javBusURL = PAsearchSites.getSearchSearchURL(912) + javID
-    req = PAutils.HTTPRequest(javBusURL)
+    req = PAutils.HTTPRequest(javBusURL, cookies=javBusCookies)
     javbusPageElements = HTML.ElementFromString(req.text)
 
     if '404 Page' in req.text and date:
@@ -289,4 +289,10 @@ crossSiteDB = {
 
 ignoreList = {
     'SEXY', 'MEEL', 'SKOT', 'SCD', 'GDSC'
+}
+
+
+javBusCookies = {
+    'existmag': 'all',
+    'dv': '1'
 }
