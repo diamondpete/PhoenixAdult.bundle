@@ -419,4 +419,6 @@ actorsDB = {
     '3000202': [('Cherry', 'female'), ('Shannon', 'female'), ('Jamie', 'female'), ('Paige', 'female')],
     '3539628': [('Natalie', 'female'), ('Baby Silver', 'female'), ('Unknown Female 1068738-B', 'female'), ('Unknown Female 393531-A', 'female'), ('Unknown Female 463877-A', 'female')],
     '4637331': [('Angie Emerald', 'female'), ('Kristen Sweet', 'female'), ('Marsha', 'female'), ('Simone', 'female')],
+    ('1189256', '1444422'): [('Julia Perrin', 'female'), ('Cathy Stewart', 'female'), ('Christine Lodes', 'female'), ('Frederique', 'female'), ('Mandarine', 'female'), ('Marilyn Jess', 'female'), ('Sophie Duflot', 'female'), ('Sophie Guers', 'female'), ('Unknown Female 202797-A', 'female'), ('Unknown Female 202797-B', 'female'), ('Unknown Female 202797-C', 'female')],
+    '2547553': [('Angel', 'female'), ('Bunny Bleu', 'female'), ('Cody Nicole', 'female'), ('Ginger Lynn', 'female'), ('Heather Thomas', 'female'), ('Lisa De Leeuw', 'female'), ('Raven', 'female'), ('Lois Ayres', 'female'), ('Stevie Taylor', 'female')],
 }
