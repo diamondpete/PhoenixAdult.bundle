@@ -22,8 +22,9 @@ def search(results, lang, siteNum, searchData):
         titleNoActors = ' '.join(titleNoActors.split(' ')[3:])
     directURL = slugify(titleNoActors.replace('\'', ''), lowercase=True)
 
-    directURL = PAsearchSites.getSearchSearchURL(siteNum) + directURL
-    searchResultsURLs = [directURL]
+    directURL1 = PAsearchSites.getSearchSearchURL(siteNum) + directURL
+    directURL2 = 'https://www.teamskeet.com/movies/' + directURL
+    searchResultsURLs = [directURL1, directURL2]
 
     googleResults = PAutils.getFromSearchEngine(searchData.title, siteNum)
 
@@ -76,7 +77,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     sceneDate = metadata_id[2]
     sceneType = metadata_id[3].replace('content', 'Content')
 
-    detailsPageElements = getJSONfromPage(PAsearchSites.getSearchSearchURL(siteNum) + sceneName)[sceneType][sceneName]
+    try:
+        detailsPageElements = getJSONfromPage(PAsearchSites.getSearchSearchURL(siteNum) + sceneName)[sceneType][sceneName]
+    except:
+        detailsPageElements = getJSONfromPage('https://www.teamskeet.com/movies/%s' % sceneName)[sceneType][sceneName]
 
     # Title
     metadata.title = PAutils.parseTitle(detailsPageElements['title'], siteNum)
@@ -113,8 +117,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         actorPhotoURL = ''
 
         try:
-            actorData = getJSONfromPage('%s/models/%s' % (PAsearchSites.getSearchBaseURL(siteNum), actorID))
-            if actorData:
+            try:
+                actorData = getJSONfromPage('%s/models/%s' % (PAsearchSites.getSearchBaseURL(siteNum), actorID))
+                actorPhotoURL = actorData['modelsContent'][actorID]['img']
+            except:
+                actorData = getJSONfromPage('https://www.teamskeet.com/models/%s' % actorID)
                 actorPhotoURL = actorData['modelsContent'][actorID]['img']
         except:
             pass
