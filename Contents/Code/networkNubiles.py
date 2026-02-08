@@ -4,7 +4,7 @@ import PAutils
 
 def search(results, lang, siteNum, searchData):
     cookies = {'18-plus-modal': 'hidden'}
-    headers = { 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8', }
+    headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8'}
     titleNoActors = ' '.join(searchData.title.split(' ')[2:])
     if titleNoActors.startswith('and '):
         titleNoActors = ' '.join(titleNoActors.split(' ')[3:])
@@ -47,7 +47,7 @@ def search(results, lang, siteNum, searchData):
 
 def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, art):
     cookies = {'18-plus-modal': 'hidden'}
-    headers = { 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8', }
+    headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8'}
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + '/video/watch/' + metadata_id[0]
     req = PAutils.HTTPRequest(sceneURL, cookies=cookies, headers=headers)
