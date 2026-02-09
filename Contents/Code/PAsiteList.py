@@ -2004,9 +2004,9 @@ searchSites = {
     1912: ('Cheating Sis', 'https://www.cheatingsis.com', '/video/gallery/'),
     1913: ('Reality Sis', 'https://www.realitysis.com', '/video/gallery/'),
     1914: ('She\'s Breeding Material', 'https://www.shesbreedingmaterial.com', '/video/gallery/'),
-    1915: ('Dating My Stepson', 'https://datingmystepson.com', '/videogallery/'),
-    1916: ('Cheating Mommy', 'https://cheatingmommy.com', '/videogallery/'),
-    1917: ('MILF Coach', 'https://milfcoach.com', '/videogallery/'),
+    1915: ('Dating My Stepson', 'https://datingmystepson.com', '/video/gallery/'),
+    1916: ('Cheating Mommy', 'https://cheatingmommy.com', '/video/gallery/'),
+    1917: ('MILF Coach', 'https://milfcoach.com', '/video/gallery/'),
 }
 
 abbreviations = (
