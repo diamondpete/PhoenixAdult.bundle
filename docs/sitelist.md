@@ -1029,6 +1029,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Bad Teens Punished
   - Bountyhunter Porn
   - Caught My Coach
+  - Cheating Sis
   - Cum Swapping Sis
   - Daddy's Lil Angel
   - Detention Girls
@@ -1043,6 +1044,8 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Petite Ballerinas Fucked
   - Petite Hd Porn
   - Princess Cum
+  - Reality Sis
+  - She's Breeding Material
   - Smashed
   - Step Siblings Caught
   - Teacher Fucks Teens
@@ -1050,7 +1053,10 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   #### Mom Comes First | ✅
   #### Mom Lover (Nubiles) Sites | ❌ - **SceneID**
   - Bratty MILF
+  - Cheating Mommy
+  - Dating My Stepson
   - I'm Not Your Mommmy
+  - MILF Coach
   - Mom Lover
   - Mom Swapped
   - Mom Wants Creampie
