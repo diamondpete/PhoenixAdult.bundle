@@ -937,7 +937,7 @@ searchSites = {
     746: ('Girls Rimming', 'https://www.girlsrimming.com', '/tour/trailers/'),
     747: ('Gangbang Creampie', 'https://www.gangbangcreampie.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
     749: ('Show My BF', 'https://naughtyamerica.com', '/search?term='),
-    748: ('DadCrush', 'https://www.familystrokes.com', '/movies/'),
+    748: ('Dad Crush', 'https://www.familystrokes.com', '/movies/'),
     750: ('POV Massage', 'http://www.fantasymassage.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
     751: ('Step Secrets', 'http://www.stepsecrets.com', 'https://www.stepsecrets.com/?query='),
     752: ('VRHush', 'https://www.vrhush.com', '/scenes/'),
