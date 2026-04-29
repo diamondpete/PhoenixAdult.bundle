@@ -1029,7 +1029,7 @@ searchSites = {
     838: ('BoppingBabes', 'https://www.boppingbabes.com', '/videos'),
     839: ('UpskirtJerk', 'https://www.upskirtjerk.com', '/videos'),
     840: ('Interracial Pass', 'https://www.interracialpass.com', '/t1/search.php?query='),
-    841: ('LookAtHerNow', 'https://www.lookathernow.com', 'https://site-api.project1service.com'),
+    841: ('Look At Her Now', 'https://www.lookathernow.com', 'https://site-api.project1service.com'),
     842: ('MylfWood', 'https://www.mylf.com', '/movies/'),
     843: ('AllBlackX', 'https://www.xempire.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
     844: ('BBCPie', 'https://bbcpie.com', '/api'),
