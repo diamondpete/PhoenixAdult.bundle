@@ -57,7 +57,7 @@ def getSceneURLFromData18(query, providers, sceneDate):
 
     # Determine number of pages (max 10)
     m = re.search(r'(?<=pages:\s)(\d+)', text)
-    numPages = min(int(m.group(1)), 10) if m else 1
+    numPages = min(int(m.group(1)), 50) if m else 1
 
     # Pre-clean query once
     queryClean = re.sub(r'\W', '', query).lower()
