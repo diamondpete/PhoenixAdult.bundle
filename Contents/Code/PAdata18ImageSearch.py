@@ -90,7 +90,7 @@ def getSceneURLFromData18(query, providers, sceneDate):
 
             # Build comparison dicts
             networkData = {"title": queryClean, "date": sceneDate, "provider": providers}
-            data18Data  = {"title": titleClean, "date": searchDate, "provider": provider}
+            data18Data = {"title": titleClean, "date": searchDate, "provider": provider}
 
             Log('From Network: %s | %s | %s' % (networkData["title"], networkData["date"], networkData["provider"]))
             Log('From  Data18: %s | %s | %s' % (data18Data["title"], data18Data["date"], data18Data["provider"]))
@@ -115,7 +115,6 @@ def getSceneURLFromData18(query, providers, sceneDate):
             text, searchPage = fetch_page(page + 1)
 
     return None
-
 
 
 def getData18Images(sceneURL, art, metadata, detailsPageElements=None, **kwargs):
@@ -160,7 +159,7 @@ def getData18Images(sceneURL, art, metadata, detailsPageElements=None, **kwargs)
             galleryID = int(gallery.xpath('./@id')[0].replace('gallery', ''))
 
             # Build viewer URL
-            viewerURL = "%s/sys/media_photos.php?s=%s&scene=%s&pic=%s" % (PAsearchSites.getSearchBaseURL(1071), scenePrefix, sceneSuffix,galleryID)
+            viewerURL = "%s/sys/media_photos.php?s=%s&scene=%s&pic=%s" % (PAsearchSites.getSearchBaseURL(1071), scenePrefix, sceneSuffix, galleryID)
 
             viewerReq = fetch(viewerURL)
             if not viewerReq:
@@ -279,8 +278,8 @@ def classify_image(width, height):
 
     # Poster heuristics
     if orientation == "portrait":
-        if aspect >= 1.2:            # tall enough
-            if resolution >= 200000: # avoid tiny thumbs
+        if aspect >= 1.2:             # tall enough
+            if resolution >= 200000:  # avoid tiny thumbs
                 return "poster"
 
     # Art heuristics

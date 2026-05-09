@@ -133,7 +133,7 @@ def search(results, lang, siteNum, searchData):
                 siteName = first_text(result)
                 break
 
-        subSite = get_xpath_text(detailsPageElements,'//p[b[.="Site"]]/following-sibling::a[@class="bold"][1]', '')
+        subSite = get_xpath_text(detailsPageElements, '//p[b[.="Site"]]/following-sibling::a[@class="bold"][1]', '')
 
         siteDisplay = '%s/%s' % (siteName, subSite) if siteName and subSite else (siteName or subSite)
 

@@ -180,7 +180,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
                 if image.isdigit():
                     art.append('https://image-service-ht.project1content.com/%s' % detailsPageElements['images'][imageType][image]['xx']['url'].split('=')[-1].split('/', 1)[-1])
 
-
     # Posters from Data18
     if Prefs['data18_enable']:
         providers = seriesNames + [metadata.studio]
