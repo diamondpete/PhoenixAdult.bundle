@@ -1,5 +1,6 @@
 import PAsearchSites
 import PAutils
+from PAdata18ImageSearch import getSceneURLFromData18, getData18Images
 
 
 def getJSONfromPage(url):
@@ -29,6 +30,29 @@ def getSubNetwork(subSite, type=None):
             return subNetwork
 
     return None
+
+
+def getArtwork(metadata, art):
+    Log('Artwork found: %d' % len(art))
+    for idx, posterUrl in enumerate(art, 1):
+        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
+            # Download image file for analysis
+            try:
+                image = PAutils.HTTPRequest(posterUrl)
+                im = StringIO(image.content)
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                # Add the image proxy items to the collection
+                if width > 1:
+                    # Item is a poster
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+                if width > 100 and width > height:
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+            except:
+                pass
+
+    return
 
 
 def getSubSite(subSite):
@@ -118,13 +142,18 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     detailsPageJson = getJSONfromPage(PAsearchSites.getSearchSearchURL(siteNum) + sceneName)
     detailsPageElements = None
 
-    for pageJson in (detailsPageJson, getJSONfromPage('https://www.%s.com/movies/%s' % (searchNetworkCleanLower, sceneName))):
-        if sceneType in pageJson and sceneName in pageJson[sceneType]:
-            detailsPageElements = pageJson[sceneType][sceneName]
-            break
-        if 'videosContent' in pageJson and sceneName in pageJson['videosContent']:
-            detailsPageElements = pageJson['videosContent'][sceneName]
-            break
+    if sceneType in detailsPageJson and sceneName in detailsPageJson[sceneType]:
+        detailsPageElements = detailsPageJson[sceneType][sceneName]
+    elif 'videosContent' in detailsPageJson and sceneName in detailsPageJson['videosContent']:
+        detailsPageElements = detailsPageJson['videosContent'][sceneName]
+    else:
+        for pageJson in (detailsPageJson, getJSONfromPage('https://www.%s.com/movies/%s' % (searchNetworkCleanLower, sceneName))):
+            if sceneType in pageJson and sceneName in pageJson[sceneType]:
+                detailsPageElements = pageJson[sceneType][sceneName]
+                break
+            if 'videosContent' in pageJson and sceneName in pageJson['videosContent']:
+                detailsPageElements = pageJson['videosContent'][sceneName]
+                break
 
     subSite = getSubSite(detailsPageElements['site']['name'] if 'site' in detailsPageElements else PAsearchSites.getSearchSiteName(siteNum))
     subNetwork = getSubNetwork(subSite)
@@ -193,25 +222,15 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
 
     # Posters
     art.append(detailsPageElements['img'])
-
-    Log('Artwork found: %d' % len(art))
-    for idx, posterUrl in enumerate(art, 1):
-        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
-            # Download image file for analysis
-            try:
-                image = PAutils.HTTPRequest(posterUrl)
-                im = StringIO(image.content)
-                resized_image = Image.open(im)
-                width, height = resized_image.size
-                # Add the image proxy items to the collection
-                if width > 1:
-                    # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
-                if width > 100 and width > height:
-                    # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
-            except:
-                pass
+    if Prefs['data18_enable']:
+        providers = ['TeamSkeet', 'MYLF', 'Family Strokes', 'Pervz', 'FreeUse', 'Swappz', subSite]
+        data18Url = getSceneURLFromData18(metadata.title, providers, date_object if sceneDate else None)
+        if data18Url:
+            getData18Images(data18Url, art, metadata)
+        else:
+            getArtwork(metadata, art)
+    else:
+        getArtwork(metadata, art)
 
     return metadata
 
@@ -291,8 +310,8 @@ swappzDB = {
 teamskeetDB = {
     'After Dark', 'Anal Euro', 'Bad MILFs', 'BFFs', 'Black Valley Girls', 'Brace Faced', 'Brat Tamer',
     'Breeding Material', 'CFNM Teens', 'Ciao Bella', 'Daddy Pounds', 'Dyked', 'Exxxtra Small', 'Ginger Patch',
-    'Glowupz', 'Her Freshman Year', 'Hijab Hookup', 'I Made Porn', 'Innocent High', 'Kissing Sis', 'Latina Team',
-    'Little Asians', 'Lust HD', 'Messy Jessy', 'Mormon Girlz', 'My Babysitters Club', 'My Dirty Uncle',
+    'Glowupz', 'Her Freshman Year', 'Hijab Hookup', 'Hussie Pass', 'I Made Porn', 'Innocent High', 'Kissing Sis',
+    'Latina Team', 'Little Asians', 'Lust HD', 'Messy Jessy', 'Mormon Girlz', 'My Babysitters Club', 'My Dirty Uncle',
     'My First', 'MYLF Classics', 'MYLF Labs', 'Our Little Secret', 'Oye Loca', 'Passport Bros', 'Petite Teens 18',
     'POV Life', 'Reptyle Classics', 'Reptyle Labs', 'Rub A Teen', 'Self Desire', 'Sex and Grades',
     'She\'s New', 'Solo Interviews', 'Spanish 18', 'Stay Home POV', 'Step Siblings', 'TeamSkeet AllStars',

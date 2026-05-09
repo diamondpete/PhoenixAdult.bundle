@@ -1,6 +1,6 @@
 import PAsearchSites
 import PAutils
-import siteData18Scenes
+from PAdata18ImageSearch import getSceneURLFromData18, getData18Images
 
 
 def get_Token(siteNum):
@@ -28,13 +28,10 @@ def get_Token(siteNum):
 
 
 def search(results, lang, siteNum, searchData):
-    if Prefs['data18_override']:
-        return siteData18Scenes.search(results, lang, siteNum, searchData)
-    else:
-        token = get_Token(siteNum)
-        headers = {
-            'Instance': token,
-        }
+    token = get_Token(siteNum)
+    headers = {
+        'Instance': token,
+    }
 
     sceneID = None
     parts = searchData.title.split()
@@ -140,6 +137,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     #         isInCollection = True
     #         break
 
+    # if seriesName[0] != metadata.studio:
+    #     metadata.tagline = seriesNames[0]
+
     # for seriesName in seriesNames:
     #     movieCollections.addCollection(seriesName)
 
@@ -188,24 +188,31 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
                 if image.isdigit():
                     art.append('https://image-service-ht.project1content.com/%s' % detailsPageElements['images'][imageType][image]['xx']['url'].split('=')[-1].split('/', 1)[-1])
 
-    Log('Artwork found: %d' % len(art))
-    for idx, posterUrl in enumerate(art, 1):
-        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
-            # Download image file for analysis
-            try:
-                image = PAutils.HTTPRequest(posterUrl)
-                im = StringIO(image.content)
-                resized_image = Image.open(im)
-                width, height = resized_image.size
-                # Add the image proxy items to the collection
-                if width > 1:
-                    # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
-                if width > 100 and width > height:
-                    # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
-            except:
-                pass
+    # Posters from Data18
+    if Prefs['data18_enable']:
+        providers = seriesNames + [metadata.studio]
+        data18Url = getSceneURLFromData18(metadata.title, providers, date_object)
+        if data18Url:
+            getData18Images(data18Url, art, metadata)
+    else:
+        Log('Artwork found: %d' % len(art))
+        for idx, posterUrl in enumerate(art, 1):
+            if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
+                # Download image file for analysis
+                try:
+                    image = PAutils.HTTPRequest(posterUrl)
+                    im = StringIO(image.content)
+                    resized_image = Image.open(im)
+                    width, height = resized_image.size
+                    # Add the image proxy items to the collection
+                    if width > 1:
+                        # Item is a poster
+                        metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+                    if width > 100 and width > height:
+                        # Item is an art item
+                        metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+                except:
+                    pass
 
     return metadata
 
