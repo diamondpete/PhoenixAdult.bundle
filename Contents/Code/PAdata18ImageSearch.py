@@ -278,7 +278,9 @@ def classify_image(width, height):
 
     # Poster heuristics
     if orientation == "portrait":
-        if aspect >= 1.2:             # tall enough
+        # avoid too tall/short (perfect is 1.5)
+        # https://support.plex.tv/articles/200220677-local-media-assets-movies/#:~:text=Poster%20art%20is%20typically%20of%201:1.5%20aspect%20ratio
+        if 1.4 <= aspect <= 1.6:
             if resolution >= 200000:  # avoid tiny thumbs
                 return "poster"
 

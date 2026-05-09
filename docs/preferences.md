@@ -24,14 +24,14 @@
  - Large library additions may result in some scrapers to IP BAN (i.e. Data18)
 
 ## Data18 Image Searching - Experimental
- - Note: Labelled experimental because not a lot of effort went into the matching alorithm.
+ - Note: Labeled experimental because not a lot of effort went into the matching algorithm.
  - Currently only configured for Reptyle and Network1Service
 
  * ### Data18 Image Search Enable
-   - Enable/Disable searching Data 18 for Searching for Images on Top of Scraper
+   - Enable/Disable searching Data 18 for images on top of scraper
 
  * ### Data18 Image Extra Galleries Enable
-   - Enable/Disable getting images from extra galleries (these galleries are normally skipped if better galleries are present)
+   - Enable/Disable getting images from extra galleries (these large/lower quality galleries are normally skipped if better galleries are present)
 
  * ### Data18 Image Search Accuracy
    - Sets a minimum percentage (0% to 100%) match based on date (if available), title and search site/network
