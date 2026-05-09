@@ -1,3 +1,4 @@
+from collections import namedtuple
 import siteNaughtyAmerica
 import siteXart
 import sitePorndoePremium
@@ -2339,1059 +2340,246 @@ abbreviations = (
 )
 
 
+PROVIDER_MAP = {
+    network1service: [
+        2, 4, (54, 81), 582, 690, 1351, 1552, (361, 364), 852, (914, 915), 1328,
+        (1732, 1733), (83, 135), (137, 182), (822, 828), 1593, 1737, 1743,
+        (216, 218), (220, 223), (225, 227), (230, 231), 233, 235, 238,
+        (243, 244), 247, 1885, (261, 270), 583, (738, 740), (1059, 1064), 1590,
+        (271, 276), (288, 291), 768, 328, (333, 339), (406, 407), 340,
+        (397, 407), 733, 737, 759, 798, 802, 806, 808, 809, 841, 859, 860, 872,
+        900, 916, 917, (918, 929), 1153, (1156, 1158), 1909, (1238, 1243),
+        1366, 1758,
+    ],
+    networkGammaEntOther: [
+        53, (375, 379), (795, 797), 183, (373, 374), 277, 975, 278, (285, 287),
+        843, 281, 329, (351, 355), 861, 330, (355, 360), 750, (365, 372), 466,
+        692, 380, 381, 382, 383, 384, 385, (460, 465), 279, (408, 431), 1805,
+        747, 770, 793, 1248, (1257, 1262), (1750, 1753), (1887, 1888), 478,
+        878, (1554, 1561), (1722, 1729), (1863, 1865), 893, (1782, 1783),
+    ],
+    networkNubiles: [
+        (525, 545), (755, 756), 766, (995, 996), 1040, 1256, 1360,
+        (1396, 1397), 1551, (1575, 1582), 1686, (1911, 1918),
+    ],
+    networkPornPros: [
+        (306, 327), (479, 489), 624, 769, 844, 890, 1263, 1364, 1393,
+        (1688, 1693), (1695, 1702), 1892, (1895, 1905),
+    ],
+    networkRadicalCash: [
+        (837, 839), (1229, 1236), (1675, 1685), 1747, (1802, 1804),
+        (1829, 1850),
+    ],
+    networkReptyle: [
+        (187, 215), (566, 567), 626, 686, 748, 807, (845, 851), 875,
+        (997, 1011), (1249, 1251), (1354, 1356), (1362, 1363), (1371, 1373),
+        1390, (1399, 1424), (1584, 1588), 1736, (1808, 1810), (1816, 1823),
+        (674, 683), 757, 842, 858, (881, 887), 1329, (1426, 1445), 1589,
+        (1734, 1735), 1807, (1811, 1815), 880, (1919, 1950),
+    ],
+    siteNaughtyAmerica: [
+        (5, 51), 341, (393, 396), (467, 468), 581, 620, 625, 691, 749,
+        (1569, 1573),
+    ],
+    sitePorndoePremium: [
+        219, 224, (228, 229), 232, 234, (236, 237), (239, 242), (245, 246),
+        (248, 259),
+    ],
+    addActors: [684],
+    network18: [1336, 1389],
+    network5Kporn: [(941, 942)],
+    networkAbbyWinters: [(1166, 1179)],
+    networkAdultEmpireCash: [815, 1337, 1574, (1765, 1781), (1784, 1796), 1800],
+    networkAdultPrime: [800, (1601, 1672), 1749],
+    networkAuntJudys: [(1730, 1731)],
+    networkBadoinkVR: [(469, 473), 1894],
+    networkBang: [813, 1365],
+    networkBellaPass: [(548, 563), (1246, 1247), 1553],
+    networkBellesa: [799, 876],
+    networkBlurredMedia: [(1565, 1568)],
+    networkCaramelCash: [(1041, 1042), 1308],
+    networkCherryPimps: [(783, 792), (1052, 1056), (1745, 1746)],
+    networkCouplesCinema: [(1267, 1285)],
+    networkCzechAV: [(696, 728), 1583],
+    networkCzechVR: [(578, 580), 1891],
+    networkDerangedDollars: [(1181, 1182)],
+    networkDirtyFlix: [(1446, 1449)],
+    networkDirtyHardDrive: [(980, 987)],
+    networkEvolvedFights: [906, 907],
+    networkFAKings: [(1080, 1152)],
+    networkFemdomEmpire: [689, 694],
+    networkFTV: [(1068, 1069)],
+    networkFuelVirtual: [(546, 547), 1395],
+    networkFullPornNetwork: [(343, 350), 1394, 1562],
+    networkGammaEnt: [386, 387, 388, 389, 390, 391, 392],
+    networkGASM: [(1866, 1882)],
+    networkGrooby: [(1331, 1333), (1338, 1343), (1391, 1392), 1739],
+    networkHighTechVR: [475, 570, 879],
+    networkIntersec: [(772, 781)],
+    networkJavBus: [912],
+    networkKellyMadison: [(184, 186)],
+    networkKink: [(490, 521), 687, (735, 736), (873, 874), (888, 889), (934, 937)],
+    networkLoveHerFilms: [731, (1705, 1707)],
+    networkMetadataAPI: [3],
+    networkMetArt: [(621, 623), (753, 754), (816, 821), 741, 810],
+    networkModelCentro: [(1025, 1039), 1051, 1058, 1075, 1191, 1245],
+    networkNVG: [1550],
+    networkPerfectGonzo: [(448, 459), (908, 911)],
+    networkPervCity: [(1160, 1165), 1910],
+    networkPKJMedia: [(1760, 1764)],
+    networkPornCZ: [(1196, 1228)],
+    networkPornWorld: [(440, 447), 332, (433, 439), 1057],
+    networkPuffy: [863, (867, 870)],
+    networkPureCFNM: [(829, 834)],
+    networkRadicalCashOther: [1066, (1851, 1862)],
+    networkRomero: [(895, 896), (1594, 1596), (1797, 1798), (1883, 1884)],
+    networkScoreGroup: [(1012, 1021), (1344, 1345), 1744, 1889],
+    networkSinX: [(864, 866), 871],
+    networkSteppedUp: [(282, 284), 767, 1253, 1674],
+    networkStrike3: [(0, 1), 52, 136, (670, 671), 1357, 1806, 1893],
+    networkTeenCoreClub: [(943, 974), 1358, (1708, 1709)],
+    networkTeenMegaWorld: [(631, 666), 930, 1398],
+    networkThickCash: [(1192, 1195)],
+    networkThickCashOther: [(1754, 1756)],
+    networkUnzipVR: [474, 904, (1906, 1908)],
+    networkVIP4K: [(1376, 1388), 1687, 1694, (1710, 1712), 1721, 1740, 1748],
+    networkVNA: [931, (1287, 1307), (1309, 1326)],
+    networkWankz: [(587, 619)],
+    networkWowNetwork: [743, 794, 1738],
+    siteAdultEmpire: [1334],
+    siteAlettaOceanLive: [1024],
+    siteAllureMedia: [(564, 565)],
+    siteAlsAngels: [1184],
+    siteAmourAngels: [811],
+    siteAnalVids: [260],
+    siteAngelaWhite: [991],
+    siteArchAngel: [729],
+    siteATKGirlfriends: [836],
+    siteAussieAss: [940],
+    siteBAMVisions: [835],
+    siteBelAmi: [1591],
+    siteBlackPayBack: [1078],
+    siteBoundHoneys: [1349],
+    siteBrandNewAmateurs: [1799],
+    siteCaribbeancom: [1597],
+    siteClips4Sale: [760],
+    siteClubFilly: [771],
+    siteColette: [1741],
+    siteCumbizz: [992],
+    siteCumLouder: [765],
+    siteDarkRoomVR: [1346],
+    siteData18Empire: [1330],
+    siteData18Movies: [1073],
+    siteData18Scenes: [1071, 1370],
+    siteDesperateAmateurs: [979],
+    siteDickDrainers: [1183],
+    siteDorcelClub: [669],
+    siteDorcelVision: [693],
+    siteExpliciteArt: [1077],
+    siteFamilyTherapy: [1335],
+    siteFemjoy: [1190],
+    siteFinishesTheJob: [(584, 586)],
+    siteFirstAnalQuest: [685],
+    siteFittingRoom: [758],
+    siteFuckingAwesome: [763],
+    siteGirlsOutWest: [745],
+    siteGirlsRimming: [746],
+    siteHeavyOnHotties: [1886],
+    siteHegre: [688],
+    siteHollyRandall: [989],
+    siteHoloGirlsVR: [891],
+    siteHotwifeXXX: [1353],
+    siteHucows: [913],
+    siteInterracialPass: [840, (976, 978), 1244, (1563, 1564)],
+    siteInTheCrack: [990],
+    siteJacquieEtMichel: [1070],
+    siteJAVDatabase: [1600],
+    siteJavLibrary: [1367],
+    siteJesseLoadsMonsterFacials: [1824],
+    siteJulesJordan: [432, 522, 523, 524, 782],
+    siteJVRPorn: [1286],
+    siteKarups: [(628, 630)],
+    siteKillergram: [(1368, 1369)],
+    siteKin8tengoku: [1599],
+    siteLittleCaprice: [742, (1713, 1720)],
+    siteLustomic: [1350],
+    siteLustReality: [898],
+    siteManyvids: [568],
+    siteMeanaWolf: [805],
+    siteMelenaMariaRya: [1159],
+    siteMeloneChallenge: [988],
+    siteMilfVR: [476, 477],
+    siteMissaX: [672, 673, (1254, 1255), (1264, 1265), 1327],
+    siteMomComesFirst: [1592],
+    siteMomPOV: [732],
+    siteMormonGirlz: [1065],
+    siteMyDirtyHobby: [1237],
+    siteNewSensations: [280, 1266],
+    siteNewSensationsOther: [1180, (1186, 1189)],
+    sitePenthouseGold: [1072],
+    sitePJGirls: [667],
+    sitePlayboyPlus: [804],
+    sitePlumperPass: [1067],
+    sitePornbox: [1801],
+    sitePornstarPlatinum: [993],
+    sitePOVR: [1359],
+    sitePrivate: [(294, 305)],
+    sitePuba: [1347],
+    sitePutalocura: [1155],
+    siteQueenSnake: [932, 933],
+    siteRealityLovers: [877],
+    siteReidMyLips: [803],
+    siteScrewbox: [668],
+    siteScrewMeToo: [938],
+    siteSexLikeReal: [899],
+    siteSexMex: [1076],
+    siteSicflics: [1023],
+    siteSinsLife: [862],
+    siteSpizoo: [293, (571, 577), (1374, 1375), 1757, (1825, 1828)],
+    siteStasyQ: [1348],
+    siteStepSecrets: [751],
+    siteStraponCum: [1352],
+    siteSunnyLaneLive: [1079],
+    siteSwallowBay: [1361],
+    siteTeenyTaboo: [1703],
+    siteTonightsGirlfriend: [627],
+    siteToughLoveX: [764],
+    siteTwoTGirls: [1022],
+    siteUltrafilms: [762],
+    siteVIPissy: [744],
+    siteVirtualReal: [342],
+    siteVirtualTaboo: [292],
+    siteVivid: [814],
+    siteVogoV: [761],
+    siteVRAllure: [1598],
+    siteVRHush: [752],
+    siteVRLatina: [903],
+    siteVRPFilms: [902],
+    siteWatch4Beauty: [1185],
+    siteWeAreHairy: [730],
+    siteWoodmanCastingX: [994],
+    siteWUNF: [1074],
+    siteXart: [82],
+    siteXConfessions: [695, 1890],
+    siteXevUnleashed: [1759],
+    siteXillimite: [901],
+    siteXSinsVR: [569],
+    siteXVirtual: [897],
+}
+
+
 def getProviderFromSiteNum(siteNum):
-    provider = None
-
-    if siteNum is not None:
-        # Strike3
-        if (0 <= siteNum <= 1) or siteNum == 52 or siteNum == 136 or (670 <= siteNum <= 671) or siteNum == 1357 or siteNum == 1806 or siteNum == 1893:
-            provider = networkStrike3
-
-        # Brazzers
-        elif siteNum == 2 or (54 <= siteNum <= 81) or siteNum == 582 or siteNum == 690 or siteNum == 1351 or siteNum == 1552:
-            provider = network1service
-
-        # MetadataAPI
-        elif siteNum == 3:
-            provider = networkMetadataAPI
-
-        # Naughty America
-        elif (5 <= siteNum <= 51) or siteNum == 341 or (393 <= siteNum <= 396) or (467 <= siteNum <= 468) or siteNum == 581 or siteNum == 620 or siteNum == 625 or siteNum == 691 or siteNum == 749 or (1569 <= siteNum <= 1573):
-            provider = siteNaughtyAmerica
-
-        # GirlsWay
-        elif siteNum == 53 or (375 <= siteNum <= 379) or (795 <= siteNum <= 797):
-            provider = networkGammaEntOther
-
-        # 21Naturals
-        elif siteNum == 183 or (373 <= siteNum <= 374):
-            provider = networkGammaEntOther
-
-        # Evil Angel
-        elif siteNum == 277 or siteNum == 975:
-            provider = networkGammaEntOther
-
-        # XEmpire
-        elif siteNum == 278 or (285 <= siteNum <= 287) or siteNum == 843:
-            provider = networkGammaEntOther
-
-        # Pure Taboo
-        elif siteNum == 281:
-            provider = networkGammaEntOther
-
-        # Blowpass
-        elif siteNum == 329 or (351 <= siteNum <= 355) or siteNum == 861:
-            provider = networkGammaEntOther
-
-        # Mile High Media
-        elif (361 <= siteNum <= 364) or siteNum == 852 or (914 <= siteNum <= 915) or siteNum == 1328 or (1732 <= siteNum <= 1733):
-            provider = network1service
-
-        # Fantasy Massage
-        elif siteNum == 330 or (355 <= siteNum <= 360) or siteNum == 750:
-            provider = networkGammaEntOther
-
-        # 21Sextury
-        elif (365 <= siteNum <= 372) or siteNum == 466 or siteNum == 692:
-            provider = networkGammaEntOther
-
-        # Girlfriends Films
-        elif siteNum == 380:
-            provider = networkGammaEntOther
-
-        # Burning Angel
-        elif siteNum == 381:
-            provider = networkGammaEntOther
-
-        # Pretty Dirty
-        elif siteNum == 382:
-            provider = networkGammaEntOther
-
-        # Devil's Film
-        elif siteNum == 383:
-            provider = networkGammaEntOther
-
-        # Peter North
-        elif siteNum == 384:
-            provider = networkGammaEntOther
-
-        # Rocco Siffredi
-        elif siteNum == 385:
-            provider = networkGammaEntOther
-
-        # Tera Patrick
-        elif siteNum == 386:
-            provider = networkGammaEnt
-
-        # Sunny Leone
-        elif siteNum == 387:
-            provider = networkGammaEnt
-
-        # Lane Sisters
-        elif siteNum == 388:
-            provider = networkGammaEnt
-
-        # Dylan Ryder
-        elif siteNum == 389:
-            provider = networkGammaEnt
-
-        # Abbey Brooks
-        elif siteNum == 390:
-            provider = networkGammaEnt
-
-        # Devon Lee
-        elif siteNum == 391:
-            provider = networkGammaEnt
-
-        # Hanna Hilton
-        elif siteNum == 392:
-            provider = networkGammaEnt
-
-        # 21Sextreme
-        elif (460 <= siteNum <= 465):
-            provider = networkGammaEntOther
-
-        # X-Art
-        elif siteNum == 82:
-            provider = siteXart
-
-        # Bang Bros
-        elif (83 <= siteNum <= 135):
-            provider = network1service
-
-        # Reality Kings
-        elif (137 <= siteNum <= 182) or (822 <= siteNum <= 828) or siteNum == 1593 or siteNum == 1737 or siteNum == 1743:
-            provider = network1service
-
-        # Kelly Madison Productions
-        elif (184 <= siteNum <= 186):
-            provider = networkKellyMadison
-
-        # TeamSkeet
-        elif (187 <= siteNum <= 215) or (566 <= siteNum <= 567) or siteNum == 626 or siteNum == 686 or siteNum == 748 or siteNum == 807 or (845 <= siteNum <= 851) or siteNum == 875 or (997 <= siteNum <= 1011) or (1249 <= siteNum <= 1251) or (1354 <= siteNum <= 1356) or (1362 <= siteNum <= 1363) or (1371 <= siteNum <= 1373) or siteNum == 1390 or (1399 <= siteNum <= 1424) or (1584 <= siteNum <= 1588) or siteNum == 1736 or (1808 <= siteNum <= 1810) or (1816 <= siteNum <= 1823):
-            provider = networkReptyle
-
-        # Porndoe Premium
-        elif siteNum == 219 or siteNum == 224 or (228 <= siteNum <= 229) or siteNum == 232 or siteNum == 234 or (236 <= siteNum <= 237) or (239 <= siteNum <= 242) or (245 <= siteNum <= 246) or (248 <= siteNum <= 259):
-            provider = sitePorndoePremium
-
-        # LetsDoeIt
-        elif (216 <= siteNum <= 218) or (220 <= siteNum <= 223) or (225 <= siteNum <= 227) or (230 <= siteNum <= 231) or siteNum == 233 or siteNum == 235 or siteNum == 238 or (243 <= siteNum <= 244) or siteNum == 247 or siteNum == 1885:
-            provider = network1service
-
-        # AnalVids
-        elif siteNum == 260:
-            provider = siteAnalVids
-
-        # Mofos
-        elif (261 <= siteNum <= 270) or siteNum == 583 or (738 <= siteNum <= 740) or (1059 <= siteNum <= 1064) or siteNum == 1590:
-            provider = network1service
-
-        # Babes
-        elif (271 <= siteNum <= 276):
-            provider = network1service
-
-        # GloryHoleSecrets
-        elif siteNum == 279:
-            provider = networkGammaEntOther
-
-        # NewSensations
-        elif siteNum == 280 or siteNum == 1266:
-            provider = siteNewSensations
-
-        # SteppedUp
-        elif (282 <= siteNum <= 284) or siteNum == 767 or siteNum == 1253 or siteNum == 1674:
-            provider = networkSteppedUp
-
-        # Twistys
-        elif (288 <= siteNum <= 291) or siteNum == 768:
-            provider = network1service
-
-        # Spizoo
-        elif siteNum == 293 or (571 <= siteNum <= 577) or (1374 <= siteNum <= 1375) or siteNum == 1757 or (1825 <= siteNum <= 1828):
-            provider = siteSpizoo
-
-        # Private
-        elif (294 <= siteNum <= 305):
-            provider = sitePrivate
-
-        # PornPros Network
-        elif (306 <= siteNum <= 327) or (479 <= siteNum <= 489) or siteNum == 624 or siteNum == 769 or siteNum == 844 or siteNum == 890 or siteNum == 1263 or siteNum == 1364 or siteNum == 1393 or (1688 <= siteNum <= 1693) or (1695 <= siteNum <= 1702) or siteNum == 1892 or (1895 <= siteNum <= 1905):
-            provider = networkPornPros
-
-        # DigitalPlayground
-        elif siteNum == 328:
-            provider = network1service
-
-        # SexyHub
-        elif (333 <= siteNum <= 339) or (406 <= siteNum <= 407):
-            provider = network1service
-
-        # FullPornNetwork
-        elif (343 <= siteNum <= 350) or siteNum == 1394 or siteNum == 1562:
-            provider = networkFullPornNetwork
-
-        # DogfartNetwork
-        elif (408 <= siteNum <= 431) or siteNum == 1805:
-            provider = networkGammaEntOther
-
-        # FakeHub
-        elif siteNum == 340 or (397 <= siteNum <= 407):
-            provider = network1service
-
-        # JulesJordan
-        elif siteNum == 432:
-            provider = siteJulesJordan
-
-        # Manuel Ferrara
-        elif siteNum == 522:
-            provider = siteJulesJordan
-
-        # The Ass Factory
-        elif siteNum == 523:
-            provider = siteJulesJordan
-
-        # Sperm Swallowers
-        elif siteNum == 524:
-            provider = siteJulesJordan
-
-        # GirlGirl
-        elif siteNum == 782:
-            provider = siteJulesJordan
-
-        # DDF Network
-        elif (440 <= siteNum <= 447):
-            provider = networkPornWorld
-
-        # PerfectGonzo
-        elif (448 <= siteNum <= 459) or (908 <= siteNum <= 911):
-            provider = networkPerfectGonzo
-
-        # BadoinkVR Network
-        elif (469 <= siteNum <= 473) or siteNum == 1894:
-            provider = networkBadoinkVR
-
-        # Unzip VR
-        elif siteNum == 474 or siteNum == 904 or (1906 <= siteNum <= 1908):
-            provider = networkUnzipVR
-
-        # SexBabesVR
-        elif siteNum == 475:
-            provider = networkHighTechVR
-
-        # SinsVR
-        elif siteNum == 569:
-            provider = siteXSinsVR
-
-        # StasyQ VR
-        elif siteNum == 570:
-            provider = networkHighTechVR
-
-        # WankzVR
-        elif siteNum == 476:
-            provider = siteMilfVR
-
-        # MilfVR
-        elif siteNum == 477:
-            provider = siteMilfVR
-
-        # Kink
-        elif (490 <= siteNum <= 521) or siteNum == 687 or (735 <= siteNum <= 736) or (873 <= siteNum <= 874) or (888 <= siteNum <= 889):
-            provider = networkKink
-
-        # Nubiles
-        elif (525 <= siteNum <= 545) or (755 <= siteNum <= 756) or siteNum == 766 or (995 <= siteNum <= 996) or siteNum == 1040 or siteNum == 1256 or siteNum == 1360 or (1396 <= siteNum <= 1397) or siteNum == 1551 or (1575 <= siteNum <= 1582) or siteNum == 1686 or (1911 <= siteNum <= 1918):
-            provider = networkNubiles
-
-        # BellaPass
-        elif (548 <= siteNum <= 563) or (1246 <= siteNum <= 1247) or siteNum == 1553:
-            provider = networkBellaPass
-
-        # AllureMedia
-        elif (564 <= siteNum <= 565):
-            provider = siteAllureMedia
-
-        # Manyvids
-        elif siteNum == 568:
-            provider = siteManyvids
-
-        # VirtualTaboo
-        elif siteNum == 292:
-            provider = siteVirtualTaboo
-
-        # VirtualRealPorn
-        elif siteNum == 342:
-            provider = siteVirtualReal
-
-        # CzechVR Network
-        elif (578 <= siteNum <= 580) or (1891 == siteNum):
-            provider = networkCzechVR
-
-        # FinishesTheJob
-        elif (584 <= siteNum <= 586):
-            provider = siteFinishesTheJob
-
-        # Wankz Network
-        elif (587 <= siteNum <= 619):
-            provider = networkWankz
-
-        # MetArt Network
-        elif (621 <= siteNum <= 623) or (753 <= siteNum <= 754) or (816 <= siteNum <= 821):
-            provider = networkMetArt
-
-        # Tonights Girlfriend
-        elif siteNum == 627:
-            provider = siteTonightsGirlfriend
-
-        # Karups
-        elif (628 <= siteNum <= 630):
-            provider = siteKarups
-
-        # TeenMegaWorld
-        elif (631 <= siteNum <= 666) or siteNum == 930 or siteNum == 1398:
-            provider = networkTeenMegaWorld
-
-        # Screwbox
-        elif siteNum == 668:
-            provider = siteScrewbox
-
-        # DorcelClub
-        elif siteNum == 669:
-            provider = siteDorcelClub
-
-        # MissaX / AllHerLuv / Exposed Whores / She Seduced Me / House of Fyre / Philavise / Lauren Phillips
-        elif siteNum == 672 or siteNum == 673 or (1254 <= siteNum <= 1255) or (1264 <= siteNum <= 1265) or siteNum == 1327:
-            provider = siteMissaX
-
-        # MYLF
-        elif (674 <= siteNum <= 683) or siteNum == 757 or siteNum == 842 or (siteNum >= 853 and siteNum <= 856) or siteNum == 858 or (881 <= siteNum <= 887) or siteNum == 1329 or (1426 <= siteNum <= 1445) or siteNum == 1589 or (1734 <= siteNum <= 1735) or siteNum == 1807 or (1811 <= siteNum <= 1815):
-            provider = networkReptyle
-
-        # Manually Add Actors
-        elif siteNum == 684:
-            provider = addActors
-
-        # First Anal Quest
-        elif siteNum == 685:
-            provider = siteFirstAnalQuest
-
-        # Hegre
-        elif siteNum == 688:
-            provider = siteHegre
-
-        # Femdom Empire
-        elif siteNum == 689 or siteNum == 694:
-            provider = networkFemdomEmpire
-
-        # Dorcel Vision
-        elif siteNum == 693:
-            provider = siteDorcelVision
-
-        # XConfessions
-        elif siteNum == 695:
-            provider = siteXConfessions
-
-        # CzechAV
-        elif (696 <= siteNum <= 728) or siteNum == 1583:
-            provider = networkCzechAV
-
-        # ArchAngel
-        elif siteNum == 729:
-            provider = siteArchAngel
-
-        # We Are Hairy
-        elif siteNum == 730:
-            provider = siteWeAreHairy
-
-        # Love Her Films
-        elif siteNum == 731 or (1705 <= siteNum <= 1707):
-            provider = networkLoveHerFilms
-
-        # MomPOV
-        elif siteNum == 732:
-            provider = siteMomPOV
-
-        # Property Sex
-        elif siteNum == 733:
-            provider = network1service
-
-        # FuelVirtual
-        elif (546 <= siteNum <= 547) or siteNum == 1395:
-            provider = networkFuelVirtual
-
-        # TransAngels
-        elif siteNum == 737:
-            provider = network1service
-
-        # Straplezz
-        elif siteNum == 741:
-            provider = networkMetArt
-
-        # LittleCaprice
-        elif siteNum == 742 or (1713 <= siteNum <= 1720):
-            provider = siteLittleCaprice
-
-        # VIPissy
-        elif siteNum == 744:
-            provider = siteVIPissy
-
-        # GirlsOutWest
-        elif siteNum == 745:
-            provider = siteGirlsOutWest
-
-        # Girls Rimming
-        elif siteNum == 746:
-            provider = siteGirlsRimming
-
-        # Gangbang Creampie
-        elif siteNum == 747:
-            provider = networkGammaEntOther
-
-        # StepSecrets
-        elif siteNum == 751:
-            provider = siteStepSecrets
-
-        # VRHush
-        elif siteNum == 752:
-            provider = siteVRHush
-
-        # Fitting-Room
-        elif siteNum == 758:
-            provider = siteFittingRoom
-
-        # FamilyHookups
-        elif siteNum == 759:
-            provider = network1service
-
-        # Clips4Sale
-        elif siteNum == 760:
-            provider = siteClips4Sale
-
-        # VogoV
-        elif siteNum == 761:
-            provider = siteVogoV
-
-        # UltraFilms
-        elif siteNum == 762:
-            provider = siteUltrafilms
-
-        # fuckingawesome.com
-        elif siteNum == 763:
-            provider = siteFuckingAwesome
-
-        # ToughLoveX
-        elif siteNum == 764:
-            provider = siteToughLoveX
-
-        # cumlouder.com
-        elif siteNum == 765:
-            provider = siteCumLouder
-
-        # ZeroTolerance
-        elif siteNum == 770:
-            provider = networkGammaEntOther
-
-        # ClubFilly
-        elif siteNum == 771:
-            provider = siteClubFilly
-
-        # Intersec
-        elif (772 <= siteNum <= 781):
-            provider = networkIntersec
-
-        # Cherry Pimps
-        elif (783 <= siteNum <= 792) or (1052 <= siteNum <= 1056) or (1745 <= siteNum <= 1746):
-            provider = networkCherryPimps
-
-        # Wicked
-        elif siteNum == 793:
-            provider = networkGammaEntOther
-
-        # LilHumpers
-        elif siteNum == 798:
-            provider = network1service
-
-        # Bellesa
-        elif siteNum == 799 or siteNum == 876:
-            provider = networkBellesa
-
-        # Adult Prime
-        elif siteNum == 800 or (1601 <= siteNum <= 1672) or siteNum == 1749:
-            provider = networkAdultPrime
-
-        # Family Sinners
-        elif siteNum == 802:
-            provider = network1service
-
-        # ReidMyLips
-        elif siteNum == 803:
-            provider = siteReidMyLips
-
-        # Playboy Plus
-        elif siteNum == 804:
-            provider = sitePlayboyPlus
-
-        # Meana Wolf
-        elif siteNum == 805:
-            provider = siteMeanaWolf
-
-        # Transsensual
-        elif siteNum == 806:
-            provider = network1service
-
-        # Erito
-        elif siteNum == 808:
-            provider = network1service
-
-        # TrueAmateurs
-        elif siteNum == 809:
-            provider = network1service
-
-        # Hustler
-        elif siteNum == 810:
-            provider = networkMetArt
-
-        # AmourAngels
-        elif siteNum == 811:
-            provider = siteAmourAngels
-
-        # Bang
-        elif siteNum == 813 or siteNum == 1365:
-            provider = networkBang
-
-        # Vivid
-        elif siteNum == 814:
-            provider = siteVivid
-
-        # AdultEmpireCash Network
-        elif siteNum == 815 or siteNum == 1337 or siteNum == 1574 or (1765 <= siteNum <= 1781) or (1784 <= siteNum <= 1796) or siteNum == 1800:
-            provider = networkAdultEmpireCash
-
-        # My Pervy Family
-        elif siteNum == 1248:
-            provider = networkGammaEntOther
-
-        # Filthy Kings sites
-        elif (1257 <= siteNum <= 1262) or (1750 <= siteNum <= 1753) or (1887 <= siteNum <= 1888):
-            provider = networkGammaEntOther
-
-        # PJGirls
-        elif siteNum == 667:
-            provider = sitePJGirls
-
-        # PureCFNM Network
-        elif (829 <= siteNum <= 834):
-            provider = networkPureCFNM
-
-        # BAMVisions
-        elif siteNum == 835:
-            provider = siteBAMVisions
-
-        # ATKGirlfriends
-        elif siteNum == 836:
-            provider = siteATKGirlfriends
-
-        # Interracial Pass / ExploitedX / I Kiss Girls
-        elif siteNum == 840 or (976 <= siteNum <= 978) or siteNum == 1244 or (1563 <= siteNum <= 1564):
-            provider = siteInterracialPass
-
-        # LookAtHerNow
-        elif siteNum == 841:
-            provider = network1service
-
-        # Deviant Hardcore
-        elif siteNum == 859:
-            provider = network1service
-
-        # She Will Cheat
-        elif siteNum == 860:
-            provider = network1service
-
-        # SinsLife
-        elif siteNum == 862:
-            provider = siteSinsLife
-
-        # Puffy Network
-        elif siteNum == 863 or (867 <= siteNum <= 870):
-            provider = networkPuffy
-
-        # SinX
-        elif (864 <= siteNum <= 866) or siteNum == 871:
-            provider = networkSinX
-
-        # Kinky Spa
-        elif siteNum == 872:
-            provider = network1service
-
-        # Reality Lovers
-        elif siteNum == 877:
-            provider = siteRealityLovers
-
-        # Adult Time
-        elif siteNum == 478 or siteNum == 878 or (1554 <= siteNum <= 1561) or (1722 <= siteNum <= 1729) or (1863 <= siteNum <= 1865):
-            provider = networkGammaEntOther
-
-        # RealJamVR
-        elif siteNum == 879:
-            provider = networkHighTechVR
-
-        # Reptyle
-        elif siteNum == 880 or (1919 <= siteNum <= 1950):
-            provider = networkReptyle
-
-        # HoloGirlsVR
-        elif siteNum == 891:
-            provider = siteHoloGirlsVR
-
-        # Gender X
-        elif siteNum == 893:
-            provider = networkGammaEntOther
-
-        # Romero Multimedia
-        elif (895 <= siteNum <= 896) or (1594 <= siteNum <= 1596) or (1797 <= siteNum <= 1798) or (1883 <= siteNum <= 1884):
-            provider = networkRomero
-
-        # XVirtual
-        elif siteNum == 897:
-            provider = siteXVirtual
-
-        # Lust Reality
-        elif siteNum == 898:
-            provider = siteLustReality
-
-        # Sex Like Real
-        elif siteNum == 899:
-            provider = siteSexLikeReal
-
-        # DoeGirls
-        elif siteNum == 900:
-            provider = network1service
-
-        # Xillimite
-        elif siteNum == 901:
-            provider = siteXillimite
-
-        # VRP Films
-        elif siteNum == 902:
-            provider = siteVRPFilms
-
-        # VR Latina
-        elif siteNum == 903:
-            provider = siteVRLatina
-
-        # Evolved Fights Network
-        elif siteNum == 906 or siteNum == 907:
-            provider = networkEvolvedFights
-
-        # JavBus
-        elif siteNum == 912:
-            provider = networkJavBus
-
-        # Hucows
-        elif siteNum == 913:
-            provider = siteHucows
-
-        # Why Not Bi
-        elif siteNum == 916:
-            provider = network1service
-
-        # HentaiPros
-        elif siteNum == 917:
-            provider = network1service
-
-        # PornPortal
-        elif (918 <= siteNum <= 929):
-            provider = network1service
-
-        # VNA Network
-        elif siteNum == 931 or (1287 <= siteNum <= 1307) or (1309 <= siteNum <= 1326):
-            provider = networkVNA
-
-        # QueenSnake
-        elif siteNum == 932:
-            provider = siteQueenSnake
-
-        # QueenSect
-        elif siteNum == 933:
-            provider = siteQueenSnake
-
-        # Fetish Network
-        elif (934 <= siteNum <= 937):
-            provider = networkKink
-
-        # ScrewMeToo
-        elif siteNum == 938:
-            provider = siteScrewMeToo
-
-        # Aussie Ass
-        elif siteNum == 940:
-            provider = siteAussieAss
-
-        # 5Kporn
-        elif (941 <= siteNum <= 942):
-            provider = network5Kporn
-
-        # Teen Core Club
-        elif (943 <= siteNum <= 974 or siteNum == 1358 or 1708 <= siteNum <= 1709):
-            provider = networkTeenCoreClub
-
-        # Desperate Amateurs
-        elif (siteNum == 979):
-            provider = siteDesperateAmateurs
-
-        # Dirty Hard Drive
-        elif (980 <= siteNum <= 987):
-            provider = networkDirtyHardDrive
-
-        # Melone Challenge
-        elif (siteNum == 988):
-            provider = siteMeloneChallenge
-
-        # Holly Randall
-        elif siteNum == 989:
-            provider = siteHollyRandall
-
-        # In The Crack
-        elif siteNum == 990:
-            provider = siteInTheCrack
-
-        # Angela White
-        elif siteNum == 991:
-            provider = siteAngelaWhite
-
-        # Cumbizz
-        elif siteNum == 992:
-            provider = siteCumbizz
-
-        # Pornstar Platinum
-        elif siteNum == 993:
-            provider = sitePornstarPlatinum
-
-        # Woodman Casting X
-        elif siteNum == 994:
-            provider = siteWoodmanCastingX
-
-        # ScoreGroup
-        elif (1012 <= siteNum <= 1021) or (1344 <= siteNum <= 1345) or siteNum == 1744 or siteNum == 1889:
-            provider = networkScoreGroup
-
-        # TwoTGirls
-        elif siteNum == 1022:
-            provider = siteTwoTGirls
-
-        # Sicflics
-        elif siteNum == 1023:
-            provider = siteSicflics
-
-        # AlettaOceanLive
-        elif siteNum == 1024:
-            provider = siteAlettaOceanLive
-
-        # ModelCentro network
-        elif (1025 <= siteNum <= 1039) or siteNum == 1051 or siteNum == 1058 or siteNum == 1075 or siteNum == 1191 or siteNum == 1245:
-            provider = networkModelCentro
-
-        # PornWorld
-        elif siteNum == 332 or (433 <= siteNum <= 439) or siteNum == 1057:
-            provider = networkPornWorld
-
-        # MormonGirlz
-        elif siteNum == 1065:
-            provider = siteMormonGirlz
-
-        # PurgatoryX
-        elif siteNum == 1066 or (1851 <= siteNum <= 1862):
-            provider = networkRadicalCashOther
-
-        # PlumperPass
-        elif siteNum == 1067:
-            provider = sitePlumperPass
-
-        # FTV
-        elif (1068 <= siteNum <= 1069):
-            provider = networkFTV
-
-        # Jacquie & Michel
-        elif siteNum == 1070:
-            provider = siteJacquieEtMichel
-
-        # Data18 Scenes
-        elif siteNum == 1071 or siteNum == 1370:
-            provider = siteData18Scenes
-
-        # Penthouse Gold
-        elif siteNum == 1072:
-            provider = sitePenthouseGold
-
-        # Data18 Movies
-        elif siteNum == 1073:
-            provider = siteData18Movies
-
-        # WakeUpNFuck
-        elif siteNum == 1074:
-            provider = siteWUNF
-
-        # SexMex
-        elif siteNum == 1076:
-            provider = siteSexMex
-
-        # Explicite Art
-        elif siteNum == 1077:
-            provider = siteExpliciteArt
-
-        # Black PayBack
-        elif siteNum == 1078:
-            provider = siteBlackPayBack
-
-        # Sunny Lane Live
-        elif siteNum == 1079:
-            provider = siteSunnyLaneLive
-
-        # FAKings
-        elif (1080 <= siteNum <= 1152):
-            provider = networkFAKings
-
-        # Other BangBros Sites
-        elif siteNum == 1153 or (1156 <= siteNum <= 1158) or siteNum == 1909:
-            provider = network1service
-
-        # Putalocura
-        elif siteNum == 1155:
-            provider = sitePutalocura
-
-        # Melena Maria Rya
-        elif siteNum == 1159:
-            provider = siteMelenaMariaRya
-
-        # PervCity
-        elif (1160 <= siteNum <= 1165) or siteNum == 1910:
-            provider = networkPervCity
-
-        # Abby Winters
-        elif (1166 <= siteNum <= 1179):
-            provider = networkAbbyWinters
-
-        # New Sensations Other
-        elif siteNum == 1180 or (1186 <= siteNum <= 1189):
-            provider = siteNewSensationsOther
-
-        # Deranged Dollars
-        elif (1181 <= siteNum <= 1182):
-            provider = networkDerangedDollars
-
-        # DickDrainers
-        elif siteNum == 1183:
-            provider = siteDickDrainers
-
-        # ALS Angels
-        elif siteNum == 1184:
-            provider = siteAlsAngels
-
-        # Watch4Beauty
-        elif siteNum == 1185:
-            provider = siteWatch4Beauty
-
-        # Femjoy
-        elif siteNum == 1190:
-            provider = siteFemjoy
-
-        # Thick Cash
-        elif (1192 <= siteNum <= 1195):
-            provider = networkThickCash
-
-        # PornCZ
-        elif (1196 <= siteNum <= 1228):
-            provider = networkPornCZ
-
-        # MyDirtyHobby
-        elif siteNum == 1237:
-            provider = siteMyDirtyHobby
-
-        # Deviante
-        elif (1238 <= siteNum <= 1243):
-            provider = network1service
-
-        # Couples Cinema Network
-        elif (1267 <= siteNum <= 1285):
-            provider = networkCouplesCinema
-
-        # JVR Porn
-        elif siteNum == 1286:
-            provider = siteJVRPorn
-
-        # Data18 Empire
-        elif siteNum == 1330:
-            provider = siteData18Empire
-
-        # Grooby Network
-        elif (1331 <= siteNum <= 1333) or (1338 <= siteNum <= 1343) or (1391 <= siteNum <= 1392) or siteNum == 1739:
-            provider = networkGrooby
-
-        # Adult Empire
-        elif siteNum == 1334:
-            provider = siteAdultEmpire
-
-        # Family Therapy
-        elif siteNum == 1335:
-            provider = siteFamilyTherapy
-
-        # Network 18
-        elif siteNum == 1336 or siteNum == 1389:
-            provider = network18
-
-        # DarkRoomVR
-        elif siteNum == 1346:
-            provider = siteDarkRoomVR
-
-        elif siteNum == 1347:
-            provider = sitePuba
-
-        # StasyQ
-        elif (1348 == siteNum):
-            provider = siteStasyQ
-
-        # Bound Honeys
-        elif siteNum == 1349:
-            provider = siteBoundHoneys
-
-        # Lustomic
-        elif siteNum == 1350:
-            provider = siteLustomic
-
-        # Strapon Cum
-        elif siteNum == 1352:
-            provider = siteStraponCum
-
-        # HotwifeXXX
-        elif siteNum == 1353:
-            provider = siteHotwifeXXX
-
-        # POVR
-        elif siteNum == 1359:
-            provider = sitePOVR
-
-        # Swallow Bay
-        elif siteNum == 1361:
-            provider = siteSwallowBay
-
-        # Virtual Porn
-        elif siteNum == 1366:
-            provider = network1service
-
-        # JAV Library
-        elif siteNum == 1367:
-            provider = siteJavLibrary
-
-        # Killergram
-        elif (1368 <= siteNum <= 1369):
-            provider = siteKillergram
-
-        # VIP4K
-        elif (1376 <= siteNum <= 1388) or siteNum == 1687 or siteNum == 1694 or (1710 <= siteNum <= 1712) or siteNum == 1721 or siteNum == 1740 or siteNum == 1748:
-            provider = networkVIP4K
-
-        # Dirty Flix Network
-        elif (1446 <= siteNum <= 1449):
-            provider = networkDirtyFlix
-
-        # NetVideoGirls
-        elif siteNum == 1550:
-            provider = networkNVG
-
-        # Blurred Media
-        elif (1565 <= siteNum <= 1568):
-            provider = networkBlurredMedia
-
-        # Bel Ami Online
-        elif siteNum == 1591:
-            provider = siteBelAmi
-
-        # Mom Comes First
-        elif siteNum == 1592:
-            provider = siteMomComesFirst
-
-        # Caribbeancom
-        elif siteNum == 1597:
-            provider = siteCaribbeancom
-
-        # VRAllure
-        elif siteNum == 1598:
-            provider = siteVRAllure
-
-        # Kin8tengoku
-        elif siteNum == 1599:
-            provider = siteKin8tengoku
-
-        # JAV Database
-        elif siteNum == 1600:
-            provider = siteJAVDatabase
-
-        # Radical Cash
-        elif (837 <= siteNum <= 839) or (1229 <= siteNum <= 1236) or (1675 <= siteNum <= 1685) or siteNum == 1747 or (1802 <= siteNum <= 1804) or (1829 <= siteNum <= 1850):
-            provider = networkRadicalCash
-
-        # Teeny Taboo
-        elif siteNum == 1703:
-            provider = siteTeenyTaboo
-
-        # WowNetwork
-        elif siteNum == 743 or siteNum == 794 or siteNum == 1738:
-            provider = networkWowNetwork
-
-        # Aunt Judys
-        elif (1730 <= siteNum <= 1731):
-            provider = networkAuntJudys
-
-        # Colette
-        elif siteNum == 1741:
-            provider = siteColette
-
-        # Thick Cash Other
-        elif (1754 <= siteNum <= 1756):
-            provider = networkThickCashOther
-
-        # Sex Selector
-        elif siteNum == 1758:
-            provider = network1service
-
-        # Xev Unleashed
-        elif siteNum == 1759:
-            provider = siteXevUnleashed
-
-        # PKJ Media
-        elif 1760 <= siteNum <= 1764:
-            provider = networkPKJMedia
-
-        # Brand New Amateurs
-        elif siteNum == 1799:
-            provider = siteBrandNewAmateurs
-
-        # Pornbox
-        elif siteNum == 1801:
-            provider = sitePornbox
-
-        # Jesse Loads Monster Facials
-        elif siteNum == 1824:
-            provider = siteJesseLoadsMonsterFacials
-
-        # GASM
-        elif 1866 <= siteNum <= 1882:
-            provider = networkGASM
-
-        # Heavy on Hotties
-        elif siteNum == 1886:
-            provider = siteHeavyOnHotties
-
-        # Lust Cinema
-        elif siteNum == 1890:
-            provider = siteXConfessions
-
-        # Lethal Hardcore
-        elif (1782 <= siteNum <= 1783):
-            provider = networkGammaEntOther
-
-        # Caramel Cash
-        elif (1041 <= siteNum <= 1042) or siteNum == 1308:
-            provider = networkCaramelCash
-
-    return provider
+    if siteNum is None:
+        return None
+
+    for provider, entries in PROVIDER_MAP.iteritems():
+        for entry in entries:
+            if isinstance(entry, tuple):
+                start, end = entry
+                if start <= siteNum <= end:
+                    return provider
+            else:
+                if siteNum == entry:
+                    return provider
+
+    return None
