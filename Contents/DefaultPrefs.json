@@ -48,6 +48,24 @@
         "default": "false"
     },
     {
+        "id": "data18_enable",
+        "label": "Enable Searching Data18 for Images",
+        "type": "bool",
+        "default": "false"
+    },
+    {
+        "id": "data18_extra_enable",
+        "label": "Enable Searching Data18 for Extra Images",
+        "type": "bool",
+        "default": "false"
+    },
+    {
+        "id": "data18_accuracy",
+        "label": "Set the match accuracy for Data 18 Images",
+        "type": "text",
+        "default": "100"
+    },
+    {
         "id": "metadataapi_enable",
         "label": "Enable using MetadataAPI for unsuccessful search",
         "type": "bool",

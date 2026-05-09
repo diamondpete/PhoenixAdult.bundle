@@ -23,6 +23,20 @@
  - Enable/Disable manual override of automatic matching when running the "Scan Library" Operation
  - Large library additions may result in some scrapers to IP BAN (i.e. Data18)
 
+## Data18 Image Searching - Experimental
+ - Note: Labelled experimental because not a lot of effort went into the matching alorithm.
+ - Currently only configured for Reptyle and Network1Service
+
+ * ### Data18 Image Search Enable
+   - Enable/Disable searching Data 18 for Searching for Images on Top of Scraper
+
+ * ### Data18 Image Extra Galleries Enable
+   - Enable/Disable getting images from extra galleries (these galleries are normally skipped if better galleries are present)
+
+ * ### Data18 Image Search Accuracy
+   - Sets a minimum percentage (0% to 100%) match based on date (if available), title and search site/network
+   - Default: 100 (exact match)
+
 ## MetadataAPI
  - Enable/Disable fallback to https://metadataapi.net/ for matching
 
