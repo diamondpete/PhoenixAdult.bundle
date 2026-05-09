@@ -328,7 +328,7 @@ def parseWord(word, siteNum):
     upper_exceptions = (
         'bbc', 'xxx', 'bbw', 'bf', 'bff', 'bts', 'pov', 'dp', 'gf', 'bj', 'wtf', 'cfnm', 'bwc', 'fm', 'tv', 'ai',
         'hd', 'milf', 'gilf', 'dilf', 'dtf', 'zz', 'xxxl', 'usa', 'nsa', 'hr', 'ii', 'iii', 'iv', 'bbq', 'avn', 'xtc', 'atv',
-        'joi', 'rpg', 'wunf', 'uk', 'asap', 'sss', 'nf', 'pawg', 'ama'
+        'joi', 'rpg', 'wunf', 'uk', 'asap', 'sss', 'nf', 'pawg', 'ama', 'xs', 'xl', 'xxl', 'xxxl'
     )
     symbols_map = {'-': '-', '/': '/', '.': r'\.', '+': r'\+', '\'': r'\''}
 
@@ -421,8 +421,10 @@ def postParseTitle(output):
     output = re.sub(r'(?<=[^\.].)(?<=\w)(?:\.)$', '', output)
     # Remove space between word and certain punctuation
     output = re.sub(r'\s+(?=[.,!\'\)]|(:(?!\))))', '', output)
-    # Add space between word and opening quote
+    # Add space between word and opening double quote
     output = re.sub(r'(?<=\S)([\"]\S+)', lambda m: ' ' + m.group(1), output)
+    # Add space between word and opening single quote, capitalizing if not a contraction
+    output = re.sub(r'(?<=\S)(\'(?!\b(?:re|t|s|d|ll|ve|m|am|ed)\b)\S+)(?=.*\')', lambda m: ' ' + m.group(1)[0] + m.group(1)[1:].capitalize(), output)
     # Remove space between punctuation and word
     output = re.sub(r'(?<=[#\(\"])\s+', '', output)
     # Add space after closing double quote
@@ -460,7 +462,7 @@ def preParseTitle(input):
     exceptions_corrections = {
         (r'(?<!\S)t\sshirt', 'tshirt'), (r'j\smac|jmac', 'jmac'), (r'\bmr(?=\s)', 'mr.'), (r'\bmrs(?=\s)', 'mrs.'),
         (r'\bms(?=\s)', 'ms.'), (r'\bdr(?=\s)', 'dr.'), (r'\bvs(?=\s)', 'vs.'), (r'\bst(?=\s)', 'st.'), (r'\s\s+', ' '),
-        (r'\bvol(?=\s)', 'vol.')
+        (r'\bvol(?=\s)', 'vol.'), (r'sci\sfi|scifi', 'sci-fi')
     }
 
     output = input.replace('\xc2\xa0', ' ')
@@ -499,7 +501,8 @@ def manualWordFix(word):
         'im': 'I\'m', 'theyll': 'They\'ll', 'cant': 'Can\'t', 'ive': 'I\'ve', 'shes': 'She\'s', 'theyre': 'They\'re', 'tshirt': 'T-Shirt', 'dont': 'Don\'t',
         'wasnt': 'Wasn\'t', 'youre': 'You\'re', 'ill': 'I\'ll', 'whats': 'What\'s', 'didnt': 'Didn\'t', 'isnt': 'Isn\'t', 'senor': 'Señor', 'senorita': 'Señorita',
         'thats': 'That\'s', 'gstring': 'G-String', 'milfs': 'MILFs', 'oreilly': 'O\'Reilly', 'bangbros': 'BangBros', 'bday': 'B-Day', 'dms': 'DMs', 'bffs': 'BFFs',
-        'ohmy': 'OhMy', 'wont': 'Won\'t', 'whos': 'Who\'s', 'shouldnt': 'Shouldn\'t', 'lasirena': 'LaSirena', 'espanol': 'español', 'youd': 'You\'d'
+        'ohmy': 'OhMy', 'wont': 'Won\'t', 'whos': 'Who\'s', 'shouldnt': 'Shouldn\'t', 'lasirena': 'LaSirena', 'espanol': 'español', 'jmac': 'J-Mac', 'youd': 'You\'d',
+        'redwolf': 'RedWolf'
     }
 
     pattern = re.compile(r'\d|\W')
