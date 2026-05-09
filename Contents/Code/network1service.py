@@ -129,6 +129,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     if not isInCollection:
         seriesNames.insert(0, PAsearchSites.getSearchSiteName(siteNum))
 
+    if seriesName[0] != metadata.studio:
+        metadata.tagline = seriesNames[0]
+
     for seriesName in seriesNames:
         movieCollections.addCollection(seriesName)
 
