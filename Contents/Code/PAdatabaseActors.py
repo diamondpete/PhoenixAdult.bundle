@@ -6241,7 +6241,7 @@ ActorsStudioIndexes = {
     64: ['JavBus', 'JAVLibrary', 'JAVDatabase'],
     65: ['Teeny Taboo'],
     66: ['SexMex'],
-    67: ['Data18'],
+    67: ['Data18 Scenes', 'Data18 Movies'],
     68: ['Mofos'],
     69: ['Adult Empire'],
     70: ['Heavy on Hotties'],
