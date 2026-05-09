@@ -136,13 +136,18 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     detailsPageJson = getJSONfromPage(PAsearchSites.getSearchSearchURL(siteNum) + sceneName)
     detailsPageElements = None
 
-    for pageJson in (detailsPageJson, getJSONfromPage('https://www.%s.com/movies/%s' % (searchNetworkCleanLower, sceneName))):
-        if sceneType in pageJson and sceneName in pageJson[sceneType]:
-            detailsPageElements = pageJson[sceneType][sceneName]
-            break
-        if 'videosContent' in pageJson and sceneName in pageJson['videosContent']:
-            detailsPageElements = pageJson['videosContent'][sceneName]
-            break
+    if sceneType in detailsPageJson and sceneName in detailsPageJson[sceneType]:
+        detailsPageElements = detailsPageJson[sceneType][sceneName]
+    elif 'videosContent' in detailsPageJson and sceneName in detailsPageJson['videosContent']:
+        detailsPageElements = detailsPageJson['videosContent'][sceneName]
+    else:
+        for pageJson in (detailsPageJson, getJSONfromPage('https://www.%s.com/movies/%s' % (searchNetworkCleanLower, sceneName))):
+            if sceneType in pageJson and sceneName in pageJson[sceneType]:
+                detailsPageElements = pageJson[sceneType][sceneName]
+                break
+            if 'videosContent' in pageJson and sceneName in pageJson['videosContent']:
+                detailsPageElements = pageJson['videosContent'][sceneName]
+                break
 
     subSite = getSubSite(detailsPageElements['site']['name'] if 'site' in detailsPageElements else PAsearchSites.getSearchSiteName(siteNum))
     subNetwork = getSubNetwork(subSite)
@@ -299,8 +304,8 @@ swappzDB = {
 teamskeetDB = {
     'After Dark', 'Anal Euro', 'Bad MILFs', 'BFFs', 'Black Valley Girls', 'Brace Faced', 'Brat Tamer',
     'Breeding Material', 'CFNM Teens', 'Ciao Bella', 'Daddy Pounds', 'Dyked', 'Exxxtra Small', 'Ginger Patch',
-    'Glowupz', 'Her Freshman Year', 'Hijab Hookup', 'I Made Porn', 'Innocent High', 'Kissing Sis', 'Latina Team',
-    'Little Asians', 'Lust HD', 'Messy Jessy', 'Mormon Girlz', 'My Babysitters Club', 'My Dirty Uncle',
+    'Glowupz', 'Her Freshman Year', 'Hijab Hookup', 'Hussie Pass', 'I Made Porn', 'Innocent High', 'Kissing Sis',
+    'Latina Team', 'Little Asians', 'Lust HD', 'Messy Jessy', 'Mormon Girlz', 'My Babysitters Club', 'My Dirty Uncle',
     'My First', 'MYLF Classics', 'MYLF Labs', 'Our Little Secret', 'Oye Loca', 'Passport Bros', 'Petite Teens 18',
     'POV Life', 'Reptyle Classics', 'Reptyle Labs', 'Rub A Teen', 'Self Desire', 'Sex and Grades',
     'She\'s New', 'Solo Interviews', 'Spanish 18', 'Stay Home POV', 'Step Siblings', 'TeamSkeet AllStars',
