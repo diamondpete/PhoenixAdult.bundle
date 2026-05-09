@@ -736,51 +736,58 @@ def getFromLocalStorage(actorName, actorEncoded, metadata):
 
 # fetches a copy of an actor image and stores it locally, then returns a URL from which Plex can fetch it later
 def cacheActorPhoto(url, actorName, gender, type, **kwargs):
-    localPhoto = ''
-    checkGender = gender if gender else ''
-    baseFileName = '%s.%s' % (type, actorName.replace(' ', '-').lower())
-    validExtensions = ['.jpg', '.png', '.webp', '.tbn', '.jfif', '.jpe', '.jpeg']
-
-    req = PAutils.HTTPRequest(url, **kwargs)
-
+    # Build paths
     actorsResourcesPath = os.path.join(Core.bundle_path, 'Contents', 'Resources')
     if not os.path.exists(actorsResourcesPath):
         os.makedirs(actorsResourcesPath)
 
-    # Check if file already exists
+    baseFileName = '%s.%s' % (type, actorName.replace(' ', '-').lower())
+    validExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.tbn', '.jfif']
+
+    # Check existing cached file
     if not Prefs['actor_cache_replace_enable']:
         actor_index = get_actor_index(actorsResourcesPath)
         matches = actor_index.get(baseFileName)
         if matches:
             fileName = matches.split('/')[-1].split('?')[0]
-            checkGender = fileName.split('_')[-1].split('.')[0] if '_' in fileName else checkGender
-            return matches, checkGender
+            gender_from_file = fileName.split('_')[-1].split('.')[0] if '_' in fileName else gender
+            return matches, gender_from_file
 
+    # Download image
+    req = PAutils.HTTPRequest(url, headers=headers, cookies=cookies)
+
+    # Determine extension
     try:
-        extension = mimetypes.guess_extension(req.headers['Content-Type'], strict=False).replace('jpe', 'jpg')
+        extension = mimetypes.guess_extension(req.headers['Content-Type'], strict=False)
+        if extension:
+            extension = extension.replace('jpe', 'jpg')
     except:
-        extension = '.%s' % url.split('.')[-1].split('?')[0]
+        extension = None
 
-    if extension and extension in validExtensions:
-        if not checkGender and Prefs['gender_enable'] and type == 'actor':
-            checkGender = genderCheck(actorName)
+    if not extension:
+        extension = '.' + url.split('.')[-1].split('?')[0].lower()
 
-        if checkGender:
-            filename = '%s_%s%s' % (baseFileName, checkGender, extension)
-        else:
-            filename = '%s%s' % (baseFileName, extension)
+    if extension not in validExtensions:
+        Log('Invalid image extension: %s' % extension)
+        return '', gender
 
-        filepath = os.path.join(actorsResourcesPath, filename)
+    # Gender detection
+    if not gender and Prefs['gender_enable'] and type == 'actor':
+        gender = genderCheck(actorName)
 
-        Log('Saving %s image as: "%s"' % (type, filename))
-        with codecs.open(filepath, 'wb+') as file:
-            file.write(req.content)
+    # Build filename
+    filename = '%s_%s%s' % (baseFileName, gender, extension) if gender else '%s%s' % (baseFileName, extension)
 
-        localPhoto = Resource.ExternalPath(filename)
-        if not localPhoto:
-            localPhoto = ''
+    filepath = os.path.join(actorsResourcesPath, filename)
 
-    return localPhoto, checkGender
+    # Save original image
+    Log('Saving %s image as: "%s"' % (type, filename))
+    with codecs.open(filepath, 'wb+') as f:
+        f.write(req.content)
+
+    # Return Plex resource path
+    localPhoto = Resource.ExternalPath(filename)
+    return localPhoto or '', gender
 
 
 def save_index(path, index, signature):
