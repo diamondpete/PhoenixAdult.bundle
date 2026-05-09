@@ -3,29 +3,20 @@ import PAutils
 
 
 def getSearchSiteName(siteNum):
-    siteName = None
-    if PAsiteList.searchSites[siteNum]:
-        siteName = PAsiteList.searchSites[siteNum][0]
-
-    return siteName
+    site = PAsiteList.searchSites.get(siteNum)
+    return site.name if site else None
 
 
 def getSearchBaseURL(siteNum):
-    url = None
-    if PAsiteList.searchSites[siteNum]:
-        url = PAsiteList.searchSites[siteNum][1]
-
-    return url
+    site = PAsiteList.searchSites.get(siteNum)
+    return site.base_url if site else None
 
 
 def getSearchSearchURL(siteNum):
-    url = None
-    if PAsiteList.searchSites[siteNum]:
-        url = PAsiteList.searchSites[siteNum][2]
-        if not url.startswith('http'):
-            url = getSearchBaseURL(siteNum) + url
-
-    return url
+    site = PAsiteList.searchSites.get(siteNum)
+    if not site:
+        return None
+    return site.search_path if site.search_path.startswith("http") else site.base_url + site.search_path
 
 
 def getSiteNumByFilter(searchFilter):
