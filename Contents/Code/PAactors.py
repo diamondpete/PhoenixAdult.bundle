@@ -754,7 +754,7 @@ def cacheActorPhoto(url, actorName, gender, type, **kwargs):
             return matches, gender_from_file
 
     # Download image
-    req = PAutils.HTTPRequest(url, headers=headers, cookies=cookies)
+    req = PAutils.HTTPRequest(url, **kwargs)
 
     # Determine extension
     try:
