@@ -13,6 +13,7 @@ from HTMLParser import HTMLParser
 
 import PAsearchSites
 from PAparseTitle import TitleCaseEngine
+from PAcaptchaHelper import CaptchaHelper
 
 UserAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
 
@@ -295,6 +296,11 @@ def saveRequest(url, req):
 def parseTitle(s, siteNum, title_type='title'):
     engine = TitleCaseEngine(title_type, debug=Prefs['debug_enable'])
     return engine.parse_title(s, siteNum)
+
+
+def nCookies(siteNum):
+    helper = CaptchaHelper(debug=Prefs['debug_enable'])
+    return helper.get_verified_cookies(PAsearchSites.getSearchBaseURL(siteNum))
 
 
 def any(s):
