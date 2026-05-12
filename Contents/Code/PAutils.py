@@ -211,7 +211,6 @@ def HTTPRequest(url, method='GET', **kwargs):
 
 
 def getFromSearchEngine(searchText, site='', **kwargs):
-    stop = kwargs.pop('stop', 10)
     lang = kwargs.pop('lang', 'en')
 
     if isinstance(site, int):
@@ -260,32 +259,39 @@ def Decode(text):
 
 
 def getClearURL(url):
-    newURL = url
-    if url.startswith('http'):
-        url = urlparse.urlparse(url)
-        path = url.path
+    if not url.startswith('http'):
+        return url
 
-        while '//' in path:
-            path = path.replace('//', '/')
+    parsed = urlparse.urlparse(url)
+    path = parsed.path.replace('//', '/')
 
-        newURL = '%s://%s%s' % (url.scheme, url.netloc, path)
-        if url.query:
-            newURL += '?%s' % url.query
+    # Rebuild URL
+    new_url = '%s://%s%s' % (parsed.scheme, parsed.netloc, path)
 
-    return newURL
+    if parsed.query:
+        new_url += '?' + parsed.query
+
+    return new_url
 
 
 def saveRequest(url, req):
+    # Build dated debug directory
     debug_dir = os.path.join('debug_data', datetime.now().strftime('%d-%m-%Y'))
-    debug_dir = os.path.realpath(debug_dir)
+
     if not os.path.exists(debug_dir):
-        os.makedirs(debug_dir)
+        try:
+            os.makedirs(debug_dir)
+        except OSError:
+            pass
 
-    raw_http = '< Target URL: "%s"\r\n\r\n' % url
-    raw_http += dump.dump_all(req).decode('UTF-8', errors='replace')
+    # Build raw HTTP dump
+    raw_http = '\r\n'.join(['< Target URL: "%s"' % url, '', dump.dump_all(req).decode('UTF-8', 'replace')])
 
-    file_name = '%s.gz' % uuid.uuid4().hex
-    with gzip.open(os.path.join(debug_dir, file_name), 'wb') as f:
+    # Create gzip file
+    file_name = uuid.uuid4().hex + '.gz'
+    file_path = os.path.join(debug_dir, file_name)
+
+    with gzip.open(file_path, 'wb') as f:
         f.write(raw_http.encode('UTF-8'))
 
     Log('GZip request saved as "%s"' % file_name)
@@ -389,33 +395,70 @@ def getSearchTitleStrip(title):
 
 
 def getDictValuesFromKey(dictDB, identifier):
+    ident = str(identifier).lower()
+
     for key, values in dictDB.items():
-        keys = list(key) if type(key) == tuple else [key]
-        for key in keys:
-            if str(key).lower() == str(identifier).lower():
+        key_items = key if isinstance(key, tuple) else (key,)
+
+        for item in key_items:
+            if str(item).lower() == ident:
                 return values
 
     return []
 
 
 def getDictKeyFromValues(dictDB, identifier):
-    keys = []
-    for key, values in dictDB.items():
-        for item in values:
-            if str(item).lower() == str(identifier).lower():
-                keys.append(key)
-                break
+    ident = str(identifier).lower()
+    result = []
 
-    return keys
+    for key, values in dictDB.items():
+        lower_values = [str(v).lower() for v in values]
+
+        if ident in lower_values:
+            result.append(key)
+
+    return result
 
 
 class MLStripper(HTMLParser):
     def __init__(self):
-        self.reset()
+        HTMLParser.__init__(self)
         self.text = StringIO()
+        self.skip_flag = False  # skip script/style content
 
-    def handle_data(self, d):
-        self.text.write(d)
+    def handle_starttag(self, tag, attrs):
+        if tag in ('script', 'style'):
+            self.skip_flag = True
+
+    def handle_endtag(self, tag):
+        if tag in ('script', 'style'):
+            self.skip_flag = False
+
+    def handle_data(self, data):
+        if not self.skip_flag:
+            self.text.write(data)
+
+    def handle_entityref(self, name):
+        try:
+            from htmlentitydefs import name2codepoint
+        except ImportError:
+            from html.entities import name2codepoint
+        cp = name2codepoint.get(name)
+        if cp:
+            self.text.write(unichr(cp))
+
+    def handle_charref(self, name):
+        try:
+            if name.startswith('x'):
+                cp = int(name[1:], 16)
+            else:
+                cp = int(name)
+            self.text.write(unichr(cp))
+        except:
+            pass
+
+    def get_data(self):
+        return self.text.getvalue()
 
     def get_data(self):
         return self.text.getvalue()
@@ -429,9 +472,10 @@ def strip_tags(html):
 
 def functionTimer(fun, msg, *args):
     start_time = time.time()
-    fun(*args)
+    output = fun(*args)
     end_time = time.time()
     Log('%s: %s' % (msg, str(timedelta(seconds=(end_time - start_time)))))
+    return output
 
 
 def rreplace(s, r, n, o):
