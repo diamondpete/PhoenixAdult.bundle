@@ -138,7 +138,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
                     images.append((image, posterUrl))
                     metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
-                break
+                pass
         elif PAsearchSites.posterOnlyAlreadyExists(posterUrl, metadata):
             posterExists = True
 
